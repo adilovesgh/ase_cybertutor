@@ -1,0 +1,10 @@
+<h1>Create New Subject</h1>
+<%= form_for :subject, url: subjects_path do |form| %>
+    <p>
+      <%= form.label :name %><br>
+      <%= form.text_field :name %>
+    </p>
+    <p>
+      <%= form.submit %>
+    </p>
+  <% end %>
