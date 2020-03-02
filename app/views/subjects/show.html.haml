@@ -1,11 +1,19 @@
 %h3 Tutors for #{@subject.name}
 
-%ul#details
-  %li
-    Title:
-    = @subject.name
+%table#tutors.table.table-striped.col-md-12
+  %thead
+    %tr
+      %th Name
+      %th Subject
+      %th Experience
+      %th Rate
+  %tbody
+    - @tutors.each do |tutor|
+      %tr
+        %td= tutor.name
+        %td= tutor.subject
+        %td= tutor.experience
+        %td= tutor.rate
+        %td= link_to "More about #{tutor.name}", tutor_path(tutor)
 
-= link_to 'Edit', edit_subject_path(@subject)
-= button_to 'Delete', subject_path(@subject), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-primary'
-= link_to 'Back to subject list', subjects_path
-
+= link_to 'Add new tutor', new_tutor_path

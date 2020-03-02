@@ -2550,3 +2550,172 @@ Processing by SubjectsController#show as HTML
   [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 5]]
   Rendered subjects/show.html.haml within layouts/application (0.5ms)
 Completed 200 OK in 24ms (Views: 22.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/subjects/" for 127.0.0.1 at 2020-03-01 22:52:59 -0500
+Processing by SubjectsController#index as HTML
+  [1m[35mSubject Load (0.8ms)[0m  SELECT "subjects".* FROM "subjects"
+  Rendered subjects/index.html.haml within layouts/application (7.2ms)
+Completed 200 OK in 45ms (Views: 41.5ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/subjects/5" for 127.0.0.1 at 2020-03-01 22:53:01 -0500
+Processing by SubjectsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mSubject Load (0.2ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 5]]
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.2ms)
+
+NameError (uninitialized constant SubjectsController::Tutors):
+  app/controllers/subjects_controller.rb:9:in `show'
+
+
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.2ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.2ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (86.7ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.6ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (80.7ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (182.8ms)
+
+
+Started GET "/subjects/" for 127.0.0.1 at 2020-03-01 22:54:01 -0500
+Processing by SubjectsController#index as HTML
+  [1m[35mSubject Load (0.2ms)[0m  SELECT "subjects".* FROM "subjects"
+  Rendered subjects/index.html.haml within layouts/application (3.6ms)
+Completed 200 OK in 37ms (Views: 34.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/subjects/5" for 127.0.0.1 at 2020-03-01 22:54:03 -0500
+Processing by SubjectsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 5]]
+  [1m[35mTutor Load (0.2ms)[0m  SELECT "tutors".* FROM "tutors"
+  Rendered subjects/show.html.haml within layouts/application (11.4ms)
+Completed 200 OK in 47ms (Views: 30.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/tutors/new" for 127.0.0.1 at 2020-03-01 22:54:15 -0500
+Processing by TutorsController#new as HTML
+  Rendered tutors/new.html.haml within layouts/application (0.9ms)
+Completed 200 OK in 30ms (Views: 29.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/tutors" for 127.0.0.1 at 2020-03-01 22:54:20 -0500
+Processing by TutorsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Ii27lEwmBm+YzakoXxYCARFuAjkcaKRu3oChNlVsMM3FdM+npueck02WIhAJUXjJW3PJABUdL4Uku+Ooxf9B+w==", "tutor"=>{"name"=>"Daniel", "subject"=>"Math", "experience"=>"10", "rate"=>"5"}, "commit"=>"Save Changes"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "tutors" ("name", "experience", "subject", "rate", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Daniel"], ["experience", 10], ["subject", "Math"], ["rate", 5.0], ["created_at", "2020-03-02 03:54:20.263422"], ["updated_at", "2020-03-02 03:54:20.263422"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/tutors
+Completed 302 Found in 4ms (ActiveRecord: 1.3ms)
+
+
+Started GET "/tutors" for 127.0.0.1 at 2020-03-01 22:54:20 -0500
+Processing by TutorsController#index as HTML
+  [1m[35mTutor Load (0.1ms)[0m  SELECT "tutors".* FROM "tutors"
+  Rendered tutors/index.html.haml within layouts/application (1.1ms)
+Completed 200 OK in 18ms (Views: 17.1ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-01 22:59:18 -0500
+Processing by SubjectsController#index as HTML
+  [1m[36mSubject Load (0.2ms)[0m  [1mSELECT "subjects".* FROM "subjects"[0m
+  Rendered subjects/index.html.haml within layouts/application (3.8ms)
+Completed 200 OK in 35ms (Views: 32.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/subjects/5" for 127.0.0.1 at 2020-03-01 22:59:23 -0500
+Processing by SubjectsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[35mSubject Load (0.2ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 5]]
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT "tutors".* FROM "tutors"[0m
+  Rendered subjects/show.html.haml within layouts/application (4.3ms)
+Completed 200 OK in 38ms (Views: 22.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/subjects/5" for 127.0.0.1 at 2020-03-01 22:59:46 -0500
+Processing by SubjectsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[35mSubject Load (0.2ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 5]]
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT "tutors".* FROM "tutors"[0m
+  Rendered subjects/show.html.haml within layouts/application (4.2ms)
+Completed 200 OK in 31ms (Views: 20.8ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/subjects/5" for 127.0.0.1 at 2020-03-01 23:00:39 -0500
+Processing by SubjectsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 5]]
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT "tutors".* FROM "tutors"[0m
+  Rendered subjects/show.html.haml within layouts/application (0.3ms)
+Completed 200 OK in 31ms (Views: 19.0ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/subjects/5" for 127.0.0.1 at 2020-03-01 23:00:42 -0500
+Processing by SubjectsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 5]]
+  [1m[36mTutor Load (0.2ms)[0m  [1mSELECT "tutors".* FROM "tutors"[0m
+  Rendered subjects/show.html.haml within layouts/application (0.6ms)
+Completed 200 OK in 30ms (Views: 27.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/subjects/5" for 127.0.0.1 at 2020-03-01 23:00:43 -0500
+Processing by SubjectsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 5]]
+  [1m[36mTutor Load (0.2ms)[0m  [1mSELECT "tutors".* FROM "tutors"[0m
+  Rendered subjects/show.html.haml within layouts/application (0.6ms)
+Completed 200 OK in 26ms (Views: 23.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/tutors/new" for 127.0.0.1 at 2020-03-01 23:00:44 -0500
+Processing by TutorsController#new as HTML
+  Rendered tutors/new.html.haml within layouts/application (0.9ms)
+Completed 200 OK in 26ms (Views: 25.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/tutors" for 127.0.0.1 at 2020-03-01 23:00:52 -0500
+Processing by TutorsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"RgAjJAHaGuqAyehWUZi/KscRr329iV284hX666rT9WWhWVcX6xuAFlWSY24H38XijQxkRLT81lcYLrh1OkCEUw==", "tutor"=>{"name"=>"Nick", "subject"=>"Math", "experience"=>"10", "rate"=>"12"}, "commit"=>"Save Changes"}
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.9ms)[0m  [1mINSERT INTO "tutors" ("name", "experience", "subject", "rate", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Nick"], ["experience", 10], ["subject", "Math"], ["rate", 12.0], ["created_at", "2020-03-02 04:00:52.411300"], ["updated_at", "2020-03-02 04:00:52.411300"]]
+  [1m[35m (8.3ms)[0m  commit transaction
+Redirected to http://127.0.0.1:3000/tutors
+Completed 302 Found in 14ms (ActiveRecord: 9.4ms)
+
+
+Started GET "/tutors" for 127.0.0.1 at 2020-03-01 23:00:52 -0500
+Processing by TutorsController#index as HTML
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT "tutors".* FROM "tutors"[0m
+  Rendered tutors/index.html.haml within layouts/application (1.2ms)
+Completed 200 OK in 19ms (Views: 18.2ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-01 23:01:00 -0500
+Processing by SubjectsController#index as HTML
+  [1m[35mSubject Load (0.1ms)[0m  SELECT "subjects".* FROM "subjects"
+  Rendered subjects/index.html.haml within layouts/application (1.2ms)
+Completed 200 OK in 33ms (Views: 31.7ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/subjects/5" for 127.0.0.1 at 2020-03-01 23:01:03 -0500
+Processing by SubjectsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mSubject Load (0.2ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 5]]
+  [1m[35mTutor Load (0.2ms)[0m  SELECT "tutors".* FROM "tutors"
+  Rendered subjects/show.html.haml within layouts/application (0.8ms)
+Completed 200 OK in 27ms (Views: 24.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/tutors/4" for 127.0.0.1 at 2020-03-01 23:01:11 -0500
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mTutor Load (0.2ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 4]]
+  Rendered tutors/show.html.haml within layouts/application (3.4ms)
+Completed 200 OK in 35ms (Views: 33.0ms | ActiveRecord: 0.2ms)
