@@ -1,0 +1,13 @@
+%h2 All Subjects
+
+%table#subjects.table.table-striped.col-md-12
+  %thead
+    %tr
+      %th Title
+  %tbody
+    - @subjects.each do |subject|
+      %tr
+        %td= subject.name
+        %td= link_to "More about #{subject.name}", subject_path(subject)
+
+= link_to 'Add new subject', new_subject_path
