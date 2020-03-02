@@ -1,0 +1,19 @@
+%h3 Details about #{@tutor.name}
+
+%ul#details
+  %li
+    Name:
+    = @tutor.name
+  %li
+    Subject:
+    = @tutor.subject
+  %li
+    Experience:
+    = @tutor.experience
+  %li
+    Rate:
+    = @tutor.rate
+
+= link_to 'Edit', edit_tutor_path(@tutor)
+= button_to 'Delete', tutor_path(@tutor), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-primary'
+= link_to 'Back to tutor list', tutors_path

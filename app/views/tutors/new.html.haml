@@ -1,0 +1,17 @@
+%h2 Create New Tutor Entry
+
+= form_tag tutors_path do
+
+  = label :tutor, :name, 'Name'
+  = text_field :tutor, 'name'
+
+  = label :tutor, :subject, 'Subject'
+  = text_field :tutor, 'subject'
+
+  = label :tutor, :experience, 'Experience'
+  = text_field :tutor, 'experience'
+
+  = label :tutor, :rate, 'Rate'
+  = text_field :tutor, 'rate'
+
+  = submit_tag 'Save Changes', :class => 'btn btn-primary'

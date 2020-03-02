@@ -2719,3 +2719,339 @@ Processing by TutorsController#show as HTML
   [1m[36mTutor Load (0.2ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 4]]
   Rendered tutors/show.html.haml within layouts/application (3.4ms)
 Completed 200 OK in 35ms (Views: 33.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-01 23:02:30 -0500
+Processing by SubjectsController#index as HTML
+  [1m[35mSubject Load (0.4ms)[0m  SELECT "subjects".* FROM "subjects"
+  Rendered subjects/index.html.haml within layouts/application (5.2ms)
+Completed 200 OK in 39ms (Views: 36.6ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/subjects/5" for 127.0.0.1 at 2020-03-01 23:02:44 -0500
+Processing by SubjectsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mSubject Load (0.2ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 5]]
+  [1m[35mTutor Load (0.2ms)[0m  SELECT "tutors".* FROM "tutors"
+  Rendered subjects/show.html.haml within layouts/application (4.5ms)
+Completed 200 OK in 51ms (Views: 27.0ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/tutors/new" for 127.0.0.1 at 2020-03-01 23:05:56 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by TutorsController#new as HTML
+  Rendered tutors/new.html.haml within layouts/application (8.0ms)
+Completed 200 OK in 272ms (Views: 261.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/tutors" for 127.0.0.1 at 2020-03-01 23:06:04 -0500
+Processing by TutorsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"dtkhYtGsKocXhWespzlJ64/usUJPCQnc5XCmqQIOK92RgFVRO22we8Le7JTxfjMjxfN6e0Z8gjcfS+Q3kp1a6w==", "tutor"=>{"name"=>"Mark", "subject"=>"English", "experience"=>"10", "rate"=>"10"}, "commit"=>"Save Changes"}
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "tutors" ("name", "experience", "subject", "rate", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Mark"], ["experience", 10], ["subject", "English"], ["rate", 10.0], ["created_at", "2020-03-02 04:06:04.677573"], ["updated_at", "2020-03-02 04:06:04.677573"]]
+  [1m[35m (1.1ms)[0m  commit transaction
+Redirected to http://127.0.0.1:3000/tutors
+Completed 302 Found in 16ms (ActiveRecord: 2.0ms)
+
+
+Started GET "/tutors" for 127.0.0.1 at 2020-03-01 23:06:04 -0500
+Processing by TutorsController#index as HTML
+  [1m[36mTutor Load (0.2ms)[0m  [1mSELECT "tutors".* FROM "tutors"[0m
+  Rendered tutors/index.html.haml within layouts/application (4.7ms)
+Completed 200 OK in 41ms (Views: 40.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-01 23:06:09 -0500
+Processing by SubjectsController#index as HTML
+  [1m[35mSubject Load (0.2ms)[0m  SELECT "subjects".* FROM "subjects"
+  Rendered subjects/index.html.haml within layouts/application (8.0ms)
+Completed 200 OK in 31ms (Views: 28.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/subjects/new" for 127.0.0.1 at 2020-03-01 23:06:11 -0500
+Processing by SubjectsController#new as HTML
+  Rendered subjects/new.html.haml within layouts/application (2.3ms)
+Completed 200 OK in 30ms (Views: 29.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/subjects" for 127.0.0.1 at 2020-03-01 23:06:13 -0500
+Processing by SubjectsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"9VQYIXV/WwbczOcIX44nB7XFiSqtbwL1/QiyFHm51vsSDWwSn77B+gmXbDAJyV3P/9hCE6QaiR4HM/CK6SqnzQ==", "subject"=>{"name"=>"English"}, "commit"=>"Save Changes"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "subjects" ("name", "created_at", "updated_at") VALUES (?, ?, ?)  [["name", "English"], ["created_at", "2020-03-02 04:06:13.207671"], ["updated_at", "2020-03-02 04:06:13.207671"]]
+  [1m[36m (9.4ms)[0m  [1mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/subjects
+Completed 302 Found in 14ms (ActiveRecord: 10.1ms)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-01 23:06:13 -0500
+Processing by SubjectsController#index as HTML
+  [1m[35mSubject Load (0.2ms)[0m  SELECT "subjects".* FROM "subjects"
+  Rendered subjects/index.html.haml within layouts/application (1.1ms)
+Completed 200 OK in 19ms (Views: 18.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/subjects/6" for 127.0.0.1 at 2020-03-01 23:06:18 -0500
+Processing by SubjectsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mSubject Load (0.2ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 6]]
+  [1m[35mTutor Load (0.2ms)[0m  SELECT "tutors".* FROM "tutors"
+  Rendered subjects/show.html.haml within layouts/application (3.3ms)
+Completed 200 OK in 49ms (Views: 31.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/subjects/" for 127.0.0.1 at 2020-03-01 23:09:44 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by SubjectsController#index as HTML
+  [1m[35mSubject Load (0.1ms)[0m  SELECT "subjects".* FROM "subjects"
+  Rendered subjects/index.html.haml within layouts/application (10.4ms)
+Completed 200 OK in 213ms (Views: 200.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/subjects/6" for 127.0.0.1 at 2020-03-01 23:09:47 -0500
+Processing by SubjectsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 6]]
+  [1m[35mTutor Load (0.2ms)[0m  SELECT "tutors".* FROM "tutors"
+  Rendered subjects/show.html.haml within layouts/application (2.8ms)
+Completed 200 OK in 67ms (Views: 16.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/tutors/new" for 127.0.0.1 at 2020-03-01 23:09:48 -0500
+Processing by TutorsController#new as HTML
+  Rendered tutors/new.html.haml within layouts/application (4.1ms)
+Completed 200 OK in 24ms (Views: 23.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/tutors" for 127.0.0.1 at 2020-03-01 23:10:06 -0500
+Processing by TutorsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"cdSfZTdeD4bG0HNFGIhejqnmDjkBVu1wbjPrOcM0zzWWjetW3Z+VehOL+H1OzyRG4/vFAAgjZpuUCKmnU6e+Aw==", "tutor"=>{"name"=>"David", "subject"=>"Fake", "experience"=>"10", "rate"=>"10"}, "commit"=>"Save Changes"}
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms)
+
+ActiveRecord::AssociationTypeMismatch (Subject(#70345259577200) expected, got String(#70345256500780)):
+  app/controllers/tutors_controller.rb:15:in `create'
+
+
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (4.2ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.9ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (100.2ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (103.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.9ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (222.5ms)
+
+
+Started POST "/tutors" for 127.0.0.1 at 2020-03-01 23:10:23 -0500
+Processing by TutorsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"LGKqKn6nQwMcpRY8zv9Z87UVd2Zo7lEZKXUg79NUKx3LO94ZlGbZ/8n+nQSYuCM7/wi8X2Gb2vLTTmJxQ8daKw==", "tutor"=>{"name"=>"David", "subject"=>"Fake", "experience"=>"10", "rate"=>"10"}, "commit"=>"Save Changes"}
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms)
+
+ActiveRecord::AssociationTypeMismatch (Subject(#70345259577200) expected, got String(#70345256500780)):
+  app/controllers/tutors_controller.rb:15:in `create'
+
+
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (4.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.1ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (89.6ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.7ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (84.1ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (184.1ms)
+
+
+Started POST "/tutors" for 127.0.0.1 at 2020-03-01 23:10:27 -0500
+Processing by TutorsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"LGKqKn6nQwMcpRY8zv9Z87UVd2Zo7lEZKXUg79NUKx3LO94ZlGbZ/8n+nQSYuCM7/wi8X2Gb2vLTTmJxQ8daKw==", "tutor"=>{"name"=>"David", "subject"=>"English", "experience"=>"10", "rate"=>"10"}, "commit"=>"Save Changes"}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+
+ActiveRecord::AssociationTypeMismatch (Subject(#70345259577200) expected, got String(#70345256500780)):
+  app/controllers/tutors_controller.rb:15:in `create'
+
+
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (4.6ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.1ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (87.8ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.7ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (85.9ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (188.7ms)
+
+
+Started POST "/tutors" for 127.0.0.1 at 2020-03-01 23:10:38 -0500
+Processing by TutorsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"LGKqKn6nQwMcpRY8zv9Z87UVd2Zo7lEZKXUg79NUKx3LO94ZlGbZ/8n+nQSYuCM7/wi8X2Gb2vLTTmJxQ8daKw==", "tutor"=>{"name"=>"David", "subject"=>"English", "experience"=>"10", "rate"=>"10"}, "commit"=>"Save Changes"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "tutors" ("name", "experience", "subject", "rate", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "David"], ["experience", 10], ["subject", "English"], ["rate", 10.0], ["created_at", "2020-03-02 04:10:38.379739"], ["updated_at", "2020-03-02 04:10:38.379739"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/tutors
+Completed 302 Found in 15ms (ActiveRecord: 2.1ms)
+
+
+Started GET "/tutors" for 127.0.0.1 at 2020-03-01 23:10:38 -0500
+Processing by TutorsController#index as HTML
+  [1m[35mTutor Load (0.2ms)[0m  SELECT "tutors".* FROM "tutors"
+  Rendered tutors/index.html.haml within layouts/application (4.0ms)
+Completed 200 OK in 25ms (Views: 24.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/tutors/new" for 127.0.0.1 at 2020-03-01 23:10:41 -0500
+Processing by TutorsController#new as HTML
+  Rendered tutors/new.html.haml within layouts/application (0.9ms)
+Completed 200 OK in 21ms (Views: 20.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/tutors" for 127.0.0.1 at 2020-03-01 23:10:48 -0500
+Processing by TutorsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"vDME+kc6V4/7EiiFBRva4+VupgOM8kgDVDCLd3mPYYhbanDJrfvNcy5Jo71TXKArr3NtOoWHw+iuC8np6RwQvg==", "tutor"=>{"name"=>"Daniel", "subject"=>"Fake", "experience"=>"10", "rate"=>"10"}, "commit"=>"Save Changes"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "tutors" ("name", "experience", "subject", "rate", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Daniel"], ["experience", 10], ["subject", "Fake"], ["rate", 10.0], ["created_at", "2020-03-02 04:10:48.579720"], ["updated_at", "2020-03-02 04:10:48.579720"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/tutors
+Completed 302 Found in 10ms (ActiveRecord: 1.3ms)
+
+
+Started GET "/tutors" for 127.0.0.1 at 2020-03-01 23:10:48 -0500
+Processing by TutorsController#index as HTML
+  [1m[35mTutor Load (0.2ms)[0m  SELECT "tutors".* FROM "tutors"
+  Rendered tutors/index.html.haml within layouts/application (1.6ms)
+Completed 200 OK in 17ms (Views: 16.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/tutors" for 127.0.0.1 at 2020-03-01 23:12:20 -0500
+Processing by TutorsController#index as HTML
+  [1m[36mTutor Load (0.3ms)[0m  [1mSELECT "tutors".* FROM "tutors"[0m
+  Rendered tutors/index.html.haml within layouts/application (12.1ms)
+Completed 200 OK in 33ms (Views: 27.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-01 23:12:25 -0500
+Processing by SubjectsController#index as HTML
+  [1m[35mSubject Load (0.1ms)[0m  SELECT "subjects".* FROM "subjects"
+  Rendered subjects/index.html.haml within layouts/application (3.1ms)
+Completed 200 OK in 25ms (Views: 24.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/subjects/6" for 127.0.0.1 at 2020-03-01 23:12:28 -0500
+Processing by SubjectsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mSubject Load (0.2ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 6]]
+  [1m[35mTutor Load (0.3ms)[0m  SELECT "tutors".* FROM "tutors"
+  Rendered subjects/show.html.haml within layouts/application (0.4ms)
+Completed 200 OK in 21ms (Views: 17.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/tutors/new" for 127.0.0.1 at 2020-03-01 23:12:30 -0500
+Processing by TutorsController#new as HTML
+  Rendered tutors/new.html.haml within layouts/application (1.4ms)
+Completed 200 OK in 21ms (Views: 20.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/tutors" for 127.0.0.1 at 2020-03-01 23:12:33 -0500
+Processing by TutorsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"QK2Ho0E81xspo8pMRFMkTN0FU5cXPufpWv2WJD7j6Qqn9POQq/1N5/z4QXQSFF6ElxiYrh5LbAKgxtS6rnCYPA==", "tutor"=>{"name"=>"Daniel", "subject"=>"Fake", "experience"=>"10", "rate"=>"10"}, "commit"=>"Save Changes"}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+
+ActiveRecord::AssociationTypeMismatch (Subject(#70345276162180) expected, got String(#70345256500780)):
+  app/controllers/tutors_controller.rb:15:in `create'
+
+
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.1ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.2ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (90.8ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (99.7ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (205.6ms)
+
+
+Started POST "/tutors" for 127.0.0.1 at 2020-03-01 23:12:43 -0500
+Processing by TutorsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UxKTUZAKaCdcfwyVMR766+ycEQcADvYmZQDwRhI0AUa0S+diesvy24kkh61nWYAjpoHaPgl7fc2fO7LYgqdwcA==", "tutor"=>{"name"=>"Daniel", "subject"=>"English", "experience"=>"10", "rate"=>"10"}, "commit"=>"Save Changes"}
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms)
+
+ActiveRecord::AssociationTypeMismatch (Subject(#70345276162180) expected, got String(#70345256500780)):
+  app/controllers/tutors_controller.rb:15:in `create'
+
+
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (4.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (86.9ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (76.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (174.8ms)
+
+
+Started GET "/subjects/6" for 127.0.0.1 at 2020-03-01 23:12:46 -0500
+Processing by SubjectsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mSubject Load (0.2ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 6]]
+  [1m[35mTutor Load (0.3ms)[0m  SELECT "tutors".* FROM "tutors"
+  Rendered subjects/show.html.haml within layouts/application (0.2ms)
+Completed 200 OK in 22ms (Views: 19.0ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-01 23:12:55 -0500
+Processing by SubjectsController#index as HTML
+  [1m[36mSubject Load (0.5ms)[0m  [1mSELECT "subjects".* FROM "subjects"[0m
+  Rendered subjects/index.html.haml within layouts/application (4.3ms)
+Completed 200 OK in 27ms (Views: 22.6ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/subjects/6" for 127.0.0.1 at 2020-03-01 23:12:58 -0500
+Processing by SubjectsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[35mSubject Load (1.5ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 6]]
+  [1m[36mTutor Load (0.3ms)[0m  [1mSELECT "tutors".* FROM "tutors"[0m
+  Rendered subjects/show.html.haml within layouts/application (1.0ms)
+Completed 200 OK in 38ms (Views: 22.3ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/subjects/5" for 127.0.0.1 at 2020-03-01 23:13:01 -0500
+Processing by SubjectsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 5]]
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT "tutors".* FROM "tutors"[0m
+  Rendered subjects/show.html.haml within layouts/application (0.4ms)
+Completed 200 OK in 23ms (Views: 21.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/subjects/6" for 127.0.0.1 at 2020-03-01 23:13:02 -0500
+Processing by SubjectsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[35mSubject Load (0.2ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 6]]
+  [1m[36mTutor Load (0.3ms)[0m  [1mSELECT "tutors".* FROM "tutors"[0m
+  Rendered subjects/show.html.haml within layouts/application (0.7ms)
+Completed 200 OK in 30ms (Views: 25.8ms | ActiveRecord: 0.4ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateReviews (20200302042317)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "reviews" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "rating" integer, "comments" text, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20200302042317"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"

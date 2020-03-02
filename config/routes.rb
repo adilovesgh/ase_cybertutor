@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :tutors
   resources :students
   resources :subjects
+  resources :reviews
 
 
   # Example of regular route:
