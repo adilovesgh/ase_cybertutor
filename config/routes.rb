@@ -17,14 +17,17 @@ Rails.application.routes.draw do
   #resources :subjects
   Rails.application.routes.draw do
     resources :subjects do
-      resources :tutors
+      resources :tutors do
+        resources :reviews
+      end
     end
   end
-  Rails.application.routes.draw do
-    resources :tutors do
-      resources :reviews
-    end
-  end
+  
+  #Rails.application.routes.draw do
+   # resources :tutors do
+    #  resources :reviews
+    #end
+  #end
 
   # Example resource route with options:
   #   resources :products do

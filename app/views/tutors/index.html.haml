@@ -11,10 +11,10 @@
     - @tutors.each do |tutor|
       %tr
         %td= tutor.name
-        %td= tutor.experience
-        %td= tutor.rate
+        %td= (tutor.experience.to_s + " years")
+        %td= number_to_currency(tutor.rate)
         %td= tutor.average_rating
-        %td= link_to "Reviews for #{tutor.name}", tutor_reviews_path(tutor)
+        %td= link_to "Reviews for #{tutor.name}", subject_tutor_reviews_path(@subject,tutor)
 
 = link_to 'Add new tutor', new_subject_tutor_path
 = link_to 'Back to subjects', subjects_path

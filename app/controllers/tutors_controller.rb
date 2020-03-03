@@ -4,7 +4,7 @@ class TutorsController < ApplicationController
         @tutors = @subject.tutors
 
         @tutors.each {|tutor|
-            tutor.average_rating=tutor.reviews.average(:rating)
+            tutor.average_rating=tutor.reviews.average(:rating).round(2)
         }
     end
 

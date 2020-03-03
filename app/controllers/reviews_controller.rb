@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
 	def index
+        @subject = Subject.find(params[:subject_id])
         @tutor = Tutor.find(params[:tutor_id])
         @reviews = @tutor.reviews
     end
@@ -14,9 +15,10 @@ class ReviewsController < ApplicationController
 
     def create
     	@tutor = Tutor.find(params[:tutor_id])
-        @review = @tutor.reviews.create(review_params)
+	    @review = @tutor.reviews.build(review_params)
+        #To Do: save a student infor on the review.
         @review.save
-        redirect_to tutor_reviews_path(params[:tutor_id])
+        redirect_to subject_tutor_reviews_path(params[:subject_id], params[:tutor_id])
     end
 
     private

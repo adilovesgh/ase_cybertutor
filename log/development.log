@@ -5821,3 +5821,2344 @@ Processing by SubjectsController#index as HTML
   [1m[36mSubject Load (0.3ms)[0m  [1mSELECT "subjects".* FROM "subjects"[0m
   Rendered subjects/index.html.haml within layouts/application (1.9ms)
 Completed 200 OK in 23ms (Views: 22.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-03 02:15:38 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by SubjectsController#index as HTML
+  [1m[35mSubject Load (0.1ms)[0m  SELECT "subjects".* FROM "subjects"
+  Rendered subjects/index.html.haml within layouts/application (16.9ms)
+Completed 200 OK in 298ms (Views: 244.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 02:15:40 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (0.2ms)[0m  SELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?  [["subject_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (3.0ms)
+Completed 200 OK in 78ms (Views: 19.7ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/subjects/1/tutors/new" for 127.0.0.1 at 2020-03-03 02:15:44 -0500
+Processing by TutorsController#new as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered tutors/new.html.haml within layouts/application (5.7ms)
+Completed 200 OK in 28ms (Views: 26.7ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 02:15:50 -0500
+Processing by TutorsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"TLRFSCR3PCtVV0CNgRLOzAif0PmjL5oDZK8ChsepExXgnz0jwPLuy+6CfKrffdsuK+vpO4MAKwTUN67saBPZgg==", "tutor"=>{"name"=>"Bobby", "experience"=>"10", "rate"=>"15.5"}, "commit"=>"Save Changes", "subject_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "tutors" ("name", "experience", "rate", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Bobby"], ["experience", 10], ["rate", 15.5], ["created_at", "2020-03-03 07:15:50.382173"], ["updated_at", "2020-03-03 07:15:50.382173"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "subjects_tutors" ("subject_id", "tutor_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["subject_id", 1], ["tutor_id", 2], ["created_at", "2020-03-03 07:15:50.388898"], ["updated_at", "2020-03-03 07:15:50.388898"]]
+  [1m[36m (10.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/subjects/1/tutors
+Completed 302 Found in 25ms (ActiveRecord: 11.2ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 02:15:50 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?[0m  [["subject_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  [1m[36m (0.4ms)[0m  [1mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 2]]
+  Rendered tutors/index.html.haml within layouts/application (0.6ms)
+Completed 200 OK in 22ms (Views: 16.1ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/tutors/2/reviews" for 127.0.0.1 at 2020-03-03 02:15:53 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"tutor_id"=>"2"}
+  [1m[35mTutor Load (0.2ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mReview Load (0.2ms)[0m  [1mSELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 2]]
+  Rendered reviews/index.html.haml within layouts/application (8.8ms)
+Completed 200 OK in 33ms (Views: 31.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/tutors/2/reviews/new" for 127.0.0.1 at 2020-03-03 02:15:55 -0500
+Processing by ReviewsController#new as HTML
+  Parameters: {"tutor_id"=>"2"}
+  [1m[35mTutor Load (0.1ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered reviews/new.html.haml within layouts/application (2.7ms)
+Completed 200 OK in 23ms (Views: 21.5ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/tutors/2/reviews" for 127.0.0.1 at 2020-03-03 02:16:02 -0500
+Processing by ReviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"EDlcuCia2OY10BciuFkA8khamHsJ0Zk+BWOKXdL3O6S8EiTTzB8KBo4FKwXmNhUQay6huSn+KDm1+yY3fU3xMw==", "review"=>{"rating"=>"5", "comment"=>"Super!"}, "commit"=>"Save Changes", "tutor_id"=>"2"}
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "reviews" ("rating", "comment", "tutor_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["rating", 5], ["comment", "Super!"], ["tutor_id", 2], ["created_at", "2020-03-03 07:16:02.899241"], ["updated_at", "2020-03-03 07:16:02.899241"]]
+  [1m[35m (9.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  commit transaction
+Redirected to http://127.0.0.1:3000/tutors/2/reviews
+Completed 302 Found in 20ms (ActiveRecord: 9.9ms)
+
+
+Started GET "/tutors/2/reviews" for 127.0.0.1 at 2020-03-03 02:16:02 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"tutor_id"=>"2"}
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mReview Load (0.1ms)[0m  SELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 2]]
+  Rendered reviews/index.html.haml within layouts/application (1.1ms)
+Completed 200 OK in 23ms (Views: 21.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-03 02:16:04 -0500
+Processing by SubjectsController#index as HTML
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT "subjects".* FROM "subjects"[0m
+  Rendered subjects/index.html.haml within layouts/application (0.9ms)
+Completed 200 OK in 24ms (Views: 23.3ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 02:16:05 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[35mSubject Load (0.2ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTutor Load (0.2ms)[0m  [1mSELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?[0m  [["subject_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 2]]
+  Rendered tutors/index.html.haml within layouts/application (0.9ms)
+Completed 200 OK in 30ms (Views: 24.0ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 02:16:16 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"tutor_id"=>"1"}
+  [1m[35mTutor Load (0.2ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mReview Load (0.1ms)[0m  [1mSELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (1.5ms)
+Completed 200 OK in 23ms (Views: 20.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-03 02:16:29 -0500
+Processing by SubjectsController#index as HTML
+  [1m[35mSubject Load (0.1ms)[0m  SELECT "subjects".* FROM "subjects"
+  Rendered subjects/index.html.haml within layouts/application (1.1ms)
+Completed 200 OK in 23ms (Views: 22.2ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/subjects/new" for 127.0.0.1 at 2020-03-03 02:16:34 -0500
+Processing by SubjectsController#new as HTML
+  Rendered subjects/new.html.haml within layouts/application (2.3ms)
+Completed 200 OK in 24ms (Views: 23.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/subjects" for 127.0.0.1 at 2020-03-03 02:16:36 -0500
+Processing by SubjectsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"cfMfI9LkllBKAzkow0vCbDq2RoL3IMjWzJcrK4uWb+zd2GdINmFEsPHWBQ+dJNeOGcJ/QNcPedF8D4dBJCylew==", "subject"=>{"name"=>"English"}, "commit"=>"Save Changes"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "subjects" ("name", "created_at", "updated_at") VALUES (?, ?, ?)  [["name", "English"], ["created_at", "2020-03-03 07:16:36.872132"], ["updated_at", "2020-03-03 07:16:36.872132"]]
+  [1m[36m (1.2ms)[0m  [1mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/subjects
+Completed 302 Found in 5ms (ActiveRecord: 1.7ms)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-03 02:16:36 -0500
+Processing by SubjectsController#index as HTML
+  [1m[35mSubject Load (0.3ms)[0m  SELECT "subjects".* FROM "subjects"
+  Rendered subjects/index.html.haml within layouts/application (1.2ms)
+Completed 200 OK in 18ms (Views: 16.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/subjects/2/tutors" for 127.0.0.1 at 2020-03-03 02:16:38 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"2"}
+  [1m[36mSubject Load (0.2ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mTutor Load (0.1ms)[0m  SELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?  [["subject_id", 2]]
+  Rendered tutors/index.html.haml within layouts/application (0.4ms)
+Completed 200 OK in 26ms (Views: 17.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/subjects/2/tutors/new" for 127.0.0.1 at 2020-03-03 02:16:39 -0500
+Processing by TutorsController#new as HTML
+  Parameters: {"subject_id"=>"2"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered tutors/new.html.haml within layouts/application (1.3ms)
+Completed 200 OK in 19ms (Views: 17.3ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/subjects/2/tutors" for 127.0.0.1 at 2020-03-03 02:16:43 -0500
+Processing by TutorsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"sL2csKOsfRGxAtBoktK2sxXdaSUYaeXcqXZgz/2VpAgcluTbRymv8QrX7E/MvaNRNqlQ5zhGVNsZ7sylUi9unw==", "tutor"=>{"name"=>"Nick", "experience"=>"10", "rate"=>"100"}, "commit"=>"Save Changes", "subject_id"=>"2"}
+  [1m[35mSubject Load (0.3ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "tutors" ("name", "experience", "rate", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Nick"], ["experience", 10], ["rate", 100.0], ["created_at", "2020-03-03 07:16:43.403745"], ["updated_at", "2020-03-03 07:16:43.403745"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "subjects_tutors" ("subject_id", "tutor_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["subject_id", 2], ["tutor_id", 3], ["created_at", "2020-03-03 07:16:43.406658"], ["updated_at", "2020-03-03 07:16:43.406658"]]
+  [1m[35m (9.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  commit transaction
+Redirected to http://127.0.0.1:3000/subjects/2/tutors
+Completed 302 Found in 20ms (ActiveRecord: 11.0ms)
+
+
+Started GET "/subjects/2/tutors" for 127.0.0.1 at 2020-03-03 02:16:43 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"2"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mTutor Load (0.1ms)[0m  SELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?  [["subject_id", 2]]
+  [1m[36m (0.1ms)[0m  [1mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 3]]
+  Rendered tutors/index.html.haml within layouts/application (0.5ms)
+Completed 200 OK in 21ms (Views: 17.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/tutors/3/reviews" for 127.0.0.1 at 2020-03-03 02:16:45 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"tutor_id"=>"3"}
+  [1m[35mTutor Load (0.1ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mReview Load (0.1ms)[0m  [1mSELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 3]]
+  Rendered reviews/index.html.haml within layouts/application (0.9ms)
+Completed 200 OK in 22ms (Views: 20.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/tutors/3/reviews/new" for 127.0.0.1 at 2020-03-03 02:16:47 -0500
+Processing by ReviewsController#new as HTML
+  Parameters: {"tutor_id"=>"3"}
+  [1m[35mTutor Load (0.1ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 3]]
+  Rendered reviews/new.html.haml within layouts/application (0.8ms)
+Completed 200 OK in 28ms (Views: 26.8ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/tutors/3/reviews" for 127.0.0.1 at 2020-03-03 02:16:50 -0500
+Processing by ReviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"pHnhZmVBE0+h+5FiqbVFtACsiqON8XbUEqhsDDgS9CsIUpkNgcTBrxourUX32lBWI9izYa3ex9OiMMBml6g+vA==", "review"=>{"rating"=>"10", "comment"=>"alright"}, "commit"=>"Save Changes", "tutor_id"=>"3"}
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "reviews" ("rating", "comment", "tutor_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["rating", 10], ["comment", "alright"], ["tutor_id", 3], ["created_at", "2020-03-03 07:16:50.499397"], ["updated_at", "2020-03-03 07:16:50.499397"]]
+  [1m[35m (8.4ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  commit transaction
+Redirected to http://127.0.0.1:3000/tutors/3/reviews
+Completed 302 Found in 15ms (ActiveRecord: 9.1ms)
+
+
+Started GET "/tutors/3/reviews" for 127.0.0.1 at 2020-03-03 02:16:50 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"tutor_id"=>"3"}
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mReview Load (0.1ms)[0m  SELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 3]]
+  Rendered reviews/index.html.haml within layouts/application (1.0ms)
+Completed 200 OK in 24ms (Views: 22.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-03 02:16:52 -0500
+Processing by SubjectsController#index as HTML
+  [1m[36mSubject Load (0.2ms)[0m  [1mSELECT "subjects".* FROM "subjects"[0m
+  Rendered subjects/index.html.haml within layouts/application (1.3ms)
+Completed 200 OK in 23ms (Views: 22.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/subjects/2/tutors" for 127.0.0.1 at 2020-03-03 02:16:53 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"2"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?[0m  [["subject_id", 2]]
+  [1m[35m (0.1ms)[0m  SELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 3]]
+  Rendered tutors/index.html.haml within layouts/application (0.5ms)
+Completed 200 OK in 23ms (Views: 18.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-03 02:17:13 -0500
+Processing by SubjectsController#index as HTML
+  [1m[36mSubject Load (0.2ms)[0m  [1mSELECT "subjects".* FROM "subjects"[0m
+  Rendered subjects/index.html.haml within layouts/application (1.2ms)
+Completed 200 OK in 21ms (Views: 20.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-03 11:46:18 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by SubjectsController#index as HTML
+  [1m[35mSubject Load (0.4ms)[0m  SELECT "subjects".* FROM "subjects"
+  Rendered subjects/index.html.haml within layouts/application (14.8ms)
+Completed 200 OK in 337ms (Views: 285.1ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:00:45 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (1.2ms)[0m  SELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?  [["subject_id", 1]]
+  [1m[36m (1.2ms)[0m  [1mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 2]]
+  Rendered tutors/index.html.haml within layouts/application (3.4ms)
+Completed 200 OK in 89ms (Views: 20.1ms | ActiveRecord: 3.1ms)
+
+
+Started GET "/subjects/2/tutors" for 127.0.0.1 at 2020-03-03 12:00:49 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"2"}
+  [1m[36mSubject Load (0.2ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mTutor Load (0.1ms)[0m  SELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?  [["subject_id", 2]]
+  [1m[36m (0.1ms)[0m  [1mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 3]]
+  Rendered tutors/index.html.haml within layouts/application (0.4ms)
+Completed 200 OK in 21ms (Views: 16.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:00:51 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?[0m  [["subject_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 2]]
+  Rendered tutors/index.html.haml within layouts/application (0.5ms)
+Completed 200 OK in 22ms (Views: 17.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/subjects/2/tutors" for 127.0.0.1 at 2020-03-03 12:00:53 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"2"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?[0m  [["subject_id", 2]]
+  [1m[35m (0.1ms)[0m  SELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 3]]
+  Rendered tutors/index.html.haml within layouts/application (0.4ms)
+Completed 200 OK in 29ms (Views: 25.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:00:58 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (0.1ms)[0m  SELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?  [["subject_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 2]]
+  Rendered tutors/index.html.haml within layouts/application (1.0ms)
+Completed 200 OK in 22ms (Views: 16.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:01:40 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"tutor_id"=>"1"}
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mReview Load (0.1ms)[0m  SELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (9.8ms)
+Completed 200 OK in 33ms (Views: 31.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/tutors/1/reviews/new" for 127.0.0.1 at 2020-03-03 12:01:42 -0500
+Processing by ReviewsController#new as HTML
+  Parameters: {"tutor_id"=>"1"}
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered reviews/new.html.haml within layouts/application (6.4ms)
+Completed 200 OK in 24ms (Views: 23.2ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:01:49 -0500
+Processing by ReviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"xGGwMD/eeA8RHsxd0/fdRLDtqMr8H9rMM53Q+kNRpFH353WG7PhTkNK8BY0RUJwQd0EFzv1d2KSV4DNBOj6vyQ==", "review"=>{"rating"=>"10", "comment"=>"Good!"}, "commit"=>"Save Changes", "tutor_id"=>"1"}
+  [1m[35mTutor Load (0.1ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.8ms)[0m  INSERT INTO "reviews" ("rating", "comment", "tutor_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["rating", 10], ["comment", "Good!"], ["tutor_id", 1], ["created_at", "2020-03-03 17:01:49.713906"], ["updated_at", "2020-03-03 17:01:49.713906"]]
+  [1m[36m (1.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/tutors/1/reviews
+Completed 302 Found in 9ms (ActiveRecord: 2.8ms)
+
+
+Started GET "/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:01:49 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"tutor_id"=>"1"}
+  [1m[35mTutor Load (0.1ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mReview Load (0.1ms)[0m  [1mSELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (1.1ms)
+Completed 200 OK in 25ms (Views: 23.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-03 12:01:51 -0500
+Processing by SubjectsController#index as HTML
+  [1m[35mSubject Load (0.1ms)[0m  SELECT "subjects".* FROM "subjects"
+  Rendered subjects/index.html.haml within layouts/application (1.1ms)
+Completed 200 OK in 28ms (Views: 27.0ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/subjects/new" for 127.0.0.1 at 2020-03-03 12:01:52 -0500
+Processing by SubjectsController#new as HTML
+  Rendered subjects/new.html.haml within layouts/application (3.4ms)
+Completed 200 OK in 31ms (Views: 31.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-03 12:07:17 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by SubjectsController#index as HTML
+  [1m[35mSubject Load (0.2ms)[0m  SELECT "subjects".* FROM "subjects"
+  Rendered subjects/index.html.haml within layouts/application (57.3ms)
+Completed 200 OK in 640ms (Views: 544.1ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:07:19 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[36mSubject Load (0.3ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (0.2ms)[0m  SELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?  [["subject_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 2]]
+  Rendered tutors/index.html.haml within layouts/application (3.1ms)
+Completed 200 OK in 67ms (Views: 18.3ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/tutors/2/reviews" for 127.0.0.1 at 2020-03-03 12:07:21 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"tutor_id"=>"2"}
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mReview Load (0.1ms)[0m  SELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 2]]
+  Rendered reviews/index.html.haml within layouts/application (8.9ms)
+Completed 200 OK in 33ms (Views: 30.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/tutors/2/reviews/new" for 127.0.0.1 at 2020-03-03 12:07:23 -0500
+Processing by ReviewsController#new as HTML
+  Parameters: {"tutor_id"=>"2"}
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered reviews/new.html.haml within layouts/application (7.9ms)
+Completed 200 OK in 24ms (Views: 23.1ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/tutors/2/reviews" for 127.0.0.1 at 2020-03-03 12:07:27 -0500
+Processing by ReviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"cdVYKZ6I5co0lkxPIRjZX5YAcU1rMLh/VAmkAQtbLq1CU52fTa7OVfc0hZ/jv5gLUazcSWpyuhfydEe6cjQlNQ==", "review"=>{"reating"=>"4", "comment"=>"Awesome!"}, "commit"=>"Save Changes", "tutor_id"=>"2"}
+  [1m[35mTutor Load (0.1ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 2]]
+Unpermitted parameter: reating
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "reviews" ("comment", "tutor_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["comment", "Awesome!"], ["tutor_id", 2], ["created_at", "2020-03-03 17:07:27.746495"], ["updated_at", "2020-03-03 17:07:27.746495"]]
+  [1m[36m (8.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/tutors/2/reviews
+Completed 302 Found in 18ms (ActiveRecord: 9.7ms)
+
+
+Started GET "/tutors/2/reviews" for 127.0.0.1 at 2020-03-03 12:07:27 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"tutor_id"=>"2"}
+  [1m[35mTutor Load (0.3ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mReview Load (0.1ms)[0m  [1mSELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 2]]
+  Rendered reviews/index.html.haml within layouts/application (1.5ms)
+Completed 200 OK in 29ms (Views: 26.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/tutors/2/reviews/new" for 127.0.0.1 at 2020-03-03 12:07:36 -0500
+Processing by ReviewsController#new as HTML
+  Parameters: {"tutor_id"=>"2"}
+  [1m[35mTutor Load (0.1ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered reviews/new.html.haml within layouts/application (0.9ms)
+Completed 200 OK in 19ms (Views: 18.2ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/tutors/2/reviews" for 127.0.0.1 at 2020-03-03 12:07:39 -0500
+Processing by ReviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"OI6EeYpVdsmRRb3055J+SVxah74c3z4+ixsTpjC2poMLCEHPWXNdVlLndCQlNT8dm/Yquh2dPFYtZvAdSdmtGw==", "review"=>{"reating"=>"3", "comment"=>"What"}, "commit"=>"Save Changes", "tutor_id"=>"2"}
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 2]]
+Unpermitted parameter: reating
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "reviews" ("comment", "tutor_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["comment", "What"], ["tutor_id", 2], ["created_at", "2020-03-03 17:07:39.342944"], ["updated_at", "2020-03-03 17:07:39.342944"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  commit transaction
+Redirected to http://127.0.0.1:3000/tutors/2/reviews
+Completed 302 Found in 7ms (ActiveRecord: 1.8ms)
+
+
+Started GET "/tutors/2/reviews" for 127.0.0.1 at 2020-03-03 12:07:39 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"tutor_id"=>"2"}
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mReview Load (0.1ms)[0m  SELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 2]]
+  Rendered reviews/index.html.haml within layouts/application (1.0ms)
+Completed 200 OK in 18ms (Views: 16.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/tutors/2/" for 127.0.0.1 at 2020-03-03 12:09:20 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mTutor Load (0.2ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered tutors/show.html.haml within layouts/application (4.8ms)
+Completed 200 OK in 264ms (Views: 225.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/tutors/" for 127.0.0.1 at 2020-03-03 12:09:36 -0500
+Processing by TutorsController#index as HTML
+  [1m[36mSubject Load (0.2ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", nil]]
+Completed 404 Not Found in 12ms (ActiveRecord: 0.3ms)
+
+ActiveRecord::RecordNotFound (Couldn't find Subject with 'id'=):
+  app/controllers/tutors_controller.rb:3:in `index'
+
+
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (3.9ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (101.1ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.7ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (99.7ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (222.0ms)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-03 12:09:41 -0500
+Processing by SubjectsController#index as HTML
+  [1m[35mSubject Load (0.2ms)[0m  SELECT "subjects".* FROM "subjects"
+  Rendered subjects/index.html.haml within layouts/application (13.8ms)
+Completed 200 OK in 42ms (Views: 41.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sube" for 127.0.0.1 at 2020-03-03 12:09:42 -0500
+
+ActionController::RoutingError (No route matches [GET] "/sube"):
+  actionpack (4.2.10) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.10) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.13) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.13) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.10) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.13) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.13) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.10) lib/rails/engine.rb:518:in `call'
+  railties (4.2.10) lib/rails/application.rb:165:in `call'
+  rack (1.6.13) lib/rack/lock.rb:17:in `call'
+  rack (1.6.13) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.13) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/2.4.0/webrick/httpserver.rb:140:in `service'
+  /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/2.4.0/webrick/httpserver.rb:96:in `run'
+  /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/2.4.0/webrick/server.rb:290:in `block in start_thread'
+
+
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.6ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/routes/_table.html.erb (5.8ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (133.9ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (82.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.9ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (182.0ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:09:46 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (0.2ms)[0m  SELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?  [["subject_id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 2]]
+  Rendered tutors/index.html.haml within layouts/application (4.0ms)
+Completed 200 OK in 65ms (Views: 28.0ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:09:47 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"tutor_id"=>"1"}
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mReview Load (0.2ms)[0m  SELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (13.5ms)
+Completed 200 OK in 38ms (Views: 35.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/tutors/1/reviews/new" for 127.0.0.1 at 2020-03-03 12:09:50 -0500
+Processing by ReviewsController#new as HTML
+  Parameters: {"tutor_id"=>"1"}
+  [1m[36mTutor Load (0.2ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered reviews/new.html.haml within layouts/application (7.7ms)
+Completed 200 OK in 50ms (Views: 48.3ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:09:53 -0500
+Processing by ReviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"qCWgdaDhZXFfZ3cfJ8vyf3kIvgMCu3+lqCUPlEBFEj+bo2XDc8dO7pzFvs/lbLMrvqQTBwP5fc0OWOwvOSoZpw==", "review"=>{"reating"=>"3", "comment"=>"What"}, "commit"=>"Save Changes", "tutor_id"=>"1"}
+  [1m[35mTutor Load (0.2ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+Unpermitted parameter: reating
+Unpermitted parameter: reating
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "reviews" ("comment", "tutor_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["comment", "What"], ["tutor_id", 1], ["created_at", "2020-03-03 17:09:53.664884"], ["updated_at", "2020-03-03 17:09:53.664884"]]
+  [1m[36m (8.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/tutors/1/reviews
+Completed 302 Found in 19ms (ActiveRecord: 9.4ms)
+
+
+Started GET "/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:09:53 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"tutor_id"=>"1"}
+  [1m[35mTutor Load (0.2ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mReview Load (0.1ms)[0m  [1mSELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (2.4ms)
+Completed 200 OK in 38ms (Views: 35.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/tutors/1/reviews/new" for 127.0.0.1 at 2020-03-03 12:10:55 -0500
+Processing by ReviewsController#new as HTML
+  Parameters: {"tutor_id"=>"1"}
+  [1m[35mTutor Load (0.1ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered reviews/new.html.haml within layouts/application (0.7ms)
+Completed 200 OK in 29ms (Views: 16.2ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:10:58 -0500
+Processing by ReviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"TxvPvitM0wuNHCd6rM10NVP7+eSb96INo9P1eqJlIuR8nQoI+Gr4lE6+7qpuajVhlFdU4Jq1oGUFrhbB2wopfA==", "review"=>{"reating"=>"4", "comment"=>"good"}, "commit"=>"Save Changes", "tutor_id"=>"1"}
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+Unpermitted parameter: reating
+Unpermitted parameter: reating
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "reviews" ("comment", "tutor_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["comment", "good"], ["tutor_id", 1], ["created_at", "2020-03-03 17:10:58.911316"], ["updated_at", "2020-03-03 17:10:58.911316"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  commit transaction
+Redirected to http://127.0.0.1:3000/tutors/1/reviews
+Completed 302 Found in 15ms (ActiveRecord: 1.7ms)
+
+
+Started GET "/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:10:58 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"tutor_id"=>"1"}
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mReview Load (0.1ms)[0m  SELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (1.5ms)
+Completed 200 OK in 21ms (Views: 19.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/tutors/1/reviews/new" for 127.0.0.1 at 2020-03-03 12:11:47 -0500
+Processing by ReviewsController#new as HTML
+  Parameters: {"tutor_id"=>"1"}
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered reviews/new.html.haml within layouts/application (6.4ms)
+Completed 200 OK in 26ms (Views: 24.6ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:11:49 -0500
+Processing by ReviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"zPvHPUZsVfTfmUyceQR25p99kNrxqUYuVPLfD7hp5Hv/fQKLlUp+axw7hUy7ozeyWNE93vDrREbyjzy0wQbv4w==", "review"=>{"rating"=>"1", "comment"=>"bad"}, "commit"=>"Save Changes", "tutor_id"=>"1"}
+  [1m[35mTutor Load (0.1ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "reviews" ("rating", "comment", "tutor_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["rating", 1], ["comment", "bad"], ["tutor_id", 1], ["created_at", "2020-03-03 17:11:49.364984"], ["updated_at", "2020-03-03 17:11:49.364984"]]
+  [1m[36m (9.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/tutors/1/reviews
+Completed 302 Found in 17ms (ActiveRecord: 10.1ms)
+
+
+Started GET "/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:11:49 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"tutor_id"=>"1"}
+  [1m[35mTutor Load (0.1ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mReview Load (0.1ms)[0m  [1mSELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (1.4ms)
+Completed 200 OK in 22ms (Views: 20.8ms | ActiveRecord: 0.2ms)
+  [1m[36m (1.3ms)[0m  [1mCREATE TABLE "reviews" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "rating" integer, "comment" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "tutor_id" integer) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (1.3ms)[0m  [1mCREATE  INDEX "index_reviews_on_tutor_id" ON "reviews" ("tutor_id")[0m
+  [1m[35m (1.3ms)[0m  CREATE TABLE "reviews_tutors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "tutor_id" integer, "review_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (1.3ms)[0m  [1mCREATE  INDEX "index_reviews_tutors_on_review_id" ON "reviews_tutors" ("review_id")[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_reviews_tutors_on_review_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_reviews_tutors_on_review_id' AND type='index'
+
+  [1m[36m (2.0ms)[0m  [1mCREATE  INDEX "index_reviews_tutors_on_tutor_id" ON "reviews_tutors" ("tutor_id")[0m
+  [1m[35m (1.2ms)[0m  CREATE TABLE "subject_tutors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "tutor_id" integer, "subject_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (1.1ms)[0m  [1mCREATE  INDEX "index_subject_tutors_on_tutor_id" ON "subject_tutors" ("tutor_id")[0m
+  [1m[35m (1.2ms)[0m  CREATE TABLE "subjects" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "name" varchar, "review_id" integer) 
+  [1m[36m (1.1ms)[0m  [1mCREATE  INDEX "index_subjects_on_review_id" ON "subjects" ("review_id")[0m
+  [1m[35m (1.0ms)[0m  CREATE TABLE "subjects_tutors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "tutor_id" integer, "subject_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (1.2ms)[0m  [1mCREATE  INDEX "index_subjects_tutors_on_subject_id" ON "subjects_tutors" ("subject_id")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_subjects_tutors_on_subject_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_subjects_tutors_on_subject_id' AND type='index'
+
+  [1m[36m (1.3ms)[0m  [1mCREATE  INDEX "index_subjects_tutors_on_tutor_id" ON "subjects_tutors" ("tutor_id")[0m
+  [1m[35m (1.2ms)[0m  CREATE TABLE "tutor_reviews" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "review_id" integer, "tutor_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (1.2ms)[0m  [1mCREATE  INDEX "index_tutor_reviews_on_review_id" ON "tutor_reviews" ("review_id")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_tutor_reviews_on_review_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_tutor_reviews_on_review_id' AND type='index'
+
+  [1m[36m (1.2ms)[0m  [1mCREATE  INDEX "index_tutor_reviews_on_tutor_id" ON "tutor_reviews" ("tutor_id")[0m
+  [1m[35m (1.1ms)[0m  CREATE TABLE "tutors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "name" varchar, "experience" integer, "rate" float, "average_rating" float) 
+  [1m[36m (1.1ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (1.1ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.1ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (1.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200303070109')
+  [1m[36m (1.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200303063057')[0m
+  [1m[35m (1.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200303045216')
+  [1m[36m (1.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200303063821')[0m
+  [1m[35m (1.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200303045159')
+  [1m[36m (1.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200303045334')[0m
+  [1m[35m (1.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200303060844')
+  [1m[36m (2.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200303045546')[0m
+  [1m[35m (0.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200303045107')
+  [1m[36m (1.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200303055406')[0m
+  [1m[35m (1.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200303063154')
+  [1m[36m (1.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200303055431')[0m
+  [1m[35m (0.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200303051448')
+  [1m[36m (1.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200303063215')[0m
+  [1m[35m (1.0ms)[0m  CREATE TABLE "reviews" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "rating" integer, "comment" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "tutor_id" integer) 
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (1.1ms)[0m  CREATE  INDEX "index_reviews_on_tutor_id" ON "reviews" ("tutor_id")
+  [1m[36m (1.1ms)[0m  [1mCREATE TABLE "reviews_tutors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "tutor_id" integer, "review_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (1.3ms)[0m  CREATE  INDEX "index_reviews_tutors_on_review_id" ON "reviews_tutors" ("review_id")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_reviews_tutors_on_review_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_reviews_tutors_on_review_id' AND type='index'
+[0m
+  [1m[35m (1.2ms)[0m  CREATE  INDEX "index_reviews_tutors_on_tutor_id" ON "reviews_tutors" ("tutor_id")
+  [1m[36m (1.1ms)[0m  [1mCREATE TABLE "subject_tutors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "tutor_id" integer, "subject_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (1.0ms)[0m  CREATE  INDEX "index_subject_tutors_on_tutor_id" ON "subject_tutors" ("tutor_id")
+  [1m[36m (1.1ms)[0m  [1mCREATE TABLE "subjects" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "name" varchar, "review_id" integer) [0m
+  [1m[35m (1.3ms)[0m  CREATE  INDEX "index_subjects_on_review_id" ON "subjects" ("review_id")
+  [1m[36m (1.1ms)[0m  [1mCREATE TABLE "subjects_tutors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "tutor_id" integer, "subject_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (1.6ms)[0m  CREATE  INDEX "index_subjects_tutors_on_subject_id" ON "subjects_tutors" ("subject_id")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_subjects_tutors_on_subject_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_subjects_tutors_on_subject_id' AND type='index'
+[0m
+  [1m[35m (1.1ms)[0m  CREATE  INDEX "index_subjects_tutors_on_tutor_id" ON "subjects_tutors" ("tutor_id")
+  [1m[36m (1.9ms)[0m  [1mCREATE TABLE "tutor_reviews" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "review_id" integer, "tutor_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (1.1ms)[0m  CREATE  INDEX "index_tutor_reviews_on_review_id" ON "tutor_reviews" ("review_id")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_tutor_reviews_on_review_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_tutor_reviews_on_review_id' AND type='index'
+[0m
+  [1m[35m (1.3ms)[0m  CREATE  INDEX "index_tutor_reviews_on_tutor_id" ON "tutor_reviews" ("tutor_id")
+  [1m[36m (1.3ms)[0m  [1mCREATE TABLE "tutors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "name" varchar, "experience" integer, "rate" float, "average_rating" float) [0m
+  [1m[35m (1.0ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar NOT NULL) 
+  [1m[36m (1.1ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.1ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (1.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200303070109')[0m
+  [1m[35m (1.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200303063057')
+  [1m[36m (1.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200303045216')[0m
+  [1m[35m (1.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200303063821')
+  [1m[36m (1.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200303045159')[0m
+  [1m[35m (1.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200303045334')
+  [1m[36m (1.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200303060844')[0m
+  [1m[35m (0.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200303045546')
+  [1m[36m (1.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200303045107')[0m
+  [1m[35m (1.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200303055406')
+  [1m[36m (1.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200303063154')[0m
+  [1m[35m (1.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200303055431')
+  [1m[36m (0.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200303051448')[0m
+  [1m[35m (0.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200303063215')
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-03 12:12:39 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by SubjectsController#index as HTML
+  [1m[35mSubject Load (0.1ms)[0m  SELECT "subjects".* FROM "subjects"
+  Rendered subjects/index.html.haml within layouts/application (6.2ms)
+Completed 200 OK in 216ms (Views: 186.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/subjects/new" for 127.0.0.1 at 2020-03-03 12:12:42 -0500
+Processing by SubjectsController#new as HTML
+  Rendered subjects/new.html.haml within layouts/application (7.5ms)
+Completed 200 OK in 36ms (Views: 35.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/subjects" for 127.0.0.1 at 2020-03-03 12:12:44 -0500
+Processing by SubjectsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"HwUb4JeTAoMb70D6QXne15vPApQ6866d4x/HWVvr10Ysg95WRLUpHNhNiSqD3p+DXGOvkDuxrPVFYiTiIoTc3g==", "subject"=>{"name"=>"Math"}, "commit"=>"Save Changes"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "subjects" ("name", "created_at", "updated_at") VALUES (?, ?, ?)  [["name", "Math"], ["created_at", "2020-03-03 17:12:44.152617"], ["updated_at", "2020-03-03 17:12:44.152617"]]
+  [1m[36m (9.3ms)[0m  [1mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/subjects
+Completed 302 Found in 20ms (ActiveRecord: 10.2ms)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-03 12:12:44 -0500
+Processing by SubjectsController#index as HTML
+  [1m[35mSubject Load (0.2ms)[0m  SELECT "subjects".* FROM "subjects"
+  Rendered subjects/index.html.haml within layouts/application (1.0ms)
+Completed 200 OK in 21ms (Views: 20.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:12:45 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (0.1ms)[0m  SELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?  [["subject_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (4.7ms)
+Completed 200 OK in 63ms (Views: 22.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/subjects/1/tutors/new" for 127.0.0.1 at 2020-03-03 12:12:46 -0500
+Processing by TutorsController#new as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered tutors/new.html.haml within layouts/application (3.3ms)
+Completed 200 OK in 31ms (Views: 30.2ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:12:52 -0500
+Processing by TutorsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"VnHG4fF+cqyq6M9DPbDpvNbFR5bXw+w1AMYSHOara2hl9wNXIlhZM2lKBpP/F6joEWnqktaB7l2mu/Gnn8Rg8A==", "tutor"=>{"name"=>"Daniel", "experience"=>"10", "rate"=>"15.50"}, "commit"=>"Save Changes", "subject_id"=>"1"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "tutors" ("name", "experience", "rate", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Daniel"], ["experience", 10], ["rate", 15.5], ["created_at", "2020-03-03 17:12:52.686465"], ["updated_at", "2020-03-03 17:12:52.686465"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "subjects_tutors" ("subject_id", "tutor_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["subject_id", 1], ["tutor_id", 1], ["created_at", "2020-03-03 17:12:52.692636"], ["updated_at", "2020-03-03 17:12:52.692636"]]
+  [1m[35m (9.2ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  commit transaction
+Redirected to http://127.0.0.1:3000/subjects/1/tutors
+Completed 302 Found in 24ms (ActiveRecord: 10.1ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:12:52 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (0.1ms)[0m  SELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?  [["subject_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (0.4ms)
+Completed 200 OK in 32ms (Views: 18.0ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:12:55 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"tutor_id"=>"1"}
+  [1m[35mTutor Load (0.2ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mReview Load (0.1ms)[0m  [1mSELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (3.8ms)
+Completed 200 OK in 24ms (Views: 22.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/tutors/1/reviews/new" for 127.0.0.1 at 2020-03-03 12:12:56 -0500
+Processing by ReviewsController#new as HTML
+  Parameters: {"tutor_id"=>"1"}
+  [1m[35mTutor Load (0.2ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered reviews/new.html.haml within layouts/application (3.5ms)
+Completed 200 OK in 26ms (Views: 23.8ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:12:59 -0500
+Processing by ReviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"MfV06/GJiJNowMyF3HGTq29pYaBzqCSiln/a7J2brSMCc7FdIq+jDKtiBVUe1tL/qMXMpHLqJsowAjlX5PSmuw==", "review"=>{"rating"=>"3", "comment"=>"Ehh"}, "commit"=>"Save Changes", "tutor_id"=>"1"}
+  [1m[36mTutor Load (0.2ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "reviews" ("rating", "comment", "tutor_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["rating", 3], ["comment", "Ehh"], ["tutor_id", 1], ["created_at", "2020-03-03 17:12:59.941683"], ["updated_at", "2020-03-03 17:12:59.941683"]]
+  [1m[35m (8.4ms)[0m  commit transaction
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  commit transaction
+Redirected to http://127.0.0.1:3000/tutors/1/reviews
+Completed 302 Found in 27ms (ActiveRecord: 9.7ms)
+
+
+Started GET "/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:12:59 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"tutor_id"=>"1"}
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mReview Load (0.1ms)[0m  SELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (1.2ms)
+Completed 200 OK in 19ms (Views: 17.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-03 12:13:02 -0500
+Processing by SubjectsController#index as HTML
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT "subjects".* FROM "subjects"[0m
+  Rendered subjects/index.html.haml within layouts/application (0.9ms)
+Completed 200 OK in 25ms (Views: 24.1ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:13:02 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[35mSubject Load (0.3ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?[0m  [["subject_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (0.8ms)
+Completed 200 OK in 43ms (Views: 35.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:13:08 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"tutor_id"=>"1"}
+  [1m[36mTutor Load (0.2ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mReview Load (0.2ms)[0m  SELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (2.1ms)
+Completed 200 OK in 45ms (Views: 37.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/tutors/1/reviews/new" for 127.0.0.1 at 2020-03-03 12:13:09 -0500
+Processing by ReviewsController#new as HTML
+  Parameters: {"tutor_id"=>"1"}
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered reviews/new.html.haml within layouts/application (1.2ms)
+Completed 200 OK in 40ms (Views: 38.3ms | ActiveRecord: 0.1ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateStudents (20200303171732)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "students" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20200303171732"]]
+  [1m[36m (9.4ms)[0m  [1mcommit transaction[0m
+Migrating to CreateStudentsSubjects (20200303171804)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateStudentsSubjects (20200303171804)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "students_subjects" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "subject_id" integer, "student_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_students_subjects_on_subject_id" ON "students_subjects" ("subject_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20200303171804"]]
+  [1m[36m (9.4ms)[0m  [1mcommit transaction[0m
+Migrating to CreateStudentsTutors (20200303171904)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "students_tutors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "tutor_id" integer, "students_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  CREATE  INDEX "index_students_tutors_on_tutor_id" ON "students_tutors" ("tutor_id")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_students_tutors_on_tutor_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_students_tutors_on_tutor_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_students_tutors_on_students_id" ON "students_tutors" ("students_id")
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20200303171904"]]
+  [1m[35m (1.1ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_reviews_on_tutor_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_reviews_on_tutor_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_reviews_tutors_on_tutor_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_reviews_tutors_on_tutor_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_reviews_tutors_on_review_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_reviews_tutors_on_review_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_students_subjects_on_subject_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_students_subjects_on_subject_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_students_tutors_on_students_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_students_tutors_on_students_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_students_tutors_on_tutor_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_students_tutors_on_tutor_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_subject_tutors_on_tutor_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_subject_tutors_on_tutor_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_subjects_on_review_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_subjects_on_review_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_subjects_tutors_on_tutor_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_subjects_tutors_on_tutor_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_subjects_tutors_on_subject_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_subjects_tutors_on_subject_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_tutor_reviews_on_tutor_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_tutor_reviews_on_tutor_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_tutor_reviews_on_review_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_tutor_reviews_on_review_id' AND type='index'
+[0m
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-03 12:30:43 -0500
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Processing by SubjectsController#index as HTML
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT "subjects".* FROM "subjects"[0m
+  Rendered subjects/index.html.haml within layouts/application (3.2ms)
+Completed 200 OK in 43ms (Views: 28.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:30:46 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?[0m  [["subject_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (0.5ms)
+Completed 200 OK in 62ms (Views: 23.1ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:30:48 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"tutor_id"=>"1"}
+  [1m[36mTutor Load (0.2ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mReview Load (0.1ms)[0m  SELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (4.5ms)
+Completed 200 OK in 30ms (Views: 27.0ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/tutors/1/reviews/new" for 127.0.0.1 at 2020-03-03 12:30:50 -0500
+Processing by ReviewsController#new as HTML
+  Parameters: {"tutor_id"=>"1"}
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered reviews/new.html.haml within layouts/application (0.8ms)
+Completed 200 OK in 24ms (Views: 22.3ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:30:53 -0500
+Processing by ReviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"r9sI8HhJXq+IfpSDJdPeKUy6LHDkQN/GAL9o3Ypw7gicXc1Gq291MEvcXVPndJ99ixaBdOUC3a6mwotm8x/lkA==", "review"=>{"rating"=>"4", "comment"=>"Good"}, "commit"=>"Save Changes", "tutor_id"=>"1"}
+  [1m[35mTutor Load (0.1ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "reviews" ("rating", "comment", "tutor_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["rating", 4], ["comment", "Good"], ["tutor_id", 1], ["created_at", "2020-03-03 17:30:53.473779"], ["updated_at", "2020-03-03 17:30:53.473779"]]
+  [1m[36m (9.3ms)[0m  [1mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/tutors/1/reviews
+Completed 302 Found in 16ms (ActiveRecord: 9.9ms)
+
+
+Started GET "/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:30:53 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"tutor_id"=>"1"}
+  [1m[35mTutor Load (0.2ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mReview Load (0.1ms)[0m  [1mSELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (1.2ms)
+Completed 200 OK in 21ms (Views: 19.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:31:34 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTutor Load (0.2ms)[0m  [1mSELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?[0m  [["subject_id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (0.5ms)
+Completed 200 OK in 26ms (Views: 19.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-03 12:31:37 -0500
+Processing by SubjectsController#index as HTML
+  [1m[36mSubject Load (0.7ms)[0m  [1mSELECT "subjects".* FROM "subjects"[0m
+  Rendered subjects/index.html.haml within layouts/application (2.8ms)
+Completed 200 OK in 21ms (Views: 19.5ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:31:38 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[35mSubject Load (0.5ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTutor Load (0.2ms)[0m  [1mSELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?[0m  [["subject_id", 1]]
+  [1m[35m (0.3ms)[0m  SELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (0.4ms)
+Completed 200 OK in 25ms (Views: 18.8ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:31:39 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"tutor_id"=>"1"}
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mReview Load (0.1ms)[0m  SELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (1.2ms)
+Completed 200 OK in 24ms (Views: 22.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-03 12:31:40 -0500
+Processing by SubjectsController#index as HTML
+  [1m[36mSubject Load (0.3ms)[0m  [1mSELECT "subjects".* FROM "subjects"[0m
+  Rendered subjects/index.html.haml within layouts/application (2.6ms)
+Completed 200 OK in 20ms (Views: 19.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:31:46 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?[0m  [["subject_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (0.5ms)
+Completed 200 OK in 24ms (Views: 18.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:31:47 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"tutor_id"=>"1"}
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mReview Load (0.2ms)[0m  SELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (1.7ms)
+Completed 200 OK in 23ms (Views: 21.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:33:10 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"tutor_id"=>"1"}
+  [1m[36mTutor Load (0.2ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mReview Load (0.1ms)[0m  SELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (3.8ms)
+Completed 200 OK in 21ms (Views: 19.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/tutors/1" for 127.0.0.1 at 2020-03-03 12:33:11 -0500
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTutor Load (0.2ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered tutors/show.html.haml within layouts/application (1.9ms)
+Completed 200 OK in 34ms (Views: 33.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/tutors/1" for 127.0.0.1 at 2020-03-03 12:33:14 -0500
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mTutor Load (0.2ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered tutors/show.html.haml within layouts/application (0.1ms)
+Completed 200 OK in 21ms (Views: 19.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/tutors/1/reviews/new" for 127.0.0.1 at 2020-03-03 12:35:07 -0500
+Processing by ReviewsController#new as HTML
+  Parameters: {"tutor_id"=>"1"}
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered reviews/new.html.haml within layouts/application (1.1ms)
+Completed 200 OK in 23ms (Views: 21.4ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:35:10 -0500
+Processing by ReviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"B6AiuqrLklqzTdeH2OzsjnHGqmu9LE/B56VjYvPi2mU0JucMee25xXDvHlcaS63atmoHb7xuTalB2IDZio3R/Q==", "review"=>{"rating"=>"3", "comment"=>"yo"}, "commit"=>"Save Changes", "tutor_id"=>"1"}
+  [1m[35mTutor Load (0.1ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "reviews" ("rating", "comment", "tutor_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["rating", 3], ["comment", "yo"], ["tutor_id", 1], ["created_at", "2020-03-03 17:35:10.506390"], ["updated_at", "2020-03-03 17:35:10.506390"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/tutors/1/reviews
+Completed 302 Found in 5ms (ActiveRecord: 1.3ms)
+
+
+Started GET "/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:35:10 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"tutor_id"=>"1"}
+  [1m[35mTutor Load (0.1ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mReview Load (0.1ms)[0m  [1mSELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (3.5ms)
+Completed 200 OK in 23ms (Views: 21.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/tutors/1/" for 127.0.0.1 at 2020-03-03 12:35:16 -0500
+Processing by TutorsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mTutor Load (0.1ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered tutors/show.html.haml within layouts/application (0.1ms)
+Completed 200 OK in 28ms (Views: 25.9ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:35:18 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"tutor_id"=>"1"}
+  [1m[36mTutor Load (0.3ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mReview Load (0.1ms)[0m  SELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (1.9ms)
+Completed 200 OK in 26ms (Views: 22.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:35:19 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (0.1ms)[0m  SELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?  [["subject_id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (0.5ms)
+Completed 200 OK in 26ms (Views: 20.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-03 12:35:20 -0500
+Processing by SubjectsController#index as HTML
+  [1m[35mSubject Load (0.5ms)[0m  SELECT "subjects".* FROM "subjects"
+  Rendered subjects/index.html.haml within layouts/application (2.4ms)
+Completed 200 OK in 21ms (Views: 20.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:35:21 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (0.1ms)[0m  SELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?  [["subject_id", 1]]
+  [1m[36m (0.6ms)[0m  [1mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (0.4ms)
+Completed 200 OK in 24ms (Views: 18.1ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:35:50 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"tutor_id"=>"1"}
+  [1m[35mTutor Load (0.1ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mReview Load (0.1ms)[0m  [1mSELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (1.3ms)
+Completed 200 OK in 23ms (Views: 21.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-03 12:37:51 -0500
+Processing by SubjectsController#index as HTML
+  [1m[35mSubject Load (0.3ms)[0m  SELECT "subjects".* FROM "subjects"
+  Rendered subjects/index.html.haml within layouts/application (3.7ms)
+Completed 200 OK in 53ms (Views: 25.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:37:54 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (0.2ms)[0m  SELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?  [["subject_id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (25.7ms)
+Completed 500 Internal Server Error in 75ms (ActiveRecord: 1.0ms)
+
+ActionView::Template::Error (undefined method `tutor_reviews_path' for #<#<Class:0x007ffd7c5dad00>:0x007ffd7a75ed18>):
+    14:         %td= tutor.experience
+    15:         %td= tutor.rate
+    16:         %td= tutor.average_rating
+    17:         %td= link_to "Reviews for #{tutor.name}", tutor_reviews_path(tutor)
+    18: 
+    19: = link_to 'Add new tutor', new_subject_tutor_path
+    20: = link_to 'Back to subjects', subjects_path
+  app/views/tutors/index.html.haml:17:in `block in _app_views_tutors_index_html_haml__1505860792538192478_70363335658620'
+  app/views/tutors/index.html.haml:11:in `_app_views_tutors_index_html_haml__1505860792538192478_70363335658620'
+
+
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.7ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.7ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (90.9ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (83.0ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (185.3ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:39:01 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[35mSubject Load (0.3ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?[0m  [["subject_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (5.4ms)
+Completed 500 Internal Server Error in 14ms (ActiveRecord: 0.5ms)
+
+ActionView::Template::Error (No route matches {:action=>"index", :controller=>"reviews", :subject_id=>#<Tutor id: 1, created_at: "2020-03-03 17:12:52", updated_at: "2020-03-03 17:12:52", name: "Daniel", experience: 10, rate: 15.5, average_rating: 3.33333333333333>, :tutor_id=>nil} missing required keys: [:tutor_id]):
+    14:         %td= tutor.experience
+    15:         %td= tutor.rate
+    16:         %td= tutor.average_rating
+    17:         %td= link_to "Reviews for #{tutor.name}", subject_tutor_reviews_path(tutor)
+    18: 
+    19: = link_to 'Add new tutor', new_subject_tutor_path
+    20: = link_to 'Back to subjects', subjects_path
+  app/views/tutors/index.html.haml:17:in `block in _app_views_tutors_index_html_haml__1505860792538192478_70363342707580'
+  app/views/tutors/index.html.haml:11:in `_app_views_tutors_index_html_haml__1505860792538192478_70363342707580'
+
+
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (7.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.8ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (94.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (85.0ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.8ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (198.6ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:39:22 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[36mSubject Load (0.8ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (0.2ms)[0m  SELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?  [["subject_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (4.1ms)
+Completed 200 OK in 32ms (Views: 25.1ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/subjects/1/tutors/new" for 127.0.0.1 at 2020-03-03 12:39:25 -0500
+Processing by TutorsController#new as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered tutors/new.html.haml within layouts/application (0.8ms)
+Completed 200 OK in 26ms (Views: 24.7ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/subjects/1/tutors/new" for 127.0.0.1 at 2020-03-03 12:39:28 -0500
+Processing by TutorsController#new as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered tutors/new.html.haml within layouts/application (1.4ms)
+Completed 200 OK in 24ms (Views: 23.1ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-03 12:39:30 -0500
+Processing by SubjectsController#index as HTML
+  [1m[35mSubject Load (0.2ms)[0m  SELECT "subjects".* FROM "subjects"
+  Rendered subjects/index.html.haml within layouts/application (1.2ms)
+Completed 200 OK in 25ms (Views: 23.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:39:31 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (0.2ms)[0m  SELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?  [["subject_id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (0.5ms)
+Completed 200 OK in 26ms (Views: 19.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/subjects/1/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:39:34 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[35mTutor Load (0.2ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mReview Load (0.2ms)[0m  [1mSELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (47.0ms)
+Completed 500 Internal Server Error in 58ms (ActiveRecord: 0.4ms)
+
+ActionView::Template::Error (undefined local variable or method `new_tutor_review_path' for #<#<Class:0x007ffd7c0bbbd0>:0x007ffd7c0b28f0>
+Did you mean?  new_subject_tutor_review_path):
+    11:         %td= review.rating
+    12:         %td= review.comment
+    13: 
+    14: = link_to 'Leave a review', new_tutor_review_path
+    15: = link_to 'Back to tutors', tutor_reviewspath(@tutor)
+  app/views/reviews/index.html.haml:14:in `_app_views_reviews_index_html_haml__2854280793170857854_70363342276980'
+
+
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (83.8ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (79.8ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (174.6ms)
+
+
+Started GET "/subjects/1/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:40:26 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[35mTutor Load (0.1ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mReview Load (0.1ms)[0m  [1mSELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (40.2ms)
+Completed 500 Internal Server Error in 45ms (ActiveRecord: 0.2ms)
+
+ActionView::Template::Error (undefined method `subject_tutor_reviewspath' for #<#<Class:0x007ffd7c0bbbd0>:0x007ffd7736d540>
+Did you mean?  subject_tutor_reviews_path
+               subject_tutor_review_path
+               subject_tutor_path
+               subject_tutor_reviews_url
+               subject_tutor_review_url):
+    12:         %td= review.comment
+    13: 
+    14: = link_to 'Leave a review', new_subject_tutor_review_path
+    15: = link_to 'Back to tutors', subject_tutor_reviewspath(@subject, @tutor)
+  app/views/reviews/index.html.haml:15:in `_app_views_reviews_index_html_haml__2854280793170857854_70363301765280'
+
+
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (10.9ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (97.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (84.9ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (185.2ms)
+
+
+Started GET "/subjects/1/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:40:39 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[35mTutor Load (0.1ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mReview Load (0.1ms)[0m  [1mSELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (5.1ms)
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.2ms)
+
+ActionView::Template::Error (No route matches {:action=>"index", :controller=>"reviews", :subject_id=>nil, :tutor_id=>"1"} missing required keys: [:subject_id]):
+    12:         %td= review.comment
+    13: 
+    14: = link_to 'Leave a review', new_subject_tutor_review_path
+    15: = link_to 'Back to tutors', subject_tutor_reviews_path(@subject, @tutor)
+  app/views/reviews/index.html.haml:15:in `_app_views_reviews_index_html_haml__2854280793170857854_70363293995560'
+
+
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (7.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (4.2ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (97.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.9ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (81.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (182.8ms)
+
+
+Started GET "/subjects/1/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:42:07 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mReview Load (0.2ms)[0m  SELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (7.7ms)
+Completed 200 OK in 77ms (Views: 26.7ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/subjects/1/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:42:09 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (0.2ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mReview Load (0.1ms)[0m  [1mSELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (1.6ms)
+Completed 200 OK in 28ms (Views: 24.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/subjects/1/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:42:10 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mReview Load (0.1ms)[0m  SELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (1.4ms)
+Completed 200 OK in 25ms (Views: 22.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/subjects/1/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:42:11 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[36mSubject Load (0.2ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (0.1ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mReview Load (0.1ms)[0m  [1mSELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (1.1ms)
+Completed 200 OK in 25ms (Views: 21.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/subjects/1/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:42:12 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[35mSubject Load (0.2ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mReview Load (0.1ms)[0m  SELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (1.1ms)
+Completed 200 OK in 27ms (Views: 23.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/subjects/1/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:42:34 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (0.1ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mReview Load (0.1ms)[0m  [1mSELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (4.1ms)
+Completed 200 OK in 24ms (Views: 22.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:42:35 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTutor Load (0.3ms)[0m  [1mSELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?[0m  [["subject_id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (0.5ms)
+Completed 200 OK in 32ms (Views: 21.0ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-03 12:42:37 -0500
+Processing by SubjectsController#index as HTML
+  [1m[36mSubject Load (0.2ms)[0m  [1mSELECT "subjects".* FROM "subjects"[0m
+  Rendered subjects/index.html.haml within layouts/application (1.0ms)
+Completed 200 OK in 20ms (Views: 19.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:42:38 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?[0m  [["subject_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (0.5ms)
+Completed 200 OK in 29ms (Views: 23.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/subjects/1/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:42:40 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[36mSubject Load (0.4ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (0.1ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mReview Load (0.1ms)[0m  [1mSELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (1.1ms)
+Completed 200 OK in 24ms (Views: 21.1ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/subjects/1/tutors/1/reviews/new" for 127.0.0.1 at 2020-03-03 12:42:41 -0500
+Processing by ReviewsController#new as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[35mTutor Load (0.6ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered reviews/new.html.haml within layouts/application (41.3ms)
+Completed 500 Internal Server Error in 50ms (ActiveRecord: 0.6ms)
+
+ActionView::Template::Error (undefined local variable or method `tutor_reviews_path' for #<#<Class:0x007ffd7b290ec0>:0x007ffd7b663458>):
+    1: %h2 Leave a review for #{@tutor.name}
+    2: 
+    3: = form_tag tutor_reviews_path do
+    4: 
+    5:   = label :review, :name, 'Rating'
+    6:   = select :review, :rating, [1,2,3,4,5]
+  app/views/reviews/new.html.haml:3:in `_app_views_reviews_new_html_haml__55491005603022623_70363334545100'
+
+
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (7.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.1ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (93.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (74.7ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (171.5ms)
+
+
+Started GET "/subjects/1/tutors/1/reviews/new" for 127.0.0.1 at 2020-03-03 12:43:16 -0500
+Processing by ReviewsController#new as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered reviews/new.html.haml within layouts/application (3.1ms)
+Completed 200 OK in 23ms (Views: 22.4ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/subjects/1/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:43:21 -0500
+Processing by ReviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"faIrwYhNSZyFcME2ekQjq67H2HyXxjiPCI81C8LKoDpOJO53W2tiA0bSCOa442L/aWt1eJaEOueu8tawu6Wrog==", "review"=>{"rating"=>"5", "comment"=>"Awesome!"}, "commit"=>"Save Changes", "subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[35mTutor Load (0.1ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "reviews" ("rating", "comment", "tutor_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["rating", 5], ["comment", "Awesome!"], ["tutor_id", 1], ["created_at", "2020-03-03 17:43:21.426984"], ["updated_at", "2020-03-03 17:43:21.426984"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+Completed 500 Internal Server Error in 20ms (ActiveRecord: 1.5ms)
+
+NoMethodError (undefined method `tutor_reviews_path' for #<ReviewsController:0x007ffd7a304880>):
+  app/controllers/reviews_controller.rb:20:in `create'
+
+
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (4.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (9.7ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (105.0ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (84.6ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (186.5ms)
+
+
+Started POST "/subjects/1/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:44:04 -0500
+Processing by ReviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"faIrwYhNSZyFcME2ekQjq67H2HyXxjiPCI81C8LKoDpOJO53W2tiA0bSCOa442L/aWt1eJaEOueu8tawu6Wrog==", "review"=>{"rating"=>"5", "comment"=>"Awesome!"}, "commit"=>"Save Changes", "subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[35mTutor Load (0.5ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "reviews" ("rating", "comment", "tutor_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["rating", 5], ["comment", "Awesome!"], ["tutor_id", 1], ["created_at", "2020-03-03 17:44:04.841263"], ["updated_at", "2020-03-03 17:44:04.841263"]]
+  [1m[36m (8.6ms)[0m  [1mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/subjects/1/tutors/1/reviews
+Completed 302 Found in 49ms (ActiveRecord: 10.8ms)
+
+
+Started GET "/subjects/1/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:44:04 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mReview Load (0.2ms)[0m  SELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (2.2ms)
+Completed 200 OK in 49ms (Views: 28.8ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:44:06 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (0.2ms)[0m  SELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?  [["subject_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (0.4ms)
+Completed 200 OK in 28ms (Views: 19.5ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/subjects/1/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:44:10 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mReview Load (0.1ms)[0m  SELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (1.6ms)
+Completed 200 OK in 26ms (Views: 22.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/subjects/1/tutors/1/reviews/new" for 127.0.0.1 at 2020-03-03 12:44:11 -0500
+Processing by ReviewsController#new as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[36mTutor Load (0.2ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered reviews/new.html.haml within layouts/application (0.8ms)
+Completed 200 OK in 20ms (Views: 18.7ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/subjects/1/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:44:15 -0500
+Processing by ReviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FyxBdacNSuXDWb/N7faJETHBxacXyCS+t9yT2osQeQ8kqoTDdCthegD7dh0vUchF9m1ooxaKJtYRoXBh8n9ylw==", "review"=>{"rating"=>"5", "comment"=>"Does this work?"}, "commit"=>"Save Changes", "subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[35mTutor Load (0.1ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "reviews" ("rating", "comment", "tutor_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["rating", 5], ["comment", "Does this work?"], ["tutor_id", 1], ["created_at", "2020-03-03 17:44:15.723967"], ["updated_at", "2020-03-03 17:44:15.723967"]]
+  [1m[36m (8.6ms)[0m  [1mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/subjects/1/tutors/1/reviews
+Completed 302 Found in 14ms (ActiveRecord: 9.1ms)
+
+
+Started GET "/subjects/1/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:44:15 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[35mSubject Load (0.2ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mReview Load (0.4ms)[0m  SELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (3.5ms)
+Completed 200 OK in 26ms (Views: 23.4ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:44:17 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (0.1ms)[0m  SELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?  [["subject_id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (0.4ms)
+Completed 200 OK in 25ms (Views: 20.2ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:45:35 -0500
+
+ActionController::RoutingError (No route matches [POST] "/tutors/1/reviews"):
+  actionpack (4.2.10) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.10) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.13) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.13) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.10) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.13) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.13) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.10) lib/rails/engine.rb:518:in `call'
+  railties (4.2.10) lib/rails/application.rb:165:in `call'
+  rack (1.6.13) lib/rack/lock.rb:17:in `call'
+  rack (1.6.13) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.13) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/2.4.0/webrick/httpserver.rb:140:in `service'
+  /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/2.4.0/webrick/httpserver.rb:96:in `run'
+  /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/2.4.0/webrick/server.rb:290:in `block in start_thread'
+
+
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.9ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (126.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (81.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.6ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (186.0ms)
+
+
+Started GET "/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:45:42 -0500
+
+ActionController::RoutingError (No route matches [GET] "/tutors/1/reviews"):
+  actionpack (4.2.10) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.10) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.13) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.13) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.10) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.13) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.13) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.10) lib/rails/engine.rb:518:in `call'
+  railties (4.2.10) lib/rails/application.rb:165:in `call'
+  rack (1.6.13) lib/rack/lock.rb:17:in `call'
+  rack (1.6.13) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.13) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/2.4.0/webrick/httpserver.rb:140:in `service'
+  /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/2.4.0/webrick/httpserver.rb:96:in `run'
+  /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/2.4.0/webrick/server.rb:290:in `block in start_thread'
+
+
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.2ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.1ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (117.0ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (80.2ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (178.2ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:45:43 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[35mSubject Load (0.2ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?[0m  [["subject_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (0.5ms)
+Completed 200 OK in 83ms (Views: 20.6ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/subjects/1/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:45:47 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (0.1ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mReview Load (0.2ms)[0m  [1mSELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (7.1ms)
+Completed 200 OK in 27ms (Views: 24.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/subjects/1/tutors/1/reviews/new" for 127.0.0.1 at 2020-03-03 12:45:49 -0500
+Processing by ReviewsController#new as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[35mTutor Load (0.1ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered reviews/new.html.haml within layouts/application (1.0ms)
+Completed 200 OK in 23ms (Views: 21.8ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/subjects/1/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:45:51 -0500
+Processing by ReviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZJi3JY/2F6L9s+d+g8pYNTjQ7Ey/J4s49ViODNjXPgFXHnKTXNA8PT4RLq5BbRlh/3xBSL5liVBTJW23obg1mQ==", "review"=>{"rating"=>"1", "comment"=>"Haha"}, "commit"=>"Save Changes", "subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[36mTutor Load (0.2ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "reviews" ("rating", "comment", "tutor_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["rating", 1], ["comment", "Haha"], ["tutor_id", 1], ["created_at", "2020-03-03 17:45:51.836413"], ["updated_at", "2020-03-03 17:45:51.836413"]]
+  [1m[35m (8.9ms)[0m  commit transaction
+Redirected to http://127.0.0.1:3000/subjects/1/tutors/1/reviews
+Completed 302 Found in 16ms (ActiveRecord: 9.5ms)
+
+
+Started GET "/subjects/1/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:45:51 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (0.1ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mReview Load (0.1ms)[0m  [1mSELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (2.0ms)
+Completed 200 OK in 23ms (Views: 21.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:45:53 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTutor Load (0.3ms)[0m  [1mSELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?[0m  [["subject_id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (0.5ms)
+Completed 200 OK in 27ms (Views: 19.8ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:46:29 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (0.1ms)[0m  SELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?  [["subject_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (7.8ms)
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 0.3ms)
+
+ActionView::Template::Error (uninitialized constant ActionView::CompiledTemplates::Years):
+    11:     - @tutors.each do |tutor|
+    12:       %tr
+    13:         %td= tutor.name
+    14:         %td= tutor.experience Years
+    15:         %td= tutor.rate
+    16:         %td= tutor.average_rating
+    17:         %td= link_to "Reviews for #{tutor.name}", subject_tutor_reviews_path(@subject,tutor)
+  app/views/tutors/index.html.haml:14:in `block in _app_views_tutors_index_html_haml__1505860792538192478_70363334727440'
+  app/views/tutors/index.html.haml:11:in `_app_views_tutors_index_html_haml__1505860792538192478_70363334727440'
+
+
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.1ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (97.1ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (82.6ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (191.3ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:46:39 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?[0m  [["subject_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (4.4ms)
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 0.4ms)
+
+ActionView::Template::Error (String can't be coerced into Integer):
+    11:     - @tutors.each do |tutor|
+    12:       %tr
+    13:         %td= tutor.name
+    14:         %td= tutor.experience + "Years"
+    15:         %td= tutor.rate
+    16:         %td= tutor.average_rating
+    17:         %td= link_to "Reviews for #{tutor.name}", subject_tutor_reviews_path(@subject,tutor)
+  app/views/tutors/index.html.haml:14:in `+'
+  app/views/tutors/index.html.haml:14:in `block in _app_views_tutors_index_html_haml__1505860792538192478_70363342902060'
+  app/views/tutors/index.html.haml:11:in `_app_views_tutors_index_html_haml__1505860792538192478_70363342902060'
+
+
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (8.1ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (100.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (83.1ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (1.0ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (191.8ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:48:00 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (0.1ms)[0m  SELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?  [["subject_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (6.7ms)
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 0.2ms)
+
+ActionView::Template::Error (undefined method `append' for 10:Integer):
+    11:     - @tutors.each do |tutor|
+    12:       %tr
+    13:         %td= tutor.name
+    14:         %td= tutor.experience.append("yo")
+    15:         %td= tutor.rate
+    16:         %td= tutor.average_rating
+    17:         %td= link_to "Reviews for #{tutor.name}", subject_tutor_reviews_path(@subject,tutor)
+  app/views/tutors/index.html.haml:14:in `block in _app_views_tutors_index_html_haml__1505860792538192478_70363301946840'
+  app/views/tutors/index.html.haml:11:in `_app_views_tutors_index_html_haml__1505860792538192478_70363301946840'
+
+
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (7.8ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (11.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (103.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (83.1ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (183.1ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:49:21 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?[0m  [["subject_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (5.2ms)
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 0.2ms)
+
+ActionView::Template::Error (wrong number of arguments (given 1, expected 0)):
+    11:     - @tutors.each do |tutor|
+    12:       %tr
+    13:         %td= tutor.name
+    14:         %td= tutor.experience "years"
+    15:         %td= tutor.rate
+    16:         %td= tutor.average_rating
+    17:         %td= link_to "Reviews for #{tutor.name}", subject_tutor_reviews_path(@subject,tutor)
+  app/views/tutors/index.html.haml:14:in `block in _app_views_tutors_index_html_haml__1505860792538192478_70363328527680'
+  app/views/tutors/index.html.haml:11:in `_app_views_tutors_index_html_haml__1505860792538192478_70363328527680'
+
+
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.9ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.6ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (91.9ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.8ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (78.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.8ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (178.6ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:49:32 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[36mSubject Load (0.2ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (0.1ms)[0m  SELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?  [["subject_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (4.5ms)
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 0.4ms)
+
+ActionView::Template::Error (String can't be coerced into Integer):
+    11:     - @tutors.each do |tutor|
+    12:       %tr
+    13:         %td= tutor.name
+    14:         %td= (tutor.experience + "years")
+    15:         %td= tutor.rate
+    16:         %td= tutor.average_rating
+    17:         %td= link_to "Reviews for #{tutor.name}", subject_tutor_reviews_path(@subject,tutor)
+  app/views/tutors/index.html.haml:14:in `+'
+  app/views/tutors/index.html.haml:14:in `block in _app_views_tutors_index_html_haml__1505860792538192478_70363292662160'
+  app/views/tutors/index.html.haml:11:in `_app_views_tutors_index_html_haml__1505860792538192478_70363292662160'
+
+
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (8.8ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.6ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (102.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.7ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.6ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (80.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.6ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (179.4ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:50:28 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?[0m  [["subject_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (6.2ms)
+Completed 200 OK in 49ms (Views: 45.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:50:53 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (0.1ms)[0m  SELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?  [["subject_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (5.7ms)
+Completed 200 OK in 34ms (Views: 30.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:51:22 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?[0m  [["subject_id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (4.5ms)
+Completed 200 OK in 29ms (Views: 24.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:52:29 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (0.1ms)[0m  SELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?  [["subject_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (15.3ms)
+Completed 200 OK in 62ms (Views: 59.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/subjects/1/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:52:36 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mReview Load (0.1ms)[0m  SELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (1.7ms)
+Completed 200 OK in 30ms (Views: 27.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:52:38 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (0.1ms)[0m  SELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?  [["subject_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (1.1ms)
+Completed 200 OK in 23ms (Views: 19.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-03 12:52:39 -0500
+Processing by SubjectsController#index as HTML
+  [1m[35mSubject Load (0.1ms)[0m  SELECT "subjects".* FROM "subjects"
+  Rendered subjects/index.html.haml within layouts/application (0.8ms)
+Completed 200 OK in 27ms (Views: 26.0ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:52:41 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (0.1ms)[0m  SELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?  [["subject_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (1.4ms)
+Completed 200 OK in 24ms (Views: 19.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/subjects/1/tutors/new" for 127.0.0.1 at 2020-03-03 12:52:43 -0500
+Processing by TutorsController#new as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered tutors/new.html.haml within layouts/application (0.8ms)
+Completed 200 OK in 29ms (Views: 28.1ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/subjects/1/tutors/new" for 127.0.0.1 at 2020-03-03 12:53:29 -0500
+Processing by TutorsController#new as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered tutors/new.html.haml within layouts/application (4.5ms)
+Completed 200 OK in 24ms (Views: 22.3ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/subjects/1/tutors/new" for 127.0.0.1 at 2020-03-03 12:53:37 -0500
+Processing by TutorsController#new as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered tutors/new.html.haml within layouts/application (2.9ms)
+Completed 200 OK in 19ms (Views: 17.9ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/subjects/1/tutors/new" for 127.0.0.1 at 2020-03-03 12:53:47 -0500
+Processing by TutorsController#new as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered tutors/new.html.haml within layouts/application (3.5ms)
+Completed 200 OK in 20ms (Views: 19.0ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/subjects/1/tutors/new" for 127.0.0.1 at 2020-03-03 12:53:53 -0500
+Processing by TutorsController#new as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[35mSubject Load (0.2ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered tutors/new.html.haml within layouts/application (2.8ms)
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 0.2ms)
+
+SyntaxError (/Users/Daniel/ase_cybertutor/app/views/tutors/new.html.haml:7: unknown type of %string
+ml::Helpers.html_escape((( %br
+                              ^
+/Users/Daniel/ase_cybertutor/app/views/tutors/new.html.haml:7: syntax error, unexpected end-of-input
+ml::Helpers.html_escape((( %br
+                              ^):
+  app/views/tutors/new.html.haml:7: unknown type of %string
+  app/views/tutors/new.html.haml:7: syntax error, unexpected end-of-input
+
+
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (8.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (4.0ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (95.0ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (78.9ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (188.6ms)
+
+
+Started GET "/subjects/1/tutors/new" for 127.0.0.1 at 2020-03-03 12:54:13 -0500
+Processing by TutorsController#new as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered tutors/new.html.haml within layouts/application (5.1ms)
+Completed 200 OK in 25ms (Views: 24.6ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/subjects/1/tutors/new" for 127.0.0.1 at 2020-03-03 12:54:22 -0500
+Processing by TutorsController#new as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered tutors/new.html.haml within layouts/application (3.3ms)
+Completed 200 OK in 27ms (Views: 25.6ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/subjects/1/tutors/new" for 127.0.0.1 at 2020-03-03 12:54:30 -0500
+Processing by TutorsController#new as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[36mSubject Load (0.2ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered tutors/new.html.haml within layouts/application (3.0ms)
+Completed 200 OK in 23ms (Views: 21.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/subjects/1/tutors/new" for 127.0.0.1 at 2020-03-03 12:55:03 -0500
+Processing by TutorsController#new as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered tutors/new.html.haml within layouts/application (33.7ms)
+Completed 500 Internal Server Error in 39ms (ActiveRecord: 0.1ms)
+
+ActionView::Template::Error (undefined local variable or method `br' for #<#<Class:0x007ffd7c38b748>:0x007ffd7b248580>):
+    2: 
+    3: = form_tag subject_tutors_path do
+    4: 
+    5:   = label :tutor, :name, 'Name' %br
+    6:   = text_field :tutor, 'name'
+    7:   %br
+    8: 
+  app/views/tutors/new.html.haml:5:in `block in _app_views_tutors_new_html_haml__4251742633798566342_70363334706280'
+  app/views/tutors/new.html.haml:3:in `_app_views_tutors_new_html_haml__4251742633798566342_70363334706280'
+
+
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (7.7ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (4.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (97.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.6ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (81.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (182.8ms)
+
+
+Started GET "/subjects/1/tutors/new" for 127.0.0.1 at 2020-03-03 12:55:12 -0500
+Processing by TutorsController#new as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered tutors/new.html.haml within layouts/application (3.2ms)
+Completed 200 OK in 21ms (Views: 20.4ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/subjects/1/tutors/new" for 127.0.0.1 at 2020-03-03 12:55:39 -0500
+Processing by TutorsController#new as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered tutors/new.html.haml within layouts/application (3.3ms)
+Completed 200 OK in 23ms (Views: 21.2ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/subjects/1/tutors/new" for 127.0.0.1 at 2020-03-03 12:55:53 -0500
+Processing by TutorsController#new as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered tutors/new.html.haml within layouts/application (3.4ms)
+Completed 200 OK in 32ms (Views: 30.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/subjects/1/tutors/new" for 127.0.0.1 at 2020-03-03 12:56:04 -0500
+Processing by TutorsController#new as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered tutors/new.html.haml within layouts/application (3.1ms)
+Completed 200 OK in 21ms (Views: 19.2ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/subjects/1/tutors/new" for 127.0.0.1 at 2020-03-03 12:58:13 -0500
+Processing by TutorsController#new as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered tutors/new.html.haml within layouts/application (0.8ms)
+Completed 200 OK in 49ms (Views: 24.7ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/subjects/1/tutors" for 127.0.0.1 at 2020-03-03 12:58:14 -0500
+Processing by TutorsController#index as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[35mSubject Load (0.2ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTutor Load (0.2ms)[0m  [1mSELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?[0m  [["subject_id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (0.7ms)
+Completed 200 OK in 69ms (Views: 15.8ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/subjects/1/tutors/new" for 127.0.0.1 at 2020-03-03 12:58:16 -0500
+Processing by TutorsController#new as HTML
+  Parameters: {"subject_id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered tutors/new.html.haml within layouts/application (1.3ms)
+Completed 200 OK in 26ms (Views: 25.0ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/subjects/1/tutors/1/reviews" for 127.0.0.1 at 2020-03-03 12:58:17 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mReview Load (0.2ms)[0m  SELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (5.4ms)
+Completed 200 OK in 28ms (Views: 24.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/subjects/1/tutors/1/reviews/new" for 127.0.0.1 at 2020-03-03 12:58:18 -0500
+Processing by ReviewsController#new as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered reviews/new.html.haml within layouts/application (0.8ms)
+Completed 200 OK in 24ms (Views: 22.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-03 12:58:20 -0500
+Processing by SubjectsController#index as HTML
+  [1m[35mSubject Load (0.1ms)[0m  SELECT "subjects".* FROM "subjects"
+  Rendered subjects/index.html.haml within layouts/application (0.9ms)
+Completed 200 OK in 25ms (Views: 24.5ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/subjects/new" for 127.0.0.1 at 2020-03-03 12:58:21 -0500
+Processing by SubjectsController#new as HTML
+  Rendered subjects/new.html.haml within layouts/application (1.5ms)
+Completed 200 OK in 39ms (Views: 37.9ms | ActiveRecord: 0.0ms)

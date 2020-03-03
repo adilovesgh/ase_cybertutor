@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200303070109) do
+ActiveRecord::Schema.define(version: 20200303171904) do
 
   create_table "reviews", force: :cascade do |t|
     t.integer  "rating"
@@ -32,6 +32,31 @@ ActiveRecord::Schema.define(version: 20200303070109) do
 
   add_index "reviews_tutors", ["review_id"], name: "index_reviews_tutors_on_review_id"
   add_index "reviews_tutors", ["tutor_id"], name: "index_reviews_tutors_on_tutor_id"
+
+  create_table "students", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "students_subjects", force: :cascade do |t|
+    t.integer  "subject_id"
+    t.integer  "student_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "students_subjects", ["subject_id"], name: "index_students_subjects_on_subject_id"
+
+  create_table "students_tutors", force: :cascade do |t|
+    t.integer  "tutor_id"
+    t.integer  "students_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "students_tutors", ["students_id"], name: "index_students_tutors_on_students_id"
+  add_index "students_tutors", ["tutor_id"], name: "index_students_tutors_on_tutor_id"
 
   create_table "subject_tutors", force: :cascade do |t|
     t.integer  "tutor_id"

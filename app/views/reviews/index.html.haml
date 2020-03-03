@@ -11,5 +11,5 @@
         %td= review.rating
         %td= review.comment
 
-= link_to 'Leave a review', new_tutor_review_path
-= link_to 'Back to tutor', subjects_path
+= link_to 'Leave a review', new_subject_tutor_review_path
+= link_to 'Back to tutors', subject_tutors_path(@subject)

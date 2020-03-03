@@ -2,13 +2,21 @@
 
 = form_tag subject_tutors_path do
 
-  = label :tutor, :name, 'Name'
+  = label :tutor, :name, 'Name' 
+  %br
   = text_field :tutor, 'name'
+  %br
 
-  = label :tutor, :experience, 'Experience'
+  = label :tutor, :experience, 'Experience' 
+  %br
   = text_field :tutor, 'experience'
+  = "Years"
+  %br
 
-  = label :tutor, :rate, 'Rate'
+  = label :tutor, :rate, 'Rate' 
+  %br
   = text_field :tutor, 'rate'
+  = "$/hr"
+  %br
 
   = submit_tag 'Save Changes', :class => 'btn btn-primary'
