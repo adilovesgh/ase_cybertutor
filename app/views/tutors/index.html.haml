@@ -1,4 +1,4 @@
-%h2 All Tutors
+%h2 All Tutors for #{@subject.name}
 
 %table#tutors.table.table-striped.col-md-12
   %thead
@@ -13,7 +13,7 @@
         %td= tutor.name
         %td= (tutor.experience.to_s + " years")
         %td= number_to_currency(tutor.rate)
-        %td= tutor.average_rating
+        %td= tutor.average_rating.to_s + "/5"
         %td= link_to "Reviews for #{tutor.name}", subject_tutor_reviews_path(@subject,tutor)
 
 = link_to 'Add new tutor', new_subject_tutor_path

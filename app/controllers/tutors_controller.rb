@@ -4,7 +4,11 @@ class TutorsController < ApplicationController
         @tutors = @subject.tutors
 
         @tutors.each {|tutor|
-            tutor.average_rating=tutor.reviews.average(:rating).round(2)
+            unless tutor.reviews.average(:rating).nil?
+                tutor.average_rating=tutor.reviews.average(:rating).round(2)
+            else
+                tutor.average_rating=0
+            end
         }
     end
 
