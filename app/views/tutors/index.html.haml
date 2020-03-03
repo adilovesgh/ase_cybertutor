@@ -1,0 +1,20 @@
+%h2 All Tutors
+
+%table#tutors.table.table-striped.col-md-12
+  %thead
+    %tr
+      %th Name
+      %th Experience
+      %th Rate
+      %th Average Review
+  %tbody
+    - @tutors.each do |tutor|
+      %tr
+        %td= tutor.name
+        %td= tutor.experience
+        %td= tutor.rate
+        %td= tutor.average_rating
+        %td= link_to "Reviews for #{tutor.name}", tutor_reviews_path(tutor)
+
+= link_to 'Add new tutor', new_subject_tutor_path
+= link_to 'Back to subjects', subjects_path

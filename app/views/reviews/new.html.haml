@@ -1,0 +1,11 @@
+%h2 Leave a review for #{@tutor.name}
+
+= form_tag tutor_reviews_path do
+
+  = label :review, :name, 'Rating'
+  = text_field :review, 'rating'
+
+  = label :review, :experience, 'Comment'
+  = text_field :review, 'comment'
+
+  = submit_tag 'Save Changes', :class => 'btn btn-primary'
