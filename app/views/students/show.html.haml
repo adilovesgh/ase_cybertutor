@@ -1,0 +1,17 @@
+%h3 Sessions for #{@student.name}
+
+%table#sessions.table.table-striped.col-md-12
+  %thead
+    %tr
+      %th Subject
+      %th Tutor
+      %th Time
+  %tbody
+    - @sessions.each do |session|
+      %tr
+        %td= session.subject.name
+        %td= link_to session.tutor.name.to_s, subject_tutor_reviews_path(session.subject, session.tutor)
+        %td= session.time
+        
+
+= link_to 'Find a new tutor', subjects_path

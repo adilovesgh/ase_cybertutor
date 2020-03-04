@@ -13,8 +13,9 @@
         %td= tutor.name
         %td= (tutor.experience.to_s + " years")
         %td= number_to_currency(tutor.rate)
-        %td= tutor.average_rating.to_s + "/5"
-        %td= link_to "Reviews for #{tutor.name}", subject_tutor_reviews_path(@subject,tutor)
+        %td= link_to (tutor.average_rating.to_s + "/5"),
+          subject_tutor_reviews_path(@subject,tutor)
+        %td= link_to "Book a session with #{tutor.name}", new_subject_tutor_session_path(@subject,tutor)
 
 = link_to 'Add new tutor', new_subject_tutor_path
 = link_to 'Back to subjects', subjects_path

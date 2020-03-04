@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  student_id: 
+  tutor_id: 
+  subject_id: 
+  rate: 
+  time: 2020-03-03 18:43:12
+
+two:
+  student_id: 
+  tutor_id: 
+  subject_id: 
+  rate: 
+  time: 2020-03-03 18:43:12

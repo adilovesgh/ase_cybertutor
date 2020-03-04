@@ -5,7 +5,8 @@ class SubjectsController < ApplicationController
 
     def show
         @subject = Subject.find(params[:id])
-        @tutors = Tutor.all.select {|m| m.subject == @subject.name}
+        #@tutors = Tutor.all.select {|m| m.subject == @subject.name}
+        @tutors = @subject.tutors
     end
 
     def new
