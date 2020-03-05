@@ -1,0 +1,16 @@
+=link_to "Logout", accounts_path
+%h2 All subjects #{@account.name} teaches
+
+%table#tutors.table.table-striped.col-md-12
+  %thead
+    %tr
+      %th Subject
+
+  %tbody
+    - @subjects.each do |subject|
+      %tr
+        %td= subject.name
+
+= link_to 'Register to tutor a subject', subjects_path
+%br
+= link_to 'Back to account', account_path(@account)

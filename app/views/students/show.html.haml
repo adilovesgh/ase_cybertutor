@@ -1,17 +1,12 @@
-%h3 Sessions for #{@student.name}
+=link_to "Logout", accounts_path
+%h3 Info for #{@student.name}
 
 %table#sessions.table.table-striped.col-md-12
   %thead
     %tr
-      %th Subject
-      %th Tutor
-      %th Time
+      %th Name
   %tbody
-    - @sessions.each do |session|
-      %tr
-        %td= session.subject.name
-        %td= link_to session.tutor.name.to_s, subject_tutor_reviews_path(session.subject, session.tutor)
-        %td= session.time
-        
+    %tr
+      %td= @student.name
 
-= link_to 'Find a new tutor', subjects_path
+=link_to "Return to sessions", subject_tutor_sessions_path(1, 1)

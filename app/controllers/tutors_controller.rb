@@ -1,18 +1,29 @@
 class TutorsController < ApplicationController
 	def index
-        @subject = Subject.find(params[:subject_id])
-        @tutors = @subject.tutors
-
-        Tutor.update_average(@tutors)
+        @account = Account.find(session[:account_id])
+        @subjects = @account.tutor.subjects
     end
 
     def show
-        @tutor = Tutor.find(params[:id])
+        @account = Account.find(session[:account_id])
+        @subjects = @account.tutor.subjects
     end
 
     def new
         @subject = Subject.find(params[:subject_id])
     end
+
+    def edit
+        @subject = Subject.find(params[:id])
+        @account = Account.find(session[:account_id])
+        unless(@subject.tutors.exists?(id:@account.tutor.id))
+            @subject.tutors << @account.tutor
+        else
+            flash[:error] = "You are already signed up to tutor this subject"
+        end
+        redirect_to tutors_path
+    end
+
 
     def create
     	@subject = Subject.find(params[:subject_id])

@@ -15,15 +15,31 @@ Rails.application.routes.draw do
   #   resources :products
   #resources :tutors
   resources :students
+  resources :accounts
+  resources :tutors
+  resources :subjects
+  Rails.application.routes.draw do
+      resources :subject do
+	  resources :tutors do
+	      resources :reviews
+	  end
+      end
+  end
+
   #resources :subjects
   Rails.application.routes.draw do
-    resources :subjects do
-      resources :tutors do
-        resources :reviews
-	resources :sessions
+      resources :subject do
+	  resources :tutors do
+	      resources :sessions
+	  end
       end
-    end
   end
+
+  #Rails.application.routes.draw do
+   #   resources :tutors do
+#	  resources :review
+ #     end
+  #end
   
   #Rails.application.routes.draw do
    # resources :tutors do

@@ -1,3 +1,4 @@
+=link_to "Logout", accounts_path
 %h2 All Reviews for #{@tutor.name}
 
 %table#reviews.table.table-striped.col-md-12
@@ -11,5 +12,7 @@
         %td= review.rating
         %td= review.comment
 
+=link_to 'Sign up for a session', new_subject_tutor_session_path(@subject, @tutor)
 = link_to 'Leave a review', new_subject_tutor_review_path
-= link_to 'Back to tutors', subject_tutors_path(@subject)
+%br
+= link_to 'Back to tutors', subject_path(@subject)

@@ -1,8 +1,8 @@
 class ReviewsController < ApplicationController
 	def index
-        @subject = Subject.find(params[:subject_id])
         @tutor = Tutor.find(params[:tutor_id])
         @reviews = @tutor.reviews
+        @subject = Subject.find(params[:subject_id])
     end
 
     def show
@@ -10,6 +10,7 @@ class ReviewsController < ApplicationController
     end
 
     def new
+        @subject = Subject.find(params[:subject_id])
         @tutor = Tutor.find(params[:tutor_id])
     end
 

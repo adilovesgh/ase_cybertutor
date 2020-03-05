@@ -1,21 +1,19 @@
-%h2 All Tutors for #{@subject.name}
+=link_to "Logout", accounts_path
+- [:notice, :error, :success].each do |key|
+  - unless flash[key].blank?
+    %p{ :class => "flash #{key}" }= flash[key]
 
-%table#tutors.table.table-striped.col-md-12
+%h2 All subjects #{@account.name} tutors
+
+%table#subjects.table.table-striped.col-md-12
   %thead
     %tr
-      %th Name
-      %th Experience
-      %th Rate
-      %th Average Review
+      %th Title
   %tbody
-    - @tutors.each do |tutor|
+    - @subjects.each do |subject|
       %tr
-        %td= tutor.name
-        %td= (tutor.experience.to_s + " years")
-        %td= number_to_currency(tutor.rate)
-        %td= link_to (tutor.average_rating.to_s + "/5"),
-          subject_tutor_reviews_path(@subject,tutor)
-        %td= link_to "Book a session with #{tutor.name}", new_subject_tutor_session_path(@subject,tutor)
+        %td= subject.name
 
-= link_to 'Add new tutor', new_subject_tutor_path
-= link_to 'Back to subjects', subjects_path
+=link_to "Find more subjects to tutor", subjects_path
+%br
+=link_to "Back to account", account_path(@account)

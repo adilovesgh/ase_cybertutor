@@ -1,11 +1,12 @@
 class StudentsController < ApplicationController
 	def index
-        @students = Student.all
+        @account = Account.find(session[:account_id])
+        @sessions = @account.student.sessions
+        @teaching_sessions = @account.tutor.sessions
     end
 
     def show
         @student = Student.find(params[:id])
-        @sessions = @student.sessions
     end
 
     def new

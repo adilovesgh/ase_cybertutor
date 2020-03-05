@@ -1,11 +1,11 @@
 class SubjectsController < ApplicationController
 	def index
+        @account = Account.find(session[:account_id])
         @subjects = Subject.all
     end
 
     def show
         @subject = Subject.find(params[:id])
-        #@tutors = Tutor.all.select {|m| m.subject == @subject.name}
         @tutors = @subject.tutors
     end
 

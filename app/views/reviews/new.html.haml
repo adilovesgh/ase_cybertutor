@@ -1,3 +1,4 @@
+=link_to "Logout", accounts_path
 %h2 Leave a review for #{@tutor.name}
 
 = form_tag subject_tutor_reviews_path do
@@ -9,3 +10,6 @@
   = text_field :review, 'comment'
 
   = submit_tag 'Save Changes', :class => 'btn btn-primary'
+
+%br
+=link_to "Go back", subject_tutor_reviews_path(@subject,@tutor)

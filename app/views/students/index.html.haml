@@ -1,13 +1,4 @@
-%h2 All Students
+=link_to "Logout", accounts_path
+%h2 Sessions for learning
 
-%table#subjects.table.table-striped.col-md-12
-  %thead
-    %tr
-      %th Title
-  %tbody
-    - @students.each do |student|
-      %tr
-        %td= student.name
-        %td= link_to "Sessions for #{student.name}", student_path(student)
-
-= link_to 'Add new student', new_student_path
+=link_to "Back to account", account_path(@account)

@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200303234312) do
+ActiveRecord::Schema.define(version: 20200305022757) do
+
+  create_table "accounts", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "reviews", force: :cascade do |t|
     t.integer  "rating"
@@ -51,7 +57,10 @@ ActiveRecord::Schema.define(version: 20200303234312) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "account_id"
   end
+
+  add_index "students", ["account_id"], name: "index_students_on_account_id"
 
   create_table "students_subjects", force: :cascade do |t|
     t.integer  "subject_id"
@@ -107,6 +116,9 @@ ActiveRecord::Schema.define(version: 20200303234312) do
     t.integer  "experience"
     t.float    "rate"
     t.float    "average_rating"
+    t.integer  "account_id"
   end
+
+  add_index "tutors", ["account_id"], name: "index_tutors_on_account_id"
 
 end

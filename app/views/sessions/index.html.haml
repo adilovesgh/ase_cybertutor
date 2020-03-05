@@ -1,13 +1,37 @@
-%h2 All Students
+=link_to "Logout", accounts_path
+- [:notice, :error, :success].each do |key|
+  - unless flash[key].blank?
+    %p{ :class => "flash #{key}" }= flash[key]
+%h2 Sessions for learning
 
 %table#subjects.table.table-striped.col-md-12
   %thead
     %tr
-      %th Title
+      %th Tutor Name
+      %th Subject
   %tbody
-    - @students.each do |student|
+    - @sessions.each do |session|
       %tr
-        %td= student.name
-        %td= link_to "Sessions for #{student.name}", student_path(student)
+        %td= session.tutor.name
+        %td= session.subject.name
+        %td=link_to "More info on tutor", subject_tutor_reviews_path(1, session.tutor)
+        /todo: add in start and end time
 
-= link_to 'Add new student', new_student_path
+%h2 Sessions for teaching
+
+%table#subjects.table.table-striped.col-md-12
+  %thead
+    %tr
+      %th Student Name
+      %th Subject
+  %tbody
+    - @teaching_sessions.each do |teaching_session|
+      %tr
+        %td= teaching_session.student.name
+        %td= teaching_session.subject.name
+        %td=link_to "More info on student", student_path(teaching_session.student)
+        /todo: add in start and end time
+
+= link_to 'Set up a new session to learn', subjects_path
+%br
+=link_to "Back to account", account_path(@account)
