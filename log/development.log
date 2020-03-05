@@ -23663,3 +23663,747 @@ Completed 200 OK in 62ms (Views: 50.2ms | ActiveRecord: 1.7ms)
   [1m[36m (1.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200303051448')[0m
   [1m[35m (1.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200303063215')
   [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-05 01:12:10 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by SubjectsController#index as HTML
+  [1m[35mAccount Load (0.2ms)[0m  SELECT  "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT 1  [["id", 1]]
+Completed 404 Not Found in 32ms (ActiveRecord: 0.5ms)
+
+ActiveRecord::RecordNotFound (Couldn't find Account with 'id'=1):
+  app/controllers/subjects_controller.rb:3:in `index'
+
+
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (12.2ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (170.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.6ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (120.6ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.7ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.6ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (270.2ms)
+
+
+Started GET "/accounts" for 127.0.0.1 at 2020-03-05 01:12:14 -0500
+Processing by AccountsController#index as HTML
+  [1m[36mAccount Load (0.1ms)[0m  [1mSELECT "accounts".* FROM "accounts"[0m
+  Rendered accounts/index.html.haml within layouts/application (6.3ms)
+Completed 200 OK in 234ms (Views: 233.6ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/accounts/new" for 127.0.0.1 at 2020-03-05 01:12:16 -0500
+Processing by AccountsController#new as HTML
+  Rendered accounts/new.html.haml within layouts/application (4.2ms)
+Completed 200 OK in 35ms (Views: 34.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/accounts" for 127.0.0.1 at 2020-03-05 01:12:18 -0500
+Processing by AccountsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"YmV+QOdREYrzEGuqc8spA1N1X7M1Y5esd9XL2zn6S/T/hNfUTpTeJgfdHtzR1w295u3OYvA4741+ecoezxfMQw==", "account"=>{"name"=>"Daniel"}, "commit"=>"Save Changes"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "accounts" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Daniel"], ["created_at", "2020-03-05 06:12:18.081568"], ["updated_at", "2020-03-05 06:12:18.081568"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "students" ("name", "account_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["name", "Daniel"], ["account_id", 1], ["created_at", "2020-03-05 06:12:18.083168"], ["updated_at", "2020-03-05 06:12:18.083168"]]
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "tutors" ("name", "account_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Daniel"], ["account_id", 1], ["created_at", "2020-03-05 06:12:18.084437"], ["updated_at", "2020-03-05 06:12:18.084437"]]
+  [1m[35m (8.8ms)[0m  commit transaction
+Redirected to http://127.0.0.1:3000/accounts
+Completed 302 Found in 66ms (ActiveRecord: 10.0ms)
+
+
+Started GET "/accounts" for 127.0.0.1 at 2020-03-05 01:12:18 -0500
+Processing by AccountsController#index as HTML
+  [1m[36mAccount Load (0.3ms)[0m  [1mSELECT "accounts".* FROM "accounts"[0m
+  Rendered accounts/index.html.haml within layouts/application (2.1ms)
+Completed 200 OK in 41ms (Views: 39.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/accounts/1" for 127.0.0.1 at 2020-03-05 01:12:19 -0500
+Processing by AccountsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mAccount Load (0.1ms)[0m  SELECT  "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mStudent Load (0.5ms)[0m  [1mSELECT  "students".* FROM "students" WHERE "students"."account_id" = ? LIMIT 1[0m  [["account_id", 1]]
+  [1m[35mTutor Load (0.2ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."account_id" = ? LIMIT 1  [["account_id", 1]]
+  Rendered accounts/show.html.haml within layouts/application (2.6ms)
+Completed 200 OK in 43ms (Views: 36.2ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/subject/1/tutors/1/sessions" for 127.0.0.1 at 2020-03-05 01:12:20 -0500
+Processing by SessionsController#index as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[36mAccount Load (0.1ms)[0m  [1mSELECT  "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mStudent Load (0.1ms)[0m  SELECT  "students".* FROM "students" WHERE "students"."account_id" = ? LIMIT 1  [["account_id", 1]]
+  [1m[36mTutor Load (0.3ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."account_id" = ? LIMIT 1[0m  [["account_id", 1]]
+  [1m[35mSession Load (0.2ms)[0m  SELECT "sessions".* FROM "sessions" WHERE "sessions"."student_id" = ?  [["student_id", 1]]
+  [1m[36mSession Load (0.2ms)[0m  [1mSELECT "sessions".* FROM "sessions" WHERE "sessions"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered sessions/index.html.haml within layouts/application (10.0ms)
+Completed 200 OK in 60ms (Views: 40.6ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/tutors" for 127.0.0.1 at 2020-03-05 01:12:28 -0500
+Processing by TutorsController#index as HTML
+  [1m[35mAccount Load (0.1ms)[0m  SELECT  "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."account_id" = ? LIMIT 1[0m  [["account_id", 1]]
+  [1m[35mSubject Load (0.2ms)[0m  SELECT "subjects".* FROM "subjects" INNER JOIN "subjects_tutors" ON "subjects"."id" = "subjects_tutors"."subject_id" WHERE "subjects_tutors"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (10.8ms)
+Completed 200 OK in 59ms (Views: 40.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-05 01:12:29 -0500
+Processing by SubjectsController#index as HTML
+  [1m[36mAccount Load (0.1ms)[0m  [1mSELECT  "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mSubject Load (0.2ms)[0m  SELECT "subjects".* FROM "subjects"
+  Rendered subjects/index.html.haml within layouts/application (4.9ms)
+Completed 200 OK in 43ms (Views: 41.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/subjects/new" for 127.0.0.1 at 2020-03-05 01:12:30 -0500
+Processing by SubjectsController#new as HTML
+  Rendered subjects/new.html.haml within layouts/application (3.0ms)
+Completed 200 OK in 29ms (Views: 27.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/subjects" for 127.0.0.1 at 2020-03-05 01:12:33 -0500
+Processing by SubjectsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"TNQ1X7ljpn8tDJG6LWWotKdhtS6eULdLlvsX58E/4tLRNZzLEKZp09nB5MyPeYwKEvkk/1sLz2qfVxYiN9JlZQ==", "subject"=>{"name"=>"English"}, "commit"=>"Save Changes"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "subjects" ("name", "created_at", "updated_at") VALUES (?, ?, ?)  [["name", "English"], ["created_at", "2020-03-05 06:12:33.118702"], ["updated_at", "2020-03-05 06:12:33.118702"]]
+  [1m[36m (9.4ms)[0m  [1mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/subjects
+Completed 302 Found in 16ms (ActiveRecord: 10.0ms)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-05 01:12:33 -0500
+Processing by SubjectsController#index as HTML
+  [1m[35mAccount Load (0.1ms)[0m  SELECT  "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT "subjects".* FROM "subjects"[0m
+  Rendered subjects/index.html.haml within layouts/application (0.9ms)
+Completed 200 OK in 29ms (Views: 27.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/tutors/1/edit" for 127.0.0.1 at 2020-03-05 01:12:35 -0500
+Processing by TutorsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mSubject Load (0.2ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mAccount Load (0.1ms)[0m  [1mSELECT  "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (0.1ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."account_id" = ? LIMIT 1  [["account_id", 1]]
+  [1m[36mTutor Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ? AND "tutors"."id" = ? LIMIT 1[0m  [["subject_id", 1], ["id", 1]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "subjects_tutors" ("subject_id", "tutor_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["subject_id", 1], ["tutor_id", 1], ["created_at", "2020-03-05 06:12:35.186032"], ["updated_at", "2020-03-05 06:12:35.186032"]]
+  [1m[35m (9.6ms)[0m  commit transaction
+Redirected to http://127.0.0.1:3000/tutors
+Completed 302 Found in 33ms (ActiveRecord: 11.2ms)
+
+
+Started GET "/tutors" for 127.0.0.1 at 2020-03-05 01:12:35 -0500
+Processing by TutorsController#index as HTML
+  [1m[36mAccount Load (0.2ms)[0m  [1mSELECT  "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (0.1ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."account_id" = ? LIMIT 1  [["account_id", 1]]
+  [1m[36mSubject Load (0.2ms)[0m  [1mSELECT "subjects".* FROM "subjects" INNER JOIN "subjects_tutors" ON "subjects"."id" = "subjects_tutors"."subject_id" WHERE "subjects_tutors"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered tutors/index.html.haml within layouts/application (3.7ms)
+Completed 200 OK in 29ms (Views: 25.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/accounts" for 127.0.0.1 at 2020-03-05 01:12:37 -0500
+Processing by AccountsController#index as HTML
+  [1m[35mAccount Load (0.1ms)[0m  SELECT "accounts".* FROM "accounts"
+  Rendered accounts/index.html.haml within layouts/application (0.9ms)
+Completed 200 OK in 28ms (Views: 26.7ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/accounts/new" for 127.0.0.1 at 2020-03-05 01:12:38 -0500
+Processing by AccountsController#new as HTML
+  Rendered accounts/new.html.haml within layouts/application (0.9ms)
+Completed 200 OK in 27ms (Views: 26.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/accounts" for 127.0.0.1 at 2020-03-05 01:12:40 -0500
+Processing by AccountsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"5dvMz7ov5NfTseN6IXCeT1X43AGwRS8IHnDylVAayK54OmVbE+oreyd8lgyDbLrx4GBN0HUeVykX3PNQpvdPGQ==", "account"=>{"name"=>"Nick"}, "commit"=>"Save Changes"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "accounts" ("name", "created_at", "updated_at") VALUES (?, ?, ?)  [["name", "Nick"], ["created_at", "2020-03-05 06:12:40.896195"], ["updated_at", "2020-03-05 06:12:40.896195"]]
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "students" ("name", "account_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Nick"], ["account_id", 2], ["created_at", "2020-03-05 06:12:40.898026"], ["updated_at", "2020-03-05 06:12:40.898026"]]
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "tutors" ("name", "account_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["name", "Nick"], ["account_id", 2], ["created_at", "2020-03-05 06:12:40.900349"], ["updated_at", "2020-03-05 06:12:40.900349"]]
+  [1m[36m (1.1ms)[0m  [1mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/accounts
+Completed 302 Found in 11ms (ActiveRecord: 2.0ms)
+
+
+Started GET "/accounts" for 127.0.0.1 at 2020-03-05 01:12:40 -0500
+Processing by AccountsController#index as HTML
+  [1m[35mAccount Load (0.2ms)[0m  SELECT "accounts".* FROM "accounts"
+  Rendered accounts/index.html.haml within layouts/application (1.1ms)
+Completed 200 OK in 40ms (Views: 39.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/accounts/2" for 127.0.0.1 at 2020-03-05 01:12:42 -0500
+Processing by AccountsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mAccount Load (0.2ms)[0m  [1mSELECT  "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mStudent Load (0.3ms)[0m  SELECT  "students".* FROM "students" WHERE "students"."account_id" = ? LIMIT 1  [["account_id", 2]]
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."account_id" = ? LIMIT 1[0m  [["account_id", 2]]
+  Rendered accounts/show.html.haml within layouts/application (0.3ms)
+Completed 200 OK in 35ms (Views: 29.8ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/subject/1/tutors/1/sessions" for 127.0.0.1 at 2020-03-05 01:12:44 -0500
+Processing by SessionsController#index as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[35mAccount Load (0.2ms)[0m  SELECT  "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mStudent Load (0.1ms)[0m  [1mSELECT  "students".* FROM "students" WHERE "students"."account_id" = ? LIMIT 1[0m  [["account_id", 2]]
+  [1m[35mTutor Load (0.1ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."account_id" = ? LIMIT 1  [["account_id", 2]]
+  [1m[36mSession Load (0.1ms)[0m  [1mSELECT "sessions".* FROM "sessions" WHERE "sessions"."student_id" = ?[0m  [["student_id", 2]]
+  [1m[35mSession Load (0.2ms)[0m  SELECT "sessions".* FROM "sessions" WHERE "sessions"."tutor_id" = ?  [["tutor_id", 2]]
+  Rendered sessions/index.html.haml within layouts/application (2.5ms)
+Completed 200 OK in 40ms (Views: 35.2ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-05 01:12:46 -0500
+Processing by SubjectsController#index as HTML
+  [1m[36mAccount Load (0.1ms)[0m  [1mSELECT  "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mSubject Load (0.2ms)[0m  SELECT "subjects".* FROM "subjects"
+  Rendered subjects/index.html.haml within layouts/application (1.2ms)
+Completed 200 OK in 30ms (Views: 28.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/subjects/1" for 127.0.0.1 at 2020-03-05 01:12:47 -0500
+Processing by SubjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (0.2ms)[0m  SELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?  [["subject_id", 1]]
+  Rendered subjects/show.html.haml within layouts/application (4.1ms)
+Completed 200 OK in 36ms (Views: 34.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/subject/1/tutors/1/reviews" for 127.0.0.1 at 2020-03-05 01:12:49 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[36mTutor Load (0.2ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mReview Load (0.2ms)[0m  [1mSELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (6.1ms)
+Completed 200 OK in 46ms (Views: 36.9ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/subject/1/tutors/1/reviews/new" for 127.0.0.1 at 2020-03-05 01:12:51 -0500
+Processing by ReviewsController#new as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTutor Load (0.2ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered reviews/new.html.haml within layouts/application (3.7ms)
+Completed 200 OK in 35ms (Views: 32.8ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/subject/1/tutors/1/reviews" for 127.0.0.1 at 2020-03-05 01:12:55 -0500
+Processing by ReviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"7SZj1JtZq9ZSz1i7Y0JPVeBuCvC3+RaX1Sdvg7Wh3eZwx8pAMpxkeqYCLc3BXmvrVfabIXKibrbci25GQ0xaUQ==", "review"=>{"rating"=>"5", "comment"=>"Great!"}, "commit"=>"Save Changes", "subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[35mTutor Load (0.1ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mAccount Load (0.1ms)[0m  [1mSELECT  "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mStudent Load (0.1ms)[0m  SELECT  "students".* FROM "students" WHERE "students"."account_id" = ? LIMIT 1  [["account_id", 2]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 0.4ms)
+
+ActiveModel::MissingAttributeError (can't write unknown attribute `student_id`):
+  app/controllers/reviews_controller.rb:21:in `create'
+
+
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.1ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.2ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (97.2ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.7ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (90.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/Daniel/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (202.9ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddStudentkeyToReviews (20200305061454)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.7ms)[0m  [1mALTER TABLE "reviews" ADD "student_id" integer[0m
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_reviews_on_tutor_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_reviews_on_tutor_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  CREATE  INDEX "index_reviews_on_student_id" ON "reviews" ("student_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20200305061454"]]
+  [1m[35m (9.4ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_reviews_on_student_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_reviews_on_student_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_reviews_on_tutor_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_reviews_on_tutor_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_reviews_tutors_on_tutor_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_reviews_tutors_on_tutor_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_reviews_tutors_on_review_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_reviews_tutors_on_review_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_sessions_on_tutor_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_sessions_on_tutor_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_sessions_on_subject_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_sessions_on_subject_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_sessions_on_student_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_sessions_on_student_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_students_on_account_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_students_on_account_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_students_subjects_on_subject_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_students_subjects_on_subject_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_subject_tutors_on_tutor_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_subject_tutors_on_tutor_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_subjects_on_review_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_subjects_on_review_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_subjects_tutors_on_tutor_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_subjects_tutors_on_tutor_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_subjects_tutors_on_subject_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_subjects_tutors_on_subject_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_tutor_reviews_on_tutor_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_tutor_reviews_on_tutor_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_tutor_reviews_on_review_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_tutor_reviews_on_review_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_tutors_on_account_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_tutors_on_account_id' AND type='index'
+[0m
+
+
+Started GET "/accounts" for 127.0.0.1 at 2020-03-05 01:15:18 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by AccountsController#index as HTML
+  [1m[35mAccount Load (0.1ms)[0m  SELECT "accounts".* FROM "accounts"
+  Rendered accounts/index.html.haml within layouts/application (10.1ms)
+Completed 200 OK in 222ms (Views: 204.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/accounts/1" for 127.0.0.1 at 2020-03-05 01:15:20 -0500
+Processing by AccountsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mAccount Load (0.1ms)[0m  [1mSELECT  "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mStudent Load (0.2ms)[0m  SELECT  "students".* FROM "students" WHERE "students"."account_id" = ? LIMIT 1  [["account_id", 1]]
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."account_id" = ? LIMIT 1[0m  [["account_id", 1]]
+  Rendered accounts/show.html.haml within layouts/application (3.1ms)
+Completed 200 OK in 104ms (Views: 52.2ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/subject/1/tutors/1/sessions" for 127.0.0.1 at 2020-03-05 01:15:21 -0500
+Processing by SessionsController#index as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[35mAccount Load (0.1ms)[0m  SELECT  "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mStudent Load (0.1ms)[0m  [1mSELECT  "students".* FROM "students" WHERE "students"."account_id" = ? LIMIT 1[0m  [["account_id", 1]]
+  [1m[35mTutor Load (0.1ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."account_id" = ? LIMIT 1  [["account_id", 1]]
+  [1m[36mSession Load (0.2ms)[0m  [1mSELECT "sessions".* FROM "sessions" WHERE "sessions"."student_id" = ?[0m  [["student_id", 1]]
+  [1m[35mSession Load (0.1ms)[0m  SELECT "sessions".* FROM "sessions" WHERE "sessions"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered sessions/index.html.haml within layouts/application (15.5ms)
+Completed 200 OK in 94ms (Views: 62.3ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/subjects" for 127.0.0.1 at 2020-03-05 01:15:23 -0500
+Processing by SubjectsController#index as HTML
+  [1m[36mAccount Load (0.1ms)[0m  [1mSELECT  "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mSubject Load (0.2ms)[0m  SELECT "subjects".* FROM "subjects"
+  Rendered subjects/index.html.haml within layouts/application (10.5ms)
+Completed 200 OK in 51ms (Views: 34.9ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/subjects/1" for 127.0.0.1 at 2020-03-05 01:15:28 -0500
+Processing by SubjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mSubject Load (0.2ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (0.3ms)[0m  SELECT "tutors".* FROM "tutors" INNER JOIN "subjects_tutors" ON "tutors"."id" = "subjects_tutors"."tutor_id" WHERE "subjects_tutors"."subject_id" = ?  [["subject_id", 1]]
+  Rendered subjects/show.html.haml within layouts/application (14.0ms)
+Completed 200 OK in 50ms (Views: 41.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/subject/1/tutors/1/reviews" for 127.0.0.1 at 2020-03-05 01:15:28 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[36mTutor Load (0.2ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mReview Load (0.3ms)[0m  [1mSELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (7.7ms)
+Completed 200 OK in 44ms (Views: 35.8ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/subject/1/tutors/1/reviews/new" for 127.0.0.1 at 2020-03-05 01:15:30 -0500
+Processing by ReviewsController#new as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[35mSubject Load (0.2ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered reviews/new.html.haml within layouts/application (10.7ms)
+Completed 200 OK in 37ms (Views: 34.5ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/subject/1/tutors/1/reviews" for 127.0.0.1 at 2020-03-05 01:15:32 -0500
+Processing by ReviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"t4fjodDjnpnpuGXr0Cv3qyxhlDCrM4f1qdEmkpmjRpgqZko1eSZRNR11EJ1yN9MVmfkF4W5o/9SgfSdXb07BLw==", "review"=>{"rating"=>"1", "comment"=>"ehh"}, "commit"=>"Save Changes", "subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[35mTutor Load (0.2ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mAccount Load (0.1ms)[0m  [1mSELECT  "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mStudent Load (0.1ms)[0m  SELECT  "students".* FROM "students" WHERE "students"."account_id" = ? LIMIT 1  [["account_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.2ms)[0m  INSERT INTO "reviews" ("rating", "comment", "tutor_id", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["rating", 1], ["comment", "ehh"], ["tutor_id", 1], ["student_id", 1], ["created_at", "2020-03-05 06:15:32.411116"], ["updated_at", "2020-03-05 06:15:32.411116"]]
+  [1m[36m (9.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/subject/1/tutors/1/reviews
+Completed 302 Found in 27ms (ActiveRecord: 11.6ms)
+
+
+Started GET "/subject/1/tutors/1/reviews" for 127.0.0.1 at 2020-03-05 01:15:32 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[35mTutor Load (0.1ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mReview Load (0.1ms)[0m  SELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (1.9ms)
+Completed 200 OK in 29ms (Views: 27.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/subject/1/tutors/1/reviews" for 127.0.0.1 at 2020-03-05 01:18:10 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mSubject Load (0.2ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mReview Load (0.2ms)[0m  [1mSELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (10.5ms)
+Completed 200 OK in 94ms (Views: 34.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/subject/1/tutors/1/reviews/new" for 127.0.0.1 at 2020-03-05 01:18:12 -0500
+Processing by ReviewsController#new as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[35mSubject Load (0.6ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered reviews/new.html.haml within layouts/application (2.5ms)
+Completed 200 OK in 40ms (Views: 36.2ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/subject/1/tutors/1/reviews" for 127.0.0.1 at 2020-03-05 01:18:15 -0500
+Processing by ReviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"c0Jhr6AD8E7Lc1Y4iR+Htn3mlbpjANIHRY/UQ1G5hqnuo8g7CcY/4j++I04rA6MIyH4Ea6ZbqiZMI9WGp1QBHg==", "review"=>{"rating"=>"1", "comment"=>"shouldnt work"}, "commit"=>"Save Changes", "subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[35mTutor Load (0.4ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mAccount Load (0.1ms)[0m  [1mSELECT  "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTutor Load (0.3ms)[0m  SELECT  "tutors".* FROM "tutors" WHERE "tutors"."account_id" = ? LIMIT 1  [["account_id", 1]]
+Redirected to http://127.0.0.1:3000/subject/1/tutors/1/reviews
+Completed 302 Found in 19ms (ActiveRecord: 1.0ms)
+
+
+Started GET "/subject/1/tutors/1/reviews" for 127.0.0.1 at 2020-03-05 01:18:15 -0500
+Processing by ReviewsController#index as HTML
+  Parameters: {"subject_id"=>"1", "tutor_id"=>"1"}
+  [1m[36mTutor Load (0.1ms)[0m  [1mSELECT  "tutors".* FROM "tutors" WHERE "tutors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mSubject Load (0.1ms)[0m  SELECT  "subjects".* FROM "subjects" WHERE "subjects"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mReview Load (0.2ms)[0m  [1mSELECT "reviews".* FROM "reviews" WHERE "reviews"."tutor_id" = ?[0m  [["tutor_id", 1]]
+  Rendered reviews/index.html.haml within layouts/application (4.3ms)
+Completed 200 OK in 46ms (Views: 44.3ms | ActiveRecord: 0.3ms)
+  [1m[36m (9.4ms)[0m  [1mCREATE TABLE "accounts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (1.2ms)[0m  CREATE TABLE "reviews" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "rating" integer, "comment" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "tutor_id" integer, "student_id" integer) 
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (1.1ms)[0m  CREATE  INDEX "index_reviews_on_student_id" ON "reviews" ("student_id")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_reviews_on_student_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_reviews_on_student_id' AND type='index'
+[0m
+  [1m[35m (0.9ms)[0m  CREATE  INDEX "index_reviews_on_tutor_id" ON "reviews" ("tutor_id")
+  [1m[36m (1.2ms)[0m  [1mCREATE TABLE "reviews_tutors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "tutor_id" integer, "review_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (1.1ms)[0m  CREATE  INDEX "index_reviews_tutors_on_review_id" ON "reviews_tutors" ("review_id")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_reviews_tutors_on_review_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_reviews_tutors_on_review_id' AND type='index'
+[0m
+  [1m[35m (1.4ms)[0m  CREATE  INDEX "index_reviews_tutors_on_tutor_id" ON "reviews_tutors" ("tutor_id")
+  [1m[36m (1.8ms)[0m  [1mCREATE TABLE "sessions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "student_id" integer, "tutor_id" integer, "subject_id" integer, "rate" float, "time" datetime, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (1.3ms)[0m  CREATE  INDEX "index_sessions_on_student_id" ON "sessions" ("student_id")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_sessions_on_student_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_sessions_on_student_id' AND type='index'
+[0m
+  [1m[35m (1.1ms)[0m  CREATE  INDEX "index_sessions_on_subject_id" ON "sessions" ("subject_id")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_sessions_on_subject_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_sessions_on_subject_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_sessions_on_student_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_sessions_on_student_id' AND type='index'
+
+  [1m[36m (1.2ms)[0m  [1mCREATE  INDEX "index_sessions_on_tutor_id" ON "sessions" ("tutor_id")[0m
+  [1m[35m (1.1ms)[0m  CREATE TABLE "students" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "account_id" integer) 
+  [1m[36m (1.4ms)[0m  [1mCREATE  INDEX "index_students_on_account_id" ON "students" ("account_id")[0m
+  [1m[35m (1.1ms)[0m  CREATE TABLE "students_subjects" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "subject_id" integer, "student_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (1.2ms)[0m  [1mCREATE  INDEX "index_students_subjects_on_subject_id" ON "students_subjects" ("subject_id")[0m
+  [1m[35m (3.3ms)[0m  CREATE TABLE "subject_tutors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "tutor_id" integer, "subject_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (1.2ms)[0m  [1mCREATE  INDEX "index_subject_tutors_on_tutor_id" ON "subject_tutors" ("tutor_id")[0m
+  [1m[35m (1.2ms)[0m  CREATE TABLE "subjects" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "name" varchar, "review_id" integer) 
+  [1m[36m (1.2ms)[0m  [1mCREATE  INDEX "index_subjects_on_review_id" ON "subjects" ("review_id")[0m
+  [1m[35m (1.0ms)[0m  CREATE TABLE "subjects_tutors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "tutor_id" integer, "subject_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (1.1ms)[0m  [1mCREATE  INDEX "index_subjects_tutors_on_subject_id" ON "subjects_tutors" ("subject_id")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_subjects_tutors_on_subject_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_subjects_tutors_on_subject_id' AND type='index'
+
+  [1m[36m (1.0ms)[0m  [1mCREATE  INDEX "index_subjects_tutors_on_tutor_id" ON "subjects_tutors" ("tutor_id")[0m
+  [1m[35m (1.5ms)[0m  CREATE TABLE "tutor_reviews" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "review_id" integer, "tutor_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (1.2ms)[0m  [1mCREATE  INDEX "index_tutor_reviews_on_review_id" ON "tutor_reviews" ("review_id")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_tutor_reviews_on_review_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_tutor_reviews_on_review_id' AND type='index'
+
+  [1m[36m (1.2ms)[0m  [1mCREATE  INDEX "index_tutor_reviews_on_tutor_id" ON "tutor_reviews" ("tutor_id")[0m
+  [1m[35m (2.3ms)[0m  CREATE TABLE "tutors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "name" varchar, "experience" integer, "rate" float, "average_rating" float, "account_id" integer) 
+  [1m[36m (1.8ms)[0m  [1mCREATE  INDEX "index_tutors_on_account_id" ON "tutors" ("account_id")[0m
+  [1m[35m (1.3ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar NOT NULL) 
+  [1m[36m (1.1ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.1ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (3.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200305061454')[0m
+  [1m[35m (1.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200303063057')
+  [1m[36m (1.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200303045216')[0m
+  [1m[35m (1.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200303063821')
+  [1m[36m (1.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200305022740')[0m
+  [1m[35m (1.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200303045159')
+  [1m[36m (1.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200303045334')[0m
+  [1m[35m (1.6ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200303234312')
+  [1m[36m (1.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200303171732')[0m
+  [1m[35m (1.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200303045107')
+  [1m[36m (2.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200303055406')[0m
+  [1m[35m (3.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200303070109')
+  [1m[36m (2.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200303063154')[0m
+  [1m[35m (1.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200305022757')
+  [1m[36m (1.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200305022554')[0m
+  [1m[35m (1.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200303051448')
+  [1m[36m (1.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200303063215')[0m
+  [1m[35m (1.1ms)[0m  CREATE TABLE "accounts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (1.9ms)[0m  [1mCREATE TABLE "reviews" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "rating" integer, "comment" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "tutor_id" integer, "student_id" integer) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (1.5ms)[0m  [1mCREATE  INDEX "index_reviews_on_student_id" ON "reviews" ("student_id")[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_reviews_on_student_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_reviews_on_student_id' AND type='index'
+
+  [1m[36m (1.2ms)[0m  [1mCREATE  INDEX "index_reviews_on_tutor_id" ON "reviews" ("tutor_id")[0m
+  [1m[35m (1.0ms)[0m  CREATE TABLE "reviews_tutors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "tutor_id" integer, "review_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (1.0ms)[0m  [1mCREATE  INDEX "index_reviews_tutors_on_review_id" ON "reviews_tutors" ("review_id")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_reviews_tutors_on_review_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_reviews_tutors_on_review_id' AND type='index'
+
+  [1m[36m (1.1ms)[0m  [1mCREATE  INDEX "index_reviews_tutors_on_tutor_id" ON "reviews_tutors" ("tutor_id")[0m
+  [1m[35m (1.1ms)[0m  CREATE TABLE "sessions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "student_id" integer, "tutor_id" integer, "subject_id" integer, "rate" float, "time" datetime, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (1.0ms)[0m  [1mCREATE  INDEX "index_sessions_on_student_id" ON "sessions" ("student_id")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_sessions_on_student_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_sessions_on_student_id' AND type='index'
+
+  [1m[36m (1.9ms)[0m  [1mCREATE  INDEX "index_sessions_on_subject_id" ON "sessions" ("subject_id")[0m
+  [1m[35m (0.3ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_sessions_on_subject_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_sessions_on_subject_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_sessions_on_student_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_sessions_on_student_id' AND type='index'
+[0m
+  [1m[35m (1.8ms)[0m  CREATE  INDEX "index_sessions_on_tutor_id" ON "sessions" ("tutor_id")
+  [1m[36m (1.8ms)[0m  [1mCREATE TABLE "students" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "account_id" integer) [0m
+  [1m[35m (2.5ms)[0m  CREATE  INDEX "index_students_on_account_id" ON "students" ("account_id")
+  [1m[36m (1.6ms)[0m  [1mCREATE TABLE "students_subjects" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "subject_id" integer, "student_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.9ms)[0m  CREATE  INDEX "index_students_subjects_on_subject_id" ON "students_subjects" ("subject_id")
+  [1m[36m (1.1ms)[0m  [1mCREATE TABLE "subject_tutors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "tutor_id" integer, "subject_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (1.2ms)[0m  CREATE  INDEX "index_subject_tutors_on_tutor_id" ON "subject_tutors" ("tutor_id")
+  [1m[36m (1.2ms)[0m  [1mCREATE TABLE "subjects" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "name" varchar, "review_id" integer) [0m
+  [1m[35m (1.1ms)[0m  CREATE  INDEX "index_subjects_on_review_id" ON "subjects" ("review_id")
+  [1m[36m (1.3ms)[0m  [1mCREATE TABLE "subjects_tutors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "tutor_id" integer, "subject_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (2.0ms)[0m  CREATE  INDEX "index_subjects_tutors_on_subject_id" ON "subjects_tutors" ("subject_id")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_subjects_tutors_on_subject_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_subjects_tutors_on_subject_id' AND type='index'
+[0m
+  [1m[35m (1.2ms)[0m  CREATE  INDEX "index_subjects_tutors_on_tutor_id" ON "subjects_tutors" ("tutor_id")
+  [1m[36m (2.4ms)[0m  [1mCREATE TABLE "tutor_reviews" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "review_id" integer, "tutor_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (1.3ms)[0m  CREATE  INDEX "index_tutor_reviews_on_review_id" ON "tutor_reviews" ("review_id")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_tutor_reviews_on_review_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_tutor_reviews_on_review_id' AND type='index'
+[0m
+  [1m[35m (3.5ms)[0m  CREATE  INDEX "index_tutor_reviews_on_tutor_id" ON "tutor_reviews" ("tutor_id")
+  [1m[36m (1.1ms)[0m  [1mCREATE TABLE "tutors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "name" varchar, "experience" integer, "rate" float, "average_rating" float, "account_id" integer) [0m
+  [1m[35m (1.2ms)[0m  CREATE  INDEX "index_tutors_on_account_id" ON "tutors" ("account_id")
+  [1m[36m (1.2ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (1.4ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.5ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (2.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200305061454')
+  [1m[36m (1.7ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200303063057')[0m
+  [1m[35m (1.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200303045216')
+  [1m[36m (1.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200303063821')[0m
+  [1m[35m (2.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200305022740')
+  [1m[36m (4.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200303045159')[0m
+  [1m[35m (2.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200303045334')
+  [1m[36m (1.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200303234312')[0m
+  [1m[35m (1.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200303171732')
+  [1m[36m (1.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200303045107')[0m
+  [1m[35m (1.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200303055406')
+  [1m[36m (1.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200303070109')[0m
+  [1m[35m (1.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200303063154')
+  [1m[36m (1.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200305022757')[0m
+  [1m[35m (1.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200305022554')
+  [1m[36m (1.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20200303051448')[0m
+  [1m[35m (1.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20200303063215')
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
