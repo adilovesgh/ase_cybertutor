@@ -1,6 +1,6 @@
-require 'uri'
-require 'cgi'
-require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
+# require 'uri'
+# require 'cgi'
+# require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
 
 module WithinHelpers
   def with_scope(locator)
@@ -10,15 +10,15 @@ end
 World(WithinHelpers)
 
 Given("I am on the subjects page") do
-  pending # Write code here that turns the phrase above into concrete actions
+  visit '/subjects'
 end
 
 When("I click on {string}") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
+  click_link string
 end
 
 Then("I should see {string}") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
+  assert page.has_content?(string)
 end
 
 Given("I am on create new subject page") do
@@ -45,18 +45,10 @@ Then("I should see a link to {string}") do |string|
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-Given("I am on the subjects page") do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
 Then("I should see all subjects") do
   pending # Write code here that turns the phrase above into concrete actions
 end
 
 Given("I am on the all tutors page") do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-When("I click on {string}") do |string|
   pending # Write code here that turns the phrase above into concrete actions
 end
