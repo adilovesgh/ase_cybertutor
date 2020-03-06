@@ -21,7 +21,7 @@ class TutorsController < ApplicationController
         else
             flash[:error] = "You are already signed up to tutor this subject"
         end
-        redirect_to tutors_path
+        redirect_to tutor_path(@account.tutor)
     end
 
 

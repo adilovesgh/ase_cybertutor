@@ -31,16 +31,6 @@ ActiveRecord::Schema.define(version: 20200305061454) do
   add_index "reviews", ["student_id"], name: "index_reviews_on_student_id"
   add_index "reviews", ["tutor_id"], name: "index_reviews_on_tutor_id"
 
-  create_table "reviews_tutors", force: :cascade do |t|
-    t.integer  "tutor_id"
-    t.integer  "review_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "reviews_tutors", ["review_id"], name: "index_reviews_tutors_on_review_id"
-  add_index "reviews_tutors", ["tutor_id"], name: "index_reviews_tutors_on_tutor_id"
-
   create_table "sessions", force: :cascade do |t|
     t.integer  "student_id"
     t.integer  "tutor_id"
@@ -64,24 +54,6 @@ ActiveRecord::Schema.define(version: 20200305061454) do
 
   add_index "students", ["account_id"], name: "index_students_on_account_id"
 
-  create_table "students_subjects", force: :cascade do |t|
-    t.integer  "subject_id"
-    t.integer  "student_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "students_subjects", ["subject_id"], name: "index_students_subjects_on_subject_id"
-
-  create_table "subject_tutors", force: :cascade do |t|
-    t.integer  "tutor_id"
-    t.integer  "subject_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "subject_tutors", ["tutor_id"], name: "index_subject_tutors_on_tutor_id"
-
   create_table "subjects", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -100,16 +72,6 @@ ActiveRecord::Schema.define(version: 20200305061454) do
 
   add_index "subjects_tutors", ["subject_id"], name: "index_subjects_tutors_on_subject_id"
   add_index "subjects_tutors", ["tutor_id"], name: "index_subjects_tutors_on_tutor_id"
-
-  create_table "tutor_reviews", force: :cascade do |t|
-    t.integer  "review_id"
-    t.integer  "tutor_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "tutor_reviews", ["review_id"], name: "index_tutor_reviews_on_review_id"
-  add_index "tutor_reviews", ["tutor_id"], name: "index_tutor_reviews_on_tutor_id"
 
   create_table "tutors", force: :cascade do |t|
     t.datetime "created_at",     null: false
