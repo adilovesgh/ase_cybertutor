@@ -1,9 +1,6 @@
 class SubjectsController < ApplicationController
 	def index
-        @account = Account.find_by_id(session[:account_id])
         @subjects = Subject.all
-        @tutor = @account.tutor
-        puts(@tutor.account.name)
     end
 
     def show
