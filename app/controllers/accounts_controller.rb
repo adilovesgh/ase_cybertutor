@@ -16,6 +16,11 @@ class AccountsController < ApplicationController
     def new
     end
 
+    def edit
+        reset_session
+        redirect_to accounts_path
+    end
+
     def create
         @account = Account.new(account_params)
         puts(account_params)

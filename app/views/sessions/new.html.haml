@@ -1,4 +1,4 @@
-=link_to "Logout", accounts_path
+=link_to "Logout", edit_account_path(1)
 - [:notice, :error, :success].each do |key|
   - unless flash[key].blank?
     %p{ :class => "flash #{key}" }= flash[key]

@@ -1,6 +1,13 @@
 class SubjectsController < ApplicationController
 	def index
         @subjects = Subject.all
+        if session[:account_id].nil?
+            @logged_in = false
+            puts(session[:account_id])
+            puts(session)
+        else
+            @logged_in = true
+        end
     end
 
     def show

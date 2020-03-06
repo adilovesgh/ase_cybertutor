@@ -1,4 +1,7 @@
-=link_to "Logout", accounts_path
+- if session[:account_id]
+  =link_to "Logout", edit_account_path(1)
+- else
+  =link_to "Log In", accounts_path
 - [:notice, :error, :success].each do |key|
   - unless flash[key].blank?
     %p{ :class => "flash #{key}" }= flash[key]
@@ -17,7 +20,9 @@
         %td= review.rating
         %td= review.comment
 
-=link_to 'Sign up for a session', new_subject_tutor_session_path(@subject, @tutor)
-= link_to 'Leave a review', new_subject_tutor_review_path
+- if session[:account_id]
+  =link_to 'Sign up for a session', new_subject_tutor_session_path(@subject, @tutor)
+- if session[:account_id]
+  = link_to 'Leave a review', new_subject_tutor_review_path
 %br
 = link_to 'Back to tutors', subject_path(@subject)
