@@ -9,11 +9,17 @@
     %tr
       %th Tutor Name
       %th Subject
+      %th Date
+      %th Start Time
+      %th End Time
   %tbody
     - @sessions.each do |session|
       %tr
-        %td= session.tutor.name
+        %td= session.tutor.account.name
         %td= session.subject.name
+        %td= session.start_time.strftime("%F")
+        %td= session.start_time.strftime("%H:%M%p")
+        %td= session.end_time.strftime("%H:%M%p")
         %td=link_to "More info on tutor", subject_tutor_reviews_path(1, session.tutor)
         /todo: add in start and end time
 
@@ -24,11 +30,17 @@
     %tr
       %th Student Name
       %th Subject
+      %th Date
+      %th Start Time
+      %th End Time
   %tbody
     - @teaching_sessions.each do |teaching_session|
       %tr
-        %td= teaching_session.student.name
+        %td= teaching_session.student.account.name
         %td= teaching_session.subject.name
+        %td= session.start_time.strftime("%F")
+        %td= session.start_time.strftime("%H:%M%p")
+        %td= session.end_time.strftime("%H:%M%p")
         %td=link_to "More info on student", student_path(teaching_session.student)
         /todo: add in start and end time
 

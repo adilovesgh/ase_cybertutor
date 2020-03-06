@@ -11,12 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200305061454) do
+ActiveRecord::Schema.define(version: 20200306013456) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "email"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -36,9 +37,10 @@ ActiveRecord::Schema.define(version: 20200305061454) do
     t.integer  "tutor_id"
     t.integer  "subject_id"
     t.float    "rate"
-    t.datetime "time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "start_time"
+    t.datetime "end_time"
   end
 
   add_index "sessions", ["student_id"], name: "index_sessions_on_student_id"
@@ -46,7 +48,6 @@ ActiveRecord::Schema.define(version: 20200305061454) do
   add_index "sessions", ["tutor_id"], name: "index_sessions_on_tutor_id"
 
   create_table "students", force: :cascade do |t|
-    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "account_id"
@@ -76,7 +77,6 @@ ActiveRecord::Schema.define(version: 20200305061454) do
   create_table "tutors", force: :cascade do |t|
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-    t.string   "name"
     t.integer  "experience"
     t.float    "rate"
     t.float    "average_rating"

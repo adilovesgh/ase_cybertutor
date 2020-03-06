@@ -9,6 +9,7 @@ class SubjectsController < ApplicationController
     def show
         @subject = Subject.find(params[:id])
         @tutors = @subject.tutors
+        Tutor.update_average(@tutors)
     end
 
     def new

@@ -5,6 +5,7 @@ class AccountsController < ApplicationController
 
     def show
         @account = Account.find(params[:id])
+        puts(@account.email)
         session[:account_id] = @account.id
         #@tutors = Tutor.all.select {|m| m.subject == @subject.name}
         @student = @account.student
@@ -16,15 +17,17 @@ class AccountsController < ApplicationController
     end
 
     def create
-        @account = Account.new(subject_params)
-        @student = @account.build_student(name:@account.name)
-        @tutor = @account.build_tutor(name:@account.name)
+        @account = Account.new(account_params)
+        puts(account_params)
+        puts(@account.email)
+        @student = @account.build_student()
+        @tutor = @account.build_tutor()
         @account.save
         redirect_to accounts_path
     end
 
     private
-    def subject_params
-        params.require(:account).permit(:name)
+    def account_params
+        params.require(:account).permit(:name, :email)
     end
 end

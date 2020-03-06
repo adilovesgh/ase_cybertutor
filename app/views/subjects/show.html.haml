@@ -5,13 +5,11 @@
   %thead
     %tr
       %th Name
-      %th Experience
-      %th Rate
+      %th Rating
   %tbody
     - @tutors.each do |tutor|
       %tr
-        %td= tutor.name
-        %td= tutor.experience
-        %td= tutor.rate
-        %td= link_to "Reviews for #{tutor.name}", subject_tutor_reviews_path(@subject, tutor)
+        %td= tutor.account.name
+        %td= tutor.average_rating
+        %td= link_to "Reviews for #{tutor.account.name}", subject_tutor_reviews_path(@subject, tutor)
 =link_to "Back to subjects", subjects_path
