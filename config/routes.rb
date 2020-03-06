@@ -25,7 +25,7 @@ Rails.application.routes.draw do
 	  end
       end
   end
-
+  root to: 'pages#home'
   #resources :subjects
   Rails.application.routes.draw do
       resources :subject do
