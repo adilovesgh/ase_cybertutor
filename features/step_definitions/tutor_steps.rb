@@ -17,11 +17,11 @@ Given("I am on the new tutor page") do
   pending #visit '/tutors/new' this breaks when no subject
 end
 
-When("I add {string} for the name") do |string|
+When("I add {string} for the tutor name") do |string|
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-When("I add {string} for the years of experience") do |string|
+When("I add {string} for the years of tutoring experience") do |string|
   pending # Write code here that turns the phrase above into concrete actions
 end
 

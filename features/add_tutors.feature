@@ -13,8 +13,8 @@ Scenario: click on link to add new tutor
 Scenario: add new tutor
 
   Given I am on the new tutor page
-  When I add "Albert Einstein" for the name
-  And I add "50" for the years of experience
+  When I add "Albert Einstein" for the tutor name
+  And I add "50" for the years of tutoring experience
   And I add "20" for the rate in dollars per hour
   And I press "Save Changes"
   Then I should redirect to the all tutors page
