@@ -15,7 +15,7 @@
         %td= subject.name
         %td= link_to "Tutors for #{subject.name}", subject_path(subject)
         - if session[:account_id]
-          %td= link_to "Sign up to tutor", edit_tutor_path(subject)
+          %td= link_to "Sign up to tutor #{subject.name}", edit_tutor_path(subject)
 
 - if session[:account_id]
   = link_to 'Add new subject', new_subject_path
