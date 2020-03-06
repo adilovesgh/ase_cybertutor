@@ -16,5 +16,5 @@ Scenario: add new subject
   When I add "English" for the subject name
   And I press "Save Changes"
   Then I should redirect to the home page
-  And I should see "English" under "Title"
+  And I should see "English"
   And I should see a link to "Tutors for English"

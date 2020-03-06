@@ -1,6 +1,6 @@
 class TutorsController < ApplicationController
 	def index
-        @account = Account.find(session[:account_id])
+        @account = Account.find_by_id(session[:account_id])
         @subjects = @account.tutor.subjects
     end
 

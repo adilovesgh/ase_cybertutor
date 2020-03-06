@@ -13,8 +13,8 @@ Given("I am on the all tutors page for {string}") do |string|
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-Given("I am on register new tutor page") do
-  pending # Write code here that turns the phrase above into concrete actions
+Given("I am on the new tutor page") do
+  pending #visit '/tutors/new' this breaks when no subject
 end
 
 When("I add {string} for the name") do |string|
@@ -29,17 +29,10 @@ When("I add {string} for the rate in dollars per hour") do |string|
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-When("I press {string}") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
 Then("I should redirect to the all tutors page") do
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-Then("I should see {string} under {string}") do |string, string2|
-  pending # Write code here that turns the phrase above into concrete actions
-end
 
 When("I see {string} as a subject title") do |string|
   pending # Write code here that turns the phrase above into concrete actions

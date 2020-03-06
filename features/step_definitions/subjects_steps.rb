@@ -18,23 +18,23 @@ When("I click on {string}") do |string|
 end
 
 Then("I should see {string}") do |string|
-  assert page.has_content?(string)
+  page.should have_content(string)
 end
 
 Given("I am on create new subject page") do
-  pending # Write code here that turns the phrase above into concrete actions
+  visit '/subjects/new'
 end
 
 When("I add {string} for the subject name") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
+  fill_in "subject_name", with: string
 end
 
 When("I press {string}") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
+  click_button(string)
 end
 
 Then("I should redirect to the home page") do
-  pending # Write code here that turns the phrase above into concrete actions
+  current_path.should == '/subjects'
 end
 
 Then("I should see {string} under {string}") do |string, string2|
@@ -42,7 +42,7 @@ Then("I should see {string} under {string}") do |string, string2|
 end
 
 Then("I should see a link to {string}") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
+  page.should have_link(string)
 end
 
 Then("I should see all subjects") do

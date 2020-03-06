@@ -9,7 +9,7 @@
     - @subjects.each do |subject|
       %tr
         %td= subject.name
-        %td= link_to "Look for tutors", subject_path(subject)
+        %td= link_to "Tutors for #{subject.name}", subject_path(subject)
         %td= link_to "Sign up to tutor", edit_tutor_path(subject)
 
 = link_to 'Add new subject', new_subject_path

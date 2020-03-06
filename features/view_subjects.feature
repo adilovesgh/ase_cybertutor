@@ -1,13 +1,9 @@
 Feature: view all subjects
 
-  As an enthusiastic student
-  So that I can learn online using the tutoring platform
-  I want to see available subjects
-
 Scenario: see subjects from subjects page
 
   Given I am on the subjects page
-  Then I should see all subjects
+  Then I should see "All Subjects"
 
 Scenario: go back to subjects page
 
