@@ -26,14 +26,17 @@ Given("I am on create new accounts page") do
 end
 
 When("I add {string} for the account name") do |string|
+  @acct_name = string
   fill_in "account_name", with: string
 end
 
 When("I add {string} for the account email") do |string|
+  @acct_email = string
   fill_in "account_email", with: string
 end
 
 Then("I should redirect to the accounts page") do
+  expect(Account.find_by_email(@acct_email)).to_not be nil
   current_path.should == '/accounts'
 end
 

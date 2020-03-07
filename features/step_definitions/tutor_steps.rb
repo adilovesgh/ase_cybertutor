@@ -9,43 +9,23 @@ module WithinHelpers
 end
 World(WithinHelpers)
 
-Given("I am on the all tutors page for {string}") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
+When("I click on Sign up to tutor {string}") do |string|
+  if page.has_no_content?(string)
+    click_link("Add new subject")
+    fill_in "subject_name", with: string
+    click_button("Save Changes")
+  end
+  click_link("Sign up to tutor " + string)
 end
 
-Given("I am on the new tutor page") do
-  pending #visit '/tutors/new' this breaks when no subject
+Then("I should see {string}") do |string|
+  page.should have_content(string)
 end
 
-When("I add {string} for the tutor name") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
+Then("I go to the subjects page") do  
+  visit '/subjects'
 end
 
-When("I add {string} for the years of tutoring experience") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-When("I add {string} for the rate in dollars per hour") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then("I should redirect to the all tutors page") do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-
-When("I see {string} as a subject title") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then("I should be able to click on {string}") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Given("{string} is a subject title") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then("I should see all tutors for {string}") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
+Then("I click on Tutors for {string}") do |string|
+  click_link("Tutors for " + string)
 end

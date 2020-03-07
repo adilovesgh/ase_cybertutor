@@ -1,20 +1,22 @@
 Feature: add subjects
 
-  As an administrator or tutor
+  As a tutor
   I want to add a new subject
   So that I can help students learn that subject
 
 Scenario: click on link to add new subject
 
-  Given I am on the subjects page
-  When I click on Add new subject
-  Then I should see Create New Subject
+  Given that I am logged in with name "Jeff Harper" and email "j@b.com"
+  When I click on Subjects you teach
+  And I click on Register to tutor a subject
+  Then I should see All Subjects
 
 Scenario: add new subject
 
-  Given I am on create new subject page
-  When I add "English" for the subject name
+  Given that I am logged in with name "Jeff Harper" and email "j@b.com"
+  When I click on Subjects you teach
+  And I click on Register to tutor a subject
+  And I click on Add new subject
+  And I enter "Math" as the name of the subject
   And I press Save Changes
-  Then I should redirect to the subjects page
-  And I should see "English"
-  And I should see a link to Tutors for "English"
+  Then I should see Tutors for "Math"
