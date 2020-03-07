@@ -1,19 +1,17 @@
-default: &default
+development:
   adapter: postgresql
+  database: db/development_postgresql
   pool: 5
   timeout: 5000
 
-development:
-  <<: *default
-  database: db/development_postgresql
-
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
 test:
-  <<: *default
+  adapter: postgresql
   database: db/test_postgresql
+  pool: 5
+  timeout: 5000
 
 production:
-  <<: *default
+  adapter: postgresql
   database: db/production_postgresql
+  pool: 5
+  timeout: 5000
