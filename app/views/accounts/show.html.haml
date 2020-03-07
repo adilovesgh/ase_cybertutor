@@ -1,0 +1,12 @@
+=link_to "Logout", edit_account_path(1)
+%h3 Account for #{@account.name}
+
+%table#tutors.table.table-striped.col-md-12
+  %thead
+    %tr
+      %th General Information
+  %tbody
+    %tr
+      %td= link_to "View your sessions", subject_tutor_sessions_path(1,1)
+    %tr
+      %td= link_to "Subjects you teach", tutor_path(@tutor)

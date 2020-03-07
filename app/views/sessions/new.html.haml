@@ -1,0 +1,41 @@
+=link_to "Logout", edit_account_path(1)
+- [:notice, :error, :success].each do |key|
+  - unless flash[key].blank?
+    %p{ :class => "flash #{key}" }= flash[key]
+
+%h2 Book a new session with #{@tutor.account.name}
+
+Basic information 
+%br
+Subject: #{@subject.name}
+%br
+Tutor: #{@tutor.account.name}
+%br
+%br
+%h4 Request a session on
+
+= form_tag subject_tutor_sessions_path do
+  = label :session, :month, 'Month'
+  = select :session, :month, ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+  =label :session, :day, 'Day'
+  = select :session, :day, @days
+
+  %br
+
+  =select :session, :start_hour, @hours
+  =label :session, :colon, ':'
+  =select :session, :start_minute, @minutes
+  =select :session, :start_ampm, ['am','pm']
+
+  =label :session, :to, 'to'
+
+  =select :session, :end_hour, @hours
+  =label :session, :colon, ':'
+  =select :session, :end_minute, @minutes
+  =select :session, :end_ampm, ['am','pm']
+
+  = submit_tag 'Book Changes', :class => 'btn btn-primary'
+
+%br
+=link_to "Go back", subject_tutor_reviews_path(@subject, @tutor)

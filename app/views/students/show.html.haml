@@ -1,0 +1,14 @@
+=link_to "Logout", edit_account_path(1)
+%h3 Info for #{@student.account.name}
+
+%table#sessions.table.table-striped.col-md-12
+  %thead
+    %tr
+      %th Name
+      %th Email
+  %tbody
+    %tr
+      %td= @student.account.name
+      %td= @student.account.email
+
+=link_to "Return to sessions", subject_tutor_sessions_path(1, 1)

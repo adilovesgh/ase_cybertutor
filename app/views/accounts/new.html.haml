@@ -1,0 +1,10 @@
+%h2 Create New Account
+
+= form_tag accounts_path do
+
+  = label :acount, :name, 'Name'
+  = text_field :account, 'name'
+  = label :account, :email, 'Email'
+  = text_field :account, 'email'
+
+  = submit_tag 'Save Changes', :class => 'btn btn-primary'

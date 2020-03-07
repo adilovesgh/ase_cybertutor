@@ -1,0 +1,14 @@
+Routes
+	/accounts
+		log in page for now. It lists all of the users and has a button to create a new account. If you press on a specific person, you log in as that person
+	/accounts/id
+		main menu for an account you can view your sessions (both teach and learn) or view the subjects you are teaching
+	/tutors
+		has a list of subjects that you are currently teaching
+	/subjects
+		has a full list of subjects that are currently offered
+	/subjects/id
+		has a list of tutors available for a given subject
+	/subjects/id/tutors/id/reviews
+		has a list of reviews for a given tutor
+	

@@ -1,0 +1,9 @@
+=link_to "Logout", edit_account_path(1)
+%h2 Create New Subject
+
+= form_tag subjects_path do
+
+  = label :subject, :name, 'Name'
+  = text_field :subject, 'name'
+
+  = submit_tag 'Save Changes', :class => 'btn btn-primary'

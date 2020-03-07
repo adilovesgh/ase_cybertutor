@@ -1,0 +1,13 @@
+%h2 All Accounts
+
+%table#accounts.table.table-striped.col-md-12
+  %thead
+    %tr
+      %th Name
+  %tbody
+    - @accounts.each do |account|
+      %tr
+        %td= account.name
+        %td= link_to "Log in to #{account.name}", account_path(account)
+
+= link_to 'Add new account', new_account_path

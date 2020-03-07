@@ -1,0 +1,18 @@
+- if session[:account_id]
+  =link_to "Logout", edit_account_path(1)
+- else
+  =link_to "Log In", accounts_path
+%h3 Tutors for #{@subject.name}
+
+%table#tutors.table.table-striped.col-md-12
+  %thead
+    %tr
+      %th Name
+      %th Rating
+  %tbody
+    - @tutors.each do |tutor|
+      %tr
+        %td= tutor.account.name
+        %td= tutor.average_rating
+        %td= link_to "Reviews for #{tutor.account.name}", subject_tutor_reviews_path(@subject, tutor)
+=link_to "Back to subjects", subjects_path
