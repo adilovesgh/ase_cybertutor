@@ -39,7 +39,19 @@ group :development, :test do
   gem 'byebug'
   gem 'database_cleaner'
   gem 'capybara', '3.1'
+  gem 'byebug'
+
+  gem 'rspec-rails'
+  gem 'guard-rspec'
+
+  # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
+
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 2.0'
+
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
 end
 
 group :development do
