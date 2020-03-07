@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200306013456) do
+ActiveRecord::Schema.define(version: 20200307020128) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
@@ -29,8 +32,8 @@ ActiveRecord::Schema.define(version: 20200306013456) do
     t.integer  "student_id"
   end
 
-  add_index "reviews", ["student_id"], name: "index_reviews_on_student_id"
-  add_index "reviews", ["tutor_id"], name: "index_reviews_on_tutor_id"
+  add_index "reviews", ["student_id"], name: "index_reviews_on_student_id", using: :btree
+  add_index "reviews", ["tutor_id"], name: "index_reviews_on_tutor_id", using: :btree
 
   create_table "sessions", force: :cascade do |t|
     t.integer  "student_id"
@@ -43,9 +46,9 @@ ActiveRecord::Schema.define(version: 20200306013456) do
     t.datetime "end_time"
   end
 
-  add_index "sessions", ["student_id"], name: "index_sessions_on_student_id"
-  add_index "sessions", ["subject_id"], name: "index_sessions_on_subject_id"
-  add_index "sessions", ["tutor_id"], name: "index_sessions_on_tutor_id"
+  add_index "sessions", ["student_id"], name: "index_sessions_on_student_id", using: :btree
+  add_index "sessions", ["subject_id"], name: "index_sessions_on_subject_id", using: :btree
+  add_index "sessions", ["tutor_id"], name: "index_sessions_on_tutor_id", using: :btree
 
   create_table "students", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -53,7 +56,7 @@ ActiveRecord::Schema.define(version: 20200306013456) do
     t.integer  "account_id"
   end
 
-  add_index "students", ["account_id"], name: "index_students_on_account_id"
+  add_index "students", ["account_id"], name: "index_students_on_account_id", using: :btree
 
   create_table "subjects", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -62,7 +65,7 @@ ActiveRecord::Schema.define(version: 20200306013456) do
     t.integer  "review_id"
   end
 
-  add_index "subjects", ["review_id"], name: "index_subjects_on_review_id"
+  add_index "subjects", ["review_id"], name: "index_subjects_on_review_id", using: :btree
 
   create_table "subjects_tutors", force: :cascade do |t|
     t.integer  "tutor_id"
@@ -71,18 +74,29 @@ ActiveRecord::Schema.define(version: 20200306013456) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "subjects_tutors", ["subject_id"], name: "index_subjects_tutors_on_subject_id"
-  add_index "subjects_tutors", ["tutor_id"], name: "index_subjects_tutors_on_tutor_id"
+  add_index "subjects_tutors", ["subject_id"], name: "index_subjects_tutors_on_subject_id", using: :btree
+  add_index "subjects_tutors", ["tutor_id"], name: "index_subjects_tutors_on_tutor_id", using: :btree
 
   create_table "tutors", force: :cascade do |t|
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "experience"
-    t.float    "rate"
     t.float    "average_rating"
     t.integer  "account_id"
+    t.float    "rate"
+    t.string   "precision"
   end
 
-  add_index "tutors", ["account_id"], name: "index_tutors_on_account_id"
+  add_index "tutors", ["account_id"], name: "index_tutors_on_account_id", using: :btree
 
+  add_foreign_key "reviews", "students"
+  add_foreign_key "reviews", "tutors"
+  add_foreign_key "sessions", "students"
+  add_foreign_key "sessions", "subjects"
+  add_foreign_key "sessions", "tutors"
+  add_foreign_key "students", "accounts"
+  add_foreign_key "subjects", "reviews"
+  add_foreign_key "subjects_tutors", "subjects"
+  add_foreign_key "subjects_tutors", "tutors"
+  add_foreign_key "tutors", "accounts"
 end
