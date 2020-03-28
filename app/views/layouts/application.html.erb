@@ -7,7 +7,22 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<div id="navbar">
+  <div id="left_bar">
+    <h3>CyberTutor</h1>
+  </div>
+  <div id="right_top">
+    
+    <% if session[:account_id] %>
+      <%= button_to "Logout", edit_account_path(1) %>
+    <% else %>
+      <%=button_to "Log In", accounts_path, {class: 'btn-menu'} %>
+      <%=button_to "Sign Up", new_account_path, {class: 'btn-menu'}%>
+    <% end %>
+  </div>
+  
+  
+</div>
 <%= yield %>
 
 </body>

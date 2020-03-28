@@ -13,3 +13,33 @@
  *= require_tree .
  *= require_self
  */
+:root {
+    --navbar-bg-color: #c5c5c5
+}
+body {
+    margin: 0;
+}
+ #navbar {
+    
+    background: var(--navbar-bg-color);
+    width: 100%;
+    justify-content: space-between;
+    display:flex;
+ }
+
+ .btn-menu {
+     background: var(--navbar-bg-color);
+     border-radius: 3px;
+     border: 2px solid white;
+     padding-top: 3px;
+     padding-bottom: 3px;
+ }
+#left_bar {
+    display: inline-block;
+    margin-left: 10px;
+    float: left;
+}
+#right_bar {
+    display: inline-block;
+    float: right;
+}
