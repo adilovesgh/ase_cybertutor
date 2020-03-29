@@ -26,7 +26,6 @@ class AccountsController < ApplicationController
         @account = Account.new(account_params)
 
         if Account.exists?(email: @account.email)
-            puts "AAAAAAAAAAAAAAAAAAAAAA\n\n\n\n\n"
             redirect_to new_account_path, flash: {error: "Account already exists with that email"}
             return
         end
