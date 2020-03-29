@@ -9,15 +9,15 @@
 <body>
 <div id="navbar">
   <div id="left_bar">
-    <h3>CyberTutor</h1>
+    <%= link_to "CyberTutor", root_path, {id: 'home-link'} %>
   </div>
   <div id="right_top">
     
-    <% if session[:account_id] %>
-      <%= button_to "Logout", edit_account_path(1) %>
+    <% if logged_in? %>
+      <%= link_to "Logout", edit_account_path(1), {class: 'navbar-links'} %>
     <% else %>
-      <%=button_to "Log In", accounts_path, {class: 'btn-menu'} %>
-      <%=button_to "Sign Up", new_account_path, {class: 'btn-menu'}%>
+      <%=link_to "Log In", login_path, {class: 'navbar-links'} %>
+      <%=link_to "Sign Up", new_account_path, {class: 'navbar-links'} %>
     <% end %>
   </div>
   

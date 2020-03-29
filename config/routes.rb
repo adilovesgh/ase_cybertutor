@@ -26,6 +26,8 @@ Rails.application.routes.draw do
       end
   end
   root to: 'pages#home'
+  get 'login', to: 'pages#login'
+  post 'login', to: 'pages#login_post'
   #resources :subjects
   Rails.application.routes.draw do
       resources :subject do

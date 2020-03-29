@@ -13,6 +13,11 @@
  *= require_tree .
  *= require_self
  */
+
+.flash-error {
+    color: red;
+    font-weight: bold;
+}
 :root {
     --navbar-bg-color: #c5c5c5
 }
@@ -20,20 +25,26 @@ body {
     margin: 0;
 }
  #navbar {
-    
+    padding: 5px 0 5px 0;
     background: var(--navbar-bg-color);
     width: 100%;
     justify-content: space-between;
     display:flex;
  }
-
- .btn-menu {
+#home-link, .navbar-links {
+    font-weight: bold;
+    font-size: 32px;
+    color: black;
+    text-decoration: none;
+}
+.navbar-links {
      background: var(--navbar-bg-color);
+     font-size: 28px;
      border-radius: 3px;
-     border: 2px solid white;
-     padding-top: 3px;
-     padding-bottom: 3px;
- }
+     border: 1px solid black;
+     /* padding-top: 3px;
+     padding-bottom: 3px; */
+}
 #left_bar {
     display: inline-block;
     margin-left: 10px;

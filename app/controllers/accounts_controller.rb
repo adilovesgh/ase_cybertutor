@@ -22,17 +22,25 @@ class AccountsController < ApplicationController
     end
 
     def create
+        
         @account = Account.new(account_params)
+
+        if Account.exists?(email: @account.email)
+            puts "AAAAAAAAAAAAAAAAAAAAAA\n\n\n\n\n"
+            redirect_to new_account_path, flash: {error: "Account already exists with that email"}
+            return
+        end
         puts(account_params)
         puts(@account.email)
         @student = @account.build_student()
         @tutor = @account.build_tutor()
         @account.save
+        session[:account_id] = @account.id
         redirect_to accounts_path
     end
 
     private
     def account_params
-        params.require(:account).permit(:name, :email)
+        params.require(:account).permit(:name, :email, :password)
     end
 end
