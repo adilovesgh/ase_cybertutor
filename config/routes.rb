@@ -14,6 +14,11 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
   #resources :tutors
+    #
+
+  get '/approve/:id', to: 'sessions#approve', as: 'approve'
+  get 'reject/:id', to: 'sessions#reject', as: 'reject'
+
   resources :students
   resources :accounts
   resources :tutors
