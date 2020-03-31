@@ -4,6 +4,8 @@
     %p{ :class => "flash #{key}" }= flash[key]
 %h2 Sessions for learning
 
+%h4 Pending Sessions
+
 %table#subjects.table.table-striped.col-md-12
   %thead
     %tr
@@ -14,16 +16,41 @@
       %th End Time
   %tbody
     - @sessions.each do |session|
-      %tr
-        %td= session.tutor.account.name
-        %td= session.subject.name
-        %td= session.start_time.strftime("%F")
-        %td= session.start_time.strftime("%H:%M%p")
-        %td= session.end_time.strftime("%H:%M%p")
-        %td=link_to "More info on tutor", subject_tutor_reviews_path(1, session.tutor)
-        /todo: add in start and end time
+      -if session.pending
+        %tr
+          %td= session.tutor.account.name
+          %td= session.subject.name
+          %td= session.start_time.strftime("%F")
+          %td= session.start_time.strftime("%H:%M%p")
+          %td= session.end_time.strftime("%H:%M%p")
+          %td=link_to "More info on tutor", subject_tutor_reviews_path(1, session.tutor)
+          /todo: add in start and end time
+
+%h4 Verified Sessions
+
+%table#subjects.table.table-striped.col-md-12
+  %thead
+    %tr
+      %th Tutor Name
+      %th Subject
+      %th Date
+      %th Start Time
+      %th End Time
+  %tbody
+    - @sessions.each do |session|
+      -if session.verified
+        %tr
+          %td= session.tutor.account.name
+          %td= session.subject.name
+          %td= session.start_time.strftime("%F")
+          %td= session.start_time.strftime("%H:%M%p")
+          %td= session.end_time.strftime("%H:%M%p")
+          %td=link_to "More info on tutor", subject_tutor_reviews_path(1, session.tutor)
+          /todo: add in start and end time
 
 %h2 Sessions for teaching
+
+%h4 Pending Sessions
 
 %table#subjects.table.table-striped.col-md-12
   %thead
@@ -35,14 +62,39 @@
       %th End Time
   %tbody
     - @teaching_sessions.each do |teaching_session|
-      %tr
-        %td= teaching_session.student.account.name
-        %td= teaching_session.subject.name
-        %td= teaching_session.start_time.strftime("%F")
-        %td= teaching_session.start_time.strftime("%H:%M%p")
-        %td= teaching_session.end_time.strftime("%H:%M%p")
-        %td=link_to "More info on student", student_path(teaching_session.student)
-        /todo: add in start and end time
+      -if teaching_session.pending
+        %tr
+          %td= teaching_session.student.account.name
+          %td= teaching_session.subject.name
+          %td= teaching_session.start_time.strftime("%F")
+          %td= teaching_session.start_time.strftime("%H:%M%p")
+          %td= teaching_session.end_time.strftime("%H:%M%p")
+          %td=link_to "Approve", approve_path( teaching_session)
+          %td=link_to "Reject", reject_path(teaching_session)
+          %td=link_to "More info on student", student_path(teaching_session.student)
+          /todo: add in start and end time
+
+%h4 Verified Sessions
+
+%table#subjects.table.table-striped.col-md-12
+  %thead
+    %tr
+      %th Student Name
+      %th Subject
+      %th Date
+      %th Start Time
+      %th End Time
+  %tbody
+    - @teaching_sessions.each do |teaching_session|
+      -if teaching_session.verified
+        %tr
+          %td= teaching_session.student.account.name
+          %td= teaching_session.subject.name
+          %td= teaching_session.start_time.strftime("%F")
+          %td= teaching_session.start_time.strftime("%H:%M%p")
+          %td= teaching_session.end_time.strftime("%H:%M%p")
+          %td=link_to "More info on student", student_path(teaching_session.student)
+          /todo: add in start and end time
 
 = link_to 'Set up a new session to learn', subjects_path
 %br

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200329203951) do
+ActiveRecord::Schema.define(version: 20200330205019) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,18 @@ ActiveRecord::Schema.define(version: 20200329203951) do
     t.string   "email"
     t.string   "password_digest"
   end
+
+  create_table "requests", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "tutor_id"
+    t.integer  "student_id"
+    t.integer  "session_id"
+  end
+
+  add_index "requests", ["session_id"], name: "index_requests_on_session_id", using: :btree
+  add_index "requests", ["student_id"], name: "index_requests_on_student_id", using: :btree
+  add_index "requests", ["tutor_id"], name: "index_requests_on_tutor_id", using: :btree
 
   create_table "reviews", force: :cascade do |t|
     t.integer  "rating"
@@ -45,6 +57,8 @@ ActiveRecord::Schema.define(version: 20200329203951) do
     t.datetime "updated_at", null: false
     t.datetime "start_time"
     t.datetime "end_time"
+    t.boolean  "pending"
+    t.boolean  "verified"
   end
 
   add_index "sessions", ["student_id"], name: "index_sessions_on_student_id", using: :btree
@@ -90,6 +104,9 @@ ActiveRecord::Schema.define(version: 20200329203951) do
 
   add_index "tutors", ["account_id"], name: "index_tutors_on_account_id", using: :btree
 
+  add_foreign_key "requests", "sessions"
+  add_foreign_key "requests", "students"
+  add_foreign_key "requests", "tutors"
   add_foreign_key "reviews", "students"
   add_foreign_key "reviews", "tutors"
   add_foreign_key "sessions", "students"

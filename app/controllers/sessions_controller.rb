@@ -6,6 +6,23 @@ class SessionsController < ApplicationController
     end
 
     def show
+
+    end
+
+    def approve
+        puts("param")
+        puts(params)
+        @session = Session.find(params["id"])
+        @session.update_attributes(:pending => false, :verified => true)
+        redirect_to subject_tutor_sessions_path(1, 1)
+    end
+
+    def reject
+        puts("param")
+        puts(params)
+        @session = Session.find(params["id"])
+        @session.update_attributes(:pending => false, :verified => false)
+        redirect_to subject_tutor_sessions_path(1, 1)
     end
 
     def new
@@ -43,7 +60,7 @@ class SessionsController < ApplicationController
             else
                 @tutor = Tutor.find(params[:tutor_id])
                 @subject = Subject.find(params["subject_id"])
-                @session = @tutor.sessions.build(subject:@subject, student:@student, start_time:@start_time, end_time:@end_time)
+                @session = @tutor.sessions.build(subject:@subject, student:@student, start_time:@start_time, end_time:@end_time, pending:true, verified:false)
                 @session.save
                 redirect_to subject_tutor_sessions_path(1,1)
             end

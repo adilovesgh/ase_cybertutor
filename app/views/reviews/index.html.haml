@@ -16,9 +16,12 @@
         %td= review.rating
         %td= review.comment
 
-- if session[:account_id]
+- if session[:account_id] and !@subject.nil?
   =link_to 'Sign up for a session', new_subject_tutor_session_path(@subject, @tutor)
 - if session[:account_id]
   = link_to 'Leave a review', new_subject_tutor_review_path
 %br
-= link_to 'Back to tutors', subject_path(@subject)
+- unless @subject.nil?
+  = link_to 'Back to tutors for ' + @subject.name, subject_path(@subject)
+%br
+  = link_to 'Back to all tutors', tutors_path

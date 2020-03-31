@@ -2,7 +2,11 @@ class ReviewsController < ApplicationController
 	def index
         @tutor = Tutor.find(params[:tutor_id])
         @reviews = @tutor.reviews
-        @subject = Subject.find(params[:subject_id])
+        if Subject.exists? id: params[:subject_id]
+            @subject = Subject.find(params[:subject_id])
+        else
+            @subject = nil
+        end
     end
 
     def show
@@ -10,7 +14,11 @@ class ReviewsController < ApplicationController
     end
 
     def new
-        @subject = Subject.find(params[:subject_id])
+        if Subject.exists? id: params[:subject_id]
+            @subject = Subject.find(params[:subject_id])
+        else
+            @subject = nil
+        end
         @tutor = Tutor.find(params[:tutor_id])
     end
 
