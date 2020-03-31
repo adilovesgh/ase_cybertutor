@@ -47,17 +47,15 @@ class SessionsController < ApplicationController
             redirect_to subject_tutor_sessions_path(1,1)
         else
             #eventually differentiate it with start and end time
+            puts(params["session"])
         	@time = Session.convert_time(params["session"])
             @start_time = @time[0]
             @end_time = @time[1]
-            if @start_time < DateTime.now || @end_time < @start_time
-                if @start_time < DateTime.now
-                    flash[:error] = "Start time cannot be in the past"
-                else
-                    flash[:error] = "End time must be after start time"
-                end
+            if @start_time < DateTime.now
+                flash[:error] = "Start time cannot be in the past"
                 redirect_to new_subject_tutor_session_path
             else
+                puts("it gets through to here!!!!!")
                 @tutor = Tutor.find(params[:tutor_id])
                 @subject = Subject.find(params["subject_id"])
                 @session = @tutor.sessions.build(subject:@subject, student:@student, start_time:@start_time, end_time:@end_time, pending:true, verified:false)
@@ -69,6 +67,6 @@ class SessionsController < ApplicationController
 
     private
     def session_params
-        params.require(:student).permit(:name)
+        params.require(:session).permit()
     end
 end

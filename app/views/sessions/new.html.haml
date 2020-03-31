@@ -17,22 +17,24 @@ Tutor: #{@tutor.account.name}
   = label :session, :month, 'Month'
   = select :session, :month, ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
-  =label :session, :day, 'Day'
+  = label :session, :day, 'Day'
   = select :session, :day, @days
 
   %br
 
+  =label :session, :start_hour, 'From'
   =select :session, :start_hour, @hours
   =label :session, :colon, ':'
   =select :session, :start_minute, @minutes
   =select :session, :start_ampm, ['am','pm']
 
-  =label :session, :to, 'to'
+  %br
+  =label :session, :to, 'for a duration of'
 
-  =select :session, :end_hour, @hours
-  =label :session, :colon, ':'
-  =select :session, :end_minute, @minutes
-  =select :session, :end_ampm, ['am','pm']
+  =select :session, :hours, ['0', '1', '2']
+  =label :session, :colon, 'hours'
+  =select :session, :minutes, @minutes
+  =label :session, :minutes, 'minutes'
 
   = submit_tag 'Book Changes', :class => 'btn btn-primary'
 
