@@ -34,12 +34,17 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Manage payment transactions
+gem "devise", ">= 4.7.1"
+gem "money-rails"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'rspec'
   gem 'byebug'
   gem 'database_cleaner'
   gem 'capybara', '3.1'
+  gem 'rerun', '0.10.0'
 end
 
 group :development do

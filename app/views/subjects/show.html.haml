@@ -10,5 +10,8 @@
       %tr
         %td= link_to "#{tutor.account.name}", subject_tutor_reviews_path(@subject, tutor)
         %td= tutor.average_rating
-        %td= link_to "Request up for a session",new_subject_tutor_session_path(@subject, tutor)
+        %td
+          - if session[:account_id] and !@subject.nil?
+            = link_to "Sign up for a session with #{tutor.account.name}", new_subject_tutor_session_path(@subject, tutor)
+        %td= link_to "Reviews for #{tutor.account.name}", subject_tutor_reviews_path(@subject, tutor)
 =link_to "Back to subjects", subjects_path
