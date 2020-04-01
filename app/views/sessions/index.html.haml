@@ -18,12 +18,11 @@
     - @sessions.each do |session|
       -if session.pending
         %tr
-          %td= session.tutor.account.name
+          %td= link_to "#{session.tutor.account.name}", subject_tutor_reviews_path(1, session.tutor)
           %td= session.subject.name
           %td= session.start_time.strftime("%F")
           %td= session.start_time.strftime("%H:%M%p")
           %td= session.end_time.strftime("%H:%M%p")
-          %td=link_to "More info on tutor", subject_tutor_reviews_path(1, session.tutor)
           /todo: add in start and end time
 
 %h4 Verified Sessions
@@ -40,12 +39,11 @@
     - @sessions.each do |session|
       -if session.verified
         %tr
-          %td= session.tutor.account.name
+          %td= link_to "#{session.tutor.account.name}", subject_tutor_reviews_path(1, session.tutor)
           %td= session.subject.name
           %td= session.start_time.strftime("%F")
           %td= session.start_time.strftime("%H:%M%p")
           %td= session.end_time.strftime("%H:%M%p")
-          %td=link_to "More info on tutor", subject_tutor_reviews_path(1, session.tutor)
           /todo: add in start and end time
 
 %h2 Sessions for teaching
@@ -64,14 +62,13 @@
     - @teaching_sessions.each do |teaching_session|
       -if teaching_session.pending
         %tr
-          %td= teaching_session.student.account.name
+          %td= link_to "#{teaching_session.student.account.name}" , student_path(teaching_session.student)
           %td= teaching_session.subject.name
           %td= teaching_session.start_time.strftime("%F")
           %td= teaching_session.start_time.strftime("%H:%M%p")
           %td= teaching_session.end_time.strftime("%H:%M%p")
           %td=link_to "Approve", approve_path( teaching_session)
           %td=link_to "Reject", reject_path(teaching_session)
-          %td=link_to "More info on student", student_path(teaching_session.student)
           /todo: add in start and end time
 
 %h4 Verified Sessions
@@ -88,12 +85,11 @@
     - @teaching_sessions.each do |teaching_session|
       -if teaching_session.verified
         %tr
-          %td= teaching_session.student.account.name
+          %td= link_to "#{teaching_session.student.account.name}" , student_path(teaching_session.student)
           %td= teaching_session.subject.name
           %td= teaching_session.start_time.strftime("%F")
           %td= teaching_session.start_time.strftime("%H:%M%p")
           %td= teaching_session.end_time.strftime("%H:%M%p")
-          %td=link_to "More info on student", student_path(teaching_session.student)
           /todo: add in start and end time
 
 = link_to 'Set up a new session to learn', subjects_path

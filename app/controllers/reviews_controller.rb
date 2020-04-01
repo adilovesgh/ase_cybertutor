@@ -2,6 +2,7 @@ class ReviewsController < ApplicationController
 	def index
         @tutor = Tutor.find(params[:tutor_id])
         @reviews = @tutor.reviews
+        @subjects = @tutor.subjects
         if Subject.exists? id: params[:subject_id]
             @subject = Subject.find(params[:subject_id])
         else

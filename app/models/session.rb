@@ -9,4 +9,19 @@ class Session < ActiveRecord::Base
     @end = @start + 60 * input['minutes'].to_i + 3600 * input['hours'].to_i
     [@start, @end]
   end
+
+  def self.conflicting_times(target, sessions)
+  	sessions.each do |session|
+  		if target.start_time > session.start_time and target.end_time < session.end_time
+  			return false
+  		elsif target.start_time < session.start_time and target.end_time > session.end_time
+  			return false
+  		elsif target.start_time < session.start_time and target.end_time < session.end_time and target.end_time > session.start_time
+  			return false
+  		elsif target.start_time > session.start_time and target.end_time > session.end_time and target.start_time < session.end_time
+  			return false
+  		end
+  	end
+  	return true
+  end
 end

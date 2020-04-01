@@ -16,12 +16,22 @@
         %td= review.rating
         %td= review.comment
 
-- if session[:account_id] and !@subject.nil?
-  =link_to 'Sign up for a session', new_subject_tutor_session_path(@subject, @tutor)
 - if session[:account_id]
   = link_to 'Leave a review', new_subject_tutor_review_path
+  %br
+
+%h3 Subjects taught by #{@tutor.account.name}
+%table#reviews.table.table-striped.col-md-12
+  %thead
+    %tr
+      %th Subject
+  %tbody
+    - @subjects.each do |subject|
+      %tr
+        %td= subject.name
+        %td= link_to 'Sign up for a session', new_subject_tutor_session_path(subject, @tutor) 
 %br
 - unless @subject.nil?
   = link_to 'Back to tutors for ' + @subject.name, subject_path(@subject)
-%br
+- else
   = link_to 'Back to all tutors', tutors_path

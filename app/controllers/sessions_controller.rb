@@ -10,19 +10,21 @@ class SessionsController < ApplicationController
     end
 
     def approve
-        puts("param")
-        puts(params)
+        @account = Account.find(session[:account_id])
+        @sessions = @account.tutor.sessions
         @session = Session.find(params["id"])
-        @session.update_attributes(:pending => false, :verified => true)
-        redirect_to subject_tutor_sessions_path(1, 1)
+        if Session.conflicting_times(@session, @sessions)
+            @session.update_attributes(:pending => false, :verified => true)
+        else 
+            flash[:error] = "Approving this will cause a scheduling conflict!"
+        end
+        redirect_to subject_tutor_sessions_path(0, 0)
     end
 
     def reject
-        puts("param")
-        puts(params)
         @session = Session.find(params["id"])
         @session.update_attributes(:pending => false, :verified => false)
-        redirect_to subject_tutor_sessions_path(1, 1)
+        redirect_to subject_tutor_sessions_path(0, 0)
     end
 
     def new
@@ -30,12 +32,9 @@ class SessionsController < ApplicationController
     	@subject = Subject.find(params["subject_id"])
     	@days = Array.new(31) {|i| i+1 }
     	@hours = Array.new(12) {|i| i+1}
-    	@minutes = Array.new(60) {|i| 
-    		if i < 10
-    			'0'+i.to_s
-    		else
-    			i.to_s
-    		end
+    	@minutes = Array.new(12) {|i|
+            i = i * 5
+    		i.to_s
     	}
     end
 
@@ -55,7 +54,6 @@ class SessionsController < ApplicationController
                 flash[:error] = "Start time cannot be in the past"
                 redirect_to new_subject_tutor_session_path
             else
-                puts("it gets through to here!!!!!")
                 @tutor = Tutor.find(params[:tutor_id])
                 @subject = Subject.find(params["subject_id"])
                 @session = @tutor.sessions.build(subject:@subject, student:@student, start_time:@start_time, end_time:@end_time, pending:true, verified:false)
