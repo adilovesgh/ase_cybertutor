@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200330205019) do
+ActiveRecord::Schema.define(version: 20200401232701) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,20 @@ ActiveRecord::Schema.define(version: 20200330205019) do
     t.datetime "updated_at",      null: false
     t.string   "email"
     t.string   "password_digest"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "session_id"
+    t.integer  "account_id"
+    t.integer  "status"
+    t.string   "token"
+    t.string   "charge_id"
+    t.string   "error_message"
+    t.string   "customer_id"
+    t.integer  "payment_gateway"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "price_cents",     default: 0, null: false
   end
 
   create_table "requests", force: :cascade do |t|
@@ -53,12 +67,16 @@ ActiveRecord::Schema.define(version: 20200330205019) do
     t.integer  "tutor_id"
     t.integer  "subject_id"
     t.float    "rate"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.datetime "start_time"
     t.datetime "end_time"
     t.boolean  "pending"
     t.boolean  "verified"
+    t.string   "stripe_plan_name"
+    t.string   "paypal_plan_name"
+    t.integer  "price_cents",      default: 0,     null: false
+    t.string   "price_currency",   default: "USD", null: false
   end
 
   add_index "sessions", ["student_id"], name: "index_sessions_on_student_id", using: :btree

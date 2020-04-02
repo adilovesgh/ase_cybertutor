@@ -6,7 +6,6 @@ class CreateSessions < ActiveRecord::Migration
       t.references :subject, index: true, foreign_key: true
       t.float :rate
       t.datetime :time
-
       t.timestamps null: false
     end
   end

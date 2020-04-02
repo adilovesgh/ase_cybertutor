@@ -17,12 +17,17 @@ Rails.application.routes.draw do
     #
 
   get '/approve/:id', to: 'sessions#approve', as: 'approve'
-  get 'reject/:id', to: 'sessions#reject', as: 'reject'
+  get '/reject/:id', to: 'sessions#reject', as: 'reject'
 
   resources :students
   resources :accounts
   resources :tutors
   resources :subjects
+  resources :orders
+  get '/orders/', to: 'orders#index'
+  post '/orders/submit', to: 'orders#submit'
+
+
   Rails.application.routes.draw do
       resources :subject do
 	  resources :tutors do
