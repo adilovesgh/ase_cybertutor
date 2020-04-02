@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
         @account = Account.find(session[:account_id])
         @sessions = @account.tutor.sessions
         @session = Session.find(params["id"])
-        if Session.conflicting_times(@session, @sessions)
+        if Session.no_conflicting_times(@session, @sessions)
             @session.update_attributes(:pending => false, :verified => true)
         else 
             flash[:error] = "Approving this will cause a scheduling conflict!"
@@ -46,16 +46,18 @@ class SessionsController < ApplicationController
             redirect_to subject_tutor_sessions_path(1,1)
         else
             #eventually differentiate it with start and end time
-            # puts(params["session"])
         	@time = Session.convert_time(params["session"])
             @start_time = @time[0]
             @end_time = @time[1]
-            if @start_time < DateTime.now
-                flash[:error] = "Start time cannot be in the past."
+            if @end_time == @start_time
+                flash[:error] = "Cannot sign up for 0 minutes"
+                redirect_to new_subject_tutor_session_path
+            elsif @start_time < DateTime.now
+                flash[:error] = "Start time cannot be in the past"
                 redirect_to new_subject_tutor_session_path
             else
                 @sessions = @account.student.sessions
-                if Session.student_conflicting_times(@time, @sessions)
+                if Session.no_student_conflicting_times(@time, @sessions)
                     @tutor = Tutor.find(params[:tutor_id])
                     @price = Session.compute_session_cost(@tutor.price_cents, params["session"])
                     @subject = Subject.find(params[:subject_id])
