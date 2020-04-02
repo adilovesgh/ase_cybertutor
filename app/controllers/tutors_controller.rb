@@ -27,19 +27,12 @@ class TutorsController < ApplicationController
     def create
     	@subject = Subject.find(params[:subject_id])
         @tutor = @subject.tutors.build(tutor_params)
-        if(@tutor.rate.nil? or @tutor.rate == 0)
-            puts("No rate specified")
-            @tutor.rate = 20.00
-        else
-            puts("A rate was specified")
-            @tutor.rate = @tutor.rate.round(2)
-        end
         @tutor.save
         redirect_to subject_tutors_path(params[:subject_id])
     end
 
     private
     def tutor_params
-        params.require(:tutor).permit(:name, :experience, :subject, :rate)
+        params.require(:tutor).permit(:name, :experience, :subject, :price_cents)
     end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200401232701) do
+ActiveRecord::Schema.define(version: 20200501231517) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,7 +66,6 @@ ActiveRecord::Schema.define(version: 20200401232701) do
     t.integer  "student_id"
     t.integer  "tutor_id"
     t.integer  "subject_id"
-    t.float    "rate"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.datetime "start_time"
@@ -111,13 +110,13 @@ ActiveRecord::Schema.define(version: 20200401232701) do
   add_index "subjects_tutors", ["tutor_id"], name: "index_subjects_tutors_on_tutor_id", using: :btree
 
   create_table "tutors", force: :cascade do |t|
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "experience"
     t.float    "average_rating"
     t.integer  "account_id"
-    t.float    "rate"
     t.string   "precision"
+    t.integer  "price_cents",    default: 0, null: false
   end
 
   add_index "tutors", ["account_id"], name: "index_tutors_on_account_id", using: :btree

@@ -32,7 +32,7 @@ class AccountsController < ApplicationController
         puts(account_params)
         puts(@account.email)
         @student = @account.build_student()
-        @tutor = @account.build_tutor()
+        @tutor = @account.build_tutor(price_cents:20.00)
         @account.save
         session[:account_id] = @account.id
         redirect_to root_path

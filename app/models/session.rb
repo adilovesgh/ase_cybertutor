@@ -43,4 +43,8 @@ class Session < ActiveRecord::Base
     end
     return true
   end
+
+  def self.compute_session_cost(price, input)
+  	return price * (input['hours'].to_d + input['minutes'].to_d / 60)
+  end
 end

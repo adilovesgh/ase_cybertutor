@@ -1,15 +1,23 @@
 %div
-  %h1 Order Summary
+  %h1 Order Summary for #{@account.name}
   = form_tag({:controller => "orders", :action => "submit"}, {:id => 'order-details'}) do
     %input{id:'order-type', :type=>"hidden", :value=>"stripe", :name=>'orders[payment_gateway]'}
     .form_row
-      %h4 Charges/Payments
-      - @sessions_purchase.each do |sessionValue|
-        %div{'data-charges-and-payments-section': true}
-          = radio_button_tag 'orders[session_id]', sessionValue.id, @sessions_purchase.first == sessionValue
-          %span{id: "radioButtonName#{sessionValue.id}"} #{sessionValue.tutor.account.name}:
-          %span{id: "radioButtonPrice#{sessionValue.id}", :'data-price' => "#{sessionValue.price_cents}"} #{humanized_money_with_symbol sessionValue.price} hourly fee
+      %div{'data-charges-and-payments-section': true}
+        Tutor: #{@tutor.account.name}
         %br
+        Subject: #{@subject.name}
+        %br
+        Hourly Rate: #{humanized_money_with_symbol @tutor.price_cents}
+        %br
+        %br
+        Session Start Time: #{@start_time}
+        %br
+        Session End Time: #{@end_time}
+        %br
+        %br
+        Total (USD): #{humanized_money_with_symbol @price}
+      %br
     %hr
   %h1 Payment Method
   .form_row

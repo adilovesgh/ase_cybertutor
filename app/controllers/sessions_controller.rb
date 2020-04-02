@@ -57,12 +57,15 @@ class SessionsController < ApplicationController
                 @sessions = @account.student.sessions
                 if Session.student_conflicting_times(@time, @sessions)
                     @tutor = Tutor.find(params[:tutor_id])
-                    @subject = Subject.find(params["subject_id"])
-                    @session = @tutor.sessions.build(subject:@subject, student:@student, start_time:@start_time, end_time:@end_time, pending:true, verified:false)
+                    @price = Session.compute_session_cost(@tutor.price_cents, params["session"])
+                    @subject = Subject.find(params[:subject_id])
                     redirect_to :controller=>"orders",
                                 :action=>"index",
                                 :tutor_id=>@tutor,
-                                :subject_id=>@subject
+                                :subject_id=>@subject,
+                                :start_time=>@start_time,
+                                :end_time=>@end_time,
+                                :price=>@price
                     # @session.save
                     # redirect_to subject_tutor_sessions_path(1,1)
                 else
