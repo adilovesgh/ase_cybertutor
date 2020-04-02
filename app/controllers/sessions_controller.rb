@@ -46,7 +46,6 @@ class SessionsController < ApplicationController
             redirect_to subject_tutor_sessions_path(1,1)
         else
             #eventually differentiate it with start and end time
-            # puts(params["session"])
         	@time = Session.convert_time(params["session"])
             @start_time = @time[0]
             @end_time = @time[1]
@@ -62,14 +61,13 @@ class SessionsController < ApplicationController
                     @tutor = Tutor.find(params[:tutor_id])
                     @subject = Subject.find(params["subject_id"])
                     @session = @tutor.sessions.build(subject:@subject, student:@student, start_time:@start_time, end_time:@end_time, pending:true, verified:false)
-                    redirect_to :controller=>"orders",
-                                :action=>"index",
-                                :tutor_id=>@tutor,
-                                :subject_id=>@subject
-                    # @session.save
-                    # redirect_to subject_tutor_sessions_path(1,1)
+                    #redirect_to :controller=>"orders",
+                     #           :action=>"index",
+                       #         :tutor_id=>@tutor,
+                      #          :subject_id=>@subject
+                    @session.save
+                    redirect_to subject_tutor_sessions_path(1,1)
                 else
-                    puts("this should happen")
                     flash[:error] = "You already have a session conflicting with this!"
                     redirect_to new_subject_tutor_session_path
                 end
