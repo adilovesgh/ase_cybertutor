@@ -13,8 +13,8 @@ Given("I am logged in with name {string} and email {string}") do |string, string
 
 end
 
-When("I click on Reviews for {string}") do |string|
-  click_link("Reviews for " + string)
+When("I click on {string}") do |string|
+  click_link(string)
 end
 
 Then("I should see All Reviews for {string}") do |string|

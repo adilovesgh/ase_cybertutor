@@ -35,11 +35,11 @@ When("I add {string} for the account email") do |string|
   fill_in "account_email", with: string
 end
 
-Then("I should redirect to the accounts page") do
-  expect(Account.find_by_email(@acct_email)).to_not be nil
-  current_path.should == '/accounts'
+When("I add {string} for the account password") do |string|
+  fill_in "account_password", with: string
 end
 
-Then("I should see a link to Log in to {string}") do |string|
-  page.should have_content("Log in to " + string)
+Then("I should redirect to the home page") do
+  expect(Account.find_by_email(@acct_email)).to_not be nil
+  current_path.should == '/'
 end

@@ -13,9 +13,9 @@ Scenario: click on link to add new account
 Scenario: add new account
 
   Given I am on create new accounts page
-  When I add "Jeff Harper" for the account name 
+  When I add "Jeff Harper" for the account name
   And I add "jeffharper@abc.com" for the account email
+  And I add "password" for the account password
   And I press Save Changes
-  Then I should redirect to the accounts page
+  Then I should redirect to the home page
   And I should see "Jeff Harper"
-  And I should see a link to Log in to "Jeff Harper"
