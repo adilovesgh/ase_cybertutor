@@ -50,7 +50,6 @@ class SessionsController < ApplicationController
         	@time = Session.convert_time(params["session"])
             @start_time = @time[0]
             @end_time = @time[1]
-<<<<<<< HEAD
             if @end_time == @start_time
                 flash[:error] = "Cannot sign up for 0 minutes"
                 redirect_to new_subject_tutor_session_path
@@ -70,6 +69,7 @@ class SessionsController < ApplicationController
                     # @session.save
                     # redirect_to subject_tutor_sessions_path(1,1)
                 else
+                    puts("this should happen")
                     flash[:error] = "You already have a session conflicting with this!"
                     redirect_to new_subject_tutor_session_path
                 end
