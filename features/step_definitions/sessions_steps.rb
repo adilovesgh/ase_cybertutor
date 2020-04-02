@@ -44,6 +44,15 @@ When("I click Book Changes") do
   click_button("Book Changes")
 end
 
-Then("I should see Start time cannot be in the past") do
-  page.should have_content("Start time cannot be in the past")
+Then("I should see link {string}") do |string|
+  page.should have_link string
 end
+
+When("I press on link {string}") do |string|
+  click_link string
+end
+
+Then("I should not see link {string}") do |string|
+  page.should_not have_link string
+end
+

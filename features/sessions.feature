@@ -50,4 +50,18 @@ Scenario: check valid month and day
   And I click on Sign up for a session
   And I enter "Jan",31,5,30,"pm",1,0
   And I click Book Changes
-  Then I should see Start time cannot be in the past
+  Then I should see "Start time cannot be in the past"
+
+Scenario: check valid session request
+  Given that I am logged in with name "Jeff Harper" and email "j@b.com" and password "password"
+  And I press on "My Account"
+  And I click on Subjects you teach
+  And I click on Register to tutor a subject
+  And I click on Sign up to tutor "English"
+  And I go to the subjects page
+  When I click on Tutors for "English"
+  And I click on "Jeff Harper"
+  And I click on Sign up for a session
+  And I enter "Jan",31,5,30,"pm",1,0
+  And I click Book Changes
+  Then I should see "You cannot sign up for your own tutoring sessions"
