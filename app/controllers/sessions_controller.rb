@@ -43,24 +43,28 @@ class SessionsController < ApplicationController
         @account = Account.find(session[:account_id])
     	@student = @account.student
         if params[:tutor_id].to_s == @account.tutor.id.to_s
-            flash[:error] = "You cannot sign up for your own tutoring sessions"
+            flash[:error] = "You cannot sign up for your own tutoring sessions."
             redirect_to subject_tutor_sessions_path(1,1)
         else
             #eventually differentiate it with start and end time
-            puts(params["session"])
+            # puts(params["session"])
         	@time = Session.convert_time(params["session"])
             @start_time = @time[0]
             @end_time = @time[1]
             if @start_time < DateTime.now
-                flash[:error] = "Start time cannot be in the past"
+                flash[:error] = "Start time cannot be in the past."
                 redirect_to new_subject_tutor_session_path
             else
                 puts("it gets through to here!!!!!")
                 @tutor = Tutor.find(params[:tutor_id])
                 @subject = Subject.find(params["subject_id"])
                 @session = @tutor.sessions.build(subject:@subject, student:@student, start_time:@start_time, end_time:@end_time, pending:true, verified:false)
-                @session.save
-                redirect_to subject_tutor_sessions_path(1,1)
+                redirect_to :controller=>"orders",
+                            :action=>"index",
+                            :tutor_id=>@tutor,
+                            :subject_id=>@subject
+                # @session.save
+                # redirect_to subject_tutor_sessions_path(1,1)
             end
         end
     end
