@@ -2,7 +2,9 @@ class PagesController < ApplicationController
     def home
       @account = nil
       unless session[:account_id].nil?
-        @account = Account.find(session[:account_id])
+        if Account.exists?(id: session[:account_id])
+          @account = Account.find(session[:account_id])
+        end
       end
     end
 
