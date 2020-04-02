@@ -29,7 +29,8 @@
     - @subjects.each do |subject|
       %tr
         %td= subject.name
-        %td= link_to 'Sign up for a session', new_subject_tutor_session_path(subject, @tutor) 
+        - unless @account.nil?
+          %td= link_to 'Sign up for a session', new_subject_tutor_session_path(subject, @tutor) 
 %br
 - unless @subject.nil?
   = link_to 'Back to tutors for ' + @subject.name, subject_path(@subject)

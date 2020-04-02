@@ -54,11 +54,17 @@ class SessionsController < ApplicationController
                 flash[:error] = "Start time cannot be in the past"
                 redirect_to new_subject_tutor_session_path
             else
-                @tutor = Tutor.find(params[:tutor_id])
-                @subject = Subject.find(params["subject_id"])
-                @session = @tutor.sessions.build(subject:@subject, student:@student, start_time:@start_time, end_time:@end_time, pending:true, verified:false)
-                @session.save
-                redirect_to subject_tutor_sessions_path(1,1)
+                @sessions = @account.student.sessions
+                if Session.student_conflicting_times(@time, @sessions)
+                    @tutor = Tutor.find(params[:tutor_id])
+                    @subject = Subject.find(params["subject_id"])
+                    @session = @tutor.sessions.build(subject:@subject, student:@student, start_time:@start_time, end_time:@end_time, pending:true, verified:false)
+                    @session.save
+                    redirect_to subject_tutor_sessions_path(1,1)
+                else
+                    flash[:error] = "You already have a session conflicting with this!"
+                    redirect_to new_subject_tutor_session_path
+                end
             end
         end
     end

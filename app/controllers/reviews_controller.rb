@@ -1,5 +1,10 @@
 class ReviewsController < ApplicationController
 	def index
+        @account = nil
+        
+        unless session[:account_id].nil?
+            @account = Tutor.find(session[:account_id])
+        end
         @tutor = Tutor.find(params[:tutor_id])
         @reviews = @tutor.reviews
         @subjects = @tutor.subjects

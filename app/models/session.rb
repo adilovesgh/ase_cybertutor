@@ -24,4 +24,21 @@ class Session < ActiveRecord::Base
   	end
   	return true
   end
+
+  def self.student_conflicting_times(target, sessions)
+    puts(target[0])
+    puts(target[1])
+    sessions.each do |session|
+      if target[0] > session.start_time and target[1] < session.end_time
+        return false
+      elsif target[0] < session.start_time and target[1] > session.end_time
+        return false
+      elsif target[0] < session.start_time and target[1] < session.end_time and target[1] > session.start_time
+        return false
+      elsif target[0] > session.start_time and target[1] > session.end_time and target[0] < session.end_time
+        return false
+      end
+    end
+    return true
+  end
 end
