@@ -1,19 +1,10 @@
-Feature: manage sessions
+Feature: approve and reject sessions
 
-  As a student or tutor
-  So that I can manage my sessions
-  I want to add and review them
+  As a tutor
+  So that I can manage my schedule and not forced into unwanted sessions
+  I want to be able to approve and reject sessions
 
-Scenario: view sessions
-
-  Given that I am logged in with name "Jeff Harper" and email "j@b.com" and password "password"
-  And I press on "My Account"
-  When I click on View your sessions
-  Then I should see Sessions for learning
-  And I should see Sessions for teaching
-  And I should see a link to Set up a new session to learn
-
-Scenario: add sessions
+Scenario: approve sessions
   Given that I am logged in with name "Jeff Harper" and email "j@b.com" and password "password"
   And I press on "My Account"
   And I click on Subjects you teach
@@ -32,12 +23,35 @@ Scenario: add sessions
   And I change to be logged in with name "Jeff Harper" and email "j@b.com" and password "password"
   And I press on "My Account"
   When I click on View your sessions
+  Then I should see link "Approve"
+  When I press on link "Approve"
+  Then I should not see link "Approve"
+
+Scenario: reject sessions
+  Given that I am logged in with name "Jeff Harper" and email "j@b.com" and password "password"
+  And I press on "My Account"
+  And I click on Subjects you teach
+  And I click on Register to tutor a subject
+  And I click on Sign up to tutor "English"
+  And I change to be logged in with name "Jack Palmer" and email "jp@morgan.com" and password "password1"
+  And I go to the subjects page
+  When I click on Tutors for "English"
+  And I click on "Jeff Harper"
+  And I click on Sign up for a session
+  And I enter "May",31,5,30,"pm",1,0
+  And I click Book Changes
   Then I should see Sessions for learning
-  And I should see Sessions for teaching
-  And I should see "Jack Palmer"
+  And I should see "Jeff Harper"
   And I should see "English"
+  And I change to be logged in with name "Jeff Harper" and email "j@b.com" and password "password"
+  And I press on "My Account"
+  When I click on View your sessions
+  Then I should see link "Reject"
+  When I press on link "Reject"
+  Then I should not see link "Reject"
+  And I should not see link "Jeff Harper"
 
-Scenario: check valid month and day
+Scenario: schedule conflict check
   Given that I am logged in with name "Jeff Harper" and email "j@b.com" and password "password"
   And I press on "My Account"
   And I click on Subjects you teach
@@ -48,42 +62,28 @@ Scenario: check valid month and day
   When I click on Tutors for "English"
   And I click on "Jeff Harper"
   And I click on Sign up for a session
-  And I enter "Jan",31,5,30,"pm",1,0
+  And I enter "May",31,5,30,"pm",1,0
   And I click Book Changes
-  Then I should see "Start time cannot be in the past"
-
-Scenario: check valid session request
-  Given that I am logged in with name "Jeff Harper" and email "j@b.com" and password "password"
+  Then I should see Sessions for learning
+  And I should see "Jeff Harper"
+  And I should see "English"
+  And I change to be logged in with name "Jeff Harper" and email "j@b.com" and password "password"
   And I press on "My Account"
-  And I click on Subjects you teach
-  And I click on Register to tutor a subject
-  And I click on Sign up to tutor "English"
-  And I go to the subjects page
-  When I click on Tutors for "English"
-  And I click on "Jeff Harper"
-  And I click on Sign up for a session
-  And I enter "Jan",31,5,30,"pm",1,0
-  And I click Book Changes
-  Then I should see "You cannot sign up for your own tutoring sessions"
+  When I click on View your sessions
+  Then I should see link "Approve"
+  When I press on link "Approve"
+  Then I should not see link "Approve"
 
-Scenario: check to make sure I cannot book session for times where I already have a booked session
-  Given that I am logged in with name "Jeff Harper" and email "j@b.com" and password "password"
-  And I press on "My Account"
-  And I click on Subjects you teach
-  And I click on Register to tutor a subject
-  And I click on Sign up to tutor "English"
   And I change to be logged in with name "Jack Palmer" and email "jp@morgan.com" and password "password1"
-  And I go to the subjects page
-  When I click on Tutors for "English"
+  When I go to the subjects page
+  And I click on Tutors for "English"
   And I click on "Jeff Harper"
   And I click on Sign up for a session
-  And I enter "Aug",31,5,30,"pm",1,0
+  And I enter "May",31,5,45,"pm",1,0
   And I click Book Changes
-
-  And I go to the subjects page
-  When I click on Tutors for "English"
-  And I click on "Jeff Harper"
-  And I click on Sign up for a session
-  And I enter "Aug",31,5,35,"pm",1,0
-  And I click Book Changes
-  Then I should see "You already have a session conflicting with this!"
+  And I change to be logged in with name "Jeff Harper" and email "j@b.com" and password "password"
+  And I press on "My Account"
+  When I click on View your sessions
+  Then I should see link "Approve"
+  When I press on link "Approve"
+  Then I should see "Approving this will cause a scheduling conflict!"

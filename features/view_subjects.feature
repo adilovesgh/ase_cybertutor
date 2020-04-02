@@ -9,7 +9,8 @@ Scenario: view subjects, not logged in
 
 Scenario: view subjects, logged in
 
-  Given that I am logged in with name "Jeff Harper" and email "j@b.com"
+  Given that I am logged in with name "Jeff Harper" and email "j@b.com" and password "password"
+  And I press on "My Account"
   When I click on Subjects you teach
   Then I should see All subjects "Jeff Harper" teaches
   And I should see a link to Register to tutor a subject

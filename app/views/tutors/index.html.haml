@@ -1,4 +1,4 @@
-%h2 All Tutors
+%h2.heading All Tutors
 
 %table#tutors.table.table-striped.col-md-12
   %thead
@@ -8,4 +8,4 @@
     - @tutors.each do |tutor|
       %tr
         %td= tutor.account.name
-        %td= link_to "Reviews for #{tutor.account.name}", subject_tutor_reviews_path(1, tutor)
+        %td= link_to "Details for #{tutor.account.name}", subject_tutor_reviews_path(0, tutor)

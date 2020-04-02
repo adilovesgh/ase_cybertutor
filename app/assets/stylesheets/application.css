@@ -19,10 +19,11 @@
     font-weight: bold;
 }
 :root {
-    --navbar-bg-color: #c5c5c5
+    --navbar-bg-color: #a5b5c5
 }
-body {
+html, body {
     margin: 0;
+    height: 100%;
 }
  #navbar {
     padding: 5px 0 5px 0;
@@ -38,10 +39,12 @@ body {
     text-decoration: none;
 }
 .navbar-links {
-     background: var(--navbar-bg-color);
+     background: #CDE;
      font-size: 28px;
      border-radius: 3px;
      border: 1px solid black;
+     padding-left: 3px;
+     padding-right: 3px;    
      /* padding-top: 3px;
      padding-bottom: 3px; */
 }
@@ -53,4 +56,21 @@ body {
 #right_bar {
     display: inline-block;
     float: right;
+}
+
+.home-links {
+    text-decoration: none;
+    font-size: 28px;
+    display: inline-block;
+}
+
+#content {
+    height: 100%;
+    background: #CDE
+}
+.heading{
+    font-size: 30px;
+    text-decoration: underline;
+    margin-top: 0;
+    padding-top: 20px;
 }

@@ -29,21 +29,30 @@ When("I click on Sign up for a session") do
   click_link("Sign up for a session")
 end
 
-When("I enter {string},{int},{int},{int},{string},{int},{int},{string}") do |string, int, int2, int3, string2, int4, int5, string3|
+When("I enter {string},{int},{int},{int},{string},{int},{int}") do |string, int, int2, int3, string2, int4, int5|
   select string.capitalize, from: "session_month"
   select int, from: "session_day"
   select int2, from: "session_start_hour"
   select int3, from: "session_start_minute"
   select string2.downcase, from: "session_start_ampm"
-  select int4, from: "session_end_hour"
-  select int5, from: "session_end_minute"
-  select string3.downcase, from: "session_end_ampm"
+  select int4, from: "session_hours"
+  select int5, from: "session_minutes"
 end
+
 
 When("I click Book Changes") do
   click_button("Book Changes")
 end
 
-Then("I should see Start time cannot be in the past") do
-  page.should have_content("Start time cannot be in the past")
+Then("I should see link {string}") do |string|
+  page.should have_link string
 end
+
+When("I press on link {string}") do |string|
+  click_link string
+end
+
+Then("I should not see link {string}") do |string|
+  page.should_not have_link string
+end
+
