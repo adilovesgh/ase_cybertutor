@@ -35,7 +35,7 @@ class AccountsController < ApplicationController
         @tutor = @account.build_tutor()
         @account.save
         session[:account_id] = @account.id
-        redirect_to accounts_path
+        redirect_to root_path
     end
 
     private

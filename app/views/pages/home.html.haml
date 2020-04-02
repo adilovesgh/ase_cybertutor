@@ -1,4 +1,9 @@
-<h1>Welcome to CyberTutor</h1>
+-if @account.nil? 
+	<h1>Welcome to CyberTutor</h1>
+-else 
+	<h1>Welcome to CyberTutor #{@account.name}</h1>
 %h3= link_to "All Subjects", subjects_path()
 %h3= link_to "All Tutors", tutors_path()
+-unless @account.nil?
+	%h3= link_to "My Account", account_path(@account)
 

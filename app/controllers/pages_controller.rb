@@ -1,6 +1,9 @@
 class PagesController < ApplicationController
     def home
-        
+      @account = nil
+      unless session[:account_id].nil?
+        @account = Account.find(session[:account_id])
+      end
     end
 
     def login
