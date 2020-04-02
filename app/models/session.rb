@@ -10,7 +10,7 @@ class Session < ActiveRecord::Base
     [@start, @end]
   end
 
-  def self.conflicting_times(target, sessions)
+  def self.no_conflicting_times(target, sessions)
   	sessions.each do |session|
   		if target.start_time > session.start_time and target.end_time < session.end_time
   			return false
@@ -25,7 +25,7 @@ class Session < ActiveRecord::Base
   	return true
   end
 
-  def self.student_conflicting_times(target, sessions)
+  def self.no_student_conflicting_times(target, sessions)
     puts(target[0])
     puts(target[1])
     sessions.each do |session|
