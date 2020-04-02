@@ -6,6 +6,6 @@
 %h3= link_to "All Subjects", subjects_path(), {class: "home-links"}
 %h3= link_to "All Tutors", tutors_path(), {class: "home-links"}
 -unless @account.nil?
-	%h3= link_to "My Account", account_path(@account)
+	%h3= link_to "My Account", account_path(@account), {class: "home-links"}
 
 
