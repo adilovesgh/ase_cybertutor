@@ -20,10 +20,10 @@ class OrdersController < ApplicationController
     @price_cents = session[:price_cents]
     @subject = Subject.find(session[:subject]["id"])
     @tutor = Tutor.find(session[:tutor]["id"])
+    puts("Your tutor is #{@tutor}}")
     @start_time = session[:start_time]
     @end_time = session[:end_time]
     @price = session[:price]
-    @session = @tutor.sessions.build(subject:@subject, student:@student, price:@price, start_time:@start_time, end_time:@end_time, pending:true, verified:false)
   
     # Check which type of order it is
     if order_params[:payment_gateway] == "stripe"
@@ -36,8 +36,9 @@ class OrdersController < ApplicationController
     if @order&.save
       if @order.paid?
         # Success is rendered when order is paid and saved
-        @session.save
         # render html: "Congratulations! You have successfully paid for your CyberTutor session."
+        @session = @tutor.sessions.build(subject:@subject, student:@student, price:@price, start_time:@start_time, end_time:@end_time, pending:true, verified:false)
+        @session.save
         redirect_to subject_tutor_sessions_path(1,1)
       elsif @order.failed? && !@order.error_message.blank?
         # Render error only if order failed and there is an error_message
