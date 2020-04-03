@@ -1,16 +1,19 @@
 class AccountsController < ApplicationController
+    VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 	def index
         @accounts = Account.all
     end
 
     def show
-        @account = Account.find(params[:id])
-        puts(@account.email)
-        session[:account_id] = @account.id
-        #@tutors = Tutor.all.select {|m| m.subject == @subject.name}
-        @student = @account.student
-        @tutor = @account.tutor
-        puts(session[:account_id])
+        if !logged_in?
+            redirect_to login_path
+        elsif params[:id].to_i != session[:account_id]
+            puts("param =#{params[:id].class}  \nsession=#{session[:account_id].class} \n #{params[:id] != session[:account_id]}"    )
+            redirect_to account_path(session[:account_id])
+        end
+        @account=current_user
+        @tutor=@account.tutor
+        @student=@account.student
     end
 
     def new
@@ -18,16 +21,26 @@ class AccountsController < ApplicationController
 
     def edit
         reset_session
-        redirect_to accounts_path
+        redirect_to root_path
     end
 
     def create
         
         @account = Account.new(account_params)
 
-        if Account.exists?(email: @account.email)
+        if @account.email == "" || @account.name == "" or @account.password == ""
+            redirect_to new_account_path, flash: {error: "All Fields are Mandatory"}
+            return
+        elsif !@account.email.match(VALID_EMAIL_REGEX)
+            redirect_to new_account_path, flash: {error: "Invalid Email Address"}
+            return
+        elsif @account.password.length < 5
+            redirect_to new_account_path, flash: {error: "Password Must Be 5 Characters or Longer"}
+            return
+        elsif Account.exists?(email: @account.email)
             redirect_to new_account_path, flash: {error: "Account already exists with that email"}
             return
+        
         end
         puts(account_params)
         puts(@account.email)
