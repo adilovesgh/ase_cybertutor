@@ -26,6 +26,9 @@ Scenario: add sessions
   And I click on Sign up for a session
   And I enter "May",31,5,30,"pm",1,0
   And I click Book Changes
+  Then I should see "Order Summary"
+  When I enter credit card informations "4242 4242 4242 4242" "123" "12/2021"
+  And I click "Complete Purchase"
   Then I should see Sessions for learning
   And I should see "Jeff Harper"
   And I should see "English"
@@ -94,6 +97,9 @@ Scenario: check to make sure I cannot book session for times where I already hav
   And I click on Sign up for a session
   And I enter "Aug",31,5,30,"pm",1,0
   And I click Book Changes
+  Then I should see "Order Summary"
+  When I enter credit card informations "4242 4242 4242 4242" "123" "12/2021"
+  And I click "Complete Purchase"
 
   And I go to the subjects page
   When I click on Tutors for "English"

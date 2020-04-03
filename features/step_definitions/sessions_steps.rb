@@ -56,3 +56,12 @@ Then("I should not see link {string}") do |string|
   page.should_not have_link string
 end
 
+When("I enter credit card informations {string} {string} {string}") do |string, string2, string3|
+  pending #We have to figure out how to interact with the stripe app, but this is where we would enter in our credit card info
+end
+
+
+When("I click {string}") do |string|
+  click_button(string)
+end
+
