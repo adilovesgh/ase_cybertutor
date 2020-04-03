@@ -14,15 +14,17 @@ class Session < ActiveRecord::Base
 
   def self.no_conflicting_times(target, sessions)
   	sessions.each do |session|
-  		if target.start_time >= session.start_time and target.end_time <= session.end_time
-  			return false
-  		elsif target.start_time <= session.start_time and target.end_time >= session.end_time
-  			return false
-  		elsif target.start_time <= session.start_time and target.end_time <= session.end_time and target.end_time >= session.start_time
-  			return false
-  		elsif target.start_time >= session.start_time and target.end_time >= session.end_time and target.start_time <= session.end_time
-  			return false
-  		end
+      if target.id != session.id
+    		if target.start_time >= session.start_time and target.end_time <= session.end_time
+    			return false
+    		elsif target.start_time <= session.start_time and target.end_time >= session.end_time
+    			return false
+    		elsif target.start_time <= session.start_time and target.end_time <= session.end_time and target.end_time >= session.start_time
+    			return false
+    		elsif target.start_time >= session.start_time and target.end_time >= session.end_time and target.start_time <= session.end_time
+    			return false
+    		end
+      end
   	end
   	return true
   end
