@@ -9,19 +9,24 @@
 <body>
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
-<div id="navbar">
-  <div id="left_bar">
-    <%= link_to "CyberTutor", root_path, {id: 'home-link'} %>
+<div class="container-fluid">
+  <div class="row">
+    <div id="navbar">
+      <div id="left_bar">
+        <%= link_to "CyberTutor", root_path, {id: 'home-link'} %>
+      </div>
+      <div id="right_top">
+        
+        <% if logged_in? %>
+          <%= link_to "Logout", edit_account_path(1), {class: 'navbar-links'} %>
+        <% else %>
+          <%=link_to "Log In", login_path, {class: 'navbar-links'} %>
+          <%=link_to "Sign Up", new_account_path, {class: 'navbar-links'} %>
+        <% end %>
+      </div>
+    </div>
   </div>
-  <div id="right_top">
-    
-    <% if logged_in? %>
-      <%= link_to "Logout", edit_account_path(1), {class: 'navbar-links'} %>
-    <% else %>
-      <%=link_to "Log In", login_path, {class: 'navbar-links'} %>
-      <%=link_to "Sign Up", new_account_path, {class: 'navbar-links'} %>
-    <% end %>
-  </div>
+</div>
   
   
 </div>

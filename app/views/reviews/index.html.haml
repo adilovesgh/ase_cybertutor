@@ -1,38 +1,46 @@
 - [:notice, :error, :success].each do |key|
   - unless flash[key].blank?
     %p{ :class => "flash-error" }= flash[key]
-%h2.heading All Reviews for #{@tutor.account.name}
 
-%h4 Email: #{@tutor.account.email}
+%div{:class=>"container-fluid"}
+  %div{:class=>"row"}
+    %h4 Email: #{@tutor.account.email}
+  %div{:class=>"row"}
+    %div{:class=>"col-md-6"}
+      %h2.heading All Reviews for #{@tutor.account.name}
 
-%table#reviews.table.table-striped.col-md-12
-  %thead
-    %tr
-      %th Rating
-      %th Comment
-  %tbody
-    - @reviews.each do |review|
-      %tr
-        %td= review.rating
-        %td= review.comment
 
-- if session[:account_id]
-  = link_to 'Leave a review', new_subject_tutor_review_path
-  %br
 
-%h3 Subjects taught by #{@tutor.account.name}
-%table#reviews.table.table-striped.col-md-12
-  %thead
-    %tr
-      %th Subject
-  %tbody
-    - @subjects.each do |subject|
-      %tr
-        %td= subject.name
-        - unless @account.nil?
-          %td= link_to 'Sign up for a session', new_subject_tutor_session_path(subject, @tutor) 
-%br
-- unless @subject.nil?
-  = link_to 'Back to tutors for ' + @subject.name, subject_path(@subject)
-- else
-  = link_to 'Back to all tutors', tutors_path
+      %table#reviews.table.table-striped.col-md-12
+        %thead
+          %tr
+            %th Rating
+            %th Comment
+        %tbody
+          - @reviews.each do |review|
+            %tr
+              %td= review.rating
+              %td= review.comment
+
+      - if session[:account_id]
+        = link_to 'Leave a review', new_subject_tutor_review_path
+        %br
+
+    %div{:class => "col-md-6"}
+      %h2.heading Subjects taught by #{@tutor.account.name}
+      %table#reviews.table.table-striped.col-md-12
+        %thead
+          %tr
+            %th Subject
+        %tbody
+          - @subjects.each do |subject|
+            %tr
+              %td= subject.name
+              - unless @account.nil?
+                %td= link_to 'Sign up for a session', new_subject_tutor_session_path(subject, @tutor) 
+  %div{:class => "row"}
+    %br
+    - unless @subject.nil?
+      = link_to 'Back to tutors for ' + @subject.name, subject_path(@subject)
+    - else
+      = link_to 'Back to all tutors', tutors_path
