@@ -18,12 +18,7 @@
         Session End Time: #{@end_time}
         %br
         %br
-      %hr
-    %h1 Payment Method
-    .form_row
-      %div
-        = radio_button_tag 'payment-selection', 'stripe', true, onclick: "changeTab();"
-        %span Stripe
+        Total (USD): #{humanized_money_with_symbol @price}
       %br
     %hr
     %h1 Payment Method
@@ -104,13 +99,13 @@
   }());
   //YOUR PAYPAL CODE WILL BE HERE
 
-  :css
-    #card-element {
-      width:500px;
-    }
-    .paymentSelectionTab {
-      display: none;
-    }
-    .paymentSelectionTab.active {
-      display: block !important;
-    }
+:css
+  #card-element {
+    width:500px;
+  }
+  .paymentSelectionTab {
+    display: none;
+  }
+  .paymentSelectionTab.active {
+    display: block !important;
+  }

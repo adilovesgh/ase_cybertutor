@@ -15,6 +15,7 @@ class OrdersController < ApplicationController
   end
 
   def submit
+    puts("called!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1")
     @order = nil
     @account = Account.find(session[:account_id])
     @price_cents = session[:price_cents]
@@ -24,6 +25,7 @@ class OrdersController < ApplicationController
     @end_time = session[:end_time]
     @price = session[:price]
     @session = @tutor.sessions.build(subject:@subject, student:@student, price:@price, start_time:@start_time, end_time:@end_time, pending:true, verified:false)
+    @session.save
   
     # Check which type of order it is
     if order_params[:payment_gateway] == "stripe"
