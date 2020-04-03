@@ -2,41 +2,42 @@
   - unless flash[key].blank?
     %p{ :class => "flash-error" }= flash[key]
 
-%h2.heading Book a new session with #{@tutor.account.name}
+%div{:class => "container-fluid"}
+  %h2.heading Book a new session with #{@tutor.account.name}
 
-Basic information 
-%br
-Subject: #{@subject.name}
-%br
-Tutor: #{@tutor.account.name}
-%br
-%br
-%h4 Request a session on
+  Basic information 
+  %br
+  Subject: #{@subject.name}
+  %br
+  Tutor: #{@tutor.account.name}
+  %br
+  %br
+  %h4 Request a session on
 
-= form_tag subject_tutor_sessions_path do
-  = label :session, :month, 'Month'
-  = select :session, :month, ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+  = form_tag subject_tutor_sessions_path do
+    = label :session, :month, 'Month'
+    = select :session, :month, ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
-  = label :session, :day, 'Day'
-  = select :session, :day, @days
+    = label :session, :day, 'Day'
+    = select :session, :day, @days
+
+    %br
+
+    =label :session, :start_hour, 'From'
+    =select :session, :start_hour, @hours
+    =label :session, :colon, ':'
+    =select :session, :start_minute, @minutes
+    =select :session, :start_ampm, ['am','pm']
+
+    %br
+    =label :session, :to, 'for a duration of'
+
+    =select :session, :hours, ['0', '1', '2']
+    =label :session, :colon, 'hours'
+    =select :session, :minutes, @minutes
+    =label :session, :minutes, 'minutes'
+
+    = submit_tag 'Book Changes', :class => 'btn btn-primary'
 
   %br
-
-  =label :session, :start_hour, 'From'
-  =select :session, :start_hour, @hours
-  =label :session, :colon, ':'
-  =select :session, :start_minute, @minutes
-  =select :session, :start_ampm, ['am','pm']
-
-  %br
-  =label :session, :to, 'for a duration of'
-
-  =select :session, :hours, ['0', '1', '2']
-  =label :session, :colon, 'hours'
-  =select :session, :minutes, @minutes
-  =label :session, :minutes, 'minutes'
-
-  = submit_tag 'Book Changes', :class => 'btn btn-primary'
-
-%br
-=link_to "Go back", subject_tutor_reviews_path(@subject, @tutor)
+  =link_to "Go back", subject_tutor_reviews_path(@subject, @tutor)

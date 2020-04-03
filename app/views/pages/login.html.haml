@@ -1,15 +1,12 @@
-%h1.heading Log In
+%div{:class => "container-fluid"}
+  %h1.heading Log In
+  - [:notice, :error, :success].each do |key|
+    - unless flash[key].blank?
+      %p{ :class => "flash-error" }= flash[key]
 
-- [:notice, :error, :success].each do |key|
-  - unless flash[key].blank?
-    %p{ :class => "flash-error" }= flash[key]
-
-
-= form_tag login_path do
-  = label :account, :email, 'Email'
-  = text_field :account, 'email'
-
-  = label :account, :password, 'Password'
-  = password_field :account, 'password'
-
-  = submit_tag 'Save Changes', :class => 'btn btn-primary'
+  = form_tag login_path do
+    = label :account, :email, 'Email'
+    = text_field :account, 'email'
+    = label :account, :password, 'Password'
+    = password_field :account, 'password'
+    = submit_tag 'Save Changes', :class => 'btn btn-primary'
