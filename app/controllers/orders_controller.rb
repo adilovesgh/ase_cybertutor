@@ -16,11 +16,15 @@ class OrdersController < ApplicationController
 
   def submit
     puts("called!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1")
+    puts()
+    puts()
+    puts("CALLLLLLEDDDD}")
     @order = nil
     @account = Account.find(session[:account_id])
     @price_cents = session[:price_cents]
     @subject = Subject.find(session[:subject]["id"])
     @tutor = Tutor.find(session[:tutor]["id"])
+    @student = @account.student
     @start_time = session[:start_time]
     @end_time = session[:end_time]
     @price = session[:price]
