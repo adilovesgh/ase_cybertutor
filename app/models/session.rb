@@ -14,13 +14,13 @@ class Session < ActiveRecord::Base
 
   def self.no_conflicting_times(target, sessions)
   	sessions.each do |session|
-  		if target.start_time > session.start_time and target.end_time < session.end_time
+  		if target.start_time >= session.start_time and target.end_time <= session.end_time
   			return false
-  		elsif target.start_time < session.start_time and target.end_time > session.end_time
+  		elsif target.start_time <= session.start_time and target.end_time >= session.end_time
   			return false
-  		elsif target.start_time < session.start_time and target.end_time < session.end_time and target.end_time > session.start_time
+  		elsif target.start_time <= session.start_time and target.end_time <= session.end_time and target.end_time >= session.start_time
   			return false
-  		elsif target.start_time > session.start_time and target.end_time > session.end_time and target.start_time < session.end_time
+  		elsif target.start_time >= session.start_time and target.end_time >= session.end_time and target.start_time <= session.end_time
   			return false
   		end
   	end
@@ -29,13 +29,13 @@ class Session < ActiveRecord::Base
 
   def self.no_student_conflicting_times(target, sessions)
     sessions.each do |session|
-      if target[0] > session.start_time and target[1] < session.end_time
+      if target[0] >= session.start_time and target[1] <= session.end_time
         return false
-      elsif target[0] < session.start_time and target[1] > session.end_time
+      elsif target[0] <= session.start_time and target[1] >= session.end_time
         return false
-      elsif target[0] < session.start_time and target[1] < session.end_time and target[1] > session.start_time
+      elsif target[0] <= session.start_time and target[1] <= session.end_time and target[1] >= session.start_time
         return false
-      elsif target[0] > session.start_time and target[1] > session.end_time and target[0] < session.end_time
+      elsif target[0] >= session.start_time and target[1] >= session.end_time and target[0] <= session.end_time
         return false
       end
     end
