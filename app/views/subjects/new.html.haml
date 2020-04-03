@@ -1,8 +1,7 @@
 %div{:class => "container-fluid"}
+  
   %h2.heading Create New Subject
-
   = form_tag subjects_path do
-
     = label :subject, :name, 'Name'
     = text_field :subject, 'name'
     = submit_tag 'Save Changes', :class => 'btn btn-primary'

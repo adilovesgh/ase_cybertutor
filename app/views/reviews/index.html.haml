@@ -3,14 +3,10 @@
     %p{ :class => "flash-error" }= flash[key]
 
 %div{:class=>"container-fluid"}
-  %div{:class=>"row"}
-    %h4 Email: #{@tutor.account.email}
+  %h4 Email: #{@tutor.account.email}
   %div{:class=>"row"}
     %div{:class=>"col-md-6"}
       %h2.heading All Reviews for #{@tutor.account.name}
-
-
-
       %table#reviews.table.table-striped.col-md-12
         %thead
           %tr
@@ -38,9 +34,7 @@
               %td= subject.name
               - unless @account.nil?
                 %td= link_to 'Sign up for a session', new_subject_tutor_session_path(subject, @tutor) 
-  %div{:class => "row"}
-    %br
-    - unless @subject.nil?
-      = link_to 'Back to tutors for ' + @subject.name, subject_path(@subject)
-    - else
-      = link_to 'Back to all tutors', tutors_path
+  - unless @subject.nil?
+    = link_to 'Back to tutors for ' + @subject.name, subject_path(@subject)
+  - else
+    = link_to 'Back to all tutors', tutors_path
