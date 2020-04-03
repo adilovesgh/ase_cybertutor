@@ -1,60 +1,61 @@
-%div
-  %h1 Order Summary for #{@account.name}
-  = form_tag({:controller => "orders", :action => "submit"}, {:id => 'order-details'}) do
-    %input{id:'order-type', :type=>"hidden", :value=>"stripe", :name=>'orders[payment_gateway]'}
+%div{:class => "container-fluid"}
+  %div
+    %h1 Order Summary for #{@account.name}
+    = form_tag({:controller => "orders", :action => "submit"}, {:id => 'order-details'}) do
+      %input{id:'order-type', :type=>"hidden", :value=>"stripe", :name=>'orders[payment_gateway]'}
+      .form_row
+        %div{'data-charges-and-payments-section': true}
+          Tutor: #{@tutor.account.name}
+          %br
+          Subject: #{@subject.name}
+          %br
+          Hourly Rate: #{humanized_money_with_symbol @tutor.price_cents}
+          %br
+          %br
+          Session Start Time: #{@start_time}
+          %br
+          Session End Time: #{@end_time}
+          %br
+          %br
+          Total (USD): #{humanized_money_with_symbol @price}
+        %br
+      %hr
+    %h1 Payment Method
     .form_row
-      %div{'data-charges-and-payments-section': true}
-        Tutor: #{@tutor.account.name}
-        %br
-        Subject: #{@subject.name}
-        %br
-        Hourly Rate: #{humanized_money_with_symbol @tutor.price_cents}
-        %br
-        %br
-        Session Start Time: #{@start_time}
-        %br
-        Session End Time: #{@end_time}
-        %br
-        %br
-        Total (USD): #{humanized_money_with_symbol @price}
+      %div
+        = radio_button_tag 'payment-selection', 'stripe', true, onclick: "changeTab();"
+        %span Stripe
       %br
+      %div
+        = radio_button_tag 'payment-selection', 'paypal', false, onclick: "changeTab();"
+        %span Paypal
+    %br
+    %br
+    %div{id:'tab-stripe', class:'paymentSelectionTab active'}
+      %div{id:'card-element'}
+      %div{id:'card-errors', role:"alert"}
+      %br
+      %br
+      = submit_tag "Complete Purchase", id: "submit-stripe"
+    %div{id:'tab-paypal', class:'paymentSelectionTab'}
+      %div{id: "submit-paypal"}
+    %br
+    %br
     %hr
-  %h1 Payment Method
-  .form_row
-    %div
-      = radio_button_tag 'payment-selection', 'stripe', true, onclick: "changeTab();"
-      %span Stripe
-    %br
-    %div
-      = radio_button_tag 'payment-selection', 'paypal', false, onclick: "changeTab();"
-      %span Paypal
-  %br
-  %br
-  %div{id:'tab-stripe', class:'paymentSelectionTab active'}
-    %div{id:'card-element'}
-    %div{id:'card-errors', role:"alert"}
-    %br
-    %br
-    = submit_tag "Complete Purchase", id: "submit-stripe"
-  %div{id:'tab-paypal', class:'paymentSelectionTab'}
-    %div{id: "submit-paypal"}
-  %br
-  %br
-  %hr
-:javascript
-  function changeTab() {
-    var newActiveTabID = $('input[name="payment-selection"]:checked').val();
-    $('.paymentSelectionTab').removeClass('active');
-    $('#tab-' + newActiveTabID).addClass('active');
-  }
+  :javascript
+    function changeTab() {
+      var newActiveTabID = $('input[name="payment-selection"]:checked').val();
+      $('.paymentSelectionTab').removeClass('active');
+      $('#tab-' + newActiveTabID).addClass('active');
+    }
 
-:css
-  #card-element {
-    width:500px;
-  }
-  .paymentSelectionTab {
-    display: none;
-  }
-  .paymentSelectionTab.active {
-    display: block !important;
-  }
+  :css
+    #card-element {
+      width:500px;
+    }
+    .paymentSelectionTab {
+      display: none;
+    }
+    .paymentSelectionTab.active {
+      display: block !important;
+    }
