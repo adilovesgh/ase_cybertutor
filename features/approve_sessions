@@ -17,6 +17,9 @@ Scenario: approve sessions
   And I click on Sign up for a session
   And I enter "May",31,5,30,"pm",1,0
   And I click Book Changes
+  Then I should see "Order Summary"
+  When I enter credit card informations "4242 4242 4242 4242" "123" "12/2021"
+  And I click "Complete Purchase"
   Then I should see Sessions for learning
   And I should see "Jeff Harper"
   And I should see "English"
@@ -40,6 +43,9 @@ Scenario: reject sessions
   And I click on Sign up for a session
   And I enter "May",31,5,30,"pm",1,0
   And I click Book Changes
+  Then I should see "Order Summary"
+  When I enter credit card informations "4242 4242 4242 4242" "123" "12/2021"
+  And I click "Complete Purchase"
   Then I should see Sessions for learning
   And I should see "Jeff Harper"
   And I should see "English"
@@ -64,6 +70,9 @@ Scenario: schedule conflict check
   And I click on Sign up for a session
   And I enter "May",31,5,30,"pm",1,0
   And I click Book Changes
+  Then I should see "Order Summary"
+  When I enter credit card informations "4242 4242 4242 4242" "123" "12/2021"
+  And I click "Complete Purchase"
   Then I should see Sessions for learning
   And I should see "Jeff Harper"
   And I should see "English"
@@ -81,6 +90,9 @@ Scenario: schedule conflict check
   And I click on Sign up for a session
   And I enter "May",31,5,45,"pm",1,0
   And I click Book Changes
+  Then I should see "Order Summary"
+  When I enter credit card informations "4242 4242 4242 4242" "123" "12/2021"
+  And I click "Complete Purchase"
   And I change to be logged in with name "Jeff Harper" and email "j@b.com" and password "password"
   And I press on "My Account"
   When I click on View your sessions
