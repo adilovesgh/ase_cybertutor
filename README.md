@@ -3,12 +3,12 @@
 ## Team Members
 * Aditya Sridhar (as5883)
 * Daniel Kang (hk3021)
-* Nicholas Bethune (nb2189)
+* Nicholas Bethune (nab2189)
 
 ## Iteration 2 Updates
 We present the following list of updates from Iteration 2 as improvements or extensions of Iteration 1 features:
 
-* Log-In Feature: we implemented a log-in feature that requires the user to log in to his or her account using a username and password.
+* Log-In Feature: we implemented a log-in feature that requires the user to log in to his or her account using a username and password. Using bcrypt, we have server-side encrypted passwords for validation. Account info pages are login-protected and unauthorized attempts at access will result in a redirect. Validation of account details includes checking for valid email, preventing duplicate account information and requiring a password with 5 or more characters. 
 
 * Tutoring Session Approval/Rejection: the tutor is able to manage session requests from potential students. We impose the restriction that students are no longer able to automatically sign up for sessions.
 
