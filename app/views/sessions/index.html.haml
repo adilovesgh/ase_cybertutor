@@ -5,6 +5,55 @@
 %div{:class => "container-fluid"}
   %div{:class => "row"}
     %div{:class => "col-md-6"}
+      %h2.heading Sessions for teaching
+
+      %h4 Pending Sessions
+
+      %table#subjects.table.table-striped.col-md-12
+        %thead
+          %tr
+            %th Student Name
+            %th Subject
+            %th Date
+            %th Start Time
+            %th End Time
+        %tbody
+          - @teaching_sessions.each do |teaching_session|
+            -if teaching_session.pending
+              %tr
+                %td= link_to "#{teaching_session.student.account.name}" , student_path(teaching_session.student)
+                %td= teaching_session.subject.name
+                %td= teaching_session.start_time.strftime("%F")
+                %td= teaching_session.start_time.strftime("%I:%M%p")
+                %td= teaching_session.end_time.strftime("%I:%M%p")
+                %td=link_to "Approve", approve_path( teaching_session)
+                %td=link_to "Reject", reject_path(teaching_session)
+
+                /todo: add in start and end time
+
+      %h4 Verified Sessions
+
+      %table#subjects.table.table-striped.col-md-12
+        %thead
+          %tr
+            %th Student Name
+            %th Subject
+            %th Date
+            %th Start Time
+            %th End Time
+            %th Video Chat
+        %tbody
+          - @teaching_sessions.each do |teaching_session|
+            -if teaching_session.verified
+              %tr
+                %td= link_to "#{teaching_session.student.account.name}" , student_path(teaching_session.student)
+                %td= teaching_session.subject.name
+                %td= teaching_session.start_time.strftime("%F")
+                %td= teaching_session.start_time.strftime("%I:%M%p")
+                %td= teaching_session.end_time.strftime("%I:%M%p")
+                %td= link_to "join", student_path(teaching_session.student)
+
+    %div{:class => "col-md-6"}
       %h2.heading Sessions for learning
 
       %h4 Pending Sessions
@@ -38,6 +87,7 @@
             %th Date
             %th Start Time
             %th End Time
+            %th Video Chat
         %tbody
           - @sessions.each do |session|
             -if session.verified
@@ -47,53 +97,8 @@
                 %td= session.start_time.strftime("%F")
                 %td= session.start_time.strftime("%I:%M%p")
                 %td= session.end_time.strftime("%I:%M%p")
-                /todo: add in start and end time
-    %div{:class => "col-md-6"}
-      %h2.heading Sessions for teaching
+                %td= link_to "join", subject_tutor_reviews_path(1, session.tutor)
 
-      %h4 Pending Sessions
-
-      %table#subjects.table.table-striped.col-md-12
-        %thead
-          %tr
-            %th Student Name
-            %th Subject
-            %th Date
-            %th Start Time
-            %th End Time
-        %tbody
-          - @teaching_sessions.each do |teaching_session|
-            -if teaching_session.pending
-              %tr
-                %td= link_to "#{teaching_session.student.account.name}" , student_path(teaching_session.student)
-                %td= teaching_session.subject.name
-                %td= teaching_session.start_time.strftime("%F")
-                %td= teaching_session.start_time.strftime("%I:%M%p")
-                %td= teaching_session.end_time.strftime("%I:%M%p")
-                %td=link_to "Approve", approve_path( teaching_session)
-                %td=link_to "Reject", reject_path(teaching_session)
-                /todo: add in start and end time
-
-      %h4 Verified Sessions
-
-      %table#subjects.table.table-striped.col-md-12
-        %thead
-          %tr
-            %th Student Name
-            %th Subject
-            %th Date
-            %th Start Time
-            %th End Time
-        %tbody
-          - @teaching_sessions.each do |teaching_session|
-            -if teaching_session.verified
-              %tr
-                %td= link_to "#{teaching_session.student.account.name}" , student_path(teaching_session.student)
-                %td= teaching_session.subject.name
-                %td= teaching_session.start_time.strftime("%F")
-                %td= teaching_session.start_time.strftime("%I:%M%p")
-                %td= teaching_session.end_time.strftime("%I:%M%p")
-                /todo: add in start and end time
   %div{:class => "row"}
   = link_to 'Set up a new session to learn', subjects_path
   %br
