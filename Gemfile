@@ -39,6 +39,7 @@ gem 'jquery-rails'
 # Manage payment transactions
 gem "devise", ">= 4.7.1"
 gem "money-rails"
+gem "stripe-rails"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

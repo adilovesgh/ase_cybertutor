@@ -1,4 +1,4 @@
-class Order < ApplicationRecord
+class Order < ActiveRecord::Base
   enum status: { pending: 0, failed: 1, paid: 2, paypal_executed: 3}
   enum payment_gateway: { stripe: 0, paypal: 1 }
   belongs_to :session

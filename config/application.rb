@@ -22,5 +22,10 @@ module AseCybertutor
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    config_file = Rails.application.config_for(:application)
+    config_file.each do |key,value|
+      ENV[key] = value
+    end unless config_file.nil?
   end
 end
