@@ -20,11 +20,11 @@ class OrdersController < ApplicationController
     @price_cents = session[:price_cents]
     @subject = Subject.find(session[:subject]["id"])
     @tutor = Tutor.find(session[:tutor]["id"])
-    puts("Your tutor is #{@tutor}}")
+    @student = @account.student
     @start_time = session[:start_time]
     @end_time = session[:end_time]
     @price = session[:price]
-  
+
     # Check which type of order it is
     if order_params[:payment_gateway] == "stripe"
       prepare_new_order

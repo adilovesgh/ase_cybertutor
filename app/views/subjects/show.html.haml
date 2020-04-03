@@ -1,18 +1,19 @@
-%h3.heading Tutors for #{@subject.name}
+%div{:class => "container-fluid"}
+  %h3.heading Tutors for #{@subject.name}
 
-%table#tutors.table.table-striped.col-md-12
-  %thead
-    %tr
-      %th Name
-      %th Rating
-      %th Hourly Rate
-  %tbody
-    - @tutors.each do |tutor|
+  %table#tutors.table.table-striped.col-md-12
+    %thead
       %tr
-        %td= link_to "#{tutor.account.name}", subject_tutor_reviews_path(@subject, tutor)
-        %td= tutor.average_rating
-        %td= "$#{tutor.price_cents}"
-        %td
-          - if session[:account_id] and !@subject.nil?
-            = link_to "Sign up for a session with #{tutor.account.name}", new_subject_tutor_session_path(@subject, tutor)
-=link_to "Back to subjects", subjects_path
+        %th Name
+        %th Rating
+        %th Hourly Rate
+    %tbody
+      - @tutors.each do |tutor|
+        %tr
+          %td= link_to "#{tutor.account.name}", subject_tutor_reviews_path(@subject, tutor)
+          %td= tutor.average_rating
+          %td= "$#{tutor.price_cents}"
+          %td
+            - if session[:account_id] and !@subject.nil?
+              = link_to "Sign up for a session with #{tutor.account.name}", new_subject_tutor_session_path(@subject, tutor)
+  =link_to "Back to subjects", subjects_path

@@ -1,11 +1,12 @@
-%h2.heading All Tutors
+%div{:class => "container-fluid"}
+  %h2.heading All Tutors
 
-%table#tutors.table.table-striped.col-md-12
-  %thead
-    %tr
-      %th Name
-  %tbody
-    - @tutors.each do |tutor|
+  %table#tutors.table.table-striped.col-md-12
+    %thead
       %tr
-        %td= tutor.account.name
-        %td= link_to "Details for #{tutor.account.name}", subject_tutor_reviews_path(0, tutor)
+        %th Name
+    %tbody
+      - @tutors.each do |tutor|
+        %tr
+          %td= tutor.account.name
+          %td= link_to "Details for #{tutor.account.name}", subject_tutor_reviews_path(0, tutor)

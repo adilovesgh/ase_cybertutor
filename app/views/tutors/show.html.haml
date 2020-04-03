@@ -1,15 +1,15 @@
-%h2.heading All subjects #{@account.name} teaches
-
-%table#tutors.table.table-striped.col-md-12
-  %thead
-    %tr
-      %th Subject
-
-  %tbody
-    - @subjects.each do |subject|
+%div{:class => "container-fluid"}
+  %h2.heading All subjects #{@account.name} teaches
+  %table#tutors.table.table-striped.col-md-12
+    %thead
       %tr
-        %td= subject.name
+        %th Subject
 
-= link_to 'Register to tutor a subject', subjects_path
-%br
-= link_to 'Back to account', account_path(@account)
+    %tbody
+      - @subjects.each do |subject|
+        %tr
+          %td= subject.name
+
+  = link_to 'Register to tutor a subject', subjects_path
+  %br
+  = link_to 'Back to account', account_path(@account)
