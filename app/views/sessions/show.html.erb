@@ -1,0 +1,18 @@
+<%# This is the title, responsive for small screens and bigger screens %>
+
+<h1 class= "h3 ml-3 my-5 text-dark d-md-block d-none" > Select a topic to start your call </h1>
+
+
+<%# This is the list of the subjects that we got from the @subjects variable, and we are creating a table with all of them! %>
+<%# All of the sessions will use the same room for now to keep it simpler %>
+
+  <ul class="list-group list-group-flush bg-transparent">
+    <p class="text-dark mb-1"> Mentor: <%=@tutor.account.name%> </p> 
+    <p class="text-dark mb-1"> Subject: <%=@clicked_subject.name%> </p> 
+  </ul>
+  
+<script crossorigin src="https://unpkg.com/@daily-co/daily-js"></script>
+<script>
+callFrame = window.DailyIframe.createFrame();
+callFrame.join({ url: 'https://tutorial.daily.co/hello' })
+</script>

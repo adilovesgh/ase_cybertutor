@@ -36,9 +36,9 @@ class OrdersController < ApplicationController
     if @order&.save
       if @order.paid?
         # Success is rendered when order is paid and saved
-        # render html: "Congratulations! You have successfully paid for your CyberTutor session."
         @session = @tutor.sessions.build(subject:@subject, student:@student, price:@price, start_time:@start_time, end_time:@end_time, pending:true, verified:false)
         @session.save
+        # render html: "Congratulations! You have successfully paid for your CyberTutor session."
         redirect_to subject_tutor_sessions_path(1,1)
       elsif @order.failed? && !@order.error_message.blank?
         # Render error only if order failed and there is an error_message
