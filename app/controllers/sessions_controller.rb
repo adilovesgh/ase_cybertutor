@@ -6,9 +6,9 @@ class SessionsController < ApplicationController
     end
 
     def show
-        puts("Hello")
         @clicked_subject = Subject.find(params["subject_id"])
         @tutor = Tutor.find(params["tutor_id"])
+        @session = Session.find(params["id"])
     end
 
     def approve
