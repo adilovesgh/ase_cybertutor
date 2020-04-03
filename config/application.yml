@@ -1,0 +1,8 @@
+test: &default
+  PAYPAL_ENV: sandbox
+  PAYPAL_CLIENT_ID:     YOUR_CREDENTIAL_HERE
+  PAYPAL_CLIENT_SECRET:   YOUR_CREDENTIAL_HERE
+  STRIPE_PUBLISHABLE_KEY: pk_test_yVdciim2vQKihKem2AuaWcRP00KX2grs4F
+  STRIPE_SECRET_KEY: sk_test_9CIeIcXrELSe4EI8UsWdNmIu00EDNF1z5m
+development:
+  <<: *default

@@ -24,9 +24,9 @@ Rails.application.routes.draw do
   resources :tutors
   resources :subjects
   resources :orders
+
   get '/orders/', to: 'orders#index'
   post '/orders/submit', to: 'orders#submit'
-
 
   Rails.application.routes.draw do
       resources :subject do

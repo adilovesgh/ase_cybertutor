@@ -61,15 +61,15 @@ class SessionsController < ApplicationController
                     @tutor = Tutor.find(params[:tutor_id])
                     @price = Session.compute_session_cost(@tutor.price_cents, params["session"])
                     @subject = Subject.find(params[:subject_id])
+                    session[:tutor] = @tutor
+                    session[:subject] = @subject
+                    session[:start_time] = @start_time
+                    session[:end_time] = @end_time
+                    session[:price] = @price
+                    session[:price_cents] = @price * 100
+
                     redirect_to :controller=>"orders",
-                                :action=>"index",
-                                :tutor_id=>@tutor,
-                                :subject_id=>@subject,
-                                :start_time=>@start_time,
-                                :end_time=>@end_time,
-                                :price=>@price
-                    # @session.save
-                    # redirect_to subject_tutor_sessions_path(1,1)
+                                :action=>"index"
                 else
                     flash[:error] = "You already have a session conflicting with this!"
                     redirect_to new_subject_tutor_session_path
