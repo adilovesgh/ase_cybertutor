@@ -1,7 +1,7 @@
-
 - [:notice, :error, :success].each do |key|
   - unless flash[key].blank?
-    %p{ :class => "flash #{key}" }= flash[key]
+    %p{ :class => "flash-error" }= flash[key]
+
 %h2.heading Sessions for learning
 
 %h4 Pending Sessions
@@ -46,7 +46,7 @@
           %td= session.end_time.strftime("%I:%M%p")
           /todo: add in start and end time
 
-%h2 Sessions for teaching
+%h2.heading Sessions for teaching
 
 %h4 Pending Sessions
 
