@@ -1,14 +1,25 @@
 class TutorsController < ApplicationController
-	def index
+    def index
+        @account = nil
+        unless session[:account_id].nil?
+            @account = Tutor.find(session[:account_id])
+        end
         @tutors = Tutor.all
     end
 
     def show
-        @account = Account.find(session[:account_id])
+        @account = nil
+        unless session[:account_id].nil?
+            @account = Tutor.find(session[:account_id])
+        end
         @subjects = @account.tutor.subjects
     end
 
     def new
+        @account = nil
+        unless session[:account_id].nil?
+            @account = Tutor.find(session[:account_id])
+        end
         @subject = Subject.find(params[:subject_id])
     end
 
@@ -25,6 +36,10 @@ class TutorsController < ApplicationController
 
 
     def create
+        @account = nil
+        unless session[:account_id].nil?
+            @account = Tutor.find(session[:account_id])
+        end
     	@subject = Subject.find(params[:subject_id])
         @tutor = @subject.tutors.build(tutor_params)
         @tutor.save

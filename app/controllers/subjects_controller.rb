@@ -1,5 +1,9 @@
 class SubjectsController < ApplicationController
 	def index
+        @account = nil
+        unless session[:account_id].nil?
+            @account = Tutor.find(session[:account_id])
+        end
         @subjects = Subject.all
         if session[:account_id].nil?
             @logged_in = false
@@ -11,15 +15,27 @@ class SubjectsController < ApplicationController
     end
 
     def show
+        @account = nil
+        unless session[:account_id].nil?
+            @account = Tutor.find(session[:account_id])
+        end
         @subject = Subject.find(params[:id])
         @tutors = @subject.tutors
         Tutor.update_average(@tutors)
     end
 
     def new
+        @account = nil
+        unless session[:account_id].nil?
+            @account = Tutor.find(session[:account_id])
+        end
     end
 
     def create
+        @account = nil
+        unless session[:account_id].nil?
+            @account = Tutor.find(session[:account_id])
+        end
         @subject = Subject.new(subject_params)
         @subject.save
         redirect_to subjects_path

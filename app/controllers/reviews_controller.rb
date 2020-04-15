@@ -1,7 +1,6 @@
 class ReviewsController < ApplicationController
 	def index
         @account = nil
-        
         unless session[:account_id].nil?
             @account = Tutor.find(session[:account_id])
         end
@@ -20,6 +19,7 @@ class ReviewsController < ApplicationController
     end
 
     def new
+        @account = Account.find(session[:account_id])
         if Subject.exists? id: params[:subject_id]
             @subject = Subject.find(params[:subject_id])
         else

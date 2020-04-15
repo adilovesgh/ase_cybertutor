@@ -6,6 +6,7 @@ class SessionsController < ApplicationController
     end
 
     def show
+        @account = Account.find(session[:account_id])
         @clicked_subject = Subject.find(params["subject_id"])
         @tutor = Tutor.find(params["tutor_id"])
         @session = Session.find(params["id"])
@@ -24,12 +25,14 @@ class SessionsController < ApplicationController
     end
 
     def reject
+        @account = Account.find(session[:account_id])
         @session = Session.find(params["id"])
         @session.update_attributes(:pending => false, :verified => false)
         redirect_to subject_tutor_sessions_path(0, 0)
     end
 
     def new
+        @account = Account.find(session[:account_id])
         @tutor = Tutor.find(params["tutor_id"])
         @subject = Subject.find(params["subject_id"])
         @days = Array.new(31) {|i| i+1 }
