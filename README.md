@@ -31,4 +31,4 @@ The user stories for our application can be found under the "features" directory
 Currently, we have temporarily run into a issue with regard to interacting Cucumber tests with the payment transaction outlet that we implemented in Iteration 2. Therefore, our `sessions.feature`, `approve_sessions.feature`, and `video_chat.feature` features have a few steps that have been deliberately skipped. To the best of our knowledge, the transaction system functions properly when tested manually, and we anticipate that the entire Cucumber test suite will be fully functional once we determine how to successfully apply Cucumber to our transaction feature.
 
 ## Heroku Deployment
-Our application has been deployed to Heroku, and the link for the deployed application is: https://mysterious-waters-80602.herokuapp.com/
+Our application has been deployed to Heroku, and the link for the deployed application is: https://intense-oasis-95894.herokuapp.com/
