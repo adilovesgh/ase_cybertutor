@@ -2,7 +2,7 @@ class TutorsController < ApplicationController
     def index
         @account = nil
         unless session[:account_id].nil?
-            @account = Tutor.find(session[:account_id])
+            @account = Account.find(session[:account_id])
         end
         @tutors = Tutor.all
     end
@@ -10,7 +10,7 @@ class TutorsController < ApplicationController
     def show
         @account = nil
         unless session[:account_id].nil?
-            @account = Tutor.find(session[:account_id])
+            @account = Account.find(session[:account_id])
         end
         @subjects = @account.tutor.subjects
     end
@@ -18,7 +18,7 @@ class TutorsController < ApplicationController
     def new
         @account = nil
         unless session[:account_id].nil?
-            @account = Tutor.find(session[:account_id])
+            @account = Account.find(session[:account_id])
         end
         @subject = Subject.find(params[:subject_id])
     end
