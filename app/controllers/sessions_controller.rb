@@ -28,6 +28,8 @@ class SessionsController < ApplicationController
         @account = Account.find(session[:account_id])
         @session = Session.find(params["id"])
         @session.update_attributes(:pending => false, :verified => false)
+        @session.student.account.price_cents += @session.price.to_i
+        @session.student.account.save
         redirect_to subject_tutor_sessions_path(0, 0)
     end
 
@@ -66,19 +68,26 @@ class SessionsController < ApplicationController
                     @tutor = Tutor.find(params[:tutor_id])
                     @student = @account.student
                     @price = Session.compute_session_cost(@tutor.price_cents, params["session"])
-                    @subject = Subject.find(params[:subject_id])
-                    @session = @tutor.sessions.build(subject:@subject, student:@student, price:@price, start_time:@start_time, end_time:@end_time, pending:true, verified:false)
-                    session[:tutor] = @tutor
-                    session[:subject] = @subject
-                    session[:start_time] = @start_time
-                    session[:end_time] = @end_time
-                    session[:price] = @price
-                    session[:price_cents] = @price * 100
+                    if @price > @account.price_cents
+                        flash[:error] = "You do not have enough balance!\nYour Balance: #{@account.price_cents}\nTotal Price: #{@price}"
+                        redirect_to new_subject_tutor_session_path
+                    else
+                        @subject = Subject.find(params[:subject_id])
+                        @session = @tutor.sessions.build(subject:@subject, student:@student, price:@price, start_time:@start_time, end_time:@end_time, pending:true, verified:false)
+                        #session[:tutor] = @tutor
+                        #session[:subject] = @subject
+                        #session[:start_time] = @start_time
+                        #session[:end_time] = @end_time
+                        #session[:price] = @price
+                        #session[:price_cents] = @price * 100
+                        #redirect_to :controller=>"orders",
+                        #            :action=>"index"
 
-                    redirect_to :controller=>"orders",
-                                :action=>"index"
-                    #@session.save
-                    #redirect_to subject_tutor_sessions_path(1,1)
+                        @session.save
+                        @account.price_cents -= @price
+                        @account.save
+                        redirect_to subject_tutor_sessions_path(1,1)
+                    end
                 else
                     flash[:error] = "You already have a session conflicting with this!"
                     redirect_to new_subject_tutor_session_path

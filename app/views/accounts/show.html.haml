@@ -1,5 +1,7 @@
 %div{:class => "container-fluid"}
   %h3.heading Account for #{@account.name}
+  %span Balance: $#{@account.price_cents}
+  %span= link_to "Add Balance", subject_tutor_sessions_path(1,1)
 
   %table#tutors.table.table-striped.col-md-12
     %thead

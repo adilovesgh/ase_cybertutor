@@ -27,7 +27,7 @@ class AccountsController < ApplicationController
     def create
         
         @account = Account.new(account_params)
-
+        @account.price_cents = 50.00
         if @account.email == "" || @account.name == "" or @account.password == ""
             redirect_to new_account_path, flash: {error: "All Fields are Mandatory"}
             return
@@ -42,8 +42,6 @@ class AccountsController < ApplicationController
             return
         
         end
-        puts(account_params)
-        puts(@account.email)
         @student = @account.build_student()
         @tutor = @account.build_tutor(price_cents:20.00)
         @account.save
