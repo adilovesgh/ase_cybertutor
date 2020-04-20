@@ -22,6 +22,10 @@ Given("that I am logging in as {string} and email {string} and password {string}
   @acct = Account.find_by_email(string2)
 end
 
+When("I click thye link to Logout") do
+  click_link "Logout"
+end
+
 When("I click the link to Log in") do
   click_link "Log In"
   page.should have_content("Log In")
