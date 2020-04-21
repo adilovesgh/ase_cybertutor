@@ -7,10 +7,10 @@ Background:
 	Given that I am logged in with name "Jeff Harper" and email "j@b.com" and password "password"
   	And I press on "My Account"
   	Then I should see "$50"
-
-Scenario: add $50 to my balance
-	When I click on "Add Balance"
+  	When I click on "Add Balance"
 	Then I should see "Select Amount"
 	And I should see "Payment Method"
+
+Scenario: add $50 to my balance
 	When I enter credit card informations "4242424242424242" "0222" "22222222"
-	
+	Then I should see "$100"
