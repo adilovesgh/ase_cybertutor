@@ -17,9 +17,7 @@ Scenario: approve sessions
   And I click on Sign up for a session
   And I enter "May",31,5,30,"pm",1,0
   And I click Book Changes
-  Then I should see "Order Summary"
-  When I enter credit card informations "4242 4242 4242 4242" "123" "12/2021"
-  And I click "Complete Purchase"
+
   Then I should see Sessions for learning
   And I should see "Jeff Harper"
   And I should see "English"
@@ -33,4 +31,7 @@ Scenario: approve sessions
   And I should see link "Join Room"
 
   When I press on link "Join Room"
-  Then I should see "Select a topic to start your call"
+  Then I should see "Video Call in Room"
+  And I should see "If the video does not display, please refresh the screen"
+  And I should see "English"
+  And I should see "Jeff Harper"
