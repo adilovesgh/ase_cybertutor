@@ -1,25 +1,20 @@
 = stripe_javascript_tag
 
-%div
-  %h1 Order Summary for #{@account.name}
+%div{:class => "container-fluid"}
+  %h1 Select Amount
   = form_tag({:controller => "orders", :action => "submit"}, {:id => 'order-details'}) do
     %input{id:'order-type', :type=>"hidden", :value=>"stripe", :name=>'orders[payment_gateway]'}
     .form_row
       %div{'data-charges-and-payments-section': true}
-        Tutor: #{@tutor.account.name}
+        = radio_button_tag 'amount', 'fifty', true, onclick: "changeTab();"
+        %span $50
         %br
-        Subject: #{@subject.name}
+        = radio_button_tag 'amount', 'hundo', false, onclick: "changeTab();"
+        %span $100
         %br
-        Hourly Rate: #{humanized_money_with_symbol @tutor.price_cents}
+        = radio_button_tag 'amount', 'hundofifty', false, onclick: "changeTab();"
+        %span $150
         %br
-        %br
-        Session Start Time: #{@start_time}
-        %br
-        Session End Time: #{@end_time}
-        %br
-        %br
-        Total (USD): #{humanized_money_with_symbol @price}
-      %br
     %hr
     %h1 Payment Method
     .form_row
