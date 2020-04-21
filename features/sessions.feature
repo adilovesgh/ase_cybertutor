@@ -7,6 +7,7 @@ Feature: manage sessions
 Background:
   Given that I am logged in with name "Jeff Harper" and email "j@b.com" and password "password"
   And I press on "My Account"
+  Then I should see "$50"
 
 Scenario: view sessions
 
