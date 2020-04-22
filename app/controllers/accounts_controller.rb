@@ -47,6 +47,7 @@ class AccountsController < ApplicationController
         end
         @student = @account.build_student()
         @tutor = @account.build_tutor(price_cents:20.00)
+        @account.notification = 0
         @account.save
         session[:account_id] = @account.id
         redirect_to account_path(@account)

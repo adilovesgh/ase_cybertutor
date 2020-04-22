@@ -4,6 +4,8 @@ class SessionsController < ApplicationController
         @sessions = @account.student.sessions
         @teaching_sessions = @account.tutor.sessions
         #puts("approved not seen by student!!!!!!!!!!!!!!!!")
+        @account.notification = 0
+        @account.save
         for s in @sessions
             unless s.seen_student
                 s.seen_student = true
@@ -32,6 +34,8 @@ class SessionsController < ApplicationController
         @session = Session.find(params["id"])
         if Session.no_conflicting_times(@session, @sessions)
             @session.update_attributes(:pending => false, :verified => true, :seen_student => false)
+            @session.student.account.notification += 1
+            @session.student.account.save
         else 
             flash[:error] = "Approving this will cause a scheduling conflict!"
         end
@@ -43,6 +47,7 @@ class SessionsController < ApplicationController
         @session = Session.find(params["id"])
         @session.update_attributes(:pending => false, :verified => false, :seen_student => false)
         @session.student.account.price_cents += @session.price.to_i
+        @session.student.account.notification += 1
         @session.student.account.save
         redirect_to subject_tutor_sessions_path(0, 0)
     end
@@ -91,6 +96,8 @@ class SessionsController < ApplicationController
                         @session.save
                         @account.price_cents -= @price
                         @account.save
+                        @tutor.account.notification += 1
+                        @tutor.account.save
                         redirect_to subject_tutor_sessions_path(1,1)
                     end
                 else

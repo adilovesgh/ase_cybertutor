@@ -19,8 +19,13 @@
         <%= link_to "Tutors", tutors_path, {class: "nav-link"} %>
       </div>
       <div id="right_top">
-        
         <% if logged_in? %>
+          <% if has_notification? %>
+            <%=link_to "#{notification_count}", subject_tutor_sessions_path(1,1), {class: 'notification_link'} %>
+            <div class="notification"> New Notification </div>
+          <% else %>
+            <div class="notification"> No Notification </div>
+          <% end %>
           <%= link_to "Logout", edit_account_path(1), {class: 'navbar-links'} %>
         <% else %>
           <%=link_to "Log In", login_path, {class: 'navbar-links'} %>

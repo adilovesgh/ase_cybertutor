@@ -18,7 +18,7 @@ Given("that I am logging in as {string} and email {string} and password {string}
     #fill_in "account_password", with: string3
     #click_button("Save Changes")
     #click_link "Logout"
-    @acct = Account.new(name:string, email:string2, password:string3, price_cents:50.00)
+    @acct = Account.new(name:string, email:string2, password:string3, price_cents:50.00, notification:0)
     @student = @acct.build_student()
     @tutor = @acct.build_tutor(price_cents:20.00)
   else 
@@ -56,7 +56,7 @@ Given("that I am logged in with name {string} and email {string} and password {s
     #fill_in "account_password", with: string3
     #click_button("Save Changes")
     #click_link "Logout"
-    @acct = Account.new(name:string, email:string2, password:string3, price_cents:50.00)
+    @acct = Account.new(name:string, email:string2, password:string3, price_cents:50.00, notification:0)
     @student = @acct.build_student()
     @tutor = @acct.build_tutor(price_cents:20.00)
     @acct.save
@@ -86,7 +86,7 @@ end
 Given("I change to be logged in with name {string} and email {string} and password {string}") do |string, string2, string3|
   click_link "Logout"
   if Account.find_by_email(string2).nil?
-    @acct = Account.new(name:string, email:string2, password:string3, price_cents:50.00)
+    @acct = Account.new(name:string, email:string2, password:string3, price_cents:50.00, notification:0)
     @student = @acct.build_student()
     @tutor = @acct.build_tutor(price_cents:20.00)
     @acct.save

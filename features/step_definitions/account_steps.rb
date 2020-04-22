@@ -21,6 +21,10 @@ Then("I should see Create New Account") do
   page.should have_content("Create New Account")
 end
 
+Then("I should not see {string}") do |string|
+  page.should have_no_content(string)
+end
+
 Given("I am on create new accounts page") do
   visit '/accounts/new'
 end
