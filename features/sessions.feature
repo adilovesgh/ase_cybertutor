@@ -6,7 +6,7 @@ Feature: manage sessions
 
 Background:
   Given that I am logged in with name "Jeff Harper" and email "j@b.com" and password "password"
-  And I press on "My Account"
+  And I press on "Account"
   Then I should see "$50"
 
 Scenario: view sessions
@@ -31,7 +31,7 @@ Scenario: add sessions
   And I should see "Jeff Harper"
   And I should see "English"
   And I change to be logged in with name "Jeff Harper" and email "j@b.com" and password "password"
-  And I press on "My Account"
+  And I press on "Account"
   When I click on View your sessions
   Then I should see Sessions for learning
   And I should see Sessions for teaching

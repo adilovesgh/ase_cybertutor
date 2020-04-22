@@ -7,7 +7,7 @@ Feature: tutor a new subject
 Scenario: add a new subject to tutor
 
   Given that I am logged in with name "Jeff Harper" and email "j@b.com" and password "password"
-  And I press on "My Account"
+  And I press on "Account"
   When I click on Subjects you teach
   And I click on Register to tutor a subject
   And I click on Sign up to tutor "Science"

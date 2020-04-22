@@ -6,7 +6,7 @@ Feature: approve and reject sessions
 
 Background:
   Given that I am logged in with name "Jeff Harper" and email "j@b.com" and password "password"
-  And I press on "My Account"
+  And I press on "Account"
   And I click on Subjects you teach
   And I click on Register to tutor a subject
   And I click on Sign up to tutor "English"
@@ -22,7 +22,7 @@ Background:
   And I should see "Jeff Harper"
   And I should see "English"
   And I change to be logged in with name "Jeff Harper" and email "j@b.com" and password "password"
-  And I press on "My Account"
+  And I press on "Account"
   When I click on View your sessions
 
 Scenario: approve sessions
@@ -50,7 +50,7 @@ Scenario: schedule conflict check
   And I click Book Changes
 
   And I change to be logged in with name "Jeff Harper" and email "j@b.com" and password "password"
-  And I press on "My Account"
+  And I press on "Account"
   When I click on View your sessions
   Then I should see link "Approve"
   When I press on link "Approve"
@@ -63,5 +63,5 @@ Scenario: reject sessions gives back money
   And I should not see link "Jeff Harper"
 
   When I change to be logged in with name "Jack Palmer" and email "jp@morgan.com" and password "password1"
-  And I press on "My Account"
-  I should see "$50"
+  And I press on "Account"
+  And I should see "$50"

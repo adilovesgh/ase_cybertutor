@@ -1,14 +1,37 @@
 %div{:class => "container-fluid"}
-  %h3.heading Account for #{@account.name}
-  %span Balance: $#{@account.price_cents}
-  %span= link_to "Add Balance", orders_path
+  %div{:class => "row"}
+    %div{:class=> "col-md-6"}
+      %h3.heading Account for #{@account.name}
+      %span Balance: $#{@account.price_cents}
+      %span= link_to "Add Balance", orders_path
 
-  %table#tutors.table.table-striped.col-md-12
-    %thead
-      %tr
-        %th General Information
-    %tbody
-      %tr
-        %td= link_to "View your sessions", subject_tutor_sessions_path(1,1)
-      %tr
-        %td= link_to "Subjects you teach", tutor_path(@tutor)
+      %table#tutors.table.table-striped.col-md-12
+        %thead
+          %tr
+            %th General Information
+        %tbody
+          %tr
+            %td= link_to "View your sessions", subject_tutor_sessions_path(1,1)
+          %tr
+            %td= link_to "Subjects you teach", tutor_path(@tutor)
+    %div{:class => "col-md-6"}
+      %h3.heading Alerts for #{@account.name}
+      %table#tutors.table.table-striped.col-md-12
+        %thead
+          %tr
+            %th As Tutor
+          %tbody
+            - @tutor_sessions.each do |session|
+              %tr
+                %td #{session.student.account.name} has sent for a session approval
+      %table#tutors.table.table-striped.col-md-12
+        %thead
+          %tr
+            %th As Student
+          %tbody
+            - @student_sessions_approved.each do |session|
+              %tr
+                %td #{session.tutor.account.name} has accepted the session
+            - @student_sessions_rejected.each do |session|
+              %tr
+                %td #{session.tutor.account.name} has rejected the session. Balance of $#{session.price_cents/100} has been returned to your account.

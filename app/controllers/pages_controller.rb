@@ -22,7 +22,7 @@ class PagesController < ApplicationController
         session[:account_id] = @account.id
         @student = @account.student
         @tutor = @account.tutor
-        redirect_to root_path
+        redirect_to account_path(session[:account_id])
       else
         redirect_to login_path, flash: {error: "Unrecognized email/password combination."}
       end

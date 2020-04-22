@@ -5,7 +5,7 @@ Feature: add money to my balance
 
 Background:
 	Given that I am logged in with name "Jeff Harper" and email "j@b.com" and password "password"
-  	And I press on "My Account"
+  	And I press on "Account"
   	Then I should see "$50"
   	When I click on "Add Balance"
 	Then I should see "Select Amount"

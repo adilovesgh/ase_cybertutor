@@ -17,12 +17,12 @@ Scenario: to log in
 
 Scenario: check logged in
   
-  When I press on "My Account"
+  When I press on "Account"
   And I am on the account page
   Then I should see Account for "Jeff Harper"
 
 Scenario: change user
   When I change to be logged in with name "Jack Palmer" and email "jp@morgan.com" and password "password1"
-  And I press on "My Account"
+  And I press on "Account"
   And I am on the account page
   Then I should see Account for "Jack Palmer"

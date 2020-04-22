@@ -43,3 +43,4 @@ Then("I should redirect to the home page") do
   expect(Account.find_by_email(@acct_email)).to_not be nil
   current_path.should == '/'
 end
+
