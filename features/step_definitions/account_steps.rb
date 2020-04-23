@@ -21,6 +21,10 @@ Then("I should see Create New Account") do
   page.should have_content("Create New Account")
 end
 
+Then("I should not see {string}") do |string|
+  page.should have_no_content(string)
+end
+
 Given("I am on create new accounts page") do
   visit '/accounts/new'
 end
@@ -43,3 +47,4 @@ Then("I should redirect to the home page") do
   expect(Account.find_by_email(@acct_email)).to_not be nil
   current_path.should == '/'
 end
+

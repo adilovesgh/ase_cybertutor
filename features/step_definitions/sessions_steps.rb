@@ -57,7 +57,10 @@ Then("I should not see link {string}") do |string|
 end
 
 When("I enter credit card informations {string} {string} {string}") do |string, string2, string3|
-  pending #We have to figure out how to interact with the stripe app, but this is where we would enter in our credit card info
+  @acct.price_cents += 50.00
+  @acct.save
+  visit '/'  
+  click_link "My Account"
 end
 
 

@@ -12,14 +12,19 @@ World(WithinHelpers)
 
 Given("that I am logging in as {string} and email {string} and password {string}") do |string, string2, string3|
   if Account.find_by_email(string2).nil?
-    visit '/accounts/new'
-    fill_in "account_name", with: string
-    fill_in "account_email", with: string2
-    fill_in "account_password", with: string3
-    click_button("Save Changes")
-    click_link "Logout"
+    #visit '/accounts/new'
+    #fill_in "account_name", with: string
+    #fill_in "account_email", with: string2
+    #fill_in "account_password", with: string3
+    #click_button("Save Changes")
+    #click_link "Logout"
+    @acct = Account.new(name:string, email:string2, password:string3, price_cents:50.00, notification:0)
+    @student = @acct.build_student()
+    @tutor = @acct.build_tutor(price_cents:20.00)
+  else 
+    @acct = Account.find_by_email(string2)  
   end
-  @acct = Account.find_by_email(string2)
+  
 end
 
 When("I click thye link to Logout") do
@@ -45,14 +50,20 @@ end
 
 Given("that I am logged in with name {string} and email {string} and password {string}") do |string, string2, string3|
   if Account.find_by_email(string2).nil?
-    visit '/accounts/new'
-    fill_in "account_name", with: string
-    fill_in "account_email", with: string2
-    fill_in "account_password", with: string3
-    click_button("Save Changes")
-    click_link "Logout"
+    #visit '/accounts/new'
+    #fill_in "account_name", with: string
+    #fill_in "account_email", with: string2
+    #fill_in "account_password", with: string3
+    #click_button("Save Changes")
+    #click_link "Logout"
+    @acct = Account.new(name:string, email:string2, password:string3, price_cents:50.00, notification:0)
+    @student = @acct.build_student()
+    @tutor = @acct.build_tutor(price_cents:20.00)
+    @acct.save
+  else
+    @acct = Account.find_by_email(string2)
   end
-  @acct = Account.find_by_email(string2)
+  visit '/'
   click_link "Log In"
   fill_in "account_email", with: string2
   fill_in "account_password", with: string3
@@ -75,12 +86,10 @@ end
 Given("I change to be logged in with name {string} and email {string} and password {string}") do |string, string2, string3|
   click_link "Logout"
   if Account.find_by_email(string2).nil?
-    visit '/accounts/new'
-    fill_in "account_name", with: string
-    fill_in "account_email", with: string2
-    fill_in "account_password", with: string3
-    click_button("Save Changes")
-    click_link "Logout"
+    @acct = Account.new(name:string, email:string2, password:string3, price_cents:50.00, notification:0)
+    @student = @acct.build_student()
+    @tutor = @acct.build_tutor(price_cents:20.00)
+    @acct.save
   end
   @acct = Account.find_by_email(string2)
   click_link "Log In"

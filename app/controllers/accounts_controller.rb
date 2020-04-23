@@ -14,6 +14,9 @@ class AccountsController < ApplicationController
         @account=current_user
         @tutor=@account.tutor
         @student=@account.student
+        @tutor_sessions = @account.tutor.sessions.where(:seen => false)
+        @student_sessions_approved = @account.student.sessions.where(:seen_student => false, :verified => true)
+        @student_sessions_rejected = @account.student.sessions.where(:seen_student => false, :verified => false)
     end
 
     def new
@@ -27,7 +30,7 @@ class AccountsController < ApplicationController
     def create
         
         @account = Account.new(account_params)
-
+        #@account.price_cents = 50.00
         if @account.email == "" || @account.name == "" or @account.password == ""
             redirect_to new_account_path, flash: {error: "All Fields are Mandatory"}
             return
@@ -42,13 +45,12 @@ class AccountsController < ApplicationController
             return
         
         end
-        puts(account_params)
-        puts(@account.email)
         @student = @account.build_student()
         @tutor = @account.build_tutor(price_cents:20.00)
+        @account.notification = 0
         @account.save
         session[:account_id] = @account.id
-        redirect_to root_path
+        redirect_to account_path(@account)
     end
 
     private

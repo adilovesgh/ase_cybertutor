@@ -17,5 +17,4 @@ Scenario: add new account
   And I add "jeffharper@abc.com" for the account email
   And I add "password" for the account password
   And I press Save Changes
-  Then I should redirect to the home page
-  And I should see "Jeff Harper"
+  Then I should see "Jeff Harper"

@@ -3,6 +3,22 @@ class SessionsController < ApplicationController
         @account = Account.find(session[:account_id])
         @sessions = @account.student.sessions
         @teaching_sessions = @account.tutor.sessions
+        #puts("approved not seen by student!!!!!!!!!!!!!!!!")
+        @account.notification = 0
+        @account.save
+        for s in @sessions
+            unless s.seen_student
+                s.seen_student = true
+                s.save
+            end
+        end
+        #puts("approved not seen by tutor!!!!!!!!!!!!!!!!!")
+        for s in @teaching_sessions
+            unless s.seen
+                s.seen = true
+                s.save
+            end
+        end
     end
 
     def show
@@ -17,7 +33,9 @@ class SessionsController < ApplicationController
         @sessions = @account.tutor.sessions
         @session = Session.find(params["id"])
         if Session.no_conflicting_times(@session, @sessions)
-            @session.update_attributes(:pending => false, :verified => true)
+            @session.update_attributes(:pending => false, :verified => true, :seen_student => false)
+            @session.student.account.notification += 1
+            @session.student.account.save
         else 
             flash[:error] = "Approving this will cause a scheduling conflict!"
         end
@@ -27,7 +45,10 @@ class SessionsController < ApplicationController
     def reject
         @account = Account.find(session[:account_id])
         @session = Session.find(params["id"])
-        @session.update_attributes(:pending => false, :verified => false)
+        @session.update_attributes(:pending => false, :verified => false, :seen_student => false)
+        @session.student.account.price_cents += @session.price.to_i
+        @session.student.account.notification += 1
+        @session.student.account.save
         redirect_to subject_tutor_sessions_path(0, 0)
     end
 
@@ -66,19 +87,20 @@ class SessionsController < ApplicationController
                     @tutor = Tutor.find(params[:tutor_id])
                     @student = @account.student
                     @price = Session.compute_session_cost(@tutor.price_cents, params["session"])
-                    @subject = Subject.find(params[:subject_id])
-                    @session = @tutor.sessions.build(subject:@subject, student:@student, price:@price, start_time:@start_time, end_time:@end_time, pending:true, verified:false)
-                    session[:tutor] = @tutor
-                    session[:subject] = @subject
-                    session[:start_time] = @start_time
-                    session[:end_time] = @end_time
-                    session[:price] = @price
-                    session[:price_cents] = @price * 100
-
-                    redirect_to :controller=>"orders",
-                                :action=>"index"
-                    #@session.save
-                    #redirect_to subject_tutor_sessions_path(1,1)
+                    if @price > @account.price_cents
+                        errors = ["You do not have enough balance!", "Your Balance: $#{@account.price_cents}", "Total Price: $#{@price}"]
+                        flash[:error] = errors
+                        redirect_to new_subject_tutor_session_path
+                    else
+                        @subject = Subject.find(params[:subject_id])
+                        @session = @tutor.sessions.build(subject:@subject, student:@student, price:@price, start_time:@start_time, end_time:@end_time, pending:true, verified:false, seen:false, seen_student:true)
+                        @session.save
+                        @account.price_cents -= @price
+                        @account.save
+                        @tutor.account.notification += 1
+                        @tutor.account.save
+                        redirect_to subject_tutor_sessions_path(1,1)
+                    end
                 else
                     flash[:error] = "You already have a session conflicting with this!"
                     redirect_to new_subject_tutor_session_path

@@ -11,17 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200401231517) do
+ActiveRecord::Schema.define(version: 20200422224231) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.string   "email"
     t.string   "password_digest"
+    t.integer  "price_cents",     default: 0, null: false
+    t.integer  "notification"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -76,6 +78,8 @@ ActiveRecord::Schema.define(version: 20200401231517) do
     t.string   "paypal_plan_name"
     t.integer  "price_cents",      default: 0,     null: false
     t.string   "price_currency",   default: "USD", null: false
+    t.boolean  "seen"
+    t.boolean  "seen_student"
   end
 
   add_index "sessions", ["student_id"], name: "index_sessions_on_student_id", using: :btree

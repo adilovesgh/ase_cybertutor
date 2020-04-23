@@ -1,5 +1,6 @@
 - [:notice, :error, :success].each do |key|
   - unless flash[key].blank?
+    /%p{ :class => "flash-error" }= flash[key].join("<br/>").html_safe
     %p{ :class => "flash-error" }= flash[key]
 
 %div{:class => "container-fluid"}
@@ -10,6 +11,10 @@
   Subject: #{@subject.name}
   %br
   Tutor: #{@tutor.account.name}
+  %br
+  Remaining Balance: $#{@account.price_cents}
+  %br
+  Rate: $#{@tutor.price_cents}/hr
   %br
   %br
   %h4 Request a session on
@@ -30,14 +35,15 @@
     =select :session, :start_ampm, ['am','pm']
 
     %br
-    =label :session, :to, 'for a duration of'
+    =label :session, :to, 'For a duration of'
 
     =select :session, :hours, ['0', '1', '2']
     =label :session, :colon, 'hours'
     =select :session, :minutes, @minutes
     =label :session, :minutes, 'minutes'
-
-    = submit_tag 'Book Changes', :class => 'btn btn-primary'
+    %br
+    %br
+    =submit_tag 'Book Changes', :class => 'btn btn-primary'
 
   %br
   =link_to "Go back", subject_tutor_reviews_path(@subject, @tutor)
