@@ -1,7 +1,11 @@
 - [:notice, :error, :success].each do |key|
   - unless flash[key].blank?
     /%p{ :class => "flash-error" }= flash[key].join("<br/>").html_safe
-    %p{ :class => "flash-error" }= flash[key]
+    - if flash[key].kind_of?(Array)
+      - flash[key].each do |f|
+        %p{ :class => "flash-error" }= f
+    - else
+      %p{ :class => "flash-error" }= flash[key]
 
 %div{:class => "container-fluid"}
   %h2.heading Book a new session with #{@tutor.account.name}
