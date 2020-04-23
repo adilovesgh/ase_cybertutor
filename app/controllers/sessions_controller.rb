@@ -88,7 +88,8 @@ class SessionsController < ApplicationController
                     @student = @account.student
                     @price = Session.compute_session_cost(@tutor.price_cents, params["session"])
                     if @price > @account.price_cents
-                        flash[:error] = "You do not have enough balance!\nYour Balance: #{@account.price_cents}\nTotal Price: #{@price}"
+                        errors = ["You do not have enough balance!", "Your Balance: $#{@account.price_cents}", "Total Price: $#{@price}"]
+                        flash[:error] = errors
                         redirect_to new_subject_tutor_session_path
                     else
                         @subject = Subject.find(params[:subject_id])
