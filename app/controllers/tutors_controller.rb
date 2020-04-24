@@ -20,7 +20,6 @@ class TutorsController < ApplicationController
         unless session[:account_id].nil?
             @account = Account.find(session[:account_id])
         end
-        @subject = Subject.find(params[:subject_id])
     end
 
     def edit
@@ -36,18 +35,34 @@ class TutorsController < ApplicationController
 
 
     def create
+        #@account = nil
+        #unless session[:account_id].nil?
+        #    @account = Tutor.find(session[:account_id])
+        #end
+    	#@subject = Subject.find(params[:subject_id])
+        #@tutor = @subject.tutors.build(tutor_params)
+        #@tutor.save
+        #redirect_to subject_tutors_path(params[:subject_id])
         @account = nil
         unless session[:account_id].nil?
-            @account = Tutor.find(session[:account_id])
+            @account = Account.find(session[:account_id])
         end
-    	@subject = Subject.find(params[:subject_id])
-        @tutor = @subject.tutors.build(tutor_params)
-        @tutor.save
-        redirect_to subject_tutors_path(params[:subject_id])
+        puts(tutor_params[:rate])
+        @rate = tutor_params[:rate].to_f
+        #change it later
+        if true
+            @account.tutor.price_cents = @rate
+            @account.tutor.save
+            redirect_to account_path(@account)
+        else
+            flash[:error] = "Please enter in a valid rate."
+            redirect_to new_tutor_path
+        end
+        
     end
 
     private
     def tutor_params
-        params.require(:tutor).permit(:name, :experience, :subject, :price_cents)
+        params.require(:tutor).permit(:rate)
     end
 end

@@ -1,0 +1,12 @@
+- [:notice, :error, :success].each do |key|
+  - unless flash[key].blank?
+    %p{ :class => "flash-error" }= flash[key]
+
+%div{:class => "container-fluid"}
+  %h1 Hourly Rate for #{@account.name}
+  %span Current Rate: $#{@account.tutor.price_cents}/hr
+
+  = form_tag tutors_path do
+    = label :tutor, :amount, 'New Rate $'
+    = text_field :tutor, 'rate'
+    = submit_tag 'Save Changes', :class => 'btn btn-primary'

@@ -4,6 +4,9 @@
       %h3.heading Account for #{@account.name}
       %span Balance: $#{@account.price_cents}
       %span= link_to "Add Balance", orders_path
+      %br
+      %span Hourly Rate: $#{@account.tutor.price_cents}/hr
+      %span= link_to "Change Rate", new_tutor_path
 
       %table#tutors.table.table-striped.col-md-12
         %thead
