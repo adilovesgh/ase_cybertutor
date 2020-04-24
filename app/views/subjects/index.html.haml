@@ -1,3 +1,7 @@
+- [:notice, :error, :success].each do |key|
+  - unless flash[key].blank?
+    %p{ :class => "flash-error" }= flash[key]
+
 %div{:class => "container-fluid"}
   %h2.heading All Subjects
 

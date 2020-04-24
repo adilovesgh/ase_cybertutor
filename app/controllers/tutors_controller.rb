@@ -27,10 +27,11 @@ class TutorsController < ApplicationController
         @account = Account.find(session[:account_id])
         unless(@subject.tutors.exists?(id:@account.tutor.id))
             @subject.tutors << @account.tutor
+            redirect_to tutor_path(@account.tutor)
         else
             flash[:error] = "You are already signed up to tutor this subject."
+            redirect_to subjects_path
         end
-        redirect_to tutor_path(@account.tutor)
     end
 
 
