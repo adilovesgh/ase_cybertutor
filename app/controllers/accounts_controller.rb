@@ -23,7 +23,11 @@ class AccountsController < ApplicationController
     end
 
     def edit
-        reset_session
+    	
+    end
+
+    def logout
+    	reset_session
         redirect_to root_path
     end
 

@@ -20,7 +20,11 @@ Rails.application.routes.draw do
   get '/reject/:id', to: 'sessions#reject', as: 'reject'
 
   resources :students
-  resources :accounts
+  resources :accounts do
+    member do
+      get 'logout'
+    end
+  end
   resources :tutors
   resources :subjects
   resources :orders
