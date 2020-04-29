@@ -23,11 +23,18 @@ Rails.application.routes.draw do
   resources :accounts do
     member do
       get 'logout'
+      get 'makereviewer'
+      get 'revokereviewer'
     end
   end
   resources :tutors
   resources :subjects
   resources :orders
+  resources :tutor_requests do
+    member do
+      get 'tutor_approve'
+    end
+  end
 
   get '/orders/', to: 'orders#index'
   post '/orders/submit', to: 'orders#submit'

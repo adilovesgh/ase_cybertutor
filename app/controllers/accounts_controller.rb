@@ -1,7 +1,11 @@
 class AccountsController < ApplicationController
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 	def index
-        @accounts = Account.all
+        @accounts = Account.all.order(:name)
+        @account = nil
+        unless session[:account_id].nil?
+            @account = Tutor.find(session[:account_id])
+        end
     end
 
     def show
@@ -20,15 +24,30 @@ class AccountsController < ApplicationController
     end
 
     def new
+        
     end
 
     def edit
-    	
+    	@accounts = Account.all
     end
 
     def logout
     	reset_session
         redirect_to root_path
+    end
+
+    def makereviewer
+        @account = Account.find(params[:id])
+        @account.is_reviewer = true
+        @account.save
+        redirect_to accounts_path
+    end
+
+    def revokereviewer
+        @account = Account.find(params[:id])
+        @account.is_reviewer = false
+        @account.save
+        redirect_to accounts_path
     end
 
     def create
@@ -51,6 +70,7 @@ class AccountsController < ApplicationController
         end
         @student = @account.build_student()
         @tutor = @account.build_tutor(price_cents:20.00)
+        @account.is_reviewer=false
         @account.notification = 0
         @account.save
         session[:account_id] = @account.id

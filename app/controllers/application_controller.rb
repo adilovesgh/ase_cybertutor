@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :logged_in?
   helper_method :notification_count
   helper_method :has_notification?
+  helper_method :is_reviewer?
 
   # before_filter:set_cache_buster
 
@@ -22,10 +23,14 @@ class ApplicationController < ActionController::Base
   end
 
   def notification_count
-      Account.find_by(id: session[:account_id]).notification
+    Account.find_by(id: session[:account_id]).notification
   end
 
   def has_notification?
     Account.find_by(id: session[:account_id]).notification > 0
+  end
+
+  def is_reviewer?
+    Account.find_by(id: session[:account_id]).is_reviewer
   end
 end

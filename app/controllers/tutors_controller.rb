@@ -12,6 +12,7 @@ class TutorsController < ApplicationController
         unless session[:account_id].nil?
             @account = Account.find(session[:account_id])
         end
+        @tutor_requests = @account.tutor.tutor_requests
         @subjects = @account.tutor.subjects
     end
 
@@ -25,9 +26,17 @@ class TutorsController < ApplicationController
     def edit
         @subject = Subject.find(params[:id])
         @account = Account.find(session[:account_id])
+        @tutor_request = TutorRequest.all
         unless(@subject.tutors.exists?(id:@account.tutor.id))
-            @subject.tutors << @account.tutor
-            redirect_to tutor_path(@account.tutor)
+            unless(@tutor_request.exists?(tutor:@account.tutor, subject:@subject))
+                @tutor_request = TutorRequest.new(tutor:@account.tutor, subject:@subject)
+                @tutor_request.save
+                puts("lets get it!")
+                redirect_to tutor_path(@account.tutor)
+            else
+                flash[:error] = "You already have a request to tutor #{@subject.name} pending."
+                redirect_to subjects_path
+            end
         else
             flash[:error] = "You are already signed up to tutor this subject."
             redirect_to subjects_path
