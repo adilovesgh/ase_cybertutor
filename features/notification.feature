@@ -10,6 +10,10 @@ Background:
   And I click on Subjects you teach
   And I click on Register to tutor a subject
   And I click on Sign up to tutor "English"
+  And I change to be logged in with name "Admin" and email "admin@admin.com" and password "password"
+  And I press on "Tutor Requests"
+  And I press on "Approve Tutor"
+  
   And I change to be logged in with name "Jack Palmer" and email "jp@morgan.com" and password "password1"
   And I go to the subjects page
   When I click on Tutors for "English"

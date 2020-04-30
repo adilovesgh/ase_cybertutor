@@ -19,8 +19,12 @@ Given("that I am logging in as {string} and email {string} and password {string}
     #click_button("Save Changes")
     #click_link "Logout"
     @acct = Account.new(name:string, email:string2, password:string3, price_cents:50.00, notification:0)
+    @admin = Account.new(name:"Admin", email:"admin@admin.com", password:"password", price_cents:50.00, notification:0, is_reviewer:true)
     @student = @acct.build_student()
     @tutor = @acct.build_tutor(price_cents:20.00)
+    @admin_student = @admin.build_student()
+    @admin_tutor = @admin.build_tutor(price_cents:20.00)
+    @admin.save
   else 
     @acct = Account.find_by_email(string2)  
   end
@@ -60,6 +64,10 @@ Given("that I am logged in with name {string} and email {string} and password {s
     @student = @acct.build_student()
     @tutor = @acct.build_tutor(price_cents:20.00)
     @acct.save
+    @admin = Account.new(name:"Admin", email:"admin@admin.com", password:"password", price_cents:50.00, notification:0, is_reviewer:true)
+    @admin_student = @admin.build_student()
+    @admin_tutor = @admin.build_tutor(price_cents:20.00)
+    @admin.save
   else
     @acct = Account.find_by_email(string2)
   end
