@@ -133,3 +133,34 @@ html, body {
 .left {
     padding-left: 15px
 }
+.parent {
+    position:relative
+}
+.child {
+    text-align:center;
+    position:absolute;
+    top: 35%;
+    left: 25%;
+    width: 50%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    background: var(--navbar-bg-color);
+}
+.logchild {
+    position:absolute;
+    top: 35%;
+    left: 40%;
+    width: 20%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    background: var(--navbar-bg-color);
+}
+.accchild {
+    position:absolute;
+    top: 35%;
+    left: 40%;
+    width: 20%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    background: var(--navbar-bg-color);
+}
