@@ -1,17 +1,18 @@
-%h2 All Accounts
+%div{:class => "container-fluid"}
+  %h2 All Accounts
 
-%table#accounts.table.table-striped.col-md-12
-  %thead
-    %tr
-      %th Name
-      %th Email
-  %tbody
-    - @accounts.each do |account|
+  %table#accounts.table.table-striped.col-md-12
+    %thead
       %tr
-        %td= account.name
-        %td= account.email
-        - if account.is_reviewer
-          %td= link_to "Revoke Reviewer", revokereviewer_account_path(account)
-        - else
-          %td= link_to "Make Reviewer", makereviewer_account_path(account)
-= link_to 'Add new account', new_account_path
+        %th Name
+        %th Email
+    %tbody
+      - @accounts.each do |account|
+        %tr
+          %td= account.name
+          %td= account.email
+          - if account.is_reviewer
+            %td= link_to "Revoke Reviewer", revokereviewer_account_path(account)
+          - else
+            %td= link_to "Make Reviewer", makereviewer_account_path(account)
+  = link_to 'Add new account', new_account_path

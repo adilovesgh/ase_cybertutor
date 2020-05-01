@@ -29,3 +29,11 @@ end
 Then("I click on Tutors for {string}") do |string|
   click_link("Tutors for " + string)
 end
+
+When("I go to {string} page") do |string|
+  visit '/'+string
+end
+
+When("I enter {string} for the rate") do |string|
+  fill_in "tutor_rate", with: string
+end

@@ -31,7 +31,6 @@ class TutorsController < ApplicationController
             unless(@tutor_request.exists?(tutor:@account.tutor, subject:@subject))
                 @tutor_request = TutorRequest.new(tutor:@account.tutor, subject:@subject)
                 @tutor_request.save
-                puts("lets get it!")
                 redirect_to tutor_path(@account.tutor)
             else
                 flash[:error] = "You already have a request to tutor #{@subject.name} pending."
@@ -58,9 +57,12 @@ class TutorsController < ApplicationController
             @account = Account.find(session[:account_id])
         end
         puts(tutor_params[:rate])
-        @rate = tutor_params[:rate].to_f
+        @rate = tutor_params[:rate]
         #change it later
-        if true
+        r1 = /^\d+\.\d\d$/
+        r2 = /^\d$/
+        if @rate.match(r1) or @rate.to_i.to_s == @rate
+            @rate = @rate.to_f
             @account.tutor.price_cents = @rate
             @account.tutor.save
             redirect_to account_path(@account)
