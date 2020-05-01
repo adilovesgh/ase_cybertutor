@@ -1,3 +1,4 @@
+%img{:class => "photo", :src=>"/tutoring.png"}
 - [:notice, :error, :success].each do |key|
   - unless flash[key].blank?
     /%p{ :class => "flash-error" }= flash[key].join("<br/>").html_safe
@@ -9,45 +10,45 @@
 
 %div{:class => "container-fluid"}
   %div{:class=>"prompt"} Book a new session with #{@tutor.account.name}
+  %dv{:class=>"row"}
+    %div{:class=>"col-md-6"}
+      %h4 Request a session on
 
-  Basic information 
-  %br
-  Subject: #{@subject.name}
-  %br
-  Tutor: #{@tutor.account.name}
-  %br
-  Remaining Balance: $#{@account.price_cents}
-  %br
-  Rate: $#{@tutor.price_cents}/hr
-  %br
-  %br
-  %h4 Request a session on
+      = form_tag subject_tutor_sessions_path do
+        = label :session, :month, 'Month'
+        = select :session, :month, ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
-  = form_tag subject_tutor_sessions_path do
-    = label :session, :month, 'Month'
-    = select :session, :month, ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        = label :session, :day, 'Day'
+        = select :session, :day, @days
 
-    = label :session, :day, 'Day'
-    = select :session, :day, @days
+        %br
 
-    %br
+        =label :session, :start_hour, 'From'
+        =select :session, :start_hour, @hours
+        =label :session, :colon, ':'
+        =select :session, :start_minute, @minutes
+        =select :session, :start_ampm, ['am','pm']
 
-    =label :session, :start_hour, 'From'
-    =select :session, :start_hour, @hours
-    =label :session, :colon, ':'
-    =select :session, :start_minute, @minutes
-    =select :session, :start_ampm, ['am','pm']
+        %br
+        =label :session, :to, 'For a duration of'
 
-    %br
-    =label :session, :to, 'For a duration of'
-
-    =select :session, :hours, ['0', '1', '2']
-    =label :session, :colon, 'hours'
-    =select :session, :minutes, @minutes
-    =label :session, :minutes, 'minutes'
-    %br
-    %br
-    =submit_tag 'Book Changes', :class => 'btn btn-primary'
+        =select :session, :hours, ['0', '1', '2']
+        =label :session, :colon, 'hours'
+        =select :session, :minutes, @minutes
+        =label :session, :minutes, 'minutes'
+        %br
+        %br
+        =submit_tag 'Book Changes', :class => 'btn btn-primary'
+    %div{:class=>"col-md-6"}
+      %h4 Basic information 
+      Subject: #{@subject.name}
+      %br
+      Tutor: #{@tutor.account.name}
+      %br
+      Remaining Balance: $#{@account.price_cents}
+      %br
+      Rate: $#{@tutor.price_cents}/hr
+      %br
 
   %br
   =link_to "Go back", subject_tutor_reviews_path(@subject, @tutor)
