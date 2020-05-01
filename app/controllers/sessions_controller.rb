@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
     def index
         @account = Account.find(session[:account_id])
-        @sessions = @account.student.sessions
+        @sessions = @account.student.sessions.order(:start_time)
         @teaching_sessions = @account.tutor.sessions
         #puts("approved not seen by student!!!!!!!!!!!!!!!!")
         @account.notification = 0

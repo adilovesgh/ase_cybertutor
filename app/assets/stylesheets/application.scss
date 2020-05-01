@@ -69,6 +69,7 @@ html, body {
     font-size: 28px;
     display: inline-block;
 }
+
 .title {
     padding-top: 20px;
     font-size: 28px;
@@ -88,7 +89,8 @@ html, body {
 
 #content {
     height: 100%;
-    background: #CDE
+    //background: #CDE
+    background: var(--navbar-bg-color);
 }
 .heading{
     font-size: 30px;
@@ -104,4 +106,30 @@ html, body {
 .notification_link {
     padding: 3px;
     background: yellow 
+}
+.photo {
+    width:100%
+}
+
+.email {
+    padding: 0px;
+    margin: 0px
+}
+
+.prompt {
+    font-size: 30px;
+    font-weight:bold;
+    display: block
+}
+
+.submit {
+    margin-top:5px
+}
+
+.blueback {
+    background: var(--navbar-bg-color);
+}
+
+.left {
+    padding-left: 15px
 }

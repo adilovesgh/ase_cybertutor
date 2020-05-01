@@ -44,14 +44,6 @@ class TutorsController < ApplicationController
 
 
     def create
-        #@account = nil
-        #unless session[:account_id].nil?
-        #    @account = Tutor.find(session[:account_id])
-        #end
-    	#@subject = Subject.find(params[:subject_id])
-        #@tutor = @subject.tutors.build(tutor_params)
-        #@tutor.save
-        #redirect_to subject_tutors_path(params[:subject_id])
         @account = nil
         unless session[:account_id].nil?
             @account = Account.find(session[:account_id])

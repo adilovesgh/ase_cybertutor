@@ -5,7 +5,7 @@
 %div{:class => "container-fluid"}
   %div{:class => "row"}
     %div{:class => "col-md-6"}
-      %h2.heading Sessions for teaching
+      %div{:class=>"prompt"} Sessions for teaching
 
       %h4 Pending Sessions
 
@@ -54,7 +54,7 @@
                 %td= link_to "Join Room", subject_tutor_session_path(teaching_session.subject, teaching_session.tutor, teaching_session[:id])
 
     %div{:class => "col-md-6"}
-      %h2.heading Sessions for learning
+      %div{:class=>"prompt"} Sessions for learning
 
       %h4 Pending Sessions
 

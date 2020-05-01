@@ -1,7 +1,17 @@
 %div{:class => "container-fluid"}
-  
-  %h2.heading Create New Subject
-  = form_tag subjects_path do
-    = label :subject, :name, 'Name'
-    = text_field :subject, 'name'
-    = submit_tag 'Save Changes', :class => 'btn btn-primary'
+  %div{:class =>"row"}
+    %img{:class => "photo", :src=>"/blackboard.png"}
+  %div{:class =>"container"}
+    %div{:class=>"row d-flex justify-content-center"}
+      - [:notice, :error, :success].each do |key|
+        - unless flash[key].blank?
+          %p{ :class => "flash-error" }= flash[key]
+    %div{:class=>"row d-flex justify-content-center"}
+      %div{:class=>"prompt"} New Subject
+  %div{:class=>"row d-flex justify-content-center"}
+    = form_tag subjects_path do
+      %div{:class=> "email"} Name
+      = text_field :subject, 'name'
+      %br
+      %div{:class=>"submit row d-flex justify-content-center"}
+        = submit_tag 'Save Changes', :class => 'btn btn-primary'

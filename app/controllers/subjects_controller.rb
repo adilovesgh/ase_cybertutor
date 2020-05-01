@@ -4,7 +4,7 @@ class SubjectsController < ApplicationController
         unless session[:account_id].nil?
             @account = Account.find(session[:account_id])
         end
-        @subjects = Subject.all
+        @subjects = Subject.all.order(:name)
         if session[:account_id].nil?
             @logged_in = false
             puts(session[:account_id])

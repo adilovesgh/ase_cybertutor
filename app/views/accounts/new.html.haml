@@ -1,19 +1,25 @@
-
-- [:notice, :error, :success].each do |key|
-  - unless flash[key].blank?
-    %p{ :class => "flash-error" }= flash[key]
 %div{:class => "container-fluid"}
-  %h2.heading Create New Account
+  %div{:class =>"row"}
+    %img{:class => "photo", :src=>"/tutoring.png"}
+  %div{:class =>"container"}
+    %div{:class=>"row d-flex justify-content-center"}
+      - [:notice, :error, :success].each do |key|
+        - unless flash[key].blank?
+          %p{ :class => "flash-error" }= flash[key]
+    %div{:class=>"row d-flex justify-content-center"}
+      %div{:class=>"prompt"} New Account
 
-  = form_tag accounts_path do
+    %div{:class=>"row d-flex justify-content-center"}
+      = form_tag accounts_path do
 
-    = label :account, :name, 'Name'
-    = text_field :account, 'name'
-    <br/>
-    = label :account, :email, 'Email'
-    = text_field :account, 'email'
-    <br/>
-    = label :account, :password, 'Password'
-    = password_field :account, 'password'
-    <br/>
-    = submit_tag 'Save Changes', :class => 'btn btn-primary'
+        %div{:class=> "email"} Name
+        = text_field :account, 'name'
+        %br
+        %div{:class=> "email"} Email
+        = text_field :account, 'email'
+        %br
+        %div{:class=> "email"} Password
+        = password_field :account, 'password'
+        %br
+        %div{:class=>"submit row d-flex justify-content-center"}
+          = submit_tag 'Save Changes', :class => 'btn btn-primary'
