@@ -8,7 +8,7 @@ Scenario: click on link to add new account
 
   Given I am on the accounts page
   When I click on Add new account
-  Then I should see Create New Account
+  Then I should see "New Account"
 
 Scenario: add new account
 
