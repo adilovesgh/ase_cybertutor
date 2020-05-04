@@ -9,7 +9,7 @@
     %tbody
       - @accounts.each do |account|
         %tr
-          %td= account.name
+          %td= link_to "#{account.name}", subject_tutor_reviews_path(0,account.tutor)
           %td= account.email
           - if account.is_reviewer
             %td= link_to "Revoke Reviewer", revokereviewer_account_path(account)

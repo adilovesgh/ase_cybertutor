@@ -9,21 +9,21 @@
 			-unless @account.nil?
 				%div{:class=>"row"}
 					%div{:class=>"col-md-4"}
-						%h3= link_to "All Tutors", tutors_path(), {class: "home-links"}
+						%h3= link_to "All Tutors", tutors_path(), {class: "child-links"}
 					%div{:class=>"col-md-4"}
-						%h3= link_to "All Subjects", subjects_path(), {class: "home-links"}
+						%h3= link_to "All Subjects", subjects_path(), {class: "child-links"}
 					%div{:class=>"col-md-4"}
-						%h3= link_to "My Account", account_path(@account), {class: "home-links"}
+						%h3= link_to "My Account", account_path(@account), {class: "child-links"}
 
 			- else
 				%div{:class=>"row"}
 					%div{:class=>"col-md-3"}
-						%h3= link_to "All Tutors", tutors_path(), {class: "home-links"}
+						%h3= link_to "All Tutors", tutors_path(), {class: "child-links"}
 					%div{:class=>"col-md-3"}
-						%h3= link_to "All Subjects", subjects_path(), {class: "home-links"}
+						%h3= link_to "All Subjects", subjects_path(), {class: "child-links"}
 					%div{:class=>"col-md-3"}
-						%h3= link_to "Login", login_path, {class: "home-links"}
+						%h3= link_to "Login", login_path, {class: "child-links"}
 					%div{:class=>"col-md-3"}
-						%h3= link_to "Sign Up", new_account_path, {class: "home-links"}
+						%h3= link_to "Sign Up", new_account_path, {class: "child-links"}
 
 
