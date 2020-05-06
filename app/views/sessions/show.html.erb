@@ -13,9 +13,7 @@
     <br>
     <div class="warning"> If the video does not display, please refresh the screen. </div>
   </ul>
-</div>
 
-<div class="col-md-3">
   <div class="panel panel-primary">
     <div class="panel-heading">
       <br>
@@ -28,16 +26,22 @@
       </ul>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <ul id="conversations-list">
+        <br>
+        <% @conversations.each do |conversation| %>
+          <%= render 'conversations/conversation', conversation: conversation, account: current_account %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 </div>
 
-<div class="col-md-9">
-  <ul id="conversations-list">
-    <br>
-    <% @conversations.each do |conversation| %>
-      <%= render 'conversations/conversation', conversation: conversation, account: current_account %>
-    <% end %>
-  </ul>
-</div>
+
+
+
 
 <% if @clicked_subject %>
 <script crossorigin src="https://unpkg.com/@daily-co/daily-js"></script>
