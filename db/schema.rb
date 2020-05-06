@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200505024839) do
+ActiveRecord::Schema.define(version: 20200506191007) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20200505024839) do
     t.integer  "price_cents",     default: 0, null: false
     t.integer  "notification"
     t.boolean  "is_reviewer"
+    t.boolean  "admin"
   end
 
   create_table "conversations", force: :cascade do |t|
