@@ -1,13 +1,8 @@
 = stripe_javascript_tag
 
 %div{:class => "container-fluid"}
-  %div{:class =>"row parent"}
-    %img{:class => "photo", :src=>"/main_screen.png"}
-  %div{:class =>"container logchild"}
-    %div{:class=>"row"}
-      %div{:class=>"row d-flex justify-content-center"}
-        %div{:class=>"prompt"} Select Amount
-      %div{:class=>"row d-flex justify-content-center"}= form_tag({:controller => "orders", :action => "submit"}, {:id => 'order-details'}) do
+  %h1 Select Amount
+  = form_tag({:controller => "orders", :action => "submit"}, {:id => 'order-details'}) do
     %input{id:'order-type', :type=>"hidden", :value=>"stripe", :name=>'orders[payment_gateway]'}
     .form_row
       %div{'data-charges-and-payments-section': true}
@@ -98,7 +93,6 @@
     });
   }());
   //YOUR PAYPAL CODE WILL BE HERE
-
 :css
   #card-element {
     width:500px;
