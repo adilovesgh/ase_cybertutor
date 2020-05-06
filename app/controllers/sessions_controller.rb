@@ -7,6 +7,9 @@ class SessionsController < ApplicationController
         @account.notification = 0
         @account.save
         for s in @sessions
+            if s.pending and s.start_time < Time.now
+                s.destroy
+            end
             unless s.seen_student
                 s.seen_student = true
                 s.save
@@ -14,6 +17,9 @@ class SessionsController < ApplicationController
         end
         #puts("approved not seen by tutor!!!!!!!!!!!!!!!!!")
         for s in @teaching_sessions
+            if s.pending and s.start_time < Time.now
+                s.destroy
+            end
             unless s.seen
                 s.seen = true
                 s.save
