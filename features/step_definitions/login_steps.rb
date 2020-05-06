@@ -31,6 +31,32 @@ Given("that I am logging in as {string} and email {string} and password {string}
   
 end
 
+Given("that I am creating a past session") do
+  @acct = Account.new(name:"Jeff Harper", email:"j@b.com", password:"password", price_cents:50.00, notification:0)
+  @admin = Account.new(name:"Admin", email:"admin@admin.com", password:"password", price_cents:50.00, notification:0, is_reviewer:true)
+  @student = @acct.build_student()
+  @tutor = @acct.build_tutor(price_cents:20.00)
+  @admin_student = @admin.build_student()
+  @admin_tutor = @admin.build_tutor(price_cents:20.00)
+  @admin.save
+  @acct.save
+
+  @acct1 = Account.new(name:"Jack Palmer", email:"jp@morgan.com", password:"password", price_cents:50.00, notification:0)
+  @student = @acct1.build_student()
+  @tutor = @acct1.build_tutor(price_cents:20.00)
+  @acct1.save
+
+  @subject = Subject.new(name:"English")
+
+  @acct1.tutor.sessions.build(subject:@subject, student:@acct.student, price:20.00, start_time:(Time.now-60*60), end_time:Time.now, pending:true, verified:false, seen:false, seen_student:true)
+  visit '/'
+
+  click_link "Log In"
+  fill_in "account_email", with: @acct1.email
+  fill_in "account_password", with: @acct1.password
+  click_button("Save Changes")
+end
+
 When("I click thye link to Logout") do
   click_link "Logout"
 end

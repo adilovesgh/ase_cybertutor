@@ -29,6 +29,11 @@ When("I click on Sign up for a session") do
   click_link("Sign up for a session")
 end
 
+Then("{string} come before {string}") do |string, string2|
+  puts(page.body.index(string))
+  puts(page.body.index(string2))
+end
+
 When("I enter {string},{int},{int},{int},{string},{int},{int}") do |string, int, int2, int3, string2, int4, int5|
   select string.capitalize, from: "session_month"
   select int, from: "session_day"
@@ -62,7 +67,6 @@ When("I enter credit card informations {string} {string} {string}") do |string, 
   visit '/'  
   click_link "My Account"
 end
-
 
 When("I click {string}") do |string|
   click_button(string)

@@ -47,4 +47,14 @@ class Session < ActiveRecord::Base
   def self.compute_session_cost(price, input)
   	return price * (input['hours'].to_d + input['minutes'].to_d / 60)
   end
+
+  def self.splitmessage(message)
+    output = ""
+    while message.length > 30
+      output+=(message[0..29])
+      message = message[30..-1]
+    end
+    output += message
+    output
+  end
 end
