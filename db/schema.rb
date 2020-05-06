@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200429222300) do
+ActiveRecord::Schema.define(version: 20200505024839) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,26 @@ ActiveRecord::Schema.define(version: 20200429222300) do
     t.integer  "notification"
     t.boolean  "is_reviewer"
   end
+
+  create_table "conversations", force: :cascade do |t|
+    t.integer  "recipient_id"
+    t.integer  "sender_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "conversations", ["recipient_id", "sender_id"], name: "index_conversations_on_recipient_id_and_sender_id", unique: true, using: :btree
+
+  create_table "messages", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "account_id"
+    t.integer  "conversation_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "messages", ["account_id"], name: "index_messages_on_account_id", using: :btree
+  add_index "messages", ["conversation_id"], name: "index_messages_on_conversation_id", using: :btree
 
   create_table "orders", force: :cascade do |t|
     t.integer  "session_id"
@@ -136,6 +156,8 @@ ActiveRecord::Schema.define(version: 20200429222300) do
 
   add_index "tutors", ["account_id"], name: "index_tutors_on_account_id", using: :btree
 
+  add_foreign_key "messages", "accounts"
+  add_foreign_key "messages", "conversations"
   add_foreign_key "requests", "sessions"
   add_foreign_key "requests", "students"
   add_foreign_key "requests", "tutors"

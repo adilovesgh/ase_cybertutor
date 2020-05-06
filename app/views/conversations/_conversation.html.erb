@@ -1,0 +1,23 @@
+<li>
+  <div class="panel panel-default" data-conversation-id="<%= conversation.id %>">
+    <div class="panel-heading">
+      <%= link_to conversation.opposed_account(account).name, '', class: 'toggle-window' %>
+      <%= link_to "x", close_conversation_path(conversation), class: "btn btn-default btn-xs pull-right", remote: true, method: :post %>
+    </div>
+
+    <div class="panel-body" style="display: none;">
+      <div class="messages-list">
+        <ul style="list-style: none;">
+          <%= render 'conversations/conversation_content', messages: conversation.messages, account: account %>
+        </ul>
+      </div>
+      <%= form_for [conversation, conversation.messages.new], remote: true do |f| %>
+        <%= f.hidden_field :account_id, value: account.id %>
+        <br>
+        <%= f.text_area :body, :size => "80x3" %>
+        <br>
+        <%= f.submit "Send", class: "btn btn-success" %>
+      <% end %>      
+    </div>
+  </div>
+</li>

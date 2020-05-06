@@ -15,9 +15,9 @@ class AccountsController < ApplicationController
             puts("param =#{params[:id].class}  \nsession=#{session[:account_id].class} \n #{params[:id] != session[:account_id]}"    )
             redirect_to account_path(session[:account_id])
         end
-        @account=current_user
-        @tutor=@account.tutor
-        @student=@account.student
+        @account = current_account
+        @tutor = @account.tutor
+        @student = @account.student
         @tutor_sessions = @account.tutor.sessions.where(:seen => false)
         @student_sessions_approved = @account.student.sessions.where(:seen_student => false, :verified => true)
         @student_sessions_rejected = @account.student.sessions.where(:seen_student => false, :verified => false)

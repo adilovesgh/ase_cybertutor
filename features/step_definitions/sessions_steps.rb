@@ -13,12 +13,12 @@ When("I click on View your sessions") do
   click_link("View your sessions")
 end
 
-Then("I should see Sessions for learning") do
-  page.should have_content("Sessions for learning")
+Then("I should see Sessions for Learning") do
+  page.should have_content("Sessions for Learning")
 end
 
-Then("I should see Sessions for teaching") do
-  page.should have_content("Sessions for teaching")
+Then("I should see Sessions for Teaching") do
+  page.should have_content("Sessions for Teaching")
 end
 
 Then("I should see a link to Set up a new session to learn") do

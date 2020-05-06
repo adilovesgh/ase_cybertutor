@@ -23,7 +23,7 @@ Scenario: approve sessions
   And I enter "May",31,5,30,"pm",1,0
   And I click Book Changes
 
-  Then I should see Sessions for learning
+  Then I should see Sessions for Learning
   And I should see "Jeff Harper"
   And I should see "English"
   And I change to be logged in with name "Jeff Harper" and email "j@b.com" and password "password"

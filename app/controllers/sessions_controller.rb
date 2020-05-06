@@ -26,6 +26,15 @@ class SessionsController < ApplicationController
         @clicked_subject = Subject.find(params["subject_id"])
         @tutor = Tutor.find(params["tutor_id"])
         @session = Session.find(params["id"])
+
+        if(@account.name == @session.student.account.name)
+            @other_account = @session.tutor.account
+        else
+            @other_account = @session.student.account
+        end
+	
+    	session[:conversations] ||= []
+	    @conversations = Conversation.includes(:recipient, :messages).find(session[:conversations])
     end
 
     def approve

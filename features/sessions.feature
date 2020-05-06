@@ -12,8 +12,8 @@ Background:
 Scenario: view sessions
 
   When I click on View your sessions
-  Then I should see Sessions for learning
-  And I should see Sessions for teaching
+  Then I should see Sessions for Learning
+  And I should see Sessions for Teaching
   And I should see a link to Set up a new session to learn
 
 Scenario: add sessions
@@ -32,14 +32,14 @@ Scenario: add sessions
   And I click on Sign up for a session
   And I enter "May",31,5,30,"pm",1,0
   And I click Book Changes
-  Then I should see Sessions for learning
+  Then I should see Sessions for Learning
   And I should see "Jeff Harper"
   And I should see "English"
   And I change to be logged in with name "Jeff Harper" and email "j@b.com" and password "password"
   And I press on "Account"
   When I click on View your sessions
-  Then I should see Sessions for learning
-  And I should see Sessions for teaching
+  Then I should see Sessions for Learning
+  And I should see Sessions for Teaching
   And I should see "Jack Palmer"
   And I should see "English"
 
@@ -58,7 +58,7 @@ Scenario: check enough balance
   And I click on Sign up for a session
   And I enter "May",31,5,30,"pm",2,0
   And I click Book Changes
-  Then I should see Sessions for learning
+  Then I should see Sessions for Learning
 
   When I press on "Account"
   Then I should see "$10"
