@@ -33,6 +33,7 @@ class SessionsController < ApplicationController
         @tutor = Tutor.find(params["tutor_id"])
         @session = Session.find(params["id"])
 
+        @whiteboard_url = "https://wbo.ophir.dev/boards/" + @session.whiteboard_id
         if(@account.name == @session.student.account.name)
             @other_account = @session.tutor.account
         else
@@ -108,7 +109,8 @@ class SessionsController < ApplicationController
                         redirect_to new_subject_tutor_session_path
                     else
                         @subject = Subject.find(params[:subject_id])
-                        @session = @tutor.sessions.build(subject:@subject, student:@student, price:@price, start_time:@start_time, end_time:@end_time, pending:true, verified:false, seen:false, seen_student:true)
+                        whiteboard = generate_session_whiteboard(@start_time)
+                        @session = @tutor.sessions.build(subject:@subject, student:@student, price:@price, start_time:@start_time, end_time:@end_time, pending:true, verified:false, seen:false, seen_student:true, whiteboard_id:whiteboard)
                         @session.save
                         @account.price_cents -= @price
                         @account.save
@@ -127,5 +129,14 @@ class SessionsController < ApplicationController
     private
     def session_params
         params.require(:session).permit()
+    end
+
+    def generate_session_whiteboard(start_time)
+        timestring = start_time.utc.strftime('%m%d%Y%H%M')
+        length = 10
+        randstring = rand(36**length).to_s(36)
+        ret = randstring+timestring
+        puts ret
+        return ret
     end
 end

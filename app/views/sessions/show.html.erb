@@ -18,6 +18,19 @@
     <div class="panel-heading">
       <br>
       <br>
+      <h3 class="panel-title"> <%=link_to "Shared Whiteboard", @whiteboard_url, target: :_blank%> </h3>
+    </div>
+    <div class="panel-body">
+      <ul id="conversations-body">
+        <li>Message <%= @other_account.name%> (<%= link_to @other_account.email, conversations_path(account_id: @other_account), remote: true, method: :post %>)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <br>
+      <br>
       <h3 class="panel-title">Chat Window</h3>
     </div>
     <div class="panel-body">
