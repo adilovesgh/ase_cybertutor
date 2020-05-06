@@ -13,6 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20200506193533) do
 
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,6 +26,7 @@ ActiveRecord::Schema.define(version: 20200506193533) do
     t.integer  "price_cents",     default: 0, null: false
     t.integer  "notification"
     t.boolean  "is_reviewer"
+    t.boolean  "admin"
   end
 
   create_table "conversations", force: :cascade do |t|

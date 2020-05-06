@@ -4,7 +4,14 @@ class AccountsController < ApplicationController
         @accounts = Account.all.order(:name)
         @account = nil
         unless session[:account_id].nil?
-            @account = Tutor.find(session[:account_id])
+            @account = Account.find(session[:account_id])
+        end
+        if @account.nil?
+            redirect_to root_path, flash: {error: "Only admins can enter accounts page"}       
+        else
+            unless @account.admin
+                redirect_to root_path, flash: {error: "Only admins can enter accounts page"}
+            end
         end
     end
 
@@ -51,7 +58,14 @@ class AccountsController < ApplicationController
     end
 
     def create
-        
+        if Account.count == 0
+            puts("BUILDING!!!!!!!!!!!!!!!!!")
+
+            @admin = Account.new(name:"Admin", email:"aseadmin@aseadmin.com", password:"aseadmin", is_reviewer:true, admin:true, notification:0)
+            @admin.build_tutor(price_cents:20.00)
+            @admin.build_student
+            @admin.save
+        end
         @account = Account.new(account_params)
         #@account.price_cents = 50.00
         if @account.email == "" || @account.name == "" or @account.password == ""
@@ -71,6 +85,7 @@ class AccountsController < ApplicationController
         @student = @account.build_student()
         @tutor = @account.build_tutor(price_cents:20.00)
         @account.is_reviewer=false
+        @account.admin=false
         @account.notification = 0
         @account.save
         session[:account_id] = @account.id

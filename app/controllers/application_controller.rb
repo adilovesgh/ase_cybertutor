@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   helper_method :notification_count
   helper_method :has_notification?
   helper_method :is_reviewer?
+  helper_method :is_admin?
 
   # before_filter:set_cache_buster
 
@@ -20,6 +21,10 @@ class ApplicationController < ActionController::Base
 
   def logged_in?
     !current_account.nil?
+  end
+
+  def is_admin?
+    current_account.admin
   end
 
   def notification_count
