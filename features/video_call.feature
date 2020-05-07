@@ -38,5 +38,6 @@ Scenario: approve sessions
   When I press on link "Join Room"
   Then I should see "Video Call in Room"
   And I should see "If the video does not display, please refresh the screen"
+  And I should see link "Shared Whiteboard"
   And I should see "English"
   And I should see "Jeff Harper"
