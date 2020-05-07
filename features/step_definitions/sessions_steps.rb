@@ -13,6 +13,17 @@ When("I click on View your sessions") do
   click_link("View your sessions")
 end
 
+Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
+  temp = page.body.split(e2)
+  expect(temp[0].include? e1).to eq true
+end
+
+Then /I should see the 2nd "(.*)" before "(.*)"/ do |e1, e2|
+  temp = page.body.split(e2)
+  temp1 = temp[0].split(e1)
+  expect(temp1.length == 3).to eq true
+end
+
 Then("I should see Sessions for Learning") do
   page.should have_content("Sessions for Learning")
 end
