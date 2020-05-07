@@ -7,10 +7,10 @@ class AccountsController < ApplicationController
             @account = Account.find(session[:account_id])
         end
         if @account.nil?
-            redirect_to root_path, flash: {error: "Only admins can enter accounts page"}       
+            redirect_to root_path, flash: {error: "Only admins can enter the accounts page!"}       
         else
             unless @account.admin
-                redirect_to root_path, flash: {error: "Only admins can enter accounts page"}
+                redirect_to root_path, flash: {error: "Only admins can enter the accounts page!"}
             end
         end
     end

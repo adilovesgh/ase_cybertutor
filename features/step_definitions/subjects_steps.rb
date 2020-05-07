@@ -29,8 +29,8 @@ When("I click on Subjects you teach") do
   click_link("Subjects you teach")
 end
 
-Then("I should see All subjects {string} teaches") do |string|
-  page.should have_content("All subjects " + string + " teaches")
+Then("I should see All Subjects {string} Teaches") do |string|
+  page.should have_content("All Subjects " + string + " Teaches")
 end
 
 Then("I should see a link to Register to tutor a subject") do

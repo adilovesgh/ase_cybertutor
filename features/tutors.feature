@@ -20,7 +20,7 @@ Background:
   And I change to be logged in with name "Jeff Harpder" and email "j@b.com" and password "password"
   And I press on "Account"
   When I click on Subjects you teach
-  Then I should see All subjects "Jeff Harper" teaches
+  Then I should see All Subjects "Jeff Harper" Teaches
   And I should see "Science"
   And I go to the subjects page
   And I click on Tutors for "Science"

@@ -1,3 +1,4 @@
+%script(src="https://www.paypal.com/sdk/js?client-id=#{ENV['PAYPAL_CLIENT_ID']}")
 = stripe_javascript_tag
 
 %div{:class => "container-fluid"}
@@ -32,12 +33,12 @@
       %div{id:'card-errors', role:"alert"}
       %br
       %br
-    = submit_tag "Complete Purchase", id: "submit-stripe"
-  %div{id:'tab-paypal', class:'paymentSelectionTab'}
-    %div{id: "submit-paypal"}
-  %br
-  %br
-  %hr
+      = submit_tag "Complete Purchase", id: "submit-stripe"
+    %div{id:'tab-paypal', class:'paymentSelectionTab'}
+      %div{id: "submit-paypal"}
+    %br
+    %br
+    %hr
 :javascript
   function changeTab() {
     var newActiveTabID = $('input[name="payment-selection"]:checked').val();
@@ -92,7 +93,50 @@
       return false;
     });
   }());
-  //YOUR PAYPAL CODE WILL BE HERE
+  
+  (function setupPaypal() {
+    function isPayment() {
+      console.log("Inside isPayment()");
+      return true;
+    }
+
+    function submitOrderPaypal(chargeID) {
+      var $form = $("#order-details");
+      // Add a hidden input orders[charge_id]
+      $form.append($('<input type="hidden" name="orders[charge_id]"/>').val(chargeID));
+      // Set order type
+      $('#order-type').val('paypal');
+      $form.submit();
+    }
+
+    paypal.Buttons({
+      env: "#{ENV['PAYPAL_ENV']}",
+      createOrder: function() {
+        $('#order-type').val("paypal");
+        console.log("About to create order");
+        if (isPayment()) {
+          console.log("Confirmed that payment is valid, creating order");
+          return $.post("#{paypal_create_payment_url}", $('#order-details').serialize()).then(function(data) {
+            return data.token;
+          });
+        }
+      },
+      onApprove: function(data) {
+        console.log("About to approve order");
+        console.log(data)
+        if (isPayment()) {
+          console.log("Confirmed that payment is valid, approving order");
+          return $.post("#{paypal_execute_payment_url}", {
+            paymentID: data.paymentID,
+            payerID:   data.payerID
+          }).then(function() {
+            submitOrderPaypal(data.paymentID)
+          });
+        }
+      }
+    }).render('#submit-paypal');
+  }());
+
 :css
   #card-element {
     width:500px;
