@@ -23,9 +23,9 @@
               %tr
                 %td= link_to "#{teaching_session.student.account.name}" , student_path(teaching_session.student)
                 %td= teaching_session.subject.name
-                %td= (teaching_session.start_time-4*60*60).strftime("%F")
-                %td= (teaching_session.start_time-4*60*60).strftime("%I:%M%p")
-                %td= (teaching_session.end_time-4*60*60).strftime("%I:%M%p")
+                %td= (teaching_session.start_time).strftime("%F")
+                %td= (teaching_session.start_time).strftime("%I:%M%p")
+                %td= (teaching_session.end_time).strftime("%I:%M%p")
                 %td=link_to "Approve", approve_path( teaching_session)
                 %td=link_to "Reject", reject_path(teaching_session)
 
@@ -48,9 +48,9 @@
               %tr
                 %td= link_to "#{teaching_session.student.account.name}" , student_path(teaching_session.student)
                 %td= teaching_session.subject.name
-                %td= (teaching_session.start_time-4*60*60).strftime("%F")
-                %td= (teaching_session.start_time-4*60*60).strftime("%I:%M%p")
-                %td= (teaching_session.end_time-4*60*60).strftime("%I:%M%p")
+                %td= (teaching_session.start_time).strftime("%F")
+                %td= (teaching_session.start_time).strftime("%I:%M%p")
+                %td= (teaching_session.end_time).strftime("%I:%M%p")
                 %td= link_to "Join Room", subject_tutor_session_path(teaching_session.subject, teaching_session.tutor, teaching_session[:id])
 
       %h4 Past Sessions
@@ -71,7 +71,7 @@
                 %td= teaching_session.subject.name
                 %td= teaching_session.start_time.strftime("%F")
                 %td= teaching_session.start_time.strftime("%I:%M%p")
-                %td= (teaching_session.end_time-4*60*60).strftime("%I:%M%p")
+                %td= (teaching_session.end_time).strftime("%I:%M%p")
 
     %div{:class => "col-md-6"}
       %div{:class=>"prompt"} Sessions for Learning
@@ -92,9 +92,9 @@
               %tr
                 %td= link_to "#{teaching_session.tutor.account.name}", subject_tutor_reviews_path(1, teaching_session.tutor)
                 %td= teaching_session.subject.name
-                %td= (teaching_session.start_time-4*60*60).strftime("%F")
-                %td= (teaching_session.start_time-4*60*60).strftime("%I:%M%p")
-                %td= (teaching_session.end_time-4*60*60).strftime("%I:%M%p")
+                %td= (teaching_session.start_time).strftime("%F")
+                %td= (teaching_session.start_time).strftime("%I:%M%p")
+                %td= (teaching_session.end_time).strftime("%I:%M%p")
                 /todo: add in start and end time
 
       %h4 Verified Sessions
@@ -114,9 +114,9 @@
               %tr
                 %td= link_to "#{teaching_session.tutor.account.name}", subject_tutor_reviews_path(1, teaching_session.tutor)
                 %td= teaching_session.subject.name
-                %td= (teaching_session.start_time-4*60*60).strftime("%F")
-                %td= (teaching_session.start_time-4*60*60).strftime("%I:%M%p")
-                %td= (teaching_session.end_time-4*60*60).strftime("%I:%M%p")
+                %td= (teaching_session.start_time).strftime("%F")
+                %td= (teaching_session.start_time).strftime("%I:%M%p")
+                %td= (teaching_session.end_time).strftime("%I:%M%p")
                 %td= link_to "Join Room", subject_tutor_session_path(teaching_session.subject, teaching_session.tutor, teaching_session[:id])
 
       %h4 Past Sessions
@@ -135,9 +135,9 @@
               %tr
                 %td= link_to "#{teaching_session.tutor.account.name}", subject_tutor_reviews_path(1, teaching_session.tutor)
                 %td= teaching_session.subject.name
-                %td= (teaching_session.start_time-4*60*60).strftime("%F")
-                %td= (teaching_session.start_time-4*60*60).strftime("%I:%M%p")
-                %td= (teaching_session.end_time-4*60*60).strftime("%I:%M%p")
+                %td= (teaching_session.start_time).strftime("%F")
+                %td= (teaching_session.start_time).strftime("%I:%M%p")
+                %td= (teaching_session.end_time).strftime("%I:%M%p")
                 /todo: add in start and end time
 
   %div{:class => "row"}
