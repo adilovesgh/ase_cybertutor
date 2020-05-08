@@ -27,8 +27,8 @@ Scenario: As a tutor, I should see a notification telling me I completed a sessi
   Given that I am creating an approved past session
   And I press on "Account"
   Then I should see "Jack Palmer"
-  And I should see "Session with Jeff Harper has been completed! Balance of $18.00 has been added to your account."
-  And I should see "Balance: $68.00"
+  And I should see "Session with Jeff Harper has been completed! Balance of $16.40 has been added to your account."
+  And I should see "Balance: $66.40"
 
 Scenario: As a student, I should see a notification telling if my tutor request has timed out. Money should also be added to my balance
   Given that I am creating an unapproved past session

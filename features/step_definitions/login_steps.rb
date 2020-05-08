@@ -33,12 +33,12 @@ end
 Given("that I am creating an approved past session") do
   @acct = Account.new(name:"Jeff Harper", email:"j@b.com", password:"password", price_cents:5000, notification:0)
   @student = @acct.build_student()
-  @tutor = @acct.build_tutor(price_cents:2000, rake:0.1)
+  @tutor = @acct.build_tutor(price_cents:2000, rake:0.18)
   @acct.save
 
   @acct1 = Account.new(name:"Jack Palmer", email:"jp@morgan.com", password:"password", price_cents:5000, notification:0)
   @student1 = @acct1.build_student()
-  @tutor1 = @acct1.build_tutor(price_cents:2000, rake:0.1)
+  @tutor1 = @acct1.build_tutor(price_cents:2000, rake:0.18)
   @acct1.save
 
   @subject = Subject.new(name:"English")
