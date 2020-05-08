@@ -19,7 +19,7 @@ class AccountsController < ApplicationController
         if !logged_in?
             redirect_to login_path
         elsif params[:id].to_i != session[:account_id]
-            puts("param =#{params[:id].class}  \nsession=#{session[:account_id].class} \n #{params[:id] != session[:account_id]}"    )
+            #puts("param =#{params[:id].class}  \nsession=#{session[:account_id].class} \n #{params[:id] != session[:account_id]}"    )
             redirect_to account_path(session[:account_id])
         end
         @account = current_account
@@ -61,7 +61,7 @@ class AccountsController < ApplicationController
 
     def create
         if Account.count == 0
-            puts("BUILDING!!!!!!!!!!!!!!!!!")
+            #puts("BUILDING!!!!!!!!!!!!!!!!!")
 
             @admin = Account.new(name:"Admin", email:"aseadmin@aseadmin.com", password:"aseadmin", is_reviewer:true, admin:true, notification:0)
             @admin.build_tutor(price_cents:2000)

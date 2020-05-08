@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
   FAILURE_MESSAGE = 'Unfortunately, the payment could not be successfully processed. We apologize for any inconvenience. Please try again later.';
 
   def index
-    puts("Session tutor: #{session[:tutor]}")
+    #puts("Session tutor: #{session[:tutor]}")
     #@tutor = Tutor.find(session[:tutor]["id"])
     #@subject = Subject.find(session[:subject]["id"])
     #@start_time = session[:start_time]
@@ -19,14 +19,14 @@ class OrdersController < ApplicationController
   end
 
   def submit
-    puts("In orders controller submit")
+    #puts("In orders controller submit")
 
-    puts("Before - creating an order via PayPal")
-    puts("Before - order params: #{order_params}")
-    puts("Before - token: #{order_params[:token]}")
-    puts("Before - charge ID: #{order_params[:charge_id]}")
-    puts("Before - is order null? #{@order.nil?}")
-    puts("Before - price cents: #{@price_cents}")
+    #puts("Before - creating an order via PayPal")
+    #puts("Before - order params: #{order_params}")
+    #puts("Before - token: #{order_params[:token]}")
+    #puts("Before - charge ID: #{order_params[:charge_id]}")
+    #puts("Before - is order null? #{@order.nil?}")
+    #puts("Before - price cents: #{@price_cents}")
     initialize_account
 
     # Check which type of order it is
@@ -35,12 +35,12 @@ class OrdersController < ApplicationController
       Orders::Stripe.execute(order: @order, price_cents: @price_cents, description: "Adding $#{@price_cents} to balance")
     elsif order_params[:payment_gateway] == "paypal"
       @order = Orders::Paypal.finish(order_params[:charge_id])
-      puts("After - creating an order via PayPal")
-      puts("After - order params: #{order_params}")
-      puts("After - token: #{order_params[:token]}")
-      puts("After - charge ID: #{order_params[:charge_id]}")
-      puts("After - is order null? #{@order.nil?}")
-      puts("After - price cents: #{@price_cents}")
+      #puts("After - creating an order via PayPal")
+      #puts("After - order params: #{order_params}")
+      #puts("After - token: #{order_params[:token]}")
+      #puts("After - charge ID: #{order_params[:charge_id]}")
+      #puts("After - is order null? #{@order.nil?}")
+      #puts("After - price cents: #{@price_cents}")
     end
   ensure
     if @order&.save!
@@ -62,7 +62,7 @@ class OrdersController < ApplicationController
   end
 
   def paypal_create_payment
-    puts("In orders controller paypal create payment")
+    #puts("In orders controller paypal create payment")
     result = Orders::Paypal.create_payment(order: @order, price_cents: @order.price_cents, description: "Adding $#{@order.price_cents} to balance")
     if result
       render json: { token: result }, status: :ok
@@ -72,7 +72,7 @@ class OrdersController < ApplicationController
   end
 
   def paypal_execute_payment
-    puts("In orders controller paypal execute payment")
+    #puts("In orders controller paypal execute payment")
     if Orders::Paypal.execute_payment(payment_id: params[:paymentID], payer_id: params[:payerID])
       render json: {}, status: :ok
     else

@@ -128,7 +128,7 @@ class SessionsController < ApplicationController
         length = 10
         randstring = rand(36**length).to_s(36)
         ret = randstring+timestring
-        puts ret
+        #puts ret
         return ret
     end
 end

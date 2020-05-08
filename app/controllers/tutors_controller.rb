@@ -47,7 +47,7 @@ class TutorsController < ApplicationController
         unless session[:account_id].nil?
             @account = Account.find(session[:account_id])
         end
-        puts(tutor_params[:rate])
+        #puts(tutor_params[:rate])
         @rate = tutor_params[:rate]
         #change it later
         r1 = /^\d+\.\d\d$/

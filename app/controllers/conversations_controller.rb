@@ -13,8 +13,8 @@ class ConversationsController < ApplicationController
     @conversation = Conversation.find(params[:id])
     # @conversation = Conversation.find(params[:account_id])
 
-    puts("Deleting conversation..................................................")
-    puts("Conversation to delete: #{@conversation}")
+    #puts("Deleting conversation..................................................")
+    #puts("Conversation to delete: #{@conversation}")
 
     session[:conversations].delete(@conversation.id)
 

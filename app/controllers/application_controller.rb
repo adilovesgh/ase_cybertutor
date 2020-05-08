@@ -54,8 +54,8 @@ class ApplicationController < ActionController::Base
       elsif s.verified and s.end_time < Time.now and !s.completed
         s.tutor.account.notification += 1
         
-        puts("!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        puts(s.price_cents.to_i - s.price_cents.to_f*s.tutor.rake)
+        #puts("!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        #puts(s.price_cents.to_i - s.price_cents.to_f*s.tutor.rake)
         s.tutor.account.price_cents += s.price_cents.to_i - s.price_cents.to_f*s.tutor.rake
         s.tutor.account.save
         s.completed = true
@@ -73,8 +73,8 @@ class ApplicationController < ActionController::Base
         s.save
       elsif s.verified and s.end_time < Time.now and !s.completed
         s.tutor.account.notification += 1
-        puts("!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        puts(s.price_cents.to_i - s.price_cents.to_f*s.tutor.rake)
+        #puts("!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        #puts(s.price_cents.to_i - s.price_cents.to_f*s.tutor.rake)
         s.tutor.account.price_cents += s.price_cents.to_i - s.price_cents.to_f*s.tutor.rake
         s.tutor.account.save
         s.completed = true
