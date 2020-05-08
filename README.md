@@ -1,5 +1,7 @@
 # CyberTutor: An Online Tutoring Platform
 
+<img src="cybertutor_homepage.png"/>
+
 ## Team Members
 * Aditya Sridhar (as5883)
 * Daniel Kang (hk3021)
