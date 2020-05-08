@@ -96,16 +96,22 @@ class SessionsController < ApplicationController
                     @student = @account.student
                     @price = Session.compute_session_cost(@tutor.price_cents, params["session"])
                     if @price > @account.price_cents
-                        errors = ["You do not have enough balance!", "Your Balance: $#{@account.price_cents}", "Total Price: $#{@price.to_f.round(2)}"]
+                        errors = ["You do not have enough balance!", "Your Balance: $#{Order.print_money @account.price_cents}", "Total Price: $#{@price.to_f.round(2)}"]
                         flash[:error] = errors
                         redirect_to new_subject_tutor_session_path
                     else
+                        puts("!!!!!!!!!!!!!!!!!!!")
+                        puts(@price)
                         @subject = Subject.find(params[:subject_id])
                         whiteboard = generate_session_whiteboard(@start_time)
                         @session = @tutor.sessions.build(subject:@subject, student:@student, price:@price, start_time:@start_time, end_time:@end_time, pending:true, verified:false, seen:false, seen_student:true, whiteboard_id:whiteboard, completed:false)
                         @session.save
+                        puts("!!!!!!!!!!!!!!!!!!")
+                        puts(@account.price_cents)
                         @account.price_cents -= @price
                         @account.save
+                        puts("!!!!!!!!!!!!!!!!!!")
+                        puts(@account.price_cents.to_s)
                         @tutor.account.notification += 1
                         @tutor.account.save
                         redirect_to subject_tutor_sessions_path(1,1)

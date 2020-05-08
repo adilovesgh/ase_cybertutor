@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200508004555) do
+ActiveRecord::Schema.define(version: 20200508032111) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,6 +155,7 @@ ActiveRecord::Schema.define(version: 20200508004555) do
     t.integer  "account_id"
     t.integer  "price_cents",    default: 0, null: false
     t.string   "precision"
+    t.float    "rake"
   end
 
   add_index "tutors", ["account_id"], name: "index_tutors_on_account_id", using: :btree

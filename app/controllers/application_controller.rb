@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
       elsif s.verified and s.end_time < Time.now and !s.completed
         s.tutor.account.notification += 1
         s.tutor.account.save
-        #s.tutor.account.price_cents += s.price.to_i
+        s.tutor.account.price_cents += s.price.to_i - s.price.to_i*s.tutor.rake
         s.completed = true
         s.seen = false
         s.save
@@ -71,7 +71,7 @@ class ApplicationController < ActionController::Base
       elsif s.verified and s.end_time < Time.now and !s.completed
         s.tutor.account.notification += 1
         s.tutor.account.save
-        #s.tutor.account.price_cents += s.price.to_i
+        s.tutor.account.price_cents += s.price.to_i - s.price.to_i*s.tutor.rake
         s.completed = true
         s.seen = false
         s.save

@@ -15,4 +15,9 @@ class Order < ActiveRecord::Base
   def set_paypal_executed
     self.status = Order.statuses[:paypal_executed]
   end
+  def self.print_money(input)
+    puts("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    puts(input.to_i)
+    input.to_s
+  end
 end
