@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200506193533) do
+ActiveRecord::Schema.define(version: 20200508004555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,6 +103,7 @@ ActiveRecord::Schema.define(version: 20200506193533) do
     t.boolean  "seen"
     t.boolean  "seen_student"
     t.string   "whiteboard_id"
+    t.boolean  "completed"
   end
 
   add_index "sessions", ["student_id"], name: "index_sessions_on_student_id", using: :btree

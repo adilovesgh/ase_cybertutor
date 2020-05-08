@@ -25,9 +25,11 @@ class AccountsController < ApplicationController
         @account = current_account
         @tutor = @account.tutor
         @student = @account.student
-        @tutor_sessions = @account.tutor.sessions.where(:seen => false)
+        @tutor_sessions = @account.tutor.sessions.where(:seen => false, :verified =>false)
+        @completed_tutor_sessions = @account.tutor.sessions.where(:seen => false, :completed => true, :verified => true)
         @student_sessions_approved = @account.student.sessions.where(:seen_student => false, :verified => true)
-        @student_sessions_rejected = @account.student.sessions.where(:seen_student => false, :verified => false)
+        @student_sessions_rejected = @account.student.sessions.where(:seen_student => false, :verified => false, :completed => false)
+        @completed_student_sessions = @account.student.sessions.where(:seen_student => false, :completed => true, :pending => true)
     end
 
     def new
