@@ -20,7 +20,7 @@ Background:
   When I click on Tutors for "English"
   And I click on "Jeff Harper"
   And I click on Sign up for a session
-  And I enter "May",31,5,30,"pm",1,0
+  And I enter "May",31,5,30,"pm",1,5
   And I click Book Changes
 
   Then I should see Sessions for Learning
@@ -40,6 +40,10 @@ Scenario: reject sessions
   When I press on link "Reject"
   Then I should not see link "Reject"
   And I should not see link "Jeff Harper"
+
+  When I change to be logged in with name "Jack Palmer" and email "jp@morgan.com" and password "password1"
+  And I press on "Account"
+  Then I should see "Balance: $50.00"
 
 Scenario: schedule conflict check 
   Then I should see link "Approve"
