@@ -14,9 +14,9 @@ We present the overview of our project's primary features and components:
 
 * Tutoring Session Approval/Rejection: the tutor is able to manage session requests from potential students. We impose the restriction that students cannot automatically sign up for sessions.
 
-* Administration: admins have special permissions to manage tutor eligibility. In other words, website users who wish to be tutors for a specific subject must wait to acquire approval from an admin prior to tutorship being granted. Currently, the admin account uses the email _aseadmin@aseadmin.com_ and password _aseadmin_. Please use this admin account when approving tutors.
+* Administration: Admins have special permissions to manage tutor eligibility. In other words, website users who wish to be tutors for a specific subject must wait to acquire approval from an admin prior to tutorship being granted. Currently, the admin account uses the email _aseadmin@aseadmin.com_ and password _aseadmin_. Please use this admin account when approving tutors.
 
-* Payment Gateway Services: we implemented a payment transaction system by which students can pay for sessions by entering credit card credentials. For our gateway services, we integrate Stripe and begin to integrate Paypal in our application. Complete transaction execution occurs prior to the creation of tutoring sessions. We use sandbox environments and test accounts provided by these gateway services to simulate payment transactions. For testing with Stripe, we used the following procedure. Note that to view a successful order in the dashboard, steps 1, 2, and 4 must be customized individually. Otherwise, to test app functionality, please proceed to step 3.
+* Payment Gateway Services: we implemented a payment transaction system by which students can pay for sessions by entering credit card credentials. Users maintain a balance, which can be filled via Stripe or Paypal, and can be transferred to a bank account for those earning money on the site. For our gateway services, we integrate Stripe and begin to integrate Paypal in our application. Complete transaction execution occurs prior to the creation of tutoring sessions. We use sandbox environments and test accounts provided by these gateway services to simulate payment transactions. For testing with Stripe, we used the following procedure. Note that to view a successful order in the dashboard, steps 1, 2, and 4 must be customized individually. Otherwise, to test app functionality, please proceed to step 3.
   1. We create a Stripe account and ensure that __View Test Data__ has been toggled on.
   2. We extract the test keys from the Stripe dashboard and add them to `config/application.yml`. Our keys can be found in this file.
   3. When executing a payment transaction in the app, we enter testing card information into the credit card form. Our sample card number is _4242 4242 4242 4242_ (Visa), and we assign the date any future date value. We also assign an arbitrary CVC and ZIP code.
@@ -32,7 +32,7 @@ We present the overview of our project's primary features and components:
 
 * Chat Messaging: we provide a user-friendly, real-time chat application to allow tutors and students to communicate notes and ideas (or simply to converse).
 
-* Shared Whiteboard: in addition to live video and messaging, we provide tutors and students with a session-specific private whiteboard for interactive tutoring.
+* Shared Whiteboard: in addition to live video and messaging, we provide tutors and students with a link to session-specific private whiteboards for interactive tutoring.
 
 * CSS Styling: over the iterations, we have continuously improved our UI to make the website more aesthetic and user-friendly. We have also implemented bootstrap to make the display less cluttered, cleaner, and more organized.
 
