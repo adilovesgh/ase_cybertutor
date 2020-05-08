@@ -32,7 +32,7 @@ We present the overview of our project's primary features and components:
 
 * Chat Messaging: we provide a user-friendly, real-time chat application to allow tutors and students to communicate notes and ideas (or simply to converse).
 
-* Shared Whiteboard: in addition to live video and messaging, we provide tutors and students with a link to session-specific private whiteboards for interactive tutoring.
+* Shared Whiteboard: in addition to live video and messaging, we provide tutors and students with links to session-specific private whiteboards for interactive tutoring.
 
 * CSS Styling: over the iterations, we have continuously improved our UI to make the website more aesthetic and user-friendly. We have also implemented bootstrap to make the display less cluttered, cleaner, and more organized.
 
