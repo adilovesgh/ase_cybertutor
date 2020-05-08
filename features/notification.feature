@@ -57,7 +57,8 @@ Scenario: student is notfied of a declined session
   Then I should not see link "Reject"
 
   When I change to be logged in with name "Jack Palmer" and email "jp@morgan.com" and password "password1"
-  Then I should see "Jeff Harper has rejected the session. Balance of $20 has been returned to your account."
+  Then I should see "Jeff Harper has rejected the session. Balance of $20.00 has been returned to your account."
+  And I should see "Balance: $50"
   And I should see "New Notification"
   When I click on View your sessions
   And I click on "Account"

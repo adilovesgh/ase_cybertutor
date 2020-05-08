@@ -46,15 +46,18 @@ class ApplicationController < ActionController::Base
     for s in @sessions
       if s.pending and s.start_time < Time.now and !s.completed
         s.update_attributes(:pending => true, :verified => false, :seen_student => false)
-        s.student.account.price_cents += s.price.to_i
+        s.student.account.price_cents += s.price_cents
         s.student.account.notification += 1
         s.completed = true
         s.student.account.save
         s.save
       elsif s.verified and s.end_time < Time.now and !s.completed
         s.tutor.account.notification += 1
+        
+        puts("!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        puts(s.price_cents.to_i - s.price_cents.to_f*s.tutor.rake)
+        s.tutor.account.price_cents += s.price_cents.to_i - s.price_cents.to_f*s.tutor.rake
         s.tutor.account.save
-        s.tutor.account.price_cents += s.price.to_i - s.price.to_i*s.tutor.rake
         s.completed = true
         s.seen = false
         s.save
@@ -63,15 +66,17 @@ class ApplicationController < ActionController::Base
     for s in @teaching_sessions
       if s.pending and s.start_time < Time.now and !s.completed
         s.update_attributes(:pending => true, :verified => false, :seen_student => false)
-        s.student.account.price_cents += s.price.to_i
+        s.student.account.price_cents += s.price_cents
         s.student.account.notification += 1
         s.completed=true
         s.student.account.save
         s.save
       elsif s.verified and s.end_time < Time.now and !s.completed
         s.tutor.account.notification += 1
+        puts("!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        puts(s.price_cents.to_i - s.price_cents.to_f*s.tutor.rake)
+        s.tutor.account.price_cents += s.price_cents.to_i - s.price_cents.to_f*s.tutor.rake
         s.tutor.account.save
-        s.tutor.account.price_cents += s.price.to_i - s.price.to_i*s.tutor.rake
         s.completed = true
         s.seen = false
         s.save

@@ -12,7 +12,7 @@
     %div{:class=>"row d-flex justify-content-center"}
       = form_tag tutors_path do
         %div{:class=> "email"} Current Rate
-        %div{:class=> "rate"} $#{@account.tutor.price_cents}/hr
+        %div{:class=> "rate"} $#{Order.print_money @account.tutor.price_cents}/hr
         %div{:class=> "email"} New Rate
         %div{:class=> "email"}
           = text_field :tutor, 'rate'

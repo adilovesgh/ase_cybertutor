@@ -93,11 +93,11 @@ class OrdersController < ApplicationController
     #@end_time = session[:end_time]
     #@price = order_params[:price]
     if params[:amount] == "fifty"
-      @price_cents = 50.00
+      @price_cents = 5000
     elsif params[:amount] == "hundo"
-      @price_cents = 100.00
+      @price_cents = 10000
     else
-      @price_cents = 150.00
+      @price_cents = 15000
     end
   end
 

@@ -42,7 +42,6 @@ class TutorsController < ApplicationController
         end
     end
 
-
     def create
         @account = nil
         unless session[:account_id].nil?
@@ -55,14 +54,13 @@ class TutorsController < ApplicationController
         r2 = /^\d$/
         if @rate.match(r1) or @rate.to_i.to_s == @rate
             @rate = @rate.to_f
-            @account.tutor.price_cents = @rate
+            @account.tutor.price_cents = @rate * 100
             @account.tutor.save
             redirect_to account_path(@account)
         else
             flash[:error] = "Please enter in a valid rate."
             redirect_to new_tutor_path
         end
-        
     end
 
     private

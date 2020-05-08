@@ -17,7 +17,12 @@ class Order < ActiveRecord::Base
   end
   def self.print_money(input)
     puts("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    puts(input.to_i)
-    input.to_s
+    puts(input)
+    puts((input.to_f/100).round(2))
+    output = (input.to_f/100).round(2).to_s
+    if output.split('.')[1].length == 1
+      output += "0"
+    end
+    output
   end
 end

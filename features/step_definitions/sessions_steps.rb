@@ -73,7 +73,7 @@ Then("I should not see link {string}") do |string|
 end
 
 When("I enter credit card informations {string} {string} {string}") do |string, string2, string3|
-  @acct.price_cents += 50.00
+  @acct.price_cents += 5000
   @acct.save
   visit '/'  
   click_link "My Account"

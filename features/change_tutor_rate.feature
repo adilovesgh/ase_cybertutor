@@ -14,12 +14,12 @@ Background:
  Scenario: add a new subject to tutor
   When I enter "30.00" for the rate
   And I press Save Changes
-  Then I should see "$30/hr"
+  Then I should see "$30.00/hr"
 
 Scenario: enter in integer
   When I enter "40" for the rate
   And I press Save Changes
-  Then I should see "$40/hr"
+  Then I should see "$40.00/hr"
 
 Scenario: enter in an invalid input
   When I enter "apple" for the rate

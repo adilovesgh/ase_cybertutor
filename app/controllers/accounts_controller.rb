@@ -64,7 +64,7 @@ class AccountsController < ApplicationController
             puts("BUILDING!!!!!!!!!!!!!!!!!")
 
             @admin = Account.new(name:"Admin", email:"aseadmin@aseadmin.com", password:"aseadmin", is_reviewer:true, admin:true, notification:0)
-            @admin.build_tutor(price_cents:20.00)
+            @admin.build_tutor(price_cents:2000)
             @admin.build_student
             @admin.save
         end
@@ -85,7 +85,7 @@ class AccountsController < ApplicationController
         
         end
         @student = @account.build_student()
-        @tutor = @account.build_tutor(price_cents:20.00, rake:0.1)
+        @tutor = @account.build_tutor(price_cents:2000, rake:0.1)
         @account.is_reviewer=false
         @account.admin=false
         @account.notification = 0

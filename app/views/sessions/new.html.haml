@@ -45,9 +45,9 @@
       %br
       Tutor: #{@tutor.account.name}
       %br
-      Remaining Balance: $#{@account.price_cents}
+      Remaining Balance: $#{Order.print_money @account.price_cents}
       %br
-      Rate: $#{@tutor.price_cents}/hr
+      Rate: $#{Order.print_money @tutor.price_cents}/hr
       %br
 
   %br

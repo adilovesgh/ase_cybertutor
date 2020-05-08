@@ -27,7 +27,11 @@ Rails.application.routes.draw do
       get 'revokereviewer'
     end
   end
-  resources :tutors
+  resources :tutors do
+    member do
+      get 'withdraw'
+    end
+  end
   resources :subjects
   resources :orders
   resources :tutor_requests do

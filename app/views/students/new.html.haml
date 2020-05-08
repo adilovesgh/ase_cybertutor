@@ -1,0 +1,20 @@
+%div{:class => "container-fluid"}
+  %div{:class =>"row parent"}
+    %img{:class => "photo", :src=>"/main_screen.png"}
+
+  %div{:class =>"container logchild"}
+    %div{:class=>"row"}
+      - [:notice, :error, :success].each do |key|
+        - unless flash[key].blank?
+          %p{ :class => "flash-error" }= flash[key]
+    %div{:class=>"row d-flex justify-content-center"}
+      %div{:class=>"prompt"} Withdraw
+    %div{:class=>"row d-flex justify-content-center"}
+      = form_tag students_path do
+        %div{:class=> "email"} Current Balance
+        %div{:class=> "rate"} $#{Order.print_money @account.price_cents}
+        %div{:class=> "email"} Withdraw
+        = text_field :student, 'amount'
+        %br
+        %div{:class=>"submit row d-flex justify-content-center"} 
+          = submit_tag 'Save Changes', :class => 'btn btn-primary'

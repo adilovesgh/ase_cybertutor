@@ -54,7 +54,7 @@ class SessionsController < ApplicationController
         @account = Account.find(session[:account_id])
         @session = Session.find(params["id"])
         @session.update_attributes(:pending => false, :verified => false, :seen_student => false)
-        @session.student.account.price_cents += @session.price.to_i
+        @session.student.account.price_cents += @session.price_cents
         @session.student.account.notification += 1
         @session.student.account.save
         redirect_to subject_tutor_sessions_path(0, 0)
@@ -96,22 +96,16 @@ class SessionsController < ApplicationController
                     @student = @account.student
                     @price = Session.compute_session_cost(@tutor.price_cents, params["session"])
                     if @price > @account.price_cents
-                        errors = ["You do not have enough balance!", "Your Balance: $#{Order.print_money @account.price_cents}", "Total Price: $#{@price.to_f.round(2)}"]
+                        errors = ["You do not have enough balance!", "Your Balance: $#{Order.print_money @account.price_cents}", "Total Price: $#{(@price.to_f/100).round(2)}"]
                         flash[:error] = errors
                         redirect_to new_subject_tutor_session_path
                     else
-                        puts("!!!!!!!!!!!!!!!!!!!")
-                        puts(@price)
                         @subject = Subject.find(params[:subject_id])
                         whiteboard = generate_session_whiteboard(@start_time)
-                        @session = @tutor.sessions.build(subject:@subject, student:@student, price:@price, start_time:@start_time, end_time:@end_time, pending:true, verified:false, seen:false, seen_student:true, whiteboard_id:whiteboard, completed:false)
+                        @session = @tutor.sessions.build(subject:@subject, student:@student, price_cents:@price, start_time:@start_time, end_time:@end_time, pending:true, verified:false, seen:false, seen_student:true, whiteboard_id:whiteboard, completed:false)
                         @session.save
-                        puts("!!!!!!!!!!!!!!!!!!")
-                        puts(@account.price_cents)
-                        @account.price_cents -= @price
+                        @account.price_cents -= @price.to_i
                         @account.save
-                        puts("!!!!!!!!!!!!!!!!!!")
-                        puts(@account.price_cents.to_s)
                         @tutor.account.notification += 1
                         @tutor.account.save
                         redirect_to subject_tutor_sessions_path(1,1)
