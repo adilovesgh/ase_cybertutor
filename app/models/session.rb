@@ -13,39 +13,41 @@ class Session < ActiveRecord::Base
   end
 
   def self.no_conflicting_times(target, sessions)
-  	sessions.each do |session|
-      if target.id != session.id and session.verified
-    		if target.start_time >= session.start_time and target.end_time <= session.end_time
-    			return false
-    		elsif target.start_time <= session.start_time and target.end_time >= session.end_time
-    			return false
-    		elsif target.start_time <= session.start_time and target.end_time <= session.end_time and target.end_time >= session.start_time
-    			return false
-    		elsif target.start_time >= session.start_time and target.end_time >= session.end_time and target.start_time <= session.end_time
-    			return false
-    		end
+    sessions.each do |session|
+      if target.id != session.id and ((!session.pending and session.verified) or (session.pending and !session.verified))
+        if target.start_time >= session.start_time and target.end_time <= session.end_time
+          return false
+        elsif target.start_time <= session.start_time and target.end_time >= session.end_time
+          return false
+        elsif target.start_time <= session.start_time and target.end_time <= session.end_time and target.end_time >= session.start_time
+          return false
+        elsif target.start_time >= session.start_time and target.end_time >= session.end_time and target.start_time <= session.end_time
+          return false
+        end
       end
-  	end
-  	return true
+    end
+    return true
   end
 
   def self.no_student_conflicting_times(target, sessions)
     sessions.each do |session|
-      if target[0] >= session.start_time and target[1] <= session.end_time
-        return false
-      elsif target[0] <= session.start_time and target[1] >= session.end_time
-        return false
-      elsif target[0] <= session.start_time and target[1] <= session.end_time and target[1] >= session.start_time
-        return false
-      elsif target[0] >= session.start_time and target[1] >= session.end_time and target[0] <= session.end_time
-        return false
+      if (!session.pending and session.verified) or (session.pending and !session.verified)
+        if target[0] >= session.start_time and target[1] <= session.end_time
+          return false
+        elsif target[0] <= session.start_time and target[1] >= session.end_time
+          return false
+        elsif target[0] <= session.start_time and target[1] <= session.end_time and target[1] >= session.start_time
+          return false
+        elsif target[0] >= session.start_time and target[1] >= session.end_time and target[0] <= session.end_time
+          return false
+        end
       end
     end
     return true
   end
 
   def self.compute_session_cost(price, input)
-  	return price * (input['hours'].to_d + input['minutes'].to_d / 60)
+    return price * (input['hours'].to_d + input['minutes'].to_d / 60)
   end
 
   def self.splitmessage(message)

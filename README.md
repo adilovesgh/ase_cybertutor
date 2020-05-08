@@ -12,11 +12,13 @@ We present the overview of our project's primary features and components:
 
 * Login: we implemented a log-in feature that requires the user to log in to his or her account conventionally via username and password. Using `bcrypt`, we have server-side encrypted passwords for validation. Account info pages are login-protected, and unauthorized attempts at access will result in a redirect. Validation of account details includes checking for valid emails, preventing duplicate account information, and requiring a password with 5 or more characters. 
 
-* Tutoring Session Approval/Rejection: the tutor is able to manage session requests from potential students. We impose the restriction that students cannot automatically sign up for sessions.
+* Tutoring Session Approval/Rejection: the tutor is able to manage session requests from potential students. We impose the restriction that students cannot automatically sign up for sessions. Before approving a session,a check is done to make sure that the tutor or the student does not have overlapping sessions. 
 
-* Administration: Admins have special permissions to manage tutor eligibility. In other words, website users who wish to be tutors for a specific subject must wait to acquire approval from an admin prior to tutorship being granted. Currently, the admin account uses the email _aseadmin@aseadmin.com_ and password _aseadmin_. Please use this admin account when approving tutors.
+* Reviewer: reviewers have special permissions to manage tutor eligibility. In other words, website users who wish to be tutors for a specific subject must wait to acquire approval from a reviewer prior to tutorship being granted. Reviewers are normal users who are given the reviewer status by the admins. A reviewer cannot approve his or her own tutor requests.
 
-* Payment Gateway Services: we implemented a payment transaction system by which students can pay for sessions by entering credit card credentials. Users maintain a balance, which can be filled via Stripe or Paypal, and can be transferred to a bank account for those earning money on the site. For our gateway services, we integrate Stripe and begin to integrate Paypal in our application. Complete transaction execution occurs prior to the creation of tutoring sessions. We use sandbox environments and test accounts provided by these gateway services to simulate payment transactions. For testing with Stripe, we used the following procedure. Note that to view a successful order in the dashboard, steps 1, 2, and 4 must be customized individually. Otherwise, to test app functionality, please proceed to step 3.
+* Administration: admins have special permissions to grant reviewer eligibility. Admins can grant and take away reviewer status of other users. Currently, the admin account uses the email _aseadmin@aseadmin.com_ and password _aseadmin_. Please use this admin account when approving tutors. The admin account is created at the same time the first account is created. In order to access the admin account, please create an account first.
+
+* Payment Gateway Services: we implemented a payment transaction system by which students can pay for sessions by entering credit card credentials. For our gateway services, we integrate Stripe and begin to integrate Paypal in our application. Complete transaction execution occurs prior to the creation of tutoring sessions. We use sandbox environments and test accounts provided by these gateway services to simulate payment transactions. For testing with Stripe, we used the following procedure. Note that to view a successful order in the dashboard, steps 1, 2, and 4 must be customized individually. Otherwise, to test app functionality, please proceed to step 3.
   1. We create a Stripe account and ensure that __View Test Data__ has been toggled on.
   2. We extract the test keys from the Stripe dashboard and add them to `config/application.yml`. Our keys can be found in this file.
   3. When executing a payment transaction in the app, we enter testing card information into the credit card form. Our sample card number is _4242 4242 4242 4242_ (Visa), and we assign the date any future date value. We also assign an arbitrary CVC and ZIP code.
@@ -28,11 +30,16 @@ We present the overview of our project's primary features and components:
 	3. After choosing PayPal as the payment method, we enter the credentials for the created buyer account, log in, and confirm the order.
 	4. We are able to view that a valid order was successful in the PayPal dashboard.
 
+* Balance: The users can use the payment feature to add balance to their own accounts. The balance can be used for tutoring sessions or can be withdrawn. When tutors complete their sessions, the payment is added to the balance. The tutors can then decide if they want to spend the balance earned or withdraw the balance. Currently, the withdraw functionality just subtracts the balance from the account, and the account is not tied to a physical bank account. The balance payments work as follows.
+	1. When a student signs up for a tutoring session, the payment is withdrawn from his or her balance.
+	2. If the tutor rejects a session or the session request times out (the instructor does not accept the session before it starts) the money is returned to the student.
+	3. If the tutor accepts the tutoring session, the payment gets added to the tutor's balance after the session is completed.
+
 * Live Video Chat: we implemented a video chat feature for tutor-to-student in-browser video calls. This feature enables tutors and students to interact during any tutoring session. Note that you might need to refresh the page if the video does not appear (this message has also been added to the website).
 
 * Chat Messaging: we provide a user-friendly, real-time chat application to allow tutors and students to communicate notes and ideas (or simply to converse).
 
-* Shared Whiteboard: in addition to live video and messaging, we provide tutors and students with links to session-specific private whiteboards for interactive tutoring.
+* Shared Whiteboard: in addition to live video and messaging, we provide tutors and students with a session-specific private whiteboard for interactive tutoring.
 
 * CSS Styling: over the iterations, we have continuously improved our UI to make the website more aesthetic and user-friendly. We have also implemented bootstrap to make the display less cluttered, cleaner, and more organized.
 
