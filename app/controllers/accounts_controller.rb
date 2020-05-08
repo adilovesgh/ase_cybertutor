@@ -85,7 +85,7 @@ class AccountsController < ApplicationController
         
         end
         @student = @account.build_student()
-        @tutor = @account.build_tutor(price_cents:2000, rake:0.1)
+        @tutor = @account.build_tutor(price_cents:2000, rake:0.18)
         @account.is_reviewer=false
         @account.admin=false
         @account.notification = 0
