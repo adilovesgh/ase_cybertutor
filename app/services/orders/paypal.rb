@@ -9,8 +9,8 @@ class Orders::Paypal
 
   def self.create_payment(order:, price_cents:, description:)
     puts("Creating payment")
-    # payment_price = (price_cents/100.0).to_s
-    payment_price = price_cents.to_s
+    payment_price = (price_cents/100.0).to_s
+    # payment_price = price_cents.to_s
     currency = "USD"
     payment = PayPal::SDK::REST::Payment.new({
       intent:  "sale",
