@@ -18,6 +18,7 @@
         %br
     %hr
     %h1 Payment Method
+    %p If you do not see a payment menu, please refresh your page
     .form_row
       %div
         = radio_button_tag 'payment-selection', 'stripe', true, onclick: "changeTab();"
