@@ -10,6 +10,11 @@ Scenario: approve sessions
   And I click on Subjects you teach
   And I click on Register to tutor a subject
   And I click on Sign up to tutor "English"
+
+  And I change to be logged in with name "Admin" and email "admin@admin.com" and password "password"
+  And I press on "Tutor Requests"
+  And I press on "Approve Tutor"
+  
   And I change to be logged in with name "Jack Palmer" and email "jp@morgan.com" and password "password1"
   And I go to the subjects page
   When I click on Tutors for "English"
@@ -18,7 +23,7 @@ Scenario: approve sessions
   And I enter "May",31,5,30,"pm",1,0
   And I click Book Changes
 
-  Then I should see Sessions for learning
+  Then I should see Sessions for Learning
   And I should see "Jeff Harper"
   And I should see "English"
   And I change to be logged in with name "Jeff Harper" and email "j@b.com" and password "password"
@@ -33,5 +38,11 @@ Scenario: approve sessions
   When I press on link "Join Room"
   Then I should see "Video Call in Room"
   And I should see "If the video does not display, please refresh the screen"
+  And I should see "Shared Whiteboard"
+  And I should see link "here"
+  And I should see "Click here to use the whiteboard!"
   And I should see "English"
   And I should see "Jeff Harper"
+  And I should see "Chat Window"
+  And I should see link "here"
+  And I should see "Click here to chat with Jack Palmer!"

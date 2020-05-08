@@ -7,14 +7,14 @@ class Session < ActiveRecord::Base
   has_many :orders
 
   def self.convert_time(input)
-    @start = Time.parse(input['month']+" " + input['day'].to_s + " 2020 " + input['start_hour'].to_s + ":" + input['start_minute'] + " " + input["start_ampm"] + " UTC")
+    @start = Time.parse(input['month']+" " + input['day'].to_s + " 2020 " + input['start_hour'].to_s + ":" + input['start_minute'] + " " + input["start_ampm"])
     @end = @start + 60 * input['minutes'].to_i + 3600 * input['hours'].to_i
     [@start, @end]
   end
 
   def self.no_conflicting_times(target, sessions)
   	sessions.each do |session|
-      if target.id != session.id
+      if target.id != session.id and session.verified
     		if target.start_time >= session.start_time and target.end_time <= session.end_time
     			return false
     		elsif target.start_time <= session.start_time and target.end_time >= session.end_time
@@ -46,5 +46,15 @@ class Session < ActiveRecord::Base
 
   def self.compute_session_cost(price, input)
   	return price * (input['hours'].to_d + input['minutes'].to_d / 60)
+  end
+
+  def self.splitmessage(message)
+    output = ""
+    while message.length > 30
+      output+=(message[0..29])
+      message = message[30..-1]
+    end
+    output += message
+    output
   end
 end

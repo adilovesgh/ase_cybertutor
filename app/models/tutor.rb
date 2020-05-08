@@ -3,6 +3,7 @@ class Tutor < ActiveRecord::Base
     has_many :reviews
     has_many :sessions
     has_many :requests
+    has_many :tutor_requests
     belongs_to :account
 
     def self.update_average(tutors)

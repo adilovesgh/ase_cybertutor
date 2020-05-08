@@ -10,6 +10,10 @@ Background:
   And I click on Subjects you teach
   And I click on Register to tutor a subject
   And I click on Sign up to tutor "English"
+  And I change to be logged in with name "Admin" and email "admin@admin.com" and password "password"
+  And I press on "Tutor Requests"
+  And I press on "Approve Tutor"
+  
   And I change to be logged in with name "Jack Palmer" and email "jp@morgan.com" and password "password1"
   And I go to the subjects page
   When I click on Tutors for "English"
@@ -18,7 +22,7 @@ Background:
   And I enter "May",31,5,30,"pm",1,0
   And I click Book Changes
 
-  Then I should see Sessions for learning
+  Then I should see Sessions for Learning
   And I should see "Jeff Harper"
   And I should see "English"
   And I change to be logged in with name "Jeff Harper" and email "j@b.com" and password "password"
@@ -53,7 +57,8 @@ Scenario: student is notfied of a declined session
   Then I should not see link "Reject"
 
   When I change to be logged in with name "Jack Palmer" and email "jp@morgan.com" and password "password1"
-  Then I should see "Jeff Harper has rejected the session. Balance of $20 has been returned to your account."
+  Then I should see "Jeff Harper has rejected the session. Balance of $20.00 has been returned to your account."
+  And I should see "Balance: $50"
   And I should see "New Notification"
   When I click on View your sessions
   And I click on "Account"

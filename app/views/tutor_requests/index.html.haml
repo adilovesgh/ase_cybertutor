@@ -1,0 +1,18 @@
+- [:notice, :error, :success].each do |key|
+  - unless flash[key].blank?
+    %p{ :class => "flash-error" }= flash[key]
+
+%div{:class => "container-fluid"}
+  %h2.heading All Tutor Requests
+
+  %table#tutors.table.table-striped.col-md-12
+    %thead
+      %tr
+        %th Tutor
+        %th Subject
+    %tbody
+      - @tutor_request.each do |request|
+        %tr
+          %td= link_to "#{request.tutor.account.name}", tutor_path(request.tutor)
+          %td= request.subject.name
+          %td= link_to "Approve Tutor", tutor_approve_tutor_request_path(request)

@@ -29,7 +29,7 @@ html, body {
 }
  #navbar {
     padding: 5px 0 5px 0;
-    background: var(--navbar-bg-color);
+    //background: var(--navbar-bg-color);
     width: 100%;
     justify-content: space-between;
     display:flex;
@@ -41,7 +41,7 @@ html, body {
     text-decoration: none;
 }
 .navbar-links {
-     background: #CDE;
+     //background: #CDE;
      font-size: 28px;
      border-radius: 3px;
      border: 1px solid black;
@@ -65,10 +65,11 @@ html, body {
 .nav-link {
     padding-left: 10px;
     padding-right: 0px;
-    color: white;
+    color: black;
     font-size: 28px;
     display: inline-block;
 }
+
 .title {
     padding-top: 20px;
     font-size: 28px;
@@ -79,6 +80,7 @@ html, body {
     text-decoration: none;
     font-size: 28px;
     display: inline-block;
+    color: black
 }
 
 .warning {
@@ -88,7 +90,8 @@ html, body {
 
 #content {
     height: 100%;
-    background: #CDE
+    //background: #CDE
+    //sbackground: var(--navbar-bg-color);
 }
 .heading{
     font-size: 30px;
@@ -97,11 +100,135 @@ html, body {
     padding-top: 20px;
 }
 .notification {
-    color: white;
+    //color: white;
     display: inline-block;
     font-weight: bold
 }
 .notification_link {
     padding: 3px;
-    background: yellow 
+    background: yellow;
+    color: black 
+}
+.photo {
+    
+    width:100%;
+}
+
+.email {
+    padding: 0px;
+    margin: 0px
+}
+
+.submit {
+    margin-top:5px
+}
+
+.blueback {
+    background: var(--navbar-bg-color);
+}
+
+.left {
+    padding-left: 15px
+}
+.parent {
+    position:relative
+}
+.child {
+    text-align:center;
+    position:absolute;
+    top: 30%;
+    left: 25%;
+    width: 50%;
+    padding:1%;
+    background: white;
+    //background: var(--navbar-bg-color);
+}
+.logchild {
+    position:absolute;
+    top: 30%;
+    left: 40%;
+    width: 20%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    //background: var(--navbar-bg-color);
+    background: white;
+}
+.accchild {
+    position:absolute;
+    top: 30%;
+    left: 40%;
+    width: 20%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    //background: var(--navbar-bg-color);
+    background: white;
+}
+.childbuttons {
+    border: solid;
+}
+.child-links {
+    color: black;
+    font-size: 75%;
+}
+.intro {
+    font-size: 150%;
+}
+.prompt {
+    font-size: 200%;
+    font-weight:bold;
+    display: block;
+    margin-bottom: 10px;
+}
+
+#conversations-body {
+  padding-left: 0px;
+  list-style: none;
+}
+
+#conversations-list {
+  padding-left: 10px;
+  list-style: none;
+}
+
+.messages-list {
+  max-height: 200px;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.float-right {
+  float:right
+}
+
+.message-sent {
+  position: relative;
+  background-color: #D9EDF7;
+  border-color: #BCE8F1;
+  margin: 5px 20px;
+  padding: 10px;
+  float: right;
+}
+
+#message-input {
+  margin-left: 5%;
+}
+.input_box {
+  width: 75%;
+  margin-left: 20px;
+}
+
+.message-received {
+  background-color: #F1F0F0;
+  border-color: #EEEEEE;
+  margin: 5px 20px;
+  padding: 10px;
+  float: left;
+}
+
+.rate {
+    padding: 0px;
+    margin: 0px;
+    font-weight: bold;
+    font-size: 150%
 }

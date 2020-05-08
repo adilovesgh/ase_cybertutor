@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200422224231) do
+ActiveRecord::Schema.define(version: 20200508032111) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,7 +24,29 @@ ActiveRecord::Schema.define(version: 20200422224231) do
     t.string   "password_digest"
     t.integer  "price_cents",     default: 0, null: false
     t.integer  "notification"
+    t.boolean  "is_reviewer"
+    t.boolean  "admin"
   end
+
+  create_table "conversations", force: :cascade do |t|
+    t.integer  "recipient_id"
+    t.integer  "sender_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "conversations", ["recipient_id", "sender_id"], name: "index_conversations_on_recipient_id_and_sender_id", unique: true, using: :btree
+
+  create_table "messages", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "account_id"
+    t.integer  "conversation_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "messages", ["account_id"], name: "index_messages_on_account_id", using: :btree
+  add_index "messages", ["conversation_id"], name: "index_messages_on_conversation_id", using: :btree
 
   create_table "orders", force: :cascade do |t|
     t.integer  "session_id"
@@ -80,6 +102,8 @@ ActiveRecord::Schema.define(version: 20200422224231) do
     t.string   "price_currency",   default: "USD", null: false
     t.boolean  "seen"
     t.boolean  "seen_student"
+    t.string   "whiteboard_id"
+    t.boolean  "completed"
   end
 
   add_index "sessions", ["student_id"], name: "index_sessions_on_student_id", using: :btree
@@ -113,6 +137,16 @@ ActiveRecord::Schema.define(version: 20200422224231) do
   add_index "subjects_tutors", ["subject_id"], name: "index_subjects_tutors_on_subject_id", using: :btree
   add_index "subjects_tutors", ["tutor_id"], name: "index_subjects_tutors_on_tutor_id", using: :btree
 
+  create_table "tutor_requests", force: :cascade do |t|
+    t.integer  "tutor_id"
+    t.integer  "subject_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "tutor_requests", ["subject_id"], name: "index_tutor_requests_on_subject_id", using: :btree
+  add_index "tutor_requests", ["tutor_id"], name: "index_tutor_requests_on_tutor_id", using: :btree
+
   create_table "tutors", force: :cascade do |t|
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
@@ -121,10 +155,13 @@ ActiveRecord::Schema.define(version: 20200422224231) do
     t.integer  "account_id"
     t.integer  "price_cents",    default: 0, null: false
     t.string   "precision"
+    t.float    "rake"
   end
 
   add_index "tutors", ["account_id"], name: "index_tutors_on_account_id", using: :btree
 
+  add_foreign_key "messages", "accounts"
+  add_foreign_key "messages", "conversations"
   add_foreign_key "requests", "sessions"
   add_foreign_key "requests", "students"
   add_foreign_key "requests", "tutors"
@@ -137,5 +174,7 @@ ActiveRecord::Schema.define(version: 20200422224231) do
   add_foreign_key "subjects", "reviews"
   add_foreign_key "subjects_tutors", "subjects"
   add_foreign_key "subjects_tutors", "tutors"
+  add_foreign_key "tutor_requests", "subjects"
+  add_foreign_key "tutor_requests", "tutors"
   add_foreign_key "tutors", "accounts"
 end

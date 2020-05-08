@@ -23,14 +23,28 @@ Rails.application.routes.draw do
   resources :accounts do
     member do
       get 'logout'
+      get 'makereviewer'
+      get 'revokereviewer'
     end
   end
-  resources :tutors
+  resources :tutors do
+    member do
+      get 'withdraw'
+    end
+  end
   resources :subjects
   resources :orders
+  resources :tutor_requests do
+    member do
+      get 'tutor_approve'
+    end
+  end
 
   get '/orders/', to: 'orders#index'
   post '/orders/submit', to: 'orders#submit'
+
+  post 'orders/paypal/create_payment'  => 'orders#paypal_create_payment', as: :paypal_create_payment
+  post 'orders/paypal/execute_payment'  => 'orders#paypal_execute_payment', as: :paypal_execute_payment
 
   Rails.application.routes.draw do
       resources :subject do
@@ -44,11 +58,18 @@ Rails.application.routes.draw do
   post 'login', to: 'pages#login_post'
   #resources :subjects
   Rails.application.routes.draw do
-      resources :subject do
-	  resources :tutors do
+    resources :subject do
+	    resources :tutors do
 	      resources :sessions
-	  end
+	    end
+    end
+
+    resources :conversations, only: [:create] do
+      member do
+        post :close
       end
+      resources :messages, only: [:create]
+    end
   end
 
   #Rails.application.routes.draw do

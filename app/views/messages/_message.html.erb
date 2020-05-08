@@ -1,0 +1,9 @@
+<li>
+  <div class="container">
+    <div class="<%= account.id == message.account_id ? 'message-sent' : 'message-received' %>">
+      	
+      <%= Session.splitmessage(message.body) %>
+    </div>
+  </div>
+  <div style="clear: both;"></div>
+</li>

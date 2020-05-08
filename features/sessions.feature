@@ -12,14 +12,19 @@ Background:
 Scenario: view sessions
 
   When I click on View your sessions
-  Then I should see Sessions for learning
-  And I should see Sessions for teaching
+  Then I should see Sessions for Learning
+  And I should see Sessions for Teaching
   And I should see a link to Set up a new session to learn
 
 Scenario: add sessions
   When I click on Subjects you teach
   And I click on Register to tutor a subject
   And I click on Sign up to tutor "English"
+
+  And I change to be logged in with name "Admin" and email "admin@admin.com" and password "password"
+  And I press on "Tutor Requests"
+  And I press on "Approve Tutor"
+
   And I change to be logged in with name "Jack Palmer" and email "jp@morgan.com" and password "password1"
   And I go to the subjects page
   And I click on Tutors for "English"
@@ -27,14 +32,45 @@ Scenario: add sessions
   And I click on Sign up for a session
   And I enter "May",31,5,30,"pm",1,0
   And I click Book Changes
-  Then I should see Sessions for learning
+  Then I should see Sessions for Learning
   And I should see "Jeff Harper"
   And I should see "English"
+  And I press on "Account"
+  Then I should see "Balance: $30.00"
   And I change to be logged in with name "Jeff Harper" and email "j@b.com" and password "password"
   And I press on "Account"
   When I click on View your sessions
-  Then I should see Sessions for learning
-  And I should see Sessions for teaching
+  Then I should see Sessions for Learning
+  And I should see Sessions for Teaching
+  And I should see "Jack Palmer"
+  And I should see "English"
+
+Scenario: check for cents payment
+  When I click on Subjects you teach
+  And I click on Register to tutor a subject
+  And I click on Sign up to tutor "English"
+
+  And I change to be logged in with name "Admin" and email "admin@admin.com" and password "password"
+  And I press on "Tutor Requests"
+  And I press on "Approve Tutor"
+
+  And I change to be logged in with name "Jack Palmer" and email "jp@morgan.com" and password "password1"
+  And I go to the subjects page
+  And I click on Tutors for "English"
+  And I click on "Jeff Harper"
+  And I click on Sign up for a session
+  And I enter "May",31,5,30,"pm",0,5
+  And I click Book Changes
+  Then I should see Sessions for Learning
+  And I should see "Jeff Harper"
+  And I should see "English"
+  And I press on "Account"
+  Then I should see "Balance: $48.34"
+  And I change to be logged in with name "Jeff Harper" and email "j@b.com" and password "password"
+  And I press on "Account"
+  When I click on View your sessions
+  Then I should see Sessions for Learning
+  And I should see Sessions for Teaching
   And I should see "Jack Palmer"
   And I should see "English"
 
@@ -42,6 +78,10 @@ Scenario: check enough balance
   When I click on Subjects you teach
   And I click on Register to tutor a subject
   And I click on Sign up to tutor "English"
+  And I change to be logged in with name "Admin" and email "admin@admin.com" and password "password"
+  And I press on "Tutor Requests"
+  And I press on "Approve Tutor"
+
   And I change to be logged in with name "Jack Palmer" and email "jp@morgan.com" and password "password1"
   And I go to the subjects page
   And I click on Tutors for "English"
@@ -49,7 +89,7 @@ Scenario: check enough balance
   And I click on Sign up for a session
   And I enter "May",31,5,30,"pm",2,0
   And I click Book Changes
-  Then I should see Sessions for learning
+  Then I should see Sessions for Learning
 
   When I press on "Account"
   Then I should see "$10"
@@ -66,6 +106,10 @@ Scenario: check valid month and day
   When I click on Subjects you teach
   And I click on Register to tutor a subject
   And I click on Sign up to tutor "English"
+  And I change to be logged in with name "Admin" and email "admin@admin.com" and password "password"
+  And I press on "Tutor Requests"
+  And I press on "Approve Tutor"
+
   And I change to be logged in with name "Jack Palmer" and email "jp@morgan.com" and password "password1"
   And I go to the subjects page
   And I click on Tutors for "English"
@@ -79,8 +123,14 @@ Scenario: check valid session request
   When I click on Subjects you teach
   And I click on Register to tutor a subject
   And I click on Sign up to tutor "English"
+  And I change to be logged in with name "Admin" and email "admin@admin.com" and password "password"
+  And I press on "Tutor Requests"
+  And I press on "Approve Tutor"
+
+  And I change to be logged in with name "Jeff Harper" and email "j@b.com" and password "password"
   And I go to the subjects page
   And I click on Tutors for "English"
+
   And I click on "Jeff Harper"
   And I click on Sign up for a session
   And I enter "Jan",31,5,30,"pm",1,0
@@ -91,6 +141,10 @@ Scenario: check it is not for 0 minutes
   When I click on Subjects you teach
   And I click on Register to tutor a subject
   And I click on Sign up to tutor "English"
+  And I change to be logged in with name "Admin" and email "admin@admin.com" and password "password"
+  And I press on "Tutor Requests"
+  And I press on "Approve Tutor"
+
   And I change to be logged in with name "Jack Palmer" and email "jp@morgan.com" and password "password1"
   And I go to the subjects page
   And I click on Tutors for "English"
@@ -104,6 +158,10 @@ Scenario: check to make sure I cannot book session for times where I already hav
   When I click on Subjects you teach
   And I click on Register to tutor a subject
   And I click on Sign up to tutor "English"
+  And I change to be logged in with name "Admin" and email "admin@admin.com" and password "password"
+  And I press on "Tutor Requests"
+  And I press on "Approve Tutor"
+
   And I change to be logged in with name "Jack Palmer" and email "jp@morgan.com" and password "password1"
   And I go to the subjects page
   And I click on Tutors for "English"

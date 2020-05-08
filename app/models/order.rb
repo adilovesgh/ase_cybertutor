@@ -15,4 +15,11 @@ class Order < ActiveRecord::Base
   def set_paypal_executed
     self.status = Order.statuses[:paypal_executed]
   end
+  def self.print_money(input)
+    output = (input.to_f/100).round(2).to_s
+    if output.split('.')[1].length == 1
+      output += "0"
+    end
+    output
+  end
 end

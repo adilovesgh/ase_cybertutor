@@ -1,13 +1,14 @@
+%img{:class => "photo", :src=>"/account.png"}
 %div{:class => "container-fluid"}
-  %div{:class => "row"}
+  %div{:class=> "row"}
     %div{:class=> "col-md-6"}
-      %h3.heading Account for #{@account.name}
-      %span Balance: $#{@account.price_cents}
+      %div{:class=>"prompt"} Account for #{@account.name}
+      %span Balance: $#{Order.print_money @account.price_cents}
       %span= link_to "Add Balance", orders_path
+      %span= link_to "Withdraw Balance", new_student_path
       %br
-      %span Hourly Rate: $#{@account.tutor.price_cents}/hr
+      %span Hourly Rate: $#{Order.print_money @account.tutor.price_cents}/hr
       %span= link_to "Change Rate", new_tutor_path
-
       %table#tutors.table.table-striped.col-md-12
         %thead
           %tr
@@ -20,7 +21,7 @@
           %tr
             %td= link_to "View your reviews", subject_tutor_reviews_path(0, @tutor)
     %div{:class => "col-md-6"}
-      %h3.heading Alerts for #{@account.name}
+      %div{:class=>"prompt"} Alerts for #{@account.name}
       %table#tutors.table.table-striped.col-md-12
         %thead
           %tr
@@ -29,6 +30,9 @@
             - @tutor_sessions.each do |session|
               %tr
                 %td #{session.student.account.name} has sent for a session approval
+            - @completed_tutor_sessions.each do |session|
+              %tr
+                %td Session with #{session.student.account.name} has been completed! Balance of $#{Order.print_money session.price_cents - session.price_cents.to_f*session.tutor.rake} has been added to your account.
       %table#tutors.table.table-striped.col-md-12
         %thead
           %tr
@@ -39,4 +43,7 @@
                 %td #{session.tutor.account.name} has accepted the session
             - @student_sessions_rejected.each do |session|
               %tr
-                %td #{session.tutor.account.name} has rejected the session. Balance of $#{session.price_cents/100} has been returned to your account.
+                %td #{session.tutor.account.name} has rejected the session. Balance of $#{Order.print_money session.price_cents} has been returned to your account.
+            - @completed_student_sessions.each do |session|
+              %tr
+                %td Session request for a session with #{session.tutor.account.name} has timed out. Balance of $#{Order.print_money session.price_cents} has been returned to your account.

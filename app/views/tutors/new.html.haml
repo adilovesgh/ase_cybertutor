@@ -1,12 +1,20 @@
-- [:notice, :error, :success].each do |key|
-  - unless flash[key].blank?
-    %p{ :class => "flash-error" }= flash[key]
-
 %div{:class => "container-fluid"}
-  %h1 Hourly Rate for #{@account.name}
-  %span Current Rate: $#{@account.tutor.price_cents}/hr
+  %div{:class =>"row parent"}
+    %img{:class => "photo", :src=>"/main_screen.png"}
 
-  = form_tag tutors_path do
-    = label :tutor, :amount, 'New Rate $'
-    = text_field :tutor, 'rate'
-    = submit_tag 'Save Changes', :class => 'btn btn-primary'
+  %div{:class =>"container logchild"}
+    %div{:class=>"row"}
+      - [:notice, :error, :success].each do |key|
+        - unless flash[key].blank?
+          %p{ :class => "flash-error" }= flash[key]
+    %div{:class=>"row d-flex justify-content-center"}
+      %div{:class=>"prompt"} Change Rate
+    %div{:class=>"row d-flex justify-content-center"}
+      = form_tag tutors_path do
+        %div{:class=> "email"} Current Rate
+        %div{:class=> "rate"} $#{Order.print_money @account.tutor.price_cents}/hr
+        %div{:class=> "email"} New Rate
+        %div{:class=> "email"}
+          = text_field :tutor, 'rate'
+        %div{:class=>"submit row d-flex justify-content-center"} 
+          = submit_tag 'Save Changes', :class => 'btn btn-primary'

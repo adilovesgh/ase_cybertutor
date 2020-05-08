@@ -3,16 +3,29 @@
     %p{ :class => "flash-error" }= flash[key]
 
 %div{:class => "container-fluid"}
-  %h2.heading All subjects #{@account.name} teaches
-  %table#tutors.table.table-striped.col-md-12
-    %thead
-      %tr
-        %th Subject
+  %div{:class =>"row"}
+    %div{:class=>"col-md-6"}
+      %h2.heading All Subjects #{@account.name} Teaches
+      %table#tutors.table.table-striped.col-md-12
+        %thead
+          %tr
+            %th Subject
 
-    %tbody
-      - @subjects.each do |subject|
-        %tr
-          %td= subject.name
+        %tbody
+          - @subjects.each do |subject|
+            %tr
+              %td= subject.name
+    %div{:class=>"col-md-6"}
+      %h2.heading All Pending Subjects
+      %table#tutors.table.table-striped.col-md-12
+        %thead
+          %tr
+            %th Subject
+
+        %tbody
+          - @tutor_requests.each do |request|
+            %tr
+              %td= request.subject.name
 
   = link_to 'Register to tutor a subject', subjects_path
   %br

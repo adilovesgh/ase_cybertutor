@@ -1,5 +1,6 @@
+%img{:class => "photo", :src=>"/reviews.png"}
 %div{:class => "container-fluid"}
-  %h2.heading Leave a review for #{@tutor.account.name}
+  %div{:class=>"prompt"} Leave a review for #{@tutor.account.name}
   = form_tag subject_tutor_reviews_path do
     = label :review, :name, 'Rating'
     = select :review, :rating, [1,2,3,4,5]

@@ -1,11 +1,32 @@
+- [:notice, :error, :success].each do |key|
+	- unless flash[key].blank?
+		%p{ :class => "flash-error" }= flash[key]
 %div{:class => "container-fluid"}
-	-if @account.nil? 
-		<h1 class="heading">Welcome to CyberTutor</h1>
-	-else 
-		<h1 class="heading">Welcome to CyberTutor #{@account.name}</h1>
-	%h3= link_to "All Subjects", subjects_path(), {class: "home-links"}
-	%h3= link_to "All Tutors", tutors_path(), {class: "home-links"}
-	-unless @account.nil?
-		%h3= link_to "My Account", account_path(@account), {class: "home-links"}
+	%div{:class =>"row"}
+		%dv{:class=>"parent"}
+			%img{:class => "photo", :src=>"/main_screen.png"}
+		%div{:class=>"container-fluid child"}
+			%div{:class =>"prompt"} Welcome to CyberTutor!
+			%div{:class=>"intro"} An online platform built to connect a large base of tutors with students across the globe and to give anyone with a drive to learn access to experienced, vetted experts in mere moments!
+			%br
+			-unless @account.nil?
+				%div{:class=>"row"}
+					%div{:class=>"col-md-4"}
+						%h3= link_to "All Tutors", tutors_path(), {class: "child-links"}
+					%div{:class=>"col-md-4"}
+						%h3= link_to "All Subjects", subjects_path(), {class: "child-links"}
+					%div{:class=>"col-md-4"}
+						%h3= link_to "My Account", account_path(@account), {class: "child-links"}
+
+			- else
+				%div{:class=>"row"}
+					%div{:class=>"col-md-3"}
+						%h3= link_to "All Tutors", tutors_path(), {class: "child-links"}
+					%div{:class=>"col-md-3"}
+						%h3= link_to "All Subjects", subjects_path(), {class: "child-links"}
+					%div{:class=>"col-md-3"}
+						%h3= link_to "Login", login_path, {class: "child-links"}
+					%div{:class=>"col-md-3"}
+						%h3= link_to "Sign Up", new_account_path, {class: "child-links"}
 
 

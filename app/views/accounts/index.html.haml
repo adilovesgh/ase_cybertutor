@@ -1,13 +1,17 @@
-%h2 All Accounts
+%div{:class => "container-fluid"}
+  %div{:class=>"prompt"} All Accounts
 
-%table#accounts.table.table-striped.col-md-12
-  %thead
-    %tr
-      %th Name
-      %th Email
-  %tbody
-    - @accounts.each do |account|
+  %table#accounts.table.table-striped.col-md-12
+    %thead
       %tr
-        %td= account.name
-        %td= account.email
-= link_to 'Add new account', new_account_path
+        %th Name
+        %th Email
+    %tbody
+      - @accounts.each do |account|
+        %tr
+          %td= link_to "#{account.name}", subject_tutor_reviews_path(0,account.tutor)
+          %td= account.email
+          - if account.is_reviewer
+            %td= link_to "Revoke Reviewer", revokereviewer_account_path(account)
+          - else
+            %td= link_to "Make Reviewer", makereviewer_account_path(account)

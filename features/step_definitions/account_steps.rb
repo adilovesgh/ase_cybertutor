@@ -43,6 +43,10 @@ When("I add {string} for the account password") do |string|
   fill_in "account_password", with: string
 end
 
+When("I enter amount {string}") do |string|
+  fill_in "student_amount", with: string
+end
+
 Then("I should redirect to the home page") do
   expect(Account.find_by_email(@acct_email)).to_not be nil
   current_path.should == '/'

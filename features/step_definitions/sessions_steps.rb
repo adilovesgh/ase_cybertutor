@@ -13,12 +13,35 @@ When("I click on View your sessions") do
   click_link("View your sessions")
 end
 
-Then("I should see Sessions for learning") do
-  page.should have_content("Sessions for learning")
+When("I press on the second {string}") do |string|
+  i = 0
+  page.all('a').each do |element|
+    if element[:href].to_s.include? string
+      i += 1
+      if i == 2
+        element.click
+      end
+    end
+  end
 end
 
-Then("I should see Sessions for teaching") do
-  page.should have_content("Sessions for teaching")
+Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
+  temp = page.body.split(e2)
+  expect(temp[0].include? e1).to eq true
+end
+
+Then /I should see the 2nd "(.*)" before "(.*)"/ do |e1, e2|
+  temp = page.body.split(e2)
+  temp1 = temp[0].split(e1)
+  expect(temp1.length == 3).to eq true
+end
+
+Then("I should see Sessions for Learning") do
+  page.should have_content("Sessions for Learning")
+end
+
+Then("I should see Sessions for Teaching") do
+  page.should have_content("Sessions for Teaching")
 end
 
 Then("I should see a link to Set up a new session to learn") do
@@ -57,12 +80,11 @@ Then("I should not see link {string}") do |string|
 end
 
 When("I enter credit card informations {string} {string} {string}") do |string, string2, string3|
-  @acct.price_cents += 50.00
+  @acct.price_cents += 5000
   @acct.save
   visit '/'  
   click_link "My Account"
 end
-
 
 When("I click {string}") do |string|
   click_button(string)
