@@ -3,23 +3,15 @@ class SessionsController < ApplicationController
         @account = Account.find(session[:account_id])
         @sessions = @account.student.sessions.order(:start_time)
         @teaching_sessions = @account.tutor.sessions
-        #puts("approved not seen by student!!!!!!!!!!!!!!!!")
         @account.notification = 0
         @account.save
         for s in @sessions
-            if s.pending and s.start_time < Time.now
-                s.destroy
-            end
             unless s.seen_student
                 s.seen_student = true
                 s.save
             end
         end
-        #puts("approved not seen by tutor!!!!!!!!!!!!!!!!!")
         for s in @teaching_sessions
-            if s.pending and s.start_time < Time.now
-                s.destroy
-            end
             unless s.seen
                 s.seen = true
                 s.save
@@ -110,7 +102,7 @@ class SessionsController < ApplicationController
                     else
                         @subject = Subject.find(params[:subject_id])
                         whiteboard = generate_session_whiteboard(@start_time)
-                        @session = @tutor.sessions.build(subject:@subject, student:@student, price:@price, start_time:@start_time, end_time:@end_time, pending:true, verified:false, seen:false, seen_student:true, whiteboard_id:whiteboard)
+                        @session = @tutor.sessions.build(subject:@subject, student:@student, price:@price, start_time:@start_time, end_time:@end_time, pending:true, verified:false, seen:false, seen_student:true, whiteboard_id:whiteboard, completed:false)
                         @session.save
                         @account.price_cents -= @price
                         @account.save

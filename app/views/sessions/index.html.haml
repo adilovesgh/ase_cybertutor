@@ -44,7 +44,7 @@
             %th Video Chat
         %tbody
           - @teaching_sessions.each do |teaching_session|
-            -if teaching_session.verified and teaching_session.end_time >= Time.now
+            -if teaching_session.verified and !teaching_session.completed
               %tr
                 %td= link_to "#{teaching_session.student.account.name}" , student_path(teaching_session.student)
                 %td= teaching_session.subject.name
@@ -65,7 +65,7 @@
             %th End Time
         %tbody
           - @teaching_sessions.each do |teaching_session|
-            -if teaching_session.verified and teaching_session.end_time < Time.now
+            -if teaching_session.verified and teaching_session.completed
               %tr
                 %td= link_to "#{teaching_session.student.account.name}" , student_path(teaching_session.student)
                 %td= teaching_session.subject.name
@@ -110,7 +110,7 @@
             %th Video Chat
         %tbody
           - @sessions.each do |teaching_session|
-            -if teaching_session.verified and teaching_session.end_time >= Time.now
+            -if teaching_session.verified and !teaching_session.completed
               %tr
                 %td= link_to "#{teaching_session.tutor.account.name}", subject_tutor_reviews_path(1, teaching_session.tutor)
                 %td= teaching_session.subject.name
@@ -131,7 +131,7 @@
             %th End Time
         %tbody
           - @sessions.each do |teaching_session|
-            -if teaching_session.verified and teaching_session.end_time <= Time.now
+            -if teaching_session.verified and teaching_session.completed
               %tr
                 %td= link_to "#{teaching_session.tutor.account.name}", subject_tutor_reviews_path(1, teaching_session.tutor)
                 %td= teaching_session.subject.name

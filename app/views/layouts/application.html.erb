@@ -13,6 +13,7 @@
       <div id="left_bar">
         <%= link_to "CyberTutor", root_path, {id: 'home-link'} %>
         <% if logged_in? %>
+          <% check_completed %>
           <% if is_admin? %>
             <%= link_to "Admin", accounts_path, {class: "nav-link"} %>
           <% end %>
