@@ -9,7 +9,6 @@ module WithinHelpers
 end
 World(WithinHelpers)
 
-
 Given("that I am logging in as {string} and email {string} and password {string}") do |string, string2, string3|
   if Account.find_by_email(string2).nil?
     #visit '/accounts/new'
@@ -45,8 +44,10 @@ Given("that I am creating an approved past session") do
   @subject = Subject.new(name:"English")
   @subject.save
 
-  @tutor1.sessions.build(subject:@subject, student:@student, price:20.00, start_time:(Time.now-60*60), end_time:Time.now, pending:false, verified:true, seen:true, seen_student:true)
+  @tutor1.sessions.build(subject:@subject, student:@student, price_cents:2000, start_time:(Time.now-60*60), end_time:(Time.now), pending:false, verified:true, seen:false, seen_student:false, completed:false)
   @tutor1.sessions[0].save
+  puts(@tutor1.sessions.length)
+  @tutor1.save
   visit '/'
   click_link "Log In"
   fill_in "account_email", with: @acct1.email
@@ -68,7 +69,7 @@ Given("that I am creating an unapproved past session") do
   @subject = Subject.new(name:"English")
   @subject.save
 
-  @tutor1.sessions.build(subject:@subject, student:@student, price:20.00, start_time:(Time.now-60*60), end_time:Time.now, pending:true, verified:false, seen:true, seen_student:true)
+  @tutor1.sessions.build(subject:@subject, student:@student, price_cents:2000, start_time:(Time.now-60*60), end_time:Time.now, pending:true, verified:false, seen:true, seen_student:true)
   @tutor1.sessions[0].save
   visit '/'
   click_link "Log In"
@@ -96,6 +97,10 @@ end
 
 When("I press button {string}") do |string|
   click_button("Save Changes")
+end
+
+When("I fill in my name as {string}") do |string|
+  fill_in "account_name", with: string
 end
 
 Given("that I am logged in with name {string} and email {string} and password {string}") do |string, string2, string3|
@@ -129,12 +134,16 @@ Given("I press on {string}") do |string|
 end
 
 Then("I should see Account for {string}") do |string|
-  page.should have_content(@acct.name)
+  page.should have_content(string)
 end
 
 Given("I am on the account page") do
   str = '/accounts/' + @acct.id.to_s
   str.should == current_path
+end
+
+Given("that I am on the new accounts page") do
+  visit'/accounts/new'
 end
 
 Given("I change to be logged in with name {string} and email {string} and password {string}") do |string, string2, string3|
@@ -150,4 +159,8 @@ Given("I change to be logged in with name {string} and email {string} and passwo
   fill_in "account_email", with: string2
   fill_in "account_password", with: string3
   click_button("Save Changes")
+end
+
+When("I visit the admin page") do
+  visit '/accounts'
 end

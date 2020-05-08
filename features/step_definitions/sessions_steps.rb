@@ -13,6 +13,18 @@ When("I click on View your sessions") do
   click_link("View your sessions")
 end
 
+When("I press on the second {string}") do |string|
+  i = 0
+  page.all('a').each do |element|
+    if element[:href].to_s.include? string
+      i += 1
+      if i == 2
+        element.click
+      end
+    end
+  end
+end
+
 Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   temp = page.body.split(e2)
   expect(temp[0].include? e1).to eq true
