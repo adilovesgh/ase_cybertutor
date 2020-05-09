@@ -16,7 +16,7 @@ We present the overview of our project's primary features and components:
 
 * Reviewer: reviewers have special permissions to manage tutor eligibility. In other words, website users who wish to be tutors for a specific subject must wait to acquire approval from a reviewer prior to tutorship being granted. Reviewers are normal users who are given the reviewer status by the admins. A reviewer cannot approve his or her own tutor requests.
 
-* Administration: admins have special permissions to grant reviewer eligibility. Admins can grant and take away reviewer status of other users. Currently, the admin account uses the email _aseadmin@aseadmin.com_ and password _aseadmin_. Please use this admin account when approving tutors. The admin account is created at the same time the first account is created. In order to access the admin account, please create an account first.
+* Administration: admins have special permissions to grant reviewer eligibility. Admins can grant and take away reviewer status of other users. Currently, the admin account uses the email _aseadmin@aseadmin.com_ and password _aseadmin_. Please use this admin account for approving tutors. The admin account is created simultaneously when the first account is created. In order to access the admin account, please create an account first.
 
 * Payment Gateway Services: we implemented a payment transaction system by which students can pay for sessions by entering credit card credentials. For our gateway services, we integrate Stripe and begin to integrate Paypal in our application. Complete transaction execution occurs prior to the creation of tutoring sessions. We use sandbox environments and test accounts provided by these gateway services to simulate payment transactions. For testing with Stripe, we used the following procedure. Note that to view a successful order in the dashboard, steps 1, 2, and 4 must be customized individually. Otherwise, to test app functionality, please proceed to step 3.
   1. We create a Stripe account and ensure that __View Test Data__ has been toggled on.
@@ -30,9 +30,9 @@ We present the overview of our project's primary features and components:
 	3. After choosing PayPal as the payment method, we enter the credentials for the created buyer account, log in, and confirm the order.
 	4. We are able to view that a valid order was successful in the PayPal dashboard.
 
-* Balance: The users can use the payment feature to add balance to their own accounts. The balance can be used for tutoring sessions or can be withdrawn. When tutors complete their sessions, the payment is added to the balance. The tutors can then decide if they want to spend the balance earned or withdraw the balance. Currently, the withdraw functionality just subtracts the balance from the account, and the account is not tied to a physical bank account. The balance payments work as follows.
+* Balance: Users can use the payment feature to add balance to their own accounts. The balance can be used for tutoring sessions or can be withdrawn. When tutors complete their sessions, payments are added to the balance. The tutors can then decide if they want to spend the balance earned or withdraw the balance. Currently, the withdraw functionality just subtracts the balance from the account, and the account is not tied to a physical bank account. The balance payments work as follows.
 	1. When a student signs up for a tutoring session, the payment is withdrawn from his or her balance.
-	2. If the tutor rejects a session or the session request times out (the instructor does not accept the session before it starts) the money is returned to the student.
+	2. If the tutor rejects a session or the session request times out, i.e., the instructor does not accept the session before it starts, the money is returned to the student.
 	3. If the tutor accepts the tutoring session, the payment gets added to the tutor's balance after the session is completed.
 
 * Live Video Chat: we implemented a video chat feature for tutor-to-student in-browser video calls. This feature enables tutors and students to interact during any tutoring session. Note that you might need to refresh the page if the video does not appear (this message has also been added to the website).
@@ -43,28 +43,29 @@ We present the overview of our project's primary features and components:
 
 * CSS Styling: over the iterations, we have continuously improved our UI to make the website more aesthetic and user-friendly. We have also implemented bootstrap to make the display less cluttered, cleaner, and more organized.
 
-## Sample tutorial for signing up for a session
-* First go to the main page of the website.
-* Press on the _Sign Up_ link on the top right corner.
-* Create a new account. This will be your tutor account.
-* You should be on _My Account_ page. Press on the link _Subject you teach_.
-* Then press on _Register to tutor a subject_.
-* Press on _Add new subject_.
-* Add a subject you want to teach.
-* Press _Sign up to tutor (subject you want to teach)_.
-* Log out. The logout button is on the top right.
-* Login to _aseadmin@aseadmin.com_ with password _aseadmin_.
-* Then press _Tutor Requests_ on the navbar.
+## Sample Tutorial for Session Sign-Up
+The following tutorial will demonstrate sign-ups for sessions between tutors and students. A session consists of a room, a timestamp (including date and time), the tutor, and the student. When a student signs up for a session with a tutor, the tutor must first approve or reject the session to avoid potential schedule conflicts. Upon approval, both the student and tutor can access a session-specific room where they will have access to video chat, chat messaging, and a shared whiteboard. * First, navigate to our website's main page.
+* Click on _Sign Up_ in the top-right corner.
+* Create a new account. Note that this will be your tutor account.
+* You should be on the _My Account_ page. Click on _Subjects you teach_.
+* Next, click on _Register to tutor a subject_.
+* Click on _Add new subject_.
+* Add a subject that you are interested in teaching.
+* Press _Sign up to tutor {subject you want to teach}_.
+* Log out. The logout button is in the top-right corner.
+* Log in with the username _aseadmin@aseadmin.com_ and password _aseadmin_.
+* Then, click on _Tutor Requests_ in the navigation bar.
 * Accept the tutor request from your account.
-* Logout and create a new account that will serve as a student.
-* You should be on _My Account_ page. From there, press on _View your sessions_.
-* Then, at the bottom press on _Set up a new session to learn_.
-* You will see a list of subjects. Press on _Tutors for (the subject you signed up to teach)_.
-* You will see a list of tutors for the subject. Press on _Sign up for a session with (your tutor account)_.
-* Fill in the form. Remember that the time you are registering for is in UTC. If you want to sign up for 4PM in Eastern Time, you should sign up for 8PM (may be 9PM if not in daylight savings time).
+* Log out and create a new account that will represent the student account by following steps 1-3.
+* You should now be on the _My Account_ page again. Ensure that you have enough balance to register for a session. If you need to add balance, click on _Add Balance_, and complete the transaction using either Stripe or PayPal. If the transaction is successful, you should be redirected back to the _My Account_ page.
+* Click on _View your sessions_.
+* Then, at the bottom of the page, click on _Set up a new session to learn_.
+* You will see a list of subjects. Click on _Tutors for {the subject you signed up to teach}_.
+* You will see a list of tutors for the subject. Click on _Sign up for a session with {the name of the tutor represented by your tutor account}_.
+* Complete the form. Note that registration times are in UTC. For example, if you want to sign up for 4 PM Eastern Time (EST), you should sign up for 8 PM (possibly 9 PM if not in daylight savings time).
 * Submit the form.
-* Logout and login to the tutor account.
-* Press _View your sessions_.
+* Log out of the student account, and log in to the tutor account.
+* Click on _View your sessions_.
 * Now, you have a choice of approving or rejecting the session request!
 
 ## GitHub
