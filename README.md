@@ -12,7 +12,7 @@ We present the overview of our project's primary features and components:
 
 * Login: we implemented a log-in feature that requires the user to log in to his or her account conventionally via username and password. Using `bcrypt`, we have server-side encrypted passwords for validation. Account info pages are login-protected, and unauthorized attempts at access will result in a redirect. Validation of account details includes checking for valid emails, preventing duplicate account information, and requiring a password with 5 or more characters. 
 
-* Tutoring Session Approval/Rejection: the tutor is able to manage session requests from potential students. We impose the restriction that students cannot automatically sign up for sessions. Before approving a session,a check is done to make sure that the tutor or the student does not have overlapping sessions. 
+* Tutoring Session Approval/Rejection: the tutor is able to manage session requests from potential students. We impose the restriction that students cannot automatically sign up for sessions. Before approving a session,a check is done to make sure that the tutor or the student does not have overlapping sessions. All of the times on the website are in UTC, 5 hours ahead of Eastern Time (4 during daylight saving). Please keep this in mind when requesting a new session or looking at the the session schedule.
 
 * Reviewer: reviewers have special permissions to manage tutor eligibility. In other words, website users who wish to be tutors for a specific subject must wait to acquire approval from a reviewer prior to tutorship being granted. Reviewers are normal users who are given the reviewer status by the admins. A reviewer cannot approve his or her own tutor requests.
 
@@ -42,6 +42,30 @@ We present the overview of our project's primary features and components:
 * Shared Whiteboard: in addition to live video and messaging, we provide tutors and students with a session-specific private whiteboard for interactive tutoring.
 
 * CSS Styling: over the iterations, we have continuously improved our UI to make the website more aesthetic and user-friendly. We have also implemented bootstrap to make the display less cluttered, cleaner, and more organized.
+
+## Sample tutorial for signing up for a session
+* First go to the main page of the website.
+* Press on the _Sign Up_ link on the top right corner.
+* Create a new account. This will be your tutor account.
+* You should be on _My Account_ page. Press on the link _Subject you teach_.
+* Then press on _Register to tutor a subject_.
+* Press on _Add new subject_.
+* Add a subject you want to teach.
+* Press _Sign up to tutor (subject you want to teach)_.
+* Log out. The logout button is on the top right.
+* Login to _aseadmin@aseadmin.com_ with password _aseadmin_.
+* Then press _Tutor Requests_ on the navbar.
+* Accept the tutor request from your account.
+* Logout and create a new account that will serve as a student.
+* You should be on _My Account_ page. From there, press on _View your sessions_.
+* Then, at the bottom press on _Set up a new session to learn_.
+* You will see a list of subjects. Press on _Tutors for (the subject you signed up to teach)_.
+* You will see a list of tutors for the subject. Press on _Sign up for a session with (your tutor account)_.
+* Fill in the form. Remember that the time you are registering for is in UTC. If you want to sign up for 4PM in Eastern Time, you should sign up for 8PM (may be 9PM if not in daylight savings time).
+* Submit the form.
+* Logout and login to the tutor account.
+* Press _View your sessions_.
+* Now, you have a choice of approving or rejecting the session request!
 
 ## GitHub
 The link for our GitHub repository is: https://github.com/adilovesgh/ase_cybertutor.git
