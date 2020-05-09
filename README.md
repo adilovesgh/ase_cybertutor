@@ -10,7 +10,7 @@
 ## Project Overview
 We present the overview of our project's primary features and components:
 
-* Login: we implemented a log-in feature that requires the user to log in to his or her account conventionally via username and password. Using `bcrypt`, we have server-side encrypted passwords for validation. Account info pages are login-protected, and unauthorized attempts at access will result in a redirect. Validation of account details includes checking for valid emails, preventing duplicate account information, and requiring a password with 5 or more characters. 
+* Login: we implemented a login feature that requires the user to log in to his or her account conventionally via username and password. Using `bcrypt`, we have server-side encrypted passwords for validation. Account info pages are login-protected, and unauthorized attempts at access will result in a redirect. Validation of account details includes checking for valid emails, preventing duplicate account information, and requiring a password with 5 or more characters. 
 
 * Tutoring Session Approval/Rejection: the tutor is able to manage session requests from potential students. We impose the restriction that students cannot automatically sign up for sessions. Before approving a session,a check is done to make sure that the tutor or the student does not have overlapping sessions. All of the times on the website are in UTC, 5 hours ahead of Eastern Time (4 during daylight saving). Please keep this in mind when requesting a new session or looking at the the session schedule.
 
