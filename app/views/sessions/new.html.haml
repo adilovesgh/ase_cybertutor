@@ -9,7 +9,7 @@
       %p{ :class => "flash-error" }= flash[key]
 
 %div{:class => "container-fluid"}
-  %div{:class=>"prompt"} Book a new session with #{@tutor.account.name}
+  %div{:class=>"prompt"} Book a new session with #{@tutor.account.name} 
   %dv{:class=>"row"}
     %div{:class=>"col-md-6"}
       %h4 Request a session on
@@ -28,8 +28,8 @@
         =label :session, :colon, ':'
         =select :session, :start_minute, @minutes
         =select :session, :start_ampm, ['am','pm']
+        %p (Note: All times in UTC)
 
-        %br
         =label :session, :to, 'For a duration of'
 
         =select :session, :hours, ['0', '1', '2']
