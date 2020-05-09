@@ -51,7 +51,7 @@ The following tutorial will demonstrate sign-ups for sessions between tutors and
 * Next, click on _Register to tutor a subject_.
 * Click on _Add new subject_.
 * Add a subject that you are interested in teaching.
-* Press _Sign up to tutor *{subject you want to teach}*_.
+* Press _Sign up to tutor __{subject you want to teach}___.
 * Log out. The logout button is in the top-right corner.
 * Log in with the username _aseadmin@aseadmin.com_ and password _aseadmin_.
 * Then, click on _Tutor Requests_ in the navigation bar.
@@ -60,8 +60,8 @@ The following tutorial will demonstrate sign-ups for sessions between tutors and
 * You should now be on the _My Account_ page again. Ensure that you have enough balance to register for a session. If you need to add balance, click on _Add Balance_, and complete the transaction using either Stripe or PayPal. If the transaction is successful, you should be redirected back to the _My Account_ page.
 * Click on _View your sessions_.
 * Then, at the bottom of the page, click on _Set up a new session to learn_.
-* You will see a list of subjects. Click on _Tutors for *{the subject you signed up to teach}*_.
-* You will see a list of tutors for the subject. Click on _Sign up for a session with *{the name of the tutor represented by your tutor account}*_.
+* You will see a list of subjects. Click on _Tutors for __{the subject you signed up to teach}___.
+* You will see a list of tutors for the subject. Click on _Sign up for a session with __{the name of the tutor represented by your tutor account}__.
 * Complete the form. Note that registration times are in UTC. For example, if you want to sign up for 4 PM Eastern Time (EST), you should sign up for 8 PM (possibly 9 PM if not in daylight savings time).
 * Submit the form.
 * Log out of the student account, and log in to the tutor account.
