@@ -61,7 +61,7 @@ The following tutorial will demonstrate sign-ups for sessions between tutors and
 * Click on _View your sessions_.
 * Then, at the bottom of the page, click on _Set up a new session to learn_.
 * You will see a list of subjects. Click on _Tutors for __{the subject you signed up to teach}___.
-* You will see a list of tutors for the subject. Click on _Sign up for a session with __{the name of the tutor represented by your tutor account}__.
+* You will see a list of tutors for the subject. Click on _Sign up for a session with __{the name of the tutor represented by your tutor account}___.
 * Complete the form. Note that registration times are in UTC. For example, if you want to sign up for 4 PM Eastern Time (EST), you should sign up for 8 PM (possibly 9 PM if not in daylight savings time).
 * Submit the form.
 * Log out of the student account, and log in to the tutor account.
