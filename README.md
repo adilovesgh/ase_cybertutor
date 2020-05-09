@@ -12,7 +12,7 @@ We present the overview of our project's primary features and components:
 
 * Login: we implemented a log-in feature that requires the user to log in to his or her account conventionally via username and password. Using `bcrypt`, we have server-side encrypted passwords for validation. Account info pages are login-protected, and unauthorized attempts at access will result in a redirect. Validation of account details includes checking for valid emails, preventing duplicate account information, and requiring a password with 5 or more characters. 
 
-* Tutoring Session Approval/Rejection: the tutor is able to manage session requests from potential students. We impose the restriction that students cannot automatically sign up for sessions. Before approving a session,a check is done to make sure that the tutor or the student does not have overlapping sessions. All of the times on the website are in UTC (4 hours ahead of Eastern Time). Please keep this in mind when requesting a new session or looking at the the session schedule.
+* Tutoring Session Approval/Rejection: the tutor is able to manage session requests from potential students. We impose the restriction that students cannot automatically sign up for sessions. Before approving a session,a check is done to make sure that the tutor or the student does not have overlapping sessions. All of the times on the website are in UTC, 5 hours ahead of Eastern Time (4 during daylight saving). Please keep this in mind when requesting a new session or looking at the the session schedule.
 
 * Reviewer: reviewers have special permissions to manage tutor eligibility. In other words, website users who wish to be tutors for a specific subject must wait to acquire approval from a reviewer prior to tutorship being granted. Reviewers are normal users who are given the reviewer status by the admins. A reviewer cannot approve his or her own tutor requests.
 
@@ -43,7 +43,7 @@ We present the overview of our project's primary features and components:
 
 * CSS Styling: over the iterations, we have continuously improved our UI to make the website more aesthetic and user-friendly. We have also implemented bootstrap to make the display less cluttered, cleaner, and more organized.
 
-## Sample Tutorial for signing up for a session
+## Sample tutorial for signing up for a session
 * First go to the main page of the website.
 * Press on the _Sign Up_ link on the top right corner.
 * Create a new account. This will be your tutor account.
@@ -61,7 +61,7 @@ We present the overview of our project's primary features and components:
 * Then, at the bottom press on _Set up a new session to learn_.
 * You will see a list of subjects. Press on _Tutors for (the subject you signed up to teach)_.
 * You will see a list of tutors for the subject. Press on _Sign up for a session with (your tutor account)_.
-* Fill in the form. Remember that the time you are registering for is in UTC. If you want to sign up for 4PM in Eastern Time, you should sign up for 8PM (may be 9PM depending on if it is daylight savings or not).
+* Fill in the form. Remember that the time you are registering for is in UTC. If you want to sign up for 4PM in Eastern Time, you should sign up for 8PM (may be 9PM if not in daylight savings time).
 * Submit the form.
 * Logout and login to the tutor account.
 * Press _View your sessions_.
