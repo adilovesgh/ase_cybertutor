@@ -72,7 +72,7 @@ The following tutorial will demonstrate sign-ups for sessions between tutors and
 The link for our GitHub repository is: https://github.com/adilovesgh/ase_cybertutor.git
 
 ## User Stories
-The user stories for our application can be found under the "features" directory. The "features/step_definitions" directory contains the Ruby files with Capybara DSL methods for our features. From the "ase_cybertutor" directory, run "bundle exec cucumber features/__{.feature file}__" for testing a specific user story feature with Cucumber. Run `bundle exec cucumber features` to run all of the user story features.
+The user stories for our application can be found under the "features" directory. The "features/step_definitions" directory contains the Ruby files with Capybara DSL methods for our features. From the "ase_cybertutor" directory, run `bundle exec cucumber features/`__{.feature file}__ for testing a specific user story feature with Cucumber. Run `bundle exec cucumber features` to run all of the user story features.
 
 ## Initial Users
 Our plan for the accrual of initial users involves a campus-based approach. We reached out to several acquaintances who tutor professionally and discussed the pain points of their client acquisition process, and we found that our platform removes or reduces most of them, meaning our main challenge is gaining initial brand awareness. Because colleges have a wealth of both potential students and tutors, we would use our own network to establish a starting point on campus. Then, using initial incentives and advertising in order to appeal to students looking for potential income, we would grow our userbase, with our on-platform tutor review system allowing for rapid expansion of our tutoring network.
