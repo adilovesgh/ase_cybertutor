@@ -79,5 +79,5 @@ Our plan for the accrual of initial users involves a campus-based approach. We r
 ## Heroku Deployment
 Our application has been deployed to Heroku, and the link for the deployed application is: https://intense-oasis-95894.herokuapp.com/
 
-## Project Video
+## Project Video/Product Pitch
 You can check out our YouTube video, which presents a preview of our platform during its early development: https://youtu.be/R102fB0nV4I. The video details our product pitch, our business model, and our experiences with Agile and software development.
