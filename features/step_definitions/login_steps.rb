@@ -52,7 +52,7 @@ Given("that I am creating an approved past session") do
   click_link "Log In"
   fill_in "account_email", with: @acct1.email
   fill_in "account_password", with: @acct1.password
-  click_button("Save Changes")
+  click_button("Log In")
 end
 
 Given("that I am creating an unapproved past session") do
@@ -75,7 +75,7 @@ Given("that I am creating an unapproved past session") do
   click_link "Log In"
   fill_in "account_email", with: @acct1.email
   fill_in "account_password", with: @acct1.password
-  click_button("Save Changes")
+  click_button("Log In")
 end
 
 When("I click thye link to Logout") do
@@ -96,7 +96,7 @@ When("I fill in my password as {string}") do |string|
 end
 
 When("I press button {string}") do |string|
-  click_button("Save Changes")
+  click_button(string)
 end
 
 When("I fill in my name as {string}") do |string|
@@ -126,7 +126,7 @@ Given("that I am logged in with name {string} and email {string} and password {s
   click_link "Log In"
   fill_in "account_email", with: string2
   fill_in "account_password", with: string3
-  click_button("Save Changes")
+  click_button("Log In")
 end
 
 Given("I press on {string}") do |string|
@@ -158,7 +158,7 @@ Given("I change to be logged in with name {string} and email {string} and passwo
   click_link "Log In"
   fill_in "account_email", with: string2
   fill_in "account_password", with: string3
-  click_button("Save Changes")
+  click_button("Log In")
 end
 
 When("I visit the admin page") do

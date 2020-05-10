@@ -12,7 +12,7 @@ Scenario: to log in
   And I click the link to Log in
   And I fill in my email as "j@b.com"
   And I fill in my password as "password"
-  And I press button "Save Changes"
+  And I press button "Log In"
   Then I should see Account for "Jeff Harper"
 
 Scenario: check logged in
