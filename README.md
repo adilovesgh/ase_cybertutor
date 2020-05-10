@@ -46,7 +46,7 @@ We present the overview of our project's primary features and components:
 * CSS Styling: over the iterations, we have continuously improved our UI to make the website more aesthetic and user-friendly. We have also implemented bootstrap to make the display less cluttered, cleaner, and more organized.
 
 ## Setup
-If you would like to access CyberTutor locally or make local modifications, please follow the instructions below:
+If you would like to access CyberTutor locally or make local modifications, please follow the instructions below to set up CyberTutor locally:
   1. Clone the repository.
   2. Run `bundle install` in the "ase_cybertutor" directory.
   3. You will need to have `postgresql` installed. Please install `postgresql` if you haven't done so. To install the latest version of `postgresql` on a Mac, run `brew install postgresql` in the command line and follow the instructions at https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-ruby-on-rails-application-on-macos.
