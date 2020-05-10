@@ -47,12 +47,12 @@ We present the overview of our project's primary features and components:
 
 ## Setup
 If you would like to access CyberTutor locally or make local modifications, please follow the instructions below to set up CyberTutor locally:
-  1. Clone the repository.
-  2. Run `bundle install` in the "ase_cybertutor" directory.
-  3. You will need to have `postgresql` installed. Please install `postgresql` if you haven't done so. To install the latest version of `postgresql` on a Mac, run `brew install postgresql` in the command line and follow the instructions at https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-ruby-on-rails-application-on-macos.
-  4. Make sure that the `postgresql` server is running. The command for doing so is `pg_ctl -D `__{directory to *postgresql*}__` start`. Typically, the command will be `pg_ctl -D /usr/local/var/postgres start`.
-  5. You will need to perform a database migration. Please run `rake db:create db:migrate db:seed` in the "ase_cybertutor" directory.
-  6. Run `rails server` while still in the "ase_cybertutor" directory to start the Rails server. You can now access our application in the web browser.
+1. Clone the repository.
+2. Run `bundle install` in the "ase_cybertutor" directory.
+3. You will need to have `postgresql` installed. Please install `postgresql` if you haven't done so. To install the latest version of `postgresql` on a Mac, run `brew install postgresql` in the command line and follow the instructions at https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-ruby-on-rails-application-on-macos.
+4. Make sure that the `postgresql` server is running. The command for doing so is `pg_ctl -D `__{directory to *postgresql*}__` start`. Typically, the command will be `pg_ctl -D /usr/local/var/postgres start`.
+5. You will need to perform a database migration. Please run `rake db:create db:migrate db:seed` in the "ase_cybertutor" directory.
+6. Run `rails server` while still in the "ase_cybertutor" directory to start the Rails server. You can now access our application in the web browser.
 
 ## Sample Tutorial for Session Sign-Up
 The following tutorial will demonstrate sign-ups for sessions between tutors and students. A session consists of a room, a timestamp (including date and time), the tutor, and the student. When a student signs up for a session with a tutor, the tutor must first approve or reject the session to avoid potential schedule conflicts. Upon approval, both the student and tutor can access a session-specific room where they will have access to video chat, chat messaging, and a shared whiteboard.   
